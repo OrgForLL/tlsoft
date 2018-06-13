@@ -1,0 +1,12 @@
+app/bin
+app/obj
+Console/bin
+Console/obj
+lab/bin
+lab/obj
+lbclass/bin
+lbclass/obj
+Structs/bin
+Structs/obj
+wx
+.vs

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8" />
+
+    <script type="text/javascript" src="Scripts/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            $('#liu').click(function () {//点击按钮提交
+
+                var wenti = parent.window.document.getElementById("wenti").value;
+                var userid = parent.window.document.getElementById("userid").value;
+                var id = parent.window.document.getElementById("id").value;
+                var formData = new FormData();
+
+                formData.append("wenti", wenti);
+                formData.append("userid", userid);
+                formData.append("id", id);
+
+                formData.append("file", $('#file1')[0].files[0]);
+
+
+                $.ajax({
+                    url: "mutifiletest.aspx?action=upload",
+                    dataType: "json",
+                    data: formData,
+                    type: "post",
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {//ajax返回的数据
+                        console.log(data);
+                    }
+                });
+
+            });
+
+
+        });
+    </script>
+
+</head>
+<body>
+    <form id="myForm" enctype="multipart/form-data">
+        <p>id<input type="text" name="id" id="id" /></p>
+        <p>问题<input type="text" name="wenti" id="wenti" /></p>
+        <p>userid<input type="text" name="userid" id="userid" /></p>
+        <p>文件1：<input type="file" name="file1" id="file1" /></p>
+
+        <p><input type="button" id="liu" value="上传" /></p>
+    </form>
+</body>
+</html>

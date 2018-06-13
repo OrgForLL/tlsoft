@@ -1,0 +1,5 @@
+2018-04-18 08:48:43 - [posapi.ashx]   在 System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   在 System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   在 System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   在 System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   在 PosCore.ProcessRequest(HttpContext context) 位置 e:\tlsoft\web\tl_ls\newpos\PosApi.ashx:行号 38

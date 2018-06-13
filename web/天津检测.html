@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script type="text/javascript" src="Scripts/jquery.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var istbs = 0;
+            var info = "";            
+            $.ajax({
+                type: "POST",
+                timeout: 30000,
+                //async:false,
+                url: "../interface/sc_lab_jcbgsjtb.aspx?bs=0&date=2018-6-5" ,
+                success: function (msg) {
+                    istbs++;
+                    info += "福州：" + msg;
+                    //alert(msg);
+                    //$('#btn_zdtb').removeAttr("disabled");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    istbs++;
+                    info += "福州：" + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus;
+                    //alert(XMLHttpRequest.status+"|"+XMLHttpRequest.readyState+"|"+textStatus);
+                    //$('#btn_zdtb').removeAttr("disabled");
+                }
+            });
+
+            ////广州           
+            //$.ajax({
+            //    type: "POST",
+            //    timeout: 30000,
+            //    //async:false,
+            //    url: "../interface/sc_lab_jcbgsjtb.aspx?bs=1&date=2018-5-25",
+            //    success: function (msg) {
+            //        istbs++;
+            //        info += "," + "广州：" + msg;
+            //        //alert(msg);
+            //        //$('#btn_zdtb').removeAttr("disabled");
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        istbs++;
+            //        info += "," + "广州：" + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus;
+            //        //alert(XMLHttpRequest.status+"|"+XMLHttpRequest.readyState+"|"+textStatus);
+            //        //$('#btn_zdtb').removeAttr("disabled");
+            //    }
+            //});
+            ////天津           
+            //$.ajax({
+            //    type: "POST",
+            //    timeout: 30000,
+            //    //async:false,
+            //    url: "../interface/sc_lab_jcbgsjtb.aspx?bs=2&date=2018-5-16",
+            //    success: function (msg) {
+            //        istbs++;
+            //        info += "," + "天津：" + msg;
+            //        //alert(msg);
+            //        //$('#btn_zdtb').removeAttr("disabled");
+            //    },
+            //    error: function (XMLHttpRequest, textStatus, errorThrown) {
+            //        istbs++;
+            //        info += "," + "天津：" + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus;
+            //        //alert(XMLHttpRequest.status+"|"+XMLHttpRequest.readyState+"|"+textStatus);
+            //        //$('#btn_zdtb').removeAttr("disabled");
+            //    }
+            //});
+        }
+    </script>
+</head>
+
+<body>
+    
+</body>
+</html>

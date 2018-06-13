@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script type="text/javascript">
+        window.onload = function () {
+            var dialog = document.getElementById('myDialog');
+            document.getElementById('show').onclick = function () {
+                dialog.showModal();
+            };
+            document.getElementById('hide').onclick = function () {
+                dialog.close();
+            };
+        }
+    
+    </script>
+</head>
+
+<body>
+    <dialog id="myDialog">
+        <p>
+            <q>The world is full of magical things patiently waiting for our wits to grow sharper.</q>
+            <cite>Bertrand Russell</cite>
+        </p>
+        <iframe src="http://wwww.baidu.com"></iframe>
+        <button id="hide">Close</button>
+    </dialog>
+    <input type="text" />
+    <button id="show">Show Dialog</button>
+</body>
+</html>

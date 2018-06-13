@@ -1,0 +1,115 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web", "web", "{FA2C3585-4578-4B18-8B93-E9D496A543D8}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		ProjectReferences = "{ada4c8f6-9c26-46cc-81cf-83671664e410}|Stock.dll;{39975760-c93e-4845-90a1-6201eecc9727}|LLWebService.dll;{b18333d1-fa49-4d78-b09b-805043740d9e}|lbclass.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_65097"
+		Debug.AspNetCompiler.PhysicalPath = "web\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65097\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_65097"
+		Release.AspNetCompiler.PhysicalPath = "web\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65097\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "65097"
+		SlnRelativePath = "web\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroService", "Y:\全渠道\开发知识库\微服务学习\源码\调用中台服务-前端\MS\MicroService.csproj", "{ADA4C8F6-9C26-46CC-81CF-83671664E410}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLWebService", "..\project\LLWebService\LLWebService.csproj", "{39975760-C93E-4845-90A1-6201EECC9727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{E71C545E-0475-403E-8753-0A9D4778D478}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "lbclass", "lbclass\lbclass.vbproj", "{B18333D1-FA49-4D78-B09B-805043740D9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Structs", "Structs\Structs.csproj", "{AF3ED927-D834-4813-99C4-5DC1D3F98030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCMD", "Console\ConsoleCMD.csproj", "{59C7F7BB-D5D2-47F8-91DF-C40322C608BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "检测所", "Lab\检测所.csproj", "{655B3AF6-6420-44FC-87E4-239531647289}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "wx", "wx", "{84618E36-9C82-4860-9BC5-1DC5025B91E8}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64186"
+		Debug.AspNetCompiler.PhysicalPath = "wx\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64186\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64186"
+		Release.AspNetCompiler.PhysicalPath = "wx\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64186\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64186"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA2C3585-4578-4B18-8B93-E9D496A543D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA2C3585-4578-4B18-8B93-E9D496A543D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA2C3585-4578-4B18-8B93-E9D496A543D8}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA2C3585-4578-4B18-8B93-E9D496A543D8}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{ADA4C8F6-9C26-46CC-81CF-83671664E410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA4C8F6-9C26-46CC-81CF-83671664E410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA4C8F6-9C26-46CC-81CF-83671664E410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA4C8F6-9C26-46CC-81CF-83671664E410}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39975760-C93E-4845-90A1-6201EECC9727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39975760-C93E-4845-90A1-6201EECC9727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39975760-C93E-4845-90A1-6201EECC9727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39975760-C93E-4845-90A1-6201EECC9727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E71C545E-0475-403E-8753-0A9D4778D478}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71C545E-0475-403E-8753-0A9D4778D478}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71C545E-0475-403E-8753-0A9D4778D478}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71C545E-0475-403E-8753-0A9D4778D478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B18333D1-FA49-4D78-B09B-805043740D9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B18333D1-FA49-4D78-B09B-805043740D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B18333D1-FA49-4D78-B09B-805043740D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B18333D1-FA49-4D78-B09B-805043740D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF3ED927-D834-4813-99C4-5DC1D3F98030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF3ED927-D834-4813-99C4-5DC1D3F98030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF3ED927-D834-4813-99C4-5DC1D3F98030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF3ED927-D834-4813-99C4-5DC1D3F98030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59C7F7BB-D5D2-47F8-91DF-C40322C608BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C7F7BB-D5D2-47F8-91DF-C40322C608BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C7F7BB-D5D2-47F8-91DF-C40322C608BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C7F7BB-D5D2-47F8-91DF-C40322C608BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{655B3AF6-6420-44FC-87E4-239531647289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{655B3AF6-6420-44FC-87E4-239531647289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{655B3AF6-6420-44FC-87E4-239531647289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{655B3AF6-6420-44FC-87E4-239531647289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84618E36-9C82-4860-9BC5-1DC5025B91E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84618E36-9C82-4860-9BC5-1DC5025B91E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84618E36-9C82-4860-9BC5-1DC5025B91E8}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{84618E36-9C82-4860-9BC5-1DC5025B91E8}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 1
+		SccProjectUniqueName0 = ..\\project\\LLWebService\\LLWebService.csproj
+		SccProjectName0 = \u0022$/利郎ERP_WEB服务层/LLWebService\u0022,\u0020ZNKAAAAA
+		SccLocalPath0 = ..\\project\\LLWebService
+		SccProvider0 = MSSCCI:Microsoft\u0020Visual\u0020SourceSafe
+	EndGlobalSection
+EndGlobal

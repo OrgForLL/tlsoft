@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+            <TR height=30>
+                <TD class=blue width=60 align=right>季度 </TD>
+                <TD vAlign=middle width=10 align=left><SELECT id=Select1 class=kfs style="WIDTH: 130px" name=cpjj> <OPTION selected value=19春季>19春季</OPTION> <OPTION value=19夏季>19夏季</OPTION> <OPTION value=19秋季>19秋季</OPTION> <OPTION value=19冬季>19冬季</OPTION> <OPTION value=18春季>18春季</OPTION> <OPTION value=18夏季>18夏季</OPTION> <OPTION value=18秋季>18秋季</OPTION> <OPTION value=18冬季>18冬季</OPTION> <OPTION value=17春季>17春季</OPTION> <OPTION value=17夏季>17夏季</OPTION> <OPTION value=17秋季>17秋季</OPTION> <OPTION value=17冬季>17冬季</OPTION> <OPTION value=16春季>16春季</OPTION> <OPTION value=16夏季>16夏季</OPTION> <OPTION value=16秋季>16秋季</OPTION> <OPTION value=16冬季>16冬季</OPTION> <OPTION value=15春季>15春季</OPTION> <OPTION value=15夏季>15夏季</OPTION> <OPTION value=15秋季>15秋季</OPTION> <OPTION value=15冬季>15冬季</OPTION> <OPTION value=14春季>14春季</OPTION> <OPTION value=14夏季>14夏季</OPTION> <OPTION value=14秋季>14秋季</OPTION> <OPTION value=14冬季>14冬季</OPTION> <OPTION value=13春季>13春季</OPTION> <OPTION value=13夏季>13夏季</OPTION> <OPTION value=13秋季>13秋季</OPTION> <OPTION value=13冬季>13冬季</OPTION> <OPTION value=12春季>12春季</OPTION> <OPTION value=12夏季>12夏季</OPTION> <OPTION value=12秋季>12秋季</OPTION> <OPTION value=12冬季>12冬季</OPTION> <OPTION value=11春季>11春季</OPTION> <OPTION value=11夏季>11夏季</OPTION> <OPTION value=11秋季>11秋季</OPTION> <OPTION value=11冬季>11冬季</OPTION> <OPTION value=10春季>10春季</OPTION> <OPTION value=10夏季>10夏季</OPTION> <OPTION value=10秋季>10秋季</OPTION> <OPTION value=10冬季>10冬季</OPTION> <OPTION value=09春季>09春季</OPTION> <OPTION value=09夏季>09夏季</OPTION> <OPTION value=09秋季>09秋季</OPTION> <OPTION value=09冬季>09冬季</OPTION></SELECT> </TD>
+                <TD vAlign=middle width=10 align=left>
+                <TD class=blue width=80 align=right>确认开始日: </TD>
+                <TD vAlign=middle width=10 align=left><INPUT tabIndex=2 onblur=checkday(this) id=ksrq class=blk style="WIDTH: 67px" oncontextmenu="setday(this,'')" size=10 value=2018-05-01 name=ksrq> </TD>
+                <TD class=blue width=60 align=center>生产项目 </TD>
+                <TD vAlign=middle width=10 align=left><SELECT id=Select2 class=kfs style="WIDTH: 100px" name=scxmlb> <OPTION selected value=7686>A8.面辅料采购部(v10)</OPTION> <OPTION value=8051>C1.业务一部</OPTION> <OPTION value=8052>C2.业务二部</OPTION> <OPTION value=8053>C3.业务三部</OPTION> <OPTION value=8054>C5.业务五部</OPTION> <OPTION value=8055>C6.业务六部</OPTION> <OPTION value=8056>C7.业务一部配饰类</OPTION> <OPTION value=0>全部</OPTION></SELECT> </TD>
+                <TD class=blue width=60 align=center>预投 </TD>
+                <TD vAlign=middle width=50 align=left><SELECT id=ytbs class=kfs style="WIDTH: 50px" name=ytbs> <OPTION selected value=2>全部</OPTION> <OPTION value=1>预投</OPTION> <OPTION value=0>大货</OPTION></SELECT> </TD>
+                <TD>&nbsp; </TD>
+                <TD class=blue width=45 align=center>生成日 </TD>
+                <TD vAlign=middle width=10 align=left><INPUT tabIndex=2 onblur=checkday(this) id=ddrq class=blk style="WIDTH: 67px" oncontextmenu="setday(this,'')" size=10 value=2018-05-24 name=ddrq> </TD><!--物料采购订单  单据别  621-->
+                <TD class=blue width=120 noWrap>单据别<SELECT id=Select2 class=kfs style="WIDTH: 83px" name=djlb> <OPTION selected value=2144>02.加工</OPTION> <OPTION value=2143>01.贴牌</OPTION></SELECT> </TD>
+                <TD vAlign=middle width=54><INPUT onclick="vbscript: window.parent.close()" class=blk style="WIDTH: 60px" type=button value=关闭窗口> </TD>
+            </TR>
+            <TR height=24>
+                <TD class=blue width=62 align=right>物料编号: </TD>
+                <TD width=10 align=left><INPUT id=chdm class=blk style="WIDTH: 70px" size=16 name=chdm> </TD>
+                <TD class=blue width=80 align=right>确认结束日: </TD>
+                <TD vAlign=middle width=10 align=left><INPUT tabIndex=2 onblur=checkday(this) id=jsrq class=blk style="WIDTH: 67px" oncontextmenu=setday(this,ksrq.value) size=10 value=2018-05-24 name=jsrq> </TD>
+                <TD class=blue width=60 align=center>跟踪号 </TD>
+                <TD vAlign=middle width=10 align=left><INPUT tabIndex=2 class=blk style="WIDTH: 100px" name=cggzh> </TD>
+                <TD class=blue width=50 align=center>FOB <INPUT type=checkbox name=fob> </TD>
+                <TD class=blue width=50 align=center>不签订合同订单 <INPUT type=checkbox name=bqdhtdd> </TD>
+                <TD vAlign=middle width=54><INPUT onclick="javascript: TcRef()" class=blk style="WIDTH: 54px" type=button value=刷新> </TD>
+                <TD>&nbsp; </TD>
+                <TD class=blue width=45 align=center>采购员 </TD>
+                <TD vAlign=middle width=10 align=left><INPUT tabIndex=2 id=cgry class=blk style="WIDTH: 67px" size=10 name=cgry> </TD>
+                <TD class=blue width=120 noWrap>分&nbsp;&nbsp;类<SELECT id=Select2 class=kfs style="WIDTH: 83px" name=djfl> <OPTION selected value=7567>01.辅料</OPTION> <OPTION value=7568>05.面料合同</OPTION> <OPTION value=7578>03.共用辅料</OPTION></SELECT> </TD>
+                <TD vAlign=middle width=54><INPUT onclick="javascript: DDsc('ddsc')" class=blk style="WIDTH: 60px" type=button value=订单生成 name=Myddsc> </TD>
+            </TR>
+        </TBODY>
+    </TABLE>
+</body>
+</html>

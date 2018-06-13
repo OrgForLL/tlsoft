@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+<title>您访问的页面未找到 </title>
+<style type="text/css">
+<!--
+.STYLE1 {color: #FF0000}
+a,
+a:link,
+a:visited,
+a:active {
+	color: #000;
+	text-decoration:none;
+}
+a:hover {
+	color: #0086C6;
+	text-decoration: underline;
+}
+body {
+	background-color: #fff;
+	color: #333;
+	font: normal 12px Verdana,Sans-serif;
+    line-height: 150%;
+	margin: 30px 0px 10px 0px;
+}
+hr {
+	border: dashed #d1d7dc 0px;
+	border-top-width: 1px;
+	height: 0px;
+	margin: 10px;
+	width: 100%;
+}
+td { font: normal 12px Verdana,Sans-serif; }
+
+.donate {
+    color: #000;
+}
+
+.code {
+    font: normal 11px Courier New;
+}
+
+.overlook {
+	color: #666;
+}
+
+.poweredby {
+	color: #999;
+	font-size: 9px;
+}
+.tip{color:#F00; font-weight:bold;}
+-->
+</style>
+</head>
+<body>
+<table width="700" border="0" cellspacing="0" cellpadding="20" style="margin-top:25px;">
+<tr>
+<td style="padding-left:120px;">对不起，您访问的页面可能已经删除、更名或暂时不可用，请单击<a href="javascript:history.back()" style="font-weight:bold;">这里</a>返回...
+<hr />
+<ul>
+<li class="overlook">确保浏览器的地址栏中显示的网站地址的拼写和格式正确无误</li>
+<li class="overlook">如果通过单击链接而到达了该网页，请与网站管理员联系<br />
+  通知我们该链接的URL地址不正确。</li>
+</ul>
+<p>HTTP 错误: <a class="tip"> 您请求的网页出现了诸如500,404,403等可能泄露敏感信息的错误。</a><br /> 
+<span class="poweredby">Copyright &copy; 2009-2012 <a href="http://www.ffib.cn" style="font-weight:bold;">www.ffib.cn</a>. All rights reserved.</span></p></td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Configuration;
+using System.IO;
+
+public class MyConfigHelper
+{
+    //system.configuration.configuration a=configurationmanager.openexeconfiguration
+    Configuration myconfig;
+    public MyConfigHelper()
+    {
+        LoadConfig("myconfig.xml");
+    }
+
+    public MyConfigHelper(string filename)
+    {
+        LoadConfig(filename);
+    }
+
+    private void LoadConfig(string filename)
+    {
+        string filepath = System.AppDomain.CurrentDomain.BaseDirectory + @"myconfig\" + filename;
+        if (File.Exists(filepath))
+        {
+            ExeConfigurationFileMap map = new ExeConfigurationFileMap();
+            map.ExeConfigFilename = filepath;
+            myconfig = System.Configuration.ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+        }
+    }
+
+    public string GetValue(string key)
+    {
+        try
+        {
+            if (myconfig != null)
+            {
+                return myconfig.AppSettings.Settings[key].Value;
+            }
+            else
+            {
+                return "";
+            }
+        }
+        catch
+        {
+            return "";
+        }
+    }
+}
+
