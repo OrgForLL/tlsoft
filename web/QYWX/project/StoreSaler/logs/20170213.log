@@ -1,0 +1,336 @@
+【2017-2-13 16:00:24】  select sp.sphh,sp.spmc,sum(a.sl) ddsl into #zb
+                            from yx_v_dddjmx a                            
+                             inner join yx_t_spdmb sp on a.sphh=sp.sphh                                 
+                            where a.tzid=1 and a.djlx=201 and a.djbs=1 
+                            group by sp.sphh,sp.spmc order by sum(a.sl) desc;
+                            --备货量与周转量
+                            select distinct sphh into #sphh from #zb;
+                            select a.sphh,isnull(a.tcl,0) tcl,c.bhl,isnull(a.tcl,0)-isnull(b.ddsl,0) zzl into #zzbh
+                            from #sphh s
+                            left join (
+                              --统筹计划量
+                              select a.sphh,sum(b.sl0) tcl 
+                              from #sphh s inner join yx_t_tcjhb a on s.sphh=a.sphh
+                              inner join yx_t_tcjhcmmx b on a.id=b.id
+                              where a.tzid=1 and a.shbs=1 group by a.sphh
+                            ) a on s.sphh=a.sphh
+                              --订单数量
+                            left join (
+                              select a.sphh,sum(a.sl) ddsl  
+                              from #sphh s inner join yx_v_dddjmx a on a.sphh=s.sphh
+                              where a.djlx=201 and a.djbs=1 group by a.sphh
+                            ) b on a.sphh=b.sphh
+                            left join (
+                              --备货库存
+                              select a.sphh,sum(a.sl0-a.dbdf0-a.qtdf0) bhl 
+                              from #sphh s inner join YX_T_Spkccmmx a on a.sphh=s.sphh
+                              where a.tzid=1 and a.ckid not in (9325,6671,7013) group by a.sphh
+                            ) c on a.sphh=c.sphh
+                            
+                            select a.*,b.zzl,b.bhl from #zb a left join #zzbh b on a.sphh=b.sphh
+
+                            drop table #zb;drop table #sphh;drop table #zzbh;
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:00:41】  订单数据查询结束！server='192.168.35.10';database=tlsoft;uid=ABEASD14AD;pwd=+AuDkDew
+【2017-2-13 16:00:41】  select a.sphh,sp.spmc,sum(a.djlb/abs(a.djlb)*sl) xssl
+                         from zmd_v_lsdjmx a
+                          inner join yx_t_spdmb sp on a.sphh=sp.sphh 
+                         where a.djlb in (1,-1,2,-2) and a.djbs=1 
+                         group by a.sphh,sp.spmc
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:00:59】  销售数据查询结束！
+【2017-2-13 16:00:59】  dt_dd-rows:68049 dt_ls-rows:56216
+【2017-2-13 16:02:46】  select sp.sphh,sp.spmc,sum(a.sl) ddsl into #zb
+                            from yx_v_dddjmx a                            
+                             inner join yx_t_spdmb sp on a.sphh=sp.sphh                                 
+                            where a.tzid=1 and a.djlx=201 and a.djbs=1 
+                            group by sp.sphh,sp.spmc order by sum(a.sl) desc;
+                            --备货量与周转量
+                            select distinct sphh into #sphh from #zb;
+                            select a.sphh,isnull(a.tcl,0) tcl,c.bhl,isnull(a.tcl,0)-isnull(b.ddsl,0) zzl into #zzbh
+                            from #sphh s
+                            left join (
+                              --统筹计划量
+                              select a.sphh,sum(b.sl0) tcl 
+                              from #sphh s inner join yx_t_tcjhb a on s.sphh=a.sphh
+                              inner join yx_t_tcjhcmmx b on a.id=b.id
+                              where a.tzid=1 and a.shbs=1 group by a.sphh
+                            ) a on s.sphh=a.sphh
+                              --订单数量
+                            left join (
+                              select a.sphh,sum(a.sl) ddsl  
+                              from #sphh s inner join yx_v_dddjmx a on a.sphh=s.sphh
+                              where a.djlx=201 and a.djbs=1 group by a.sphh
+                            ) b on a.sphh=b.sphh
+                            left join (
+                              --备货库存
+                              select a.sphh,sum(a.sl0-a.dbdf0-a.qtdf0) bhl 
+                              from #sphh s inner join YX_T_Spkccmmx a on a.sphh=s.sphh
+                              where a.tzid=1 and a.ckid not in (9325,6671,7013) group by a.sphh
+                            ) c on a.sphh=c.sphh
+                            
+                            select a.*,b.zzl,b.bhl from #zb a left join #zzbh b on a.sphh=b.sphh
+
+                            drop table #zb;drop table #sphh;drop table #zzbh;
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:03:01】  订单数据查询结束！server='192.168.35.10';database=tlsoft;uid=ABEASD14AD;pwd=+AuDkDew
+【2017-2-13 16:03:01】  select a.sphh,sp.spmc,sum(a.djlb/abs(a.djlb)*sl) xssl
+                         from zmd_v_lsdjmx a
+                          inner join yx_t_spdmb sp on a.sphh=sp.sphh 
+                         where a.djlb in (1,-1,2,-2) and a.djbs=1 
+                         group by a.sphh,sp.spmc
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:03:20】  销售数据查询结束！
+【2017-2-13 16:03:20】  dt_dd-rows:68049 dt_ls-rows:56216
+【2017-2-13 16:03:25】  select sp.sphh,sp.spmc,sum(a.sl) ddsl into #zb
+                            from yx_v_dddjmx a                            
+                             inner join yx_t_spdmb sp on a.sphh=sp.sphh                                 
+                            where a.tzid=1 and a.djlx=201 and a.djbs=1 
+                            group by sp.sphh,sp.spmc order by sum(a.sl) desc;
+                            --备货量与周转量
+                            select distinct sphh into #sphh from #zb;
+                            select a.sphh,isnull(a.tcl,0) tcl,c.bhl,isnull(a.tcl,0)-isnull(b.ddsl,0) zzl into #zzbh
+                            from #sphh s
+                            left join (
+                              --统筹计划量
+                              select a.sphh,sum(b.sl0) tcl 
+                              from #sphh s inner join yx_t_tcjhb a on s.sphh=a.sphh
+                              inner join yx_t_tcjhcmmx b on a.id=b.id
+                              where a.tzid=1 and a.shbs=1 group by a.sphh
+                            ) a on s.sphh=a.sphh
+                              --订单数量
+                            left join (
+                              select a.sphh,sum(a.sl) ddsl  
+                              from #sphh s inner join yx_v_dddjmx a on a.sphh=s.sphh
+                              where a.djlx=201 and a.djbs=1 group by a.sphh
+                            ) b on a.sphh=b.sphh
+                            left join (
+                              --备货库存
+                              select a.sphh,sum(a.sl0-a.dbdf0-a.qtdf0) bhl 
+                              from #sphh s inner join YX_T_Spkccmmx a on a.sphh=s.sphh
+                              where a.tzid=1 and a.ckid not in (9325,6671,7013) group by a.sphh
+                            ) c on a.sphh=c.sphh
+                            
+                            select a.*,b.zzl,b.bhl from #zb a left join #zzbh b on a.sphh=b.sphh
+
+                            drop table #zb;drop table #sphh;drop table #zzbh;
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:03:42】  订单数据查询结束！server='192.168.35.10';database=tlsoft;uid=ABEASD14AD;pwd=+AuDkDew
+【2017-2-13 16:03:42】  select a.sphh,sp.spmc,sum(a.djlb/abs(a.djlb)*sl) xssl
+                         from zmd_v_lsdjmx a
+                          inner join yx_t_spdmb sp on a.sphh=sp.sphh 
+                         where a.djlb in (1,-1,2,-2) and a.djbs=1 
+                         group by a.sphh,sp.spmc
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:04:00】  销售数据查询结束！
+【2017-2-13 16:04:01】  dt_dd-rows:68049 dt_ls-rows:56216
+【2017-2-13 16:04:30】  select sp.sphh,sp.spmc,sum(a.sl) ddsl into #zb
+                            from yx_v_dddjmx a                            
+                             inner join yx_t_spdmb sp on a.sphh=sp.sphh                                 
+                            where a.tzid=1 and a.djlx=201 and a.djbs=1 
+                            group by sp.sphh,sp.spmc order by sum(a.sl) desc;
+                            --备货量与周转量
+                            select distinct sphh into #sphh from #zb;
+                            select a.sphh,isnull(a.tcl,0) tcl,c.bhl,isnull(a.tcl,0)-isnull(b.ddsl,0) zzl into #zzbh
+                            from #sphh s
+                            left join (
+                              --统筹计划量
+                              select a.sphh,sum(b.sl0) tcl 
+                              from #sphh s inner join yx_t_tcjhb a on s.sphh=a.sphh
+                              inner join yx_t_tcjhcmmx b on a.id=b.id
+                              where a.tzid=1 and a.shbs=1 group by a.sphh
+                            ) a on s.sphh=a.sphh
+                              --订单数量
+                            left join (
+                              select a.sphh,sum(a.sl) ddsl  
+                              from #sphh s inner join yx_v_dddjmx a on a.sphh=s.sphh
+                              where a.djlx=201 and a.djbs=1 group by a.sphh
+                            ) b on a.sphh=b.sphh
+                            left join (
+                              --备货库存
+                              select a.sphh,sum(a.sl0-a.dbdf0-a.qtdf0) bhl 
+                              from #sphh s inner join YX_T_Spkccmmx a on a.sphh=s.sphh
+                              where a.tzid=1 and a.ckid not in (9325,6671,7013) group by a.sphh
+                            ) c on a.sphh=c.sphh
+                            
+                            select a.*,b.zzl,b.bhl from #zb a left join #zzbh b on a.sphh=b.sphh
+
+                            drop table #zb;drop table #sphh;drop table #zzbh;
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:04:46】  订单数据查询结束！server='192.168.35.10';database=tlsoft;uid=ABEASD14AD;pwd=+AuDkDew
+【2017-2-13 16:04:46】  select a.sphh,sp.spmc,sum(a.djlb/abs(a.djlb)*sl) xssl
+                         from zmd_v_lsdjmx a
+                          inner join yx_t_spdmb sp on a.sphh=sp.sphh 
+                         where a.djlb in (1,-1,2,-2) and a.djbs=1 
+                         group by a.sphh,sp.spmc
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:05:03】  销售数据查询结束！
+【2017-2-13 16:05:04】  dt_dd-rows:68049 dt_ls-rows:56216
+【2017-2-13 16:07:14】  select sp.sphh,sp.spmc,sum(a.sl) ddsl into #zb
+                            from yx_v_dddjmx a                            
+                             inner join yx_t_spdmb sp on a.sphh=sp.sphh                                 
+                            where a.tzid=1 and a.djlx=201 and a.djbs=1 
+                            group by sp.sphh,sp.spmc order by sum(a.sl) desc;
+                            --备货量与周转量
+                            select distinct sphh into #sphh from #zb;
+                            select a.sphh,isnull(a.tcl,0) tcl,c.bhl,isnull(a.tcl,0)-isnull(b.ddsl,0) zzl into #zzbh
+                            from #sphh s
+                            left join (
+                              --统筹计划量
+                              select a.sphh,sum(b.sl0) tcl 
+                              from #sphh s inner join yx_t_tcjhb a on s.sphh=a.sphh
+                              inner join yx_t_tcjhcmmx b on a.id=b.id
+                              where a.tzid=1 and a.shbs=1 group by a.sphh
+                            ) a on s.sphh=a.sphh
+                              --订单数量
+                            left join (
+                              select a.sphh,sum(a.sl) ddsl  
+                              from #sphh s inner join yx_v_dddjmx a on a.sphh=s.sphh
+                              where a.djlx=201 and a.djbs=1 group by a.sphh
+                            ) b on a.sphh=b.sphh
+                            left join (
+                              --备货库存
+                              select a.sphh,sum(a.sl0-a.dbdf0-a.qtdf0) bhl 
+                              from #sphh s inner join YX_T_Spkccmmx a on a.sphh=s.sphh
+                              where a.tzid=1 and a.ckid not in (9325,6671,7013) group by a.sphh
+                            ) c on a.sphh=c.sphh
+                            
+                            select a.*,b.zzl,b.bhl from #zb a left join #zzbh b on a.sphh=b.sphh
+
+                            drop table #zb;drop table #sphh;drop table #zzbh;
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:07:29】  订单数据查询结束！server='192.168.35.10';database=tlsoft;uid=ABEASD14AD;pwd=+AuDkDew
+【2017-2-13 16:07:29】  select a.sphh,sp.spmc,sum(a.djlb/abs(a.djlb)*sl) xssl
+                         from zmd_v_lsdjmx a
+                          inner join yx_t_spdmb sp on a.sphh=sp.sphh 
+                         where a.djlb in (1,-1,2,-2) and a.djbs=1 
+                         group by a.sphh,sp.spmc
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:07:46】  销售数据查询结束！
+【2017-2-13 16:07:47】  dt_dd-rows:68049 dt_ls-rows:56216
+【2017-2-13 16:08:20】  select sp.sphh,sp.spmc,sum(a.sl) ddsl into #zb
+                            from yx_v_dddjmx a                            
+                             inner join yx_t_spdmb sp on a.sphh=sp.sphh                                 
+                            where a.tzid=1 and a.djlx=201 and a.djbs=1 
+                            group by sp.sphh,sp.spmc order by sum(a.sl) desc;
+                            --备货量与周转量
+                            select distinct sphh into #sphh from #zb;
+                            select a.sphh,isnull(a.tcl,0) tcl,c.bhl,isnull(a.tcl,0)-isnull(b.ddsl,0) zzl into #zzbh
+                            from #sphh s
+                            left join (
+                              --统筹计划量
+                              select a.sphh,sum(b.sl0) tcl 
+                              from #sphh s inner join yx_t_tcjhb a on s.sphh=a.sphh
+                              inner join yx_t_tcjhcmmx b on a.id=b.id
+                              where a.tzid=1 and a.shbs=1 group by a.sphh
+                            ) a on s.sphh=a.sphh
+                              --订单数量
+                            left join (
+                              select a.sphh,sum(a.sl) ddsl  
+                              from #sphh s inner join yx_v_dddjmx a on a.sphh=s.sphh
+                              where a.djlx=201 and a.djbs=1 group by a.sphh
+                            ) b on a.sphh=b.sphh
+                            left join (
+                              --备货库存
+                              select a.sphh,sum(a.sl0-a.dbdf0-a.qtdf0) bhl 
+                              from #sphh s inner join YX_T_Spkccmmx a on a.sphh=s.sphh
+                              where a.tzid=1 and a.ckid not in (9325,6671,7013) group by a.sphh
+                            ) c on a.sphh=c.sphh
+                            
+                            select a.*,b.zzl,b.bhl from #zb a left join #zzbh b on a.sphh=b.sphh
+
+                            drop table #zb;drop table #sphh;drop table #zzbh;
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:08:37】  订单数据查询结束！server='192.168.35.10';database=tlsoft;uid=ABEASD14AD;pwd=+AuDkDew
+【2017-2-13 16:08:37】  select a.sphh,sp.spmc,sum(a.djlb/abs(a.djlb)*sl) xssl
+                         from zmd_v_lsdjmx a
+                          inner join yx_t_spdmb sp on a.sphh=sp.sphh 
+                         where a.djlb in (1,-1,2,-2) and a.djbs=1 
+                         group by a.sphh,sp.spmc
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 16:08:56】  销售数据查询结束！
+【2017-2-13 16:08:57】  dt_dd-rows:68049 dt_ls-rows:56216
+【2017-2-13 17:32:03】  select sp.sphh,sp.spmc,sum(a.sl) ddsl into #zb
+                            from yx_v_dddjmx a                            
+                             inner join yx_t_spdmb sp on a.sphh=sp.sphh                                 
+                            where a.tzid=1 and a.djlx=201 and a.djbs=1 
+                            group by sp.sphh,sp.spmc order by sum(a.sl) desc;
+                            --备货量与周转量
+                            select distinct sphh into #sphh from #zb;
+                            select a.sphh,isnull(a.tcl,0) tcl,c.bhl,isnull(a.tcl,0)-isnull(b.ddsl,0) zzl into #zzbh
+                            from #sphh s
+                            left join (
+                              --统筹计划量
+                              select a.sphh,sum(b.sl0) tcl 
+                              from #sphh s inner join yx_t_tcjhb a on s.sphh=a.sphh
+                              inner join yx_t_tcjhcmmx b on a.id=b.id
+                              where a.tzid=1 and a.shbs=1 group by a.sphh
+                            ) a on s.sphh=a.sphh
+                              --订单数量
+                            left join (
+                              select a.sphh,sum(a.sl) ddsl  
+                              from #sphh s inner join yx_v_dddjmx a on a.sphh=s.sphh
+                              where a.djlx=201 and a.djbs=1 group by a.sphh
+                            ) b on a.sphh=b.sphh
+                            left join (
+                              --备货库存
+                              select a.sphh,sum(a.sl0-a.dbdf0-a.qtdf0) bhl 
+                              from #sphh s inner join YX_T_Spkccmmx a on a.sphh=s.sphh
+                              where a.tzid=1 and a.ckid not in (9325,6671,7013) group by a.sphh
+                            ) c on a.sphh=c.sphh
+                            
+                            select a.*,b.zzl,b.bhl from #zb a left join #zzbh b on a.sphh=b.sphh
+
+                            drop table #zb;drop table #sphh;drop table #zzbh;
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 17:32:21】  订单数据查询结束！server='192.168.35.10';database=tlsoft;uid=ABEASD14AD;pwd=+AuDkDew
+【2017-2-13 17:32:21】  select a.sphh,sp.spmc,sum(a.djlb/abs(a.djlb)*sl) xssl
+                         from zmd_v_lsdjmx a
+                          inner join yx_t_spdmb sp on a.sphh=sp.sphh 
+                         where a.djlb in (1,-1,2,-2) and a.djbs=1 
+                         group by a.sphh,sp.spmc
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 17:32:37】  销售数据查询结束！
+【2017-2-13 17:32:38】  dt_dd-rows:68049 dt_ls-rows:56216
+【2017-2-13 18:38:38】  select sp.sphh,sp.spmc,sum(a.sl) ddsl into #zb
+                            from yx_v_dddjmx a                            
+                             inner join yx_t_spdmb sp on a.sphh=sp.sphh                                 
+                            where a.tzid=1 and a.djlx=201 and a.djbs=1 
+                            group by sp.sphh,sp.spmc order by sum(a.sl) desc;
+                            --备货量与周转量
+                            select distinct sphh into #sphh from #zb;
+                            select a.sphh,isnull(a.tcl,0) tcl,c.bhl,isnull(a.tcl,0)-isnull(b.ddsl,0) zzl into #zzbh
+                            from #sphh s
+                            left join (
+                              --统筹计划量
+                              select a.sphh,sum(b.sl0) tcl 
+                              from #sphh s inner join yx_t_tcjhb a on s.sphh=a.sphh
+                              inner join yx_t_tcjhcmmx b on a.id=b.id
+                              where a.tzid=1 and a.shbs=1 group by a.sphh
+                            ) a on s.sphh=a.sphh
+                              --订单数量
+                            left join (
+                              select a.sphh,sum(a.sl) ddsl  
+                              from #sphh s inner join yx_v_dddjmx a on a.sphh=s.sphh
+                              where a.djlx=201 and a.djbs=1 group by a.sphh
+                            ) b on a.sphh=b.sphh
+                            left join (
+                              --备货库存
+                              select a.sphh,sum(a.sl0-a.dbdf0-a.qtdf0) bhl 
+                              from #sphh s inner join YX_T_Spkccmmx a on a.sphh=s.sphh
+                              where a.tzid=1 and a.ckid not in (9325,6671,7013) group by a.sphh
+                            ) c on a.sphh=c.sphh
+                            
+                            select a.*,b.zzl,b.bhl from #zb a left join #zzbh b on a.sphh=b.sphh
+
+                            drop table #zb;drop table #sphh;drop table #zzbh;
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 18:38:56】  订单数据查询结束！server='192.168.35.10';database=tlsoft;uid=ABEASD14AD;pwd=+AuDkDew
+【2017-2-13 18:38:56】  select a.sphh,sp.spmc,sum(a.djlb/abs(a.djlb)*sl) xssl
+                         from zmd_v_lsdjmx a
+                          inner join yx_t_spdmb sp on a.sphh=sp.sphh 
+                         where a.djlb in (1,-1,2,-2) and a.djbs=1 
+                         group by a.sphh,sp.spmc
+{"lx":"sphh","khid":"","mdid":"","sphh":"","lbid":"","kfbh":"","ksrq":"","jsrq":"","khlb":"","zmdfl":"","roleid":"99","curkhid":"","curkhfl":"","order":{"col":"","direc":""}}
+【2017-2-13 18:39:13】  销售数据查询结束！
+【2017-2-13 18:39:14】  dt_dd-rows:68049 dt_ls-rows:56217

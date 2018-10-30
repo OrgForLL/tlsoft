@@ -1,0 +1,3 @@
+DineQRcode.aspx:放在企业号二维码，提供闸机二维码读头使用
+fivelicanteencore.aspx：刷卡，二维码消费接口
+QRcodeScan.aspx：煮面二维码，被动刷

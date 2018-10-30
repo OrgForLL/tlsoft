@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/vipweixin/ncoStyle.css?ver=20170227_01" />
+</head>
+<body>
+    <!--顶部快递方式及收货地址显示-->
+    <div class="header">
+        <i class="fa fa-angle-left" onclick="javascript:window.history.back(-1);"></i>
+        <div class="express_mode back-img">
+            <a href="javascript:nvaigateTo('store')" class="express_item" style="border-right: 1px solid rgba(255,255,255,.2);">
+                <img src="../../res/img/vipweixin/shop_icon.png" />
+                <p>到店自取</p>
+            </a>
+            <a href="javascript:nvaigateTo('express')" class="express_item">
+                <img src="../../res/img/vipweixin/delivery_icon.png" />
+                <p>快递上门</p>
+            </a>
+        </div>
+        <!--收货地址-->
+        <div class="address-wrap" data-addr="0"></div>
+    </div>
+    <div class="wrap-page">
+        <!--确认订单页-->
+        <div class="page page-not-header-footer" id="index">
+            <!--订单列表-->
+            <div class="order-list">
+                <ul>
+                    <!--<li>
+                        <div class="thumb back-img" style="background-image: url(../img/EasyBusiness/50ticket.jpg)"></div>
+                        <div class="info">
+                            <p class="name">50积分兑换</p>
+                            <p class="desc">价值50元</p>
+                            <p class="points">1000积分</p>
+                            <p class="nums">x<span>1</span></p>
+                        </div>
+                    </li>-->
+                </ul>
+            </div>
+            <p class="no-result center-translate">您尚未选择要兑换的商品..</p>
+        </div>
+
+        <!--个人地址列表页-->
+        <div class="page page-right" id="addressList_page">
+            <div class="head">
+                <i class="fa fa-angle-left" onclick="javascript:returnTo('addressList_page','index')"></i>
+                <span class="title">选择收货地址</span>
+            </div>
+
+            <ul class="addList" data-load="0">
+                <!--<li class="selfaddress">
+                    <div class="top-rec-info">
+                        <div class="user-info floatfix">
+                            <span class="user-name">小明</span>
+                            <span class="user-phone">15260825009</span>
+                        </div>
+                        <div class="address-info">
+                            <span class="sf">福建省</span><span class="cs">泉州市</span><span class="jd"></span><span class="xxdz">长兴路利郎工业园200号</span>
+                        </div>
+                    </div>
+                    <div class="opera-wrap floatfix">
+                        <div class="right-opera">
+                            <div class="edit-wrap">
+                                <i class="fa fa-edit (alias)"></i>
+                                <span>编辑</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>-->
+            </ul>
+
+            <div class="addrbtn-wrap">
+                <a href="javascript:$('#myAdd_page').attr('data-mode','add');nvaigateTo('newaddress');" class="newAddBtn">添加新地址</a>
+            </div>
+        </div>
+
+        <!--店铺地址页-->
+        <div class="page page-right" id="shopAdd_page">
+            <div class="head">
+                <i class="fa fa-angle-left" onclick="javascript:returnTo('shopAdd_page','index')"></i>
+                <span class="title">选择店铺地址</span>
+            </div>
+            <ul class="user-list">
+                <li class="floatfix">
+                    <span class="input-title">收货人</span>
+                    <input class="shopinput" type="text" id="shopname" placeholder="请输入收货人姓名" />
+                </li>
+                <li class="floatfix">
+                    <span class="input-title">联系电话</span>
+                    <input class="shopinput" type="text" id="number" placeholder="请输入收货人联系电话" />
+                </li>
+            </ul>
+            <div class="shoplist-wrap">
+                <p class="shoptitle">店铺地址</p>
+                <ul class="shoplist">
+                    <li class="floatfix" data-type="shop-province">
+                        <span class="input-title">省份</span>
+                        <select id="sprovince" class="seaddress" data-load="0">
+                            <option class="o-tip" value="-1">请选择省份</option>
+                        </select>
+                        <i class="fa fa-angle-down"></i>
+                    </li>
+                    <li class="floatfix" data-type="shop-city">
+                        <span class="input-title">城市</span>
+                        <select id="scity" class="seaddress" data-load="0" disabled="disabled">
+                            <option class="o-tip" value="-1">请选择城市</option>
+                        </select>
+                        <i class="fa fa-angle-down"></i>
+                    </li>
+                    <li class="floatfix" data-type="shop-addr">
+                        <span class="input-title">店铺</span>
+                        <select id="sshop" class="seaddress" data-load="0" disabled="disabled">
+                            <option class="o-tip" value="-1">请选择店铺</option>
+                        </select>
+                        <i class="fa fa-angle-down"></i>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="addrbtn-wrap">
+                <a href="javascript:;" class="sureBtn">确 认</a>
+            </div>
+        </div>
+
+        <!--添加新地址-->
+        <div class="page page-right" id="myAdd_page">
+            <div class="head">
+                <i class="fa fa-angle-left" onclick="javascript:resetAddrForm();returnTo('myAdd_page','addressList_page');"></i>
+                <span class="title">添加新地址</span>
+            </div>
+
+            <ul class="user-list" id="userlist">
+                <li class="floatfix">
+                    <span class="input-title">收货人</span>
+                    <input class="myinput" id="name" type="text" value="" placeholder="请输入收货人姓名">
+                </li>
+                <li class="floatfix">
+                    <span class="input-title">联系电话</span>
+                    <input class="myinput" id="phone" type="number" value="" placeholder="请输入收货人联系电话" pattern="[0-9]*">
+                </li>
+                <li class="floatfix" data-type="province">
+                    <span class="input-title">省份</span>
+                    <select id="province" class="seaddress" data-load="1">
+                        <option class="o-tip" value="-1">请选择省份</option>
+                    </select>
+                    <i class="fa fa-angle-down"></i>
+                </li>
+                <li class="floatfix" data-type="city">
+                    <span class="input-title">城市</span>
+                    <select id="city" class="seaddress" disabled="disabled">
+                        <option class="o-tip" value="-1">请选择城市</option>
+                    </select>
+                    <i class="fa fa-angle-down"></i>
+                </li>
+                <li class="floatfix" data-type="district">
+                    <span class="input-title">街道</span>
+                    <select id="district" class="seaddress" disabled="disabled">
+                        <option class="o-tip" value="-1">请选择街道</option>
+                    </select>
+                    <i class="fa fa-angle-down"></i>
+                </li>
+                <li class="floatfix">
+                    <span class="input-title">详细地址</span>
+                    <input class="myinput" id="detailadd" type="text" value="" placeholder="请输入详细地址">
+                </li>
+            </ul>
+
+            <div class="setDefault">
+                <div class="setBtn" id="setDefBtn" data-select="0">
+                    <i class="fa fa-circle-thin"></i>
+                    <span>设为默认地址</span>
+                </div>
+            </div>
+
+            <div class="addrbtn-wrap">
+                <a href="javascript:;" class="addBtn">确 认</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="subForm">
+            <div class="static">
+                <span style="color: #9b6170;"><span id="total_points">--</span>积分</span>
+                <span style="color: #999;">(共<span id="total_nums">--</span>件商品)</span>
+            </div>
+            <div class="subbtn">提交订单</div>
+        </div>
+    </div>
+
+
+    <!--模板区-->
+    <script type="text/html" id="tmp_address_option">
+        <option value="{{id}}">{{cname}}</option>
+    </script>
+
+    <script type="text/html" id="tmp_shop_option">
+        <option value="{{mdid}}">{{mdmc}}</option>
+    </script>
+
+    <script type="text/html" id="tmp_order_item">        
+        <li data-id="{{id}}">
+            <div class="thumb back-img" style="background-image: url({{img}})"></div>
+            <div class="info">
+                <p class="name">{{name}}</p>
+                <p class="desc">价值{{market_price}}元</p>
+                <p class="points">{{point}}积分</p>
+                <p class="nums">x<span>{{goods_nums}}</span></p>
+            </div>
+        </li>
+    </script>
+
+    <script type="text/html" id="tmp_myaddress">
+        <li class="selfaddress" data-id="{{id}}" data-default="{{defaultAddr}}">
+            <div class="top-rec-info">
+                <div class="user-info floatfix">
+                    <span class="user-name">{{cname}}</span>
+                    <span class="user-phone">{{mobile}}</span>
+                </div>
+                <div class="address-info">
+                    <span class="sf">{{province}}</span><span class="cs">{{city}}</span><span class="jd">{{district}}</span><span class="xxdz">{{other}}</span>
+                </div>
+            </div>
+            <div class="opera-wrap floatfix">
+                <div class="right-opera">
+                    <div class="edit-wrap">
+                        <i class="fa fa-edit (alias)"></i>
+                        <span>编辑</span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </script>
+
+    <script type="text/html" id="tmp_chooseAddr">
+        <div class="left-add center-translate">
+            <div class="rec-info">
+                <span class="info-label">收货人:</span>
+                <span class="rec-name">{{cname}}</span>
+                <span class="phone">{{mobile}}</span>
+            </div>
+            <div class="address-info">
+                <span class="info-label">收货地址:</span>
+                <span class="rec-address">{{address}}</span>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/template.js"></script>
+    <script type="text/javascript" src="../../res/js/fastclick.min.js"></script>
+    <script type="text/javascript" src="../../res/js/LeeJSUtils.min.js"></script>
+    <script type="text/javascript" src="../../res/js/vipweixin/ncoMain.js?ver=20170227_02"></script>
+</body>
+</html>

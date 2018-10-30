@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>企业号个人中心</title>
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
+            font-size: 14px;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            z-index: 100;
+            background: url(img/qythumb.jpg);
+            background-size: cover;
+            overflow: hidden;
+            border-bottom: 1px solid #cbcbcb;
+        }
+
+            .header .headimg {
+                position: relative;
+                top: 15px;
+                left: 15px;
+                width: 60px;
+                height: 60px;
+                left: 50%;
+                margin-left: -33px;
+                background: url('img/vip1.jpg');
+                background-size: cover;
+                border-radius: 50px;
+                border: 3px solid #fff;
+            }
+
+        .editicon {
+            position: absolute;
+            top: 10px;
+            color: #fff;
+            font-size: 2em;
+            padding: 0 10px;
+        }
+
+        .editicon {
+            right: 5px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #fff;
+            text-align: center;
+        }
+
+        .header .uname {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-top: 18px;
+        }
+
+        .mypage {
+            position: fixed;
+            top: 141px;
+            bottom: 40px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            padding-top: 5px;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            z-index: 10;
+            -webkit-transform: translate3d(0,0,0);
+            -webkit-transform: translate(0,0,0);
+            transform: translate3d(0,0,0);
+        }
+
+        .item {
+            width: 80%;
+            height: 100px;
+            background: #71a43d;
+            border-radius: 6px;
+            box-shadow: 0px 0px 2px #aaa;
+            box-sizing: border-box;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        .menulist li {
+            float: left;
+            width: 33.33%;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+            .menulist li img {
+                width: 40px;
+                height: 40px;
+                margin-top: 15px;
+            }
+
+        .floatfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .itemtxt {
+            height: 26px;
+            line-height: 26px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-image: linear-gradient(360deg,#e7e7e7,#f8f8f8);
+            background-image: -webkit-linear-gradient(90deg,#e7e7e7,#f8f8f8);
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .left {
+            transform: translate3d(-100%,0,0);
+            -webkit-transform: translate3d(-100%,0,0);
+            -webkit-transform: translate(-100%,0,0);
+        }
+
+        .right {
+            -webkit-transform: translate3d(100%,0,0);
+            -webkit-transform: translate(100%,0,0);
+            transform: translate3d(100%,0,0);
+        }
+
+        .menulist2 li {
+            padding: 10px;
+            height: 60px;
+            background: #fff;
+            text-align: left;
+        }
+
+            .menulist2 li:not(:last-child) {
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+        .fixicon {
+            height: 36px;
+            width: 36px;
+            padding: 3px;
+            margin: 0;
+            box-shadow: none;
+            float: left;
+            top: 50%;
+            margin-top: -18px;
+        }
+
+        .menulist2 img {
+            width: 30px;
+            height: auto;
+        }
+
+        .menuname {
+            height: 30px;
+            line-height: 30px;
+            vertical-align: middle;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding-left: 50px;
+            margin-top: -3px;
+        }
+
+        .menudesc {
+            height: 30px;
+            padding-left: 50px;
+            line-height: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="headimg"></div>
+        <p class="uname">李清峰</p>
+        <p class="tel"><strong>Tel:</strong>15260825009</p>
+        <div class="editicon"><i class="fa fa-edit"></i></div>
+    </div>
+    <div class="container" id="prevent-scroll">
+        <div class="mypage" id="page1">
+            <ul class="menulist floatfix">
+                <li>
+                    <div class="item">
+                        <img src="img/wxsys.png" />
+                        <p class="itemtxt">微信系统开通</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="item" style="background: #e8960e;">
+                        <img src="img/bylicon.png" />
+                        <p class="itemtxt">备忘录</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="item" style="background: #d75847;">
+                        <img src="img/srdzicon.png" />
+                        <p class="itemtxt">私人定制</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="item" style="background: #199aa7;">
+                        <img src="img/gzjhicon.png" />
+                        <p class="itemtxt">工作报告</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="item" style="background: #384a70;">
+                        <img src="img/kdcxicon.png" />
+                        <p class="itemtxt">快递查询</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="mypage right" id="page2">
+            <ul class="menulist2">
+                <li>
+                    <div class="item fixicon">
+                        <img src="img/wxsys.png" />
+                    </div>
+                    <p class="menuname">1.微信系统开通</p>
+                    <p class="menudesc">用于自助开通利郎企业号中的各种应用系统，如ERP系统微信扫描登陆等功能。</p>
+                </li>
+                <li>
+                    <div class="item fixicon" style="background: #e8960e;">
+                        <img src="img/bylicon.png" />
+                    </div>
+                    <p class="menuname">2.备忘录</p>
+                    <p class="menudesc">用于记录您在工作中的一些提醒事项，并且可以利用企业号在指定时间提醒您。</p>
+                </li>
+                <li>
+                    <div class="item fixicon" style="background: #d75847;">
+                        <img src="img/srdzicon.png" />
+                    </div>
+                    <p class="menuname">3.私人定制</p>
+                    <p class="menudesc">主要用于您在工作中的一些订阅服务。</p>
+                </li>
+                <li>
+                    <div class="item fixicon" style="background: #199aa7;">
+                        <img src="img/gzjhicon.png" />
+                    </div>
+                    <p class="menuname">4.工作报告</p>
+                    <p class="menudesc">方便您随时随地书写工作报告，后期还可以与ERP系统打通，实现数据的共享。</p>
+                </li>
+                <li>
+                    <div class="item fixicon" style="background: #384a70;">
+                        <img src="img/kdcxicon.png" />
+                    </div>
+                    <p class="menuname">5.快递查询</p>
+                    <p class="menudesc">用于查询您的快递信息。</p>
+                </li>
+                <li>
+                    <div class="item fixicon" style="background: #384a70;">
+                        <img src="img/kdcxicon.png" />
+                    </div>
+                    <p class="menuname">5.快递查询</p>
+                    <p class="menudesc">用于查询您的快递信息。</p>
+                </li>
+            </ul>
+        </div>
+        <div class="mypage"></div>
+    </div>
+    <div class="footer">
+        &copy;2016 利郎信息技术部
+    </div>
+    <script type="text/javascript" src="js/jquery.js"></script>    
+    <script type="text/javascript">
+        var yy, YY,xx,XX;
+        var obj = document.getElementById("prevent-scroll");
+        if (obj != null) {
+            obj.addEventListener('touchstart', function (event) {
+                xx = event.targetTouches[0].screenX;
+                yy = event.targetTouches[0].screenY;
+            });
+
+            obj.addEventListener('touchmove', function (event) {                
+                YY = event.targetTouches[0].screenY;
+
+                if (YY < yy && obj.scrollTop + obj.clientHeight >= obj.scrollHeight) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return;
+                } else if (YY > yy && obj.scrollTop == 0) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return;
+                }
+            });
+
+            obj.addEventListener('touchend', function (event) {
+                XX = event.changedTouches[0].screenX;
+                YY = event.changedTouches[0].screenY;
+
+                if (XX < xx && Math.abs(XX - xx) > 100) {
+                    $("#page1").addClass("left");
+                    $("#page2").removeClass("right");
+                } else if (XX > xx && Math.abs(XX - xx) > 100) {
+                    $("#page1").removeClass("left");
+                    $("#page2").addClass("right");
+                }                
+            });            
+        }
+    </script>
+</body>
+</html>

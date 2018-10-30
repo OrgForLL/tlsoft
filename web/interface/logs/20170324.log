@@ -1,0 +1,39 @@
+【2017-3-24 8:34:41】  创建卡券 { 
+                            "card": {
+                               "card_type": "GENERAL_COUPON",
+                               "general_coupon": {
+                                   "base_info": {
+                                       "logo_url": "http://mmbiz.qpic.cn/mmbiz/wrgiaawibvBmAF6dCOA33AxFSc5gmSpgjZ4D7YExKlEJ6jUNgtmEHB3roAWKLX8e6s2stsCXN67ZRrnLhaMyYenQ/0",
+                                       "brand_name":"利郎男装",
+                                       "code_type":"CODE_TYPE_BARCODE",
+                                       "title": "测试抵用券",
+                                       "sub_title": "10",
+                                       "color": "Color010",
+                                       "notice": "请让营业员扫码销券",
+                                       "service_phone": "",
+                                       "description": "IT测试数据，不外发",
+                                       "date_info": {
+                                           "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                           "begin_timestamp": 1488297600 ,
+                                           "end_timestamp": 1490975940
+                                       },
+                                       "sku": {
+                                           "quantity": 20
+                                       },
+                                       "get_limit": 10,
+                                       "use_custom_code": false,  
+                                       "bind_openid":true,                                     
+                                       "can_share": false,
+                                       "can_give_friend": false,                                       
+                                       "custom_url_name": "",
+                                       "custom_url": "",
+                                       "custom_url_sub_title": "",
+                                       "promotion_url_name": "",
+                                       "promotion_url": "",
+                                       "promotion_url_sub_title":"",
+                                       "source": "LILANZ"
+                                   },
+                                   "default_detail":"抵用100元" 
+                                }
+                             }
+                            }提交结果：{"errcode":0,"errmsg":"ok","card_id":"parMEt4yY-LdqaWkvKFt-XTcpIZQ"}

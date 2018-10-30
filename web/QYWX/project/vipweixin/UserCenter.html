@@ -1,0 +1,624 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <style type="text/css">
+        #page-index {
+            max-width: 600px;
+            position: relative;
+            margin: 0 auto;
+            height: 100%;
+        }
+
+        .page {
+            padding: 0;
+        }
+
+        .page-head {
+            height: 210px;
+            background: linear-gradient(90deg,#272b2e 0%,#555 100%);
+            background: -webkit-linear-gradient(90deg,#272b2e 0%,#555 100%);
+            border-bottom: 1px solid #444;
+            box-sizing: border-box;
+            position: relative;
+            background-color: rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        svg {
+            background-position: 50% 50%;
+            background-size: cover;
+        }
+
+        .blurbg {
+            /*position: absolute;*/
+            /*top:0;
+            left:0;
+            width:100%;
+            height:100%;*/
+            /*background: url(../../res/img/storesaler/headimg.jpg) no-repeat left bottom scroll;
+            background-size: cover;*/
+            /*background:url(img/123.svg) no-repeat center center;
+            min-height:100%;
+            background-size:cover;*/
+            /*-webkit-filter: blur(8px); 
+            filter: blur(8px);*/
+            /*box-sizing: border-box;
+            background-position:50% 50%;
+            background-size:cover;*/    
+            position:absolute;        
+        }
+
+        .navs {
+            position: absolute;
+            top: 210px;
+            left: 0;
+            right: 0;
+            bottom: 26px;
+            background: #272b2e;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
+            z-index: 200;
+        }
+
+        .headimg {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid #fff;
+            margin: 0 auto;
+            position:relative;
+        }
+
+            .headimg img {
+                width: 100%;
+                height: 100%;
+            }
+
+        .username {
+            font-size: 1.4em;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            margin: 8px 0 2px 0;
+            text-shadow: 0 0 1px #ccc;
+        }
+
+        .area {
+            color: #fff;
+            text-align: center;
+            text-shadow: 0 0 1px #ccc;
+        }
+
+        .iconcircle {
+            width: 34px;
+            height: 34px;
+            padding: 7px;
+            border-radius: 50px;
+            background: rgba(0,0,0,0.2);
+            position: absolute;
+            top: 50%;
+            left: 66%;
+            margin-top: -40px;
+        }
+
+            .iconcircle img {
+                width: 20px;
+                height: 20px;
+            }
+
+        .left {
+            left: initial;
+            right: 66%;
+        }
+
+        .iconcircle:hover {
+            background: rgba(0,0,0,0.8);
+        }
+
+        .top-navs {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            bottom: 0;
+            height: 50px;
+            background-color: rgba(0,0,0,0.2);
+        }
+
+        .tnavul {
+            list-style: none;
+            color: #f0f0f0;
+        }
+
+            .tnavul li {
+                float: left;
+                width: 33.33%;
+                box-sizing: border-box;
+                text-align: center;
+                padding: 5px 0;
+                line-height: 20px;
+            }
+
+                .tnavul li > p {
+                    border-right: 1px solid #f0f0f0;
+                    border-right: 1px solid rgba(255,255,255,.2);
+                }
+
+                .tnavul li:last-child p {
+                    border-right: none;
+                }
+
+        .navul {
+            list-style: none;
+            color: #ccc;
+        }
+
+            .navul li {
+                width: 50%;
+                float: left;
+                position: relative;
+                height: 80px;
+                text-align: center;
+                border-right: 1px solid #333;
+                border-bottom: 1px solid #333;
+                box-sizing: border-box;
+                background-color: #272b2e;
+            }
+
+                .navul li:nth-child(2n) {
+                    border-right: none;
+                }
+
+                .navul li:hover {
+                    background-color: rgba(0,0,0,0.4);
+                }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            float: left;
+        }
+
+        .icontext {
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            padding: 0 5px;
+            font-size: 1.1em;
+        }
+
+        .item {
+            position: relative;
+            top: 20px;
+            display: inline-block;
+        }
+
+        .copy {
+            color: #aaa;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9em;
+            height: 27px;
+            line-height: 30px;
+            z-index: 100;
+            background-color: #272b2e;
+        }
+        /*loader style*/
+        .mask, .mask2 {
+            color: #fff;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            font-size: 1.1em;
+            text-align: center;
+            background-color: rgba(0,0,0,0.5);
+            display: none;
+        }
+
+        .loader {
+            background-color: rgba(39, 43, 46, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow: hidden;
+        }
+
+        #loadtext {
+            margin-top: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .mask2 {
+            z-index: 2000;
+        }
+
+        .points {
+            font-size: 3.2em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0px 0px 2px #ccc;
+            padding: 20px;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+        }
+
+
+        .animated {
+            -webkit-animation-duration: 2s;
+            animation-duration: 2s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+
+
+        @keyframes fadeOutUp {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate3d(0,-100%,0);
+                transform: translate3d(0,-100%,0);
+            }
+        }
+
+        @-webkit-keyframes fadeOutUp {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate3d(0,-100%,0);
+                transform: translate3d(0,-100%,0);
+            }
+        }
+
+        .fadeOutUp {
+            -webkit-animation-name: fadeOutUp;
+            animation-name: fadeOutUp;
+        }
+
+        .bling {            
+            background: rgba(255, 255, 255, 0.4);
+            height: 100%;
+            width: 46px;
+            position: absolute;
+            top: 0;      
+            transform: skew(-45deg);                              
+            -webkit-animation: move 2.5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+
+        }
+
+        .headimg:before {
+            content: '';
+            background: rgba(255, 255, 255, 0.3);
+            height: 100%;
+            width: 46px;
+            position: absolute;
+            top: 0;            
+            transform: skew(-45deg);                              
+            -webkit-animation: move 2.5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+        }
+
+        @-webkit-keyframes move {
+            0% {                                               
+                -webkit-transform: skew(-45deg) translate(-220%,0);
+            }
+
+            20% {                
+                -webkit-transform:skew(-45deg) translate(220%,0);
+            }
+
+            100% {                    
+                -webkit-transform:skew(-45deg) translate(220%,0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main" class="wrap-page">
+        <!--主页-->
+        <section id="page-index" class="page">
+            <div class="page-head">
+                <div style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; padding-top: 15px; z-index: 205;">
+                    <div class="headimg">
+                        <img src="../../res/img/storesaler/headimg.jpg" alt="" />
+                        <!--<div class="bling"></div>-->                        
+                    </div>
+                    <p class="username">李家的风</p>
+                    <p class="area"><i class="fa fa-map-marker"></i>福建 泉州</p>
+                    <div class="top-navs">
+                        <ul class="tnavul">
+                            <li>
+                                <p>--</p>
+                                <p>用户积分</p>
+                            </li>
+                            <li>
+                                <p>--</p>
+                                <p>魅力值</p>
+                            </li>
+                            <li>
+                                <p>--</p>
+                                <p>等级</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="iconcircle left" onclick="sign()">
+                        <img class="edit" src="../../res/img/storesaler/signicon.png" alt="" />
+                    </div>
+                    <div class="iconcircle" onclick="javascript:window.location.href='myinfos.html'">
+                        <img class="sign" src="../../res/img/storesaler/editicon.png" alt="" />
+                    </div>
+                </div>
+                <div class="blurbg" id="blurbg">
+                </div>
+            </div>
+            <div class="navs floatfix">
+                <ul class="navul">
+                    <li onclick="gourl('wdzs')">
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-my.png" alt="" />
+                            <span class="icontext">我的专属</span>
+                        </div>
+                    </li>
+                    <li onclick="gourl('tsjy')">
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-support.png" alt="" />
+                            <span class="icontext">投诉建议</span>
+                        </div>
+                    </li>
+                    <li onclick="gourl('jfcx')">
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-points.png" alt="" />
+                            <span class="icontext">积分查询</span>
+                        </div>
+                    </li>
+                    <li onclick="gourl('wdsc')">
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-star.png" alt="" />
+                            <span class="icontext">我的收藏</span>
+                        </div>
+                    </li>
+                    <li onclick="gourl('xxzx')">
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-message.png" alt="" />
+                            <span class="icontext">消息中心</span>
+                        </div>
+                    </li>
+                    <li onclick="gourl('wdkq')">
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-myvip.png" alt="" />
+                            <span class="icontext">我的卡券</span>
+                        </div>
+                    </li>
+                    <li onclick="gourl('rwxt')">
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-task.png" alt="" />
+                            <span class="icontext">任务系统</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="copy">&copy; 2016 利郎信息技术部</div>
+
+        </section>
+    </div>
+    <!--加载提示层-->
+    <section class="mask">
+        <div class="loader center-translate">
+            <div style="font-size: 1.2em;">
+                <i class="fa fa-2x fa-spinner fa-pulse"></i>
+            </div>
+            <p id="loadtext">正在加载...</p>
+        </div>
+    </section>
+    <section class="mask2">
+        <div class="points animated ">+5</div>
+    </section>
+
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/StoreSaler/fastclick.min.js"></script>
+    <script type="text/javascript" src="js/background-blur.min.js"></script>
+    <script type="text/javascript" src="../../res/js/vipweixin/jqthumb.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            FastClick.attach(document.body);
+            //var UA = navigator.userAgent;
+            //if (UA.indexOf("QQBrowser") > -1) {
+            //    $(".blurbg").hide();
+            //}
+
+            //$("#blurbg").backgroundBlur({
+            //    imageURL: 'http://wx.qlogo.cn/mmopen/ajNVdqHZLLBhxkDyvYfZSIKB8eALmhCibngQ8cGWuicRMiaXtkELtfFgX29FxnpN3nQzwgzygv7220rc8cDF4s8WA/0', // URL to the image that will be used for blurring
+            //    blurAmount: 10, // Amount of blur (higher amount degrades browser performance)
+            //    imageClass: 'avatar-blur' // CSS class that will be applied to the image and to the SVG element,
+            //});
+
+            //$(".points").removeClass("fadeOutUp").addClass("fadeOutUp");
+            //locateIMG();
+
+            IMGIsLoaded();
+        });
+
+        function IMGIsLoaded() {
+            var img = new Image();
+            img.src = "img/66.jpg";
+            var timer = setInterval(function () {
+                if (img.complete) {
+                    
+                    clearInterval(timer);
+                    //alert("width:" + img.width + "height:" + img.height);
+                    CalcIMGContainer(img.src, img.width, img.height);
+                }
+            }, 100)
+        }
+
+        //图片算法 Elilee V1.0 20160305
+        function CalcIMGContainer(src, iw, ih) {
+            //先获得图片容器此时的大小 并先将宽度多加20像素上去
+            var cw = $(".page-head").width() + 20;
+            var ch = parseInt((210 / (cw - 20)) * cw);            
+
+            //换算后的图像大小
+            var nih = parseInt((ih / iw) * cw);
+            var niw = parseInt((iw / ih) * ch);
+
+            if (nih >= ch) {
+                //符合横向换算                
+                $("#blurbg").css("width", cw + "px");
+                $("#blurbg").css("height", nih + "px");
+                $("#blurbg").backgroundBlur({
+                    imageURL: src,
+                    blurAmount: 10,
+                    imageClass: 'avatar-blur'
+                });
+                $("#blurbg").css("top", parseInt((nih - $(".page-head").height()) / 2) * -1 + "px");
+                $("#blurbg").css("left", "-10px");
+            } else {
+                //符合竖向换算
+                $("#blurbg").css("width", niw + "px");
+                $("#blurbg").css("height", ch + "px");
+                $("#blurbg").backgroundBlur({
+                    imageURL: src,
+                    blurAmount: 10,
+                    imageClass: 'avatar-blur'
+                });
+                $("#blurbg").css("top", parseInt((ch - $(".page-head").height()) / 2) * -1 + "px");
+                $("#blurbg").css("left", parseInt((niw / 2) - ((cw - 20) / 2)) * -1 + "px");
+            }
+        }
+
+        function gourl(type) {
+            if (type == "wdzs")
+                window.location.href = "myinfos.html";
+            else if (type == "jfcx")
+                window.location.href = "pointrecords.html";
+            switch (type) {
+                case "wdzs":
+                    window.location.href = "myguider.html";
+                    break;
+                case "tsjy":
+
+                    break;
+                case "jfcx":
+                    window.location.href = "pointrecords.html";
+                    break;
+                default:
+                    showLoader("thunder", "即将推出,敬请期待!");
+
+            }
+        }
+        $(".points").on("webkitAnimationEnd", function () {
+            //alert("动画结束");
+        });
+
+        //等比放大图片并截取最中央部分
+        function locateIMG() {
+            var imgObj = new Image();
+            imgObj.src = $("#blurbg img").attr("src");
+            var imgWidth = imgObj.width;
+            var imgHeight = imgObj.height;
+            var containerWidth = parseInt($(".page-head").css("width").replace("px", ""));
+            var containerHeight = 210;
+            $("#canvas").css("width", "100%");
+            $("#canvas").css("height", "auto");
+            if (parseInt($("#canvas").css("height").replace("px", "")) >= 210) {
+                imgHeight = parseInt($("#canvas").css("height").replace("px", ""));
+                var topSite = (imgHeight / 2 - 105) * -1 + "px";
+                $("#canvas").css("top", topSite);
+            } else {
+                $("#canvas").css("height", "100%");
+                $("#canvas").css("width", "auto");
+                containerWidth = parseInt($(".page-head").css("width").replace("px", ""));
+                imgWidth = parseInt($("#canvas").css("width").replace("px", ""));
+                var leftSite = (imgWidth / 2 - containerWidth / 2) * -1 + "px";
+                $("#canvas").css("left", leftSite);
+            }
+        }
+
+        function sign() {
+            $(".points").removeClass("fadeOutUp").addClass("fadeOutUp");
+            $(".points").addClass("fadeOutUp");
+        }
+        //提示层
+        function showLoader(type, txt) {
+            switch (type) {
+                case "loading":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-spinner fa-pulse");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "successed":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-check");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    setTimeout(function () {
+                        $(".mask").fadeOut(200);
+                    }, 500);
+                    break;
+                case "error":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-close (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    setTimeout(function () {
+                        $(".mask").fadeOut(400);
+                    }, 2000);
+                    break;
+                case "warn":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-warning (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    setTimeout(function () {
+                        $(".mask").fadeOut(400);
+                    }, 800);
+                    break;
+                case "thunder":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-bolt");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    setTimeout(function () {
+                        $(".mask").fadeOut(400);
+                    }, 1000);
+                    break;
+                case "sign-success":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-check-circle");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    setTimeout(function () {
+                        $(".mask").fadeOut(400);
+                    }, 1000);
+                    break;
+            }
+        }
+
+    </script>
+</body>
+</html>

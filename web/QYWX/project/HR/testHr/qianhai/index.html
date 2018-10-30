@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>仿前海企业公馆 - 移动端</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">  
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">  
+		<meta content="telephone=no,email=no" name="format-detection">
+		<link rel="stylesheet" href="css/custom.css" />
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+	<body>
+		<div class="container demo-2">
+			<div id="slider" class="sl-slider-wrapper">
+				<div class="sl-slider">
+					
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-slide-inner">
+							<div class="bg-img bg-img-1"></div>
+							<h2 style="width:80%;">业务采购方向培训生<p class="text_title">&nbsp;111</p></h2>
+							<blockquote style="width:80%;">
+								<p>
+									职位说明：隶属生产管理中心，为确保成衣订单按时按质完成，统筹跟进订单进度并协调处理订单问题。
+									<br/>
+									岗位要求：服装及管理类相关专业为主，统筹调动能力强，沟通表达良好，思路清晰，数据敏感性强，吃苦耐劳，能接受出差和加班。
+                                    <br/>
+                                    发展方向：培训生->服装业务采购/统筹计划等岗位（初级、中级、高级）->主管->经理
+								</p><cite>全国招聘人数：10人</cite>
+							</blockquote>
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-slide-inner">
+                            <div class="bg-img bg-img-2"></div>
+                            <!-- style="margin-top:200px;" -->
+                            <h2 style="width:80%;">成衣设计方向培训生<p class="text_title"></p></h2>
+                            <blockquote style="width:80%;">
+                                <p>
+                                    职位说明：隶属商品中心，负责公司所属品牌系列产品设计及外采购开发的开发设计，协助跟进设计样衣款式的样板开发和生产过程。
+                                    </br>
+                                    岗位要求：手绘功底强，有时尚感，沟通表达良好，心态佳，熟悉使用COREIDRAW、PHOTOSHOP等软件。
+                                    </br>
+                                    发展方向：培训生——设计师（初级、中级、高级）——项目主管——项目经理——项目总监
+                                </p><cite>全国招聘人数：8人</cite>
+                            </blockquote>
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-slide-inner">
+							<div class="bg-img bg-img-2"></div>
+							<div class="deco" data-icon="t"></div>
+                            <!--margin:150px auto 0;-->
+							<h2 style="padding-top:10px;padding-bottom:0;margin:60px auto 0;width:90%;">
+                            品质检测方向培训生<p class="text_title"></p></h2>
+							<blockquote style="width:90%;margin:0 auto;">
+								<p>
+                                    职位说明：隶属商品调控部，1、按照流程卡的要求采用相关标准对面料及成衣的理化性能和化学性能进行检测工作；2、对所有的面料、辅料、成衣在生产过程的品质问题进行预见并予以提出合理的解决方案，完成单件书面质量记录及批质量判定，对工艺和品质进行控制并撰写验货报告
+                    
+                                    岗位要求：化学、纺织或染整相关专业，沟通表达良好，动手能力强、心态佳、务实、严谨的工作态度，能接受出差和加班
+                    
+                                    发展方向：培训生——实验室检测专员（初级、中级、高级）——主管——经理
+                                     培训生——面辅料/成衣检验专员（初级、中级、高级）——主管——经理
+								</p><cite style="padding-top:10px;">全国招聘人数：6人</cite>
+							</blockquote>
+						</div>
+					</div>
+
+					<div class="tc"><img class="arrowBtn" src="images/arrowBtn.png" alt="" /></div>
+					
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery-1.10.0.min.js"></script>
+		<script src="js/jquery.ba-cond.min.js"></script>
+		<script src="js/jquery.slitslider.js"></script>
+		<script src="js/jquery.touchSwipe.min.js"></script>
+		<script>
+			$(function() {
+				$('.sl-slider-wrapper').height($(window).height());
+				var Page = (function() {
+					var $nav = $('#nav-dots > span'), slitslider = $('#slider').slitslider({
+						//interval : 2000, //自动播放时间间隔
+						//autoplay : true, //是否自动播放
+						onBeforeChange : function(slide, pos) {
+							$nav.removeClass('nav-dot-current');
+							$nav.eq(pos).addClass('nav-dot-current');
+						}
+					})
+					
+					$('body').swipe({
+						swipeUp : function(event, direction, distance, duration, fingerCount) {
+							slitslider.next();
+						},
+						swipeDown : function(event, direction, distance, duration, fingerCount) {
+							slitslider.previous();
+						}
+					});
+				})();
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>关注我们</title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <style type="text/css">
+        .page {
+            padding:0;
+        }
+        .part_top, .part_bot {            
+            position:relative;
+            color:#f7f7f7;
+            overflow-x:hidden;
+            overflow-y:auto;
+            -webkit-overflow-scrolling:touch;
+        }
+        .part_top {
+            height:48%;
+            background-color:#202020;
+            text-align:center;
+        }
+        .part_bot {
+            height:52%;
+            background-color:#ebebeb;
+            text-align:center;
+        }
+        .logo {
+            width:56px;
+            height:56px;
+            background-repeat:no-repeat;
+            background-position:center center;
+            background-size:cover;
+            border:1px solid #f2f2f2;            
+            border-radius:4px;
+            margin:0 auto;
+        }
+        .part_top .title {
+            font-size:18px;
+            font-weight:bold;
+            margin-top:10px;
+        }
+
+        .img_guide {
+            width:100%; 
+            margin:25px 0 5px 0;           
+        }
+
+        .angle {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 20px solid #202020;
+            position:absolute;
+            top:0;
+            left:50%;
+            margin-left:-15px;
+        }
+
+        #qrcode {
+            height:76%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap-page">
+        <div class="page">
+            <div class="part_top">
+                <div class="top_wrap center-translate">
+                    <div class="logo" style="background-image:url(../../res/img/vipweixin/lilanzlogo.jpg);"></div>
+                    <p class="title">利郎男装</p>
+                    <img class="img_guide" src="../../res/img/vipweixin/scan_press.png" />
+                    <p>扫一扫或长按下方二维码</p>
+                    <p>关注我们</p>
+                </div>                
+            </div>
+            <div class="part_bot">
+                <div class="angle"></div>
+                <img id="qrcode" class="center-translate" src="../../res/img/vipweixin/follow_5.png" />
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var configkey = getQueryString("configkey");
+            if (configkey == "7") {
+                //利郎轻商务
+                document.querySelector(".logo").style.backgroundImage = "url('../../res/img/vipweixin/qswlogo.jpg')";
+                document.querySelector(".title").innerText = "利郎轻商务";
+                document.querySelector("#qrcode").src = "../../res/img/vipweixin/follow_7.png";
+            }
+        }
+
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+    </script>
+</body>
+</html>

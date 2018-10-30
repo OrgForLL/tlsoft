@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title></title>    
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/example.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            margin: 0;
+            height: 100%;
+        }
+
+        body {
+            color: #333;
+            background: #eeeeee;
+            font-family: "微软雅黑";
+        }
+
+        .container {
+            overflow: hidden;
+            margin-top: 70px;
+            margin-bottom: 40px;
+            height: 100%;
+        }
+
+        #tip {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #e9e9e9;
+            height: 70px;
+            line-height: 70px;
+            border-bottom: 1px solid #bababa;
+            text-align: center;            
+        }
+
+        .headdiv {
+            font-size: 1.5em;
+            letter-spacing: 1px;
+        }
+
+        .menulist {
+            width: 100%;
+            margin: 0 auto;
+            border-top: 1px solid #e2e2e2;
+            border-bottom: 1px solid #e2e2e2;
+            box-shadow: 1px 1px 1px #e2e2e2;
+            margin-top: 15px;
+            position: relative;            
+        }
+
+        .menuul {
+            list-style: none;
+        }
+
+            .menuul li {
+                background: #fff;
+                height: 45px;
+                line-height: 45px;
+                font-size: 1.1em;
+                cursor: pointer;
+                transition: all 0.4s;
+                padding: 0 10px;
+            }
+
+                .menuul li:nth-child(2n) {
+                    background-color: #f6f7fa;
+                }
+
+                .menuul li:hover {
+                    background: #ccc;
+                }
+
+                .menuul li:not(:last-child) {
+                    border-bottom: 1px solid #ddd;
+                }
+
+                .menuul li i {
+                    font-size: 1.1em;
+                    padding: 0 5px;
+                }
+
+        .copyright {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            height: 35px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #808080;
+        }
+
+        #menus {
+            animation-delay: 0.8s;
+            -webkit-animation-delay: 0.8s;
+        }
+
+        .qjdcc {
+            border-left: 7px solid #449d44;
+        }
+
+        .txdcc {
+            border-left: 7px solid #ce4844;
+        }
+
+        .bqkcc {
+            border-left: 7px solid #f0ad4e;
+        }
+
+        .qjdcc .fa-pencil {
+            color: #449d44;
+        }
+
+        .txdcc .fa-pencil {
+            color: #ce4844;
+        }
+
+        .bqkcc .fa-pencil {
+            color: #f0ad4e;
+        }
+        #loadingToast {
+            z-index:200;
+        }
+        .weui_mask,.weui_mask, .weui_mask_transparent {
+            background:rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="tip">
+            <div class="headdiv">利郎总部考勤单据</div>
+        </div>
+        <div id="menus" class="menulist">
+            <ul class="menuul ">
+                <li class="qjdcc"><i class="fa fa-pencil"></i>请假单<i class="fa fa-user"></i>林文印<i class="fa fa-clock-o"></i>2015/12/12&nbsp;&nbsp;1天</li>
+                <li class="txdcc"><i class="fa fa-pencil"></i>调休单<i class="fa fa-user"></i>李清峰<i class="fa fa-clock-o"></i>2015-12-12&nbsp;&nbsp;2天</li>
+                <li class="bqkcc"><i class="fa fa-pencil"></i>签卡单<i class="fa fa-user"></i>蔡铭光<i class="fa fa-clock-o"></i>2015-12-12&nbsp;&nbsp;3天</li>
+                <li class="bqkcc"><i class="fa fa-pencil"></i>签卡单<i class="fa fa-user"></i>蔡铭光<i class="fa fa-clock-o"></i>2015-12-12&nbsp;&nbsp;3天</li>
+            </ul>
+        </div>
+        <div class="copyright">&copy;2015 利郎信息技术部</div>
+        <!--加载动画-->
+        <div class="copyright">&copy;2015 利郎信息技术部</div>
+        <div id="loadingToast" class="weui_loading_toast" style="display: none;">
+            <div class="weui_mask_transparent"></div>
+            <div class="weui_toast">
+                <div class="weui_loading">
+                    <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+                    <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+                </div>
+                <p class="weui_toast_content">数据加载中</p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        window.onload = function () {
+            $(".weui_toast_content").text("正在加载数据...");
+            $('#loadingToast').show();            
+        }
+    </script>
+</body>
+</html>

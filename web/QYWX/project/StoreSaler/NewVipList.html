@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .spinner {
+            position: absolute;
+            width: 50px;
+            height: 30px;
+            top: 50%;
+            left: 50%;
+            margin-top: -25px;
+            margin-left: -15px;
+            text-align: center;
+            font-size: 10px;
+        }
+
+            .spinner > div {
+                background-color: #333;
+                height: 100%;
+                width: 6px;
+                display: inline-block;
+                -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+                animation: stretchdelay 1.2s infinite ease-in-out;
+            }
+
+            .spinner .rect2 {
+                -webkit-animation-delay: -1.1s;
+                animation-delay: -1.1s;
+            }
+
+            .spinner .rect3 {
+                -webkit-animation-delay: -1.0s;
+                animation-delay: -1.0s;
+            }
+
+            .spinner .rect4 {
+                -webkit-animation-delay: -0.9s;
+                animation-delay: -0.9s;
+            }
+
+            .spinner .rect5 {
+                -webkit-animation-delay: -0.8s;
+                animation-delay: -0.8s;
+            }
+
+        @-webkit-keyframes stretchdelay {
+            0%, 40%, 100% {
+                -webkit-transform: scaleY(0.4);
+            }
+
+            20% {
+                -webkit-transform: scaleY(1.0);
+            }
+        }
+
+        @keyframes stretchdelay {
+            0%, 40%, 100% {
+                transform: scaleY(0.4);
+                -webkit-transform: scaleY(0.4);
+            }
+
+            20% {
+                transform: scaleY(1.0);
+                -webkit-transform: scaleY(1.0);
+            }
+        }
+
+        #loadingmask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5999;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body style="overflow: hidden;">
+    <div id="loadingmask">
+        <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+        </div>
+    </div>
+    <header class="header">
+        <div class="logo">
+            <div class="backbtn"><i class="fa fa-chevron-left"></i></div>
+            <img src="../../res/img/StoreSaler/lllogo6.png" alt="" />
+        </div>
+        <div class="tags" onclick="switchTags()">打标签</div>
+        <div class="sorts" onclick="mysort()" style="display: block;" isshow="0"><i class="fa fa-filter"></i></div>
+    </header>
+    <div id="main" class="wrap-page">
+        <!--主页-->
+        <section class="page page-not-header-footer" id="page-main">
+            <div class="viplist floatfix">
+                <div class="search">
+                    <input id="searchtxt" type="text" placeholder="请输入昵称关键字" oninput="searchFunc()" />
+                </div>
+                <p style="text-align: center; margin-top: 5px;">
+                    <span id="vipcount">
+                        <span>VIP总数: <span id="vipall">--</span>
+                        </span>
+                        <span>当前数: <span id="vipcurr">--</span>
+                        </span>
+                    </span>
+                </p>
+                <ul class="vipul" id="vipdiv">
+                </ul>
+            </div>
+            <div class="lmdiv">
+                <a href="javascript:;" id="loadmore_btn">- 加载更多 -</a>
+            </div>
+        </section>
+        <!--用户详情页-->
+        <section class="page page-not-header page-right" id="info-page" style="z-index: 901;">
+        </section>
+        <!--消费单据详情页-->
+        <section class="page page-not-header page-right" id="consumedetail" style="z-index: 903; padding: 0 8px;">
+            <div style="margin-top: 10px; font-size: 1.1em; padding: 0 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                <strong>单据号:</strong>
+                <span id="cd_djh"></span>&nbsp;&nbsp;<strong>时间：</strong>
+                <span id="cd_djsj"></span>
+            </div>
+            <div class="usernav floatfix" style="position: relative; padding: 0 8px;">
+                <div class="cdetail theader floatfix" id="ctheader">
+                    <div class="citem sphh">商品货号</div>
+                    <div class="citem cm">尺码</div>
+                    <div class="citem sl">数量</div>
+                    <div class="citem dj">单价</div>
+                </div>
+                <div id="cdetaillist" style="padding-top: 41px;">
+                </div>
+            </div>
+        </section>
+        <!--打标签-->
+        <section class="page page-not-header page-top" id="tags-page" style="z-index: 902;">
+            <div class="topnav">
+                <div id="subtags">提 交</div>
+            </div>
+        </section>
+        <!--排序列表-->
+        <section class="mysort page-top" isshow="0">
+            <ul class="sortul floatfix">
+                <li class="sort-item" onclick="FilterData('jf')">按积分</li>
+                <li class="sort-item" onclick="FilterData('ml')">按魅力值</li>
+                <li class="sort-item" onclick="FilterData('je')">按消费总金额</li>
+                <li class="sort-item" onclick="FilterData('sj')">最近购买时间</li>
+                <li class="filter-item" onclick="FilterData('lessm1')">一个月内有消费</li>
+                <li class="filter-item" onclick="FilterData('lessm3')">三个月内有消费</li>
+                <li class="filter-item" onclick="FilterData('lessy1')">一年内有消费</li>
+                <li class="filter-item" onclick="FilterData('morey1')">超过一年无消费</li>
+            </ul>
+            <div id="filter-btn">
+                <a class="fchecked" onclick="switchSF('sort',this)">排 序</a>
+                <a onclick="switchSF('filter',this)">筛 选</a>
+            </div>
+        </section>
+        <!--加载提示层-->
+        <section class="mask">
+            <div class="loader center-translate">
+                <div style="font-size: 1.2em;">
+                    <i class="fa fa-2x fa-spinner fa-pulse"></i>
+                </div>
+                <p id="loadtext">正在加载...</p>
+            </div>
+        </section>
+        <div id="to-top"><i class="fa fa-chevron-up"></i></div>
+        <div id="mask2"></div>
+    </div>
+    <footer class="footer">
+        <div class="bottomnav">
+            <ul class="navul floatfix">
+                <li onclick="switchMenu(0)">
+                    <i class="fa fa-comments"></i>
+                    <p>消 息</p>
+                </li>
+                <li onclick="switchMenu(1)" id="selected">
+                    <i class="fa fa-users"></i>
+                    <p>客 户</p>
+                </li>
+                <li onclick="switchMenu(2)">
+                    <i class="fa fa-retweet"></i>
+                    <p>引 流</p>
+                </li>
+                <li onclick="switchMenu(3)">
+                    <i class="fa fa-user"></i>
+                    <p>我 的</p>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script type='text/javascript' src='../../res/js/require.js'></script>
+    <script type="text/javascript">
+        /* 加载文件 */
+        /* 已加载文件缓存列表,用于判断文件是否已加载过，若已加载则不再次加载*/
+        var classcodes = [];
+        var mdid = "249";
+        window.Import = {
+            /*加载一批文件，_files:文件路径数组,可包括js,css,less文件,succes:加载成功回调函数*/
+            LoadFileList: function (_files, succes) {
+                var FileArray = [];
+                if (typeof _files === "object") {
+                    FileArray = _files;
+                } else {
+                    /*如果文件列表是字符串，则用,切分成数组*/
+                    if (typeof _files === "string") {
+                        FileArray = _files.split(",");
+                    }
+                }
+                if (FileArray != null && FileArray.length > 0) {
+                    var LoadedCount = 0;
+                    for (var i = 0; i < FileArray.length; i++) {
+                        loadFile(FileArray[i], function () {
+                            LoadedCount++;
+                            if (LoadedCount == FileArray.length) {
+                                succes();
+                            }
+                        })
+                    }
+                }
+                /*加载JS文件,url:文件路径,success:加载成功回调函数*/
+                function loadFile(url, success) {
+                    if (!FileIsExt(classcodes, url)) {
+                        var ThisType = GetFileType(url);
+                        var fileObj = null;
+                        if (ThisType == ".js") {
+                            fileObj = document.createElement('script');
+                            fileObj.src = url;
+                        } else if (ThisType == ".css") {
+                            fileObj = document.createElement('link');
+                            fileObj.href = url;
+                            fileObj.type = "text/css";
+                            fileObj.rel = "stylesheet";
+                        } else if (ThisType == ".less") {
+                            fileObj = document.createElement('link');
+                            fileObj.href = url;
+                            fileObj.type = "text/css";
+                            fileObj.rel = "stylesheet/less";
+                        }
+                        success = success || function () { };
+                        fileObj.onload = fileObj.onreadystatechange = function () {
+                            if (!this.readyState || 'loaded' === this.readyState || 'complete' === this.readyState) {
+                                success();
+                                classcodes.push(url)
+                            }
+                        }
+                        document.getElementsByTagName('head')[0].appendChild(fileObj);
+                    } else {
+                        success();
+                    }
+                }
+                /*获取文件类型,后缀名，小写*/
+                function GetFileType(url) {
+                    if (url != null && url.length > 0) {
+                        return url.substr(url.lastIndexOf(".")).toLowerCase();
+                    }
+                    return "";
+                }
+                /*文件是否已加载*/
+                function FileIsExt(FileArray, _url) {
+                    if (FileArray != null && FileArray.length > 0) {
+                        var len = FileArray.length;
+                        for (var i = 0; i < len; i++) {
+                            if (FileArray[i] == _url) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+
+        var FilesArray = ["../../res/css/font-awesome.min.css", "../../res/css/LeePageSlider.css", "../../res/css/StoreSaler/VIPMainStyle.css"];
+
+        Import.LoadFileList(FilesArray, function () {
+            /*这里写加载完成后需要执行的代码或方法*/
+            require.config({
+                paths: {
+                    "jquery": ["../../res/js/jquery"],
+                    "fastclick": ["../../res/js/StoreSaler/fastclick.min"],
+                    "chartjs": ["../../res/js/Chart.min"],
+                    "underscore": ["../../res/js/underscore-min"],
+                    "vipmain": ["../../res/js/StoreSaler/vipmain"]
+                },
+                shim: {
+                    'jquery': {
+                        exports: '$'
+                    },
+                    'underscore': {
+                        exports: '_'
+                    },
+                    'fastclick': {
+                        exports: 'FastClick'
+                    },
+                    'vipmain': {
+                        deps: ['jquery', 'chartjs', 'underscore'],
+                        exports: 'vipmain'
+                    }
+                }
+            });
+
+            require(["../../res/js/plugins/text.js!VipTemplate.html", "fastclick", "vipmain"], function (content, FastClick) {
+                $($("script")[0]).before(content);
+                FastClick.attach(document.body);
+            });
+        });
+    </script>
+</body>
+</html>

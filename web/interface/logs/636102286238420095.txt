@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\WXMassMessageCore.aspx(56): error CS1501: “getOpenIDList”方法没有采用“2”个参数的重载

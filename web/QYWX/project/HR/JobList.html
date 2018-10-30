@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>招聘职位列表</title>
+<link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.3.min.css">
+<!--
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+-->
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.mobile-1.4.3.min.js"></script>
+</head>
+
+<body>
+<div data-role="page" id="page1">
+    <label for="search">请输入要查询岗位名称:</label>
+    <input name="jobName" id="jobName" value="" placeholder="查询岗位名称" type="search">
+    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+        <legend>职位类别:</legend>
+            <input name="radio-choice-b" id="radio-choice-c" value="list" checked="checked" type="radio">
+            <label for="radio-choice-c">设计开发类</label>
+            <input name="radio-choice-b" id="radio-choice-d" value="grid" type="radio">
+            <label for="radio-choice-d">营销类</label>
+            <input name="radio-choice-b" id="radio-choice-e" value="gallery" type="radio">
+            <label for="radio-choice-e">技术研发类</label>
+            <input name="radio-choice-b" id="radio-choice-f" value="gallery" type="radio">
+            <label for="radio-choice-f">供应链管理类</label>
+            <input name="radio-choice-b" id="radio-choice-g" value="gallery" type="radio">
+            <label for="radio-choice-g">职能类</label>
+    </fieldset>
+    <ul data-role="listview" data-divider-theme="" data-inset="true">
+        <li data-role="list-divider" role="heading">
+            岗位信息
+        </li>
+        <li data-theme="c">
+            <a href="JobDetail.html" data-transition="slide">
+                设计师
+            </a>
+        </li>
+        <li data-theme="c">
+            <a href="JobDetail.html" data-transition="slide">
+                工艺师
+            </a>
+        </li>
+        <li data-theme="c">
+            <a href="JobDetail.html" data-transition="slide">
+                外派会计
+            </a>
+        </li>
+ 	</ul>
+</div>
+</body>
+</html>

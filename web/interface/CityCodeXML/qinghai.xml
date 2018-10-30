@@ -1,0 +1,10 @@
+﻿<qinghai dn="day">
+<city cityX="374" cityY="139.85" cityname="海西" centername="海西" fontColor="FFFFFF" pyName="haixi" state1="0" state2="1" stateDetailed="晴转多云" tem1="-17" tem2="-3" temNow="-2" windState="微风" windDir="南风" windPower="2级" humidity="25%" time="16:25" url="101150701"/>
+<city cityX="262" cityY="314" cityname="玉树" centername="玉树" fontColor="FFFFFF" pyName="yushu" state1="1" state2="2" stateDetailed="多云转阴" tem1="-15" tem2="4" temNow="5" windState="微风" windDir="西风" windPower="4级" humidity="10%" time="16:25" url="101150601"/>
+<city cityX="486" cityY="132" cityname="海北" centername="海北" fontColor="FFFFFF" pyName="haibei" state1="0" state2="0" stateDetailed="晴" tem1="-22" tem2="-5" temNow="-5" windState="微风" windDir="东南风" windPower="3级" humidity="40%" time="16:25" url="101150801"/>
+<city cityX="540" cityY="186" cityname="西宁" centername="西宁" fontColor="FFFF00" pyName="xining" state1="0" state2="1" stateDetailed="晴转多云" tem1="-15" tem2="-2" temNow="-2" windState="微风" windDir="北风" windPower="1级" humidity="42%" time="16:25" url="101150101"/>
+<city cityX="483" cityY="229" cityname="海南" centername="海南" fontColor="FFFFFF" pyName="hainanzangzuzizhizhou" state1="0" state2="0" stateDetailed="晴" tem1="-17" tem2="0" temNow="0" windState="微风" windDir="东南风" windPower="1级" humidity="34%" time="16:25" url="101150401"/>
+<city cityX="452" cityY="326" cityname="果洛" centername="果洛" fontColor="FFFFFF" pyName="guoluo" state1="1" state2="1" stateDetailed="多云" tem1="-18" tem2="0" temNow="1" windState="西风3-4级转5-6级" windDir="西风" windPower="4级" humidity="18%" time="16:25" url="101150501"/>
+<city cityX="574" cityY="215" cityname="海东" centername="海东" fontColor="FFFFFF" pyName="haidong" state1="1" state2="1" stateDetailed="多云" tem1="-13" tem2="-2" temNow="-2" windState="微风" windDir="东风" windPower="2级" humidity="43%" time="16:25" url="101150201"/>
+<city cityX="530" cityY="285" cityname="黄南" centername="黄南" fontColor="FFFFFF" pyName="huangnan" state1="1" state2="1" stateDetailed="多云" tem1="-11" tem2="-2" temNow="-5" windState="微风" windDir="北风" windPower="2级" humidity="56%" time="16:25" url="101150301"/>
+</qinghai>

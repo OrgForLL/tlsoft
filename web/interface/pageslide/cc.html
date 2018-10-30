@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
+            font-size: 25px;
+            color: #fff;
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        .view {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 99;
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .current {
+            z-index: 100;
+            display: block;
+            transform:translate3d(0,0,0);
+            -webkit-transform: translate3d(0,0,0);
+        }
+
+        #page1 {
+            background: #ff6a00;
+        }
+
+        #page2 {
+            background: #333;
+        }
+
+        #page3 {
+            background: #573a3a;
+        }
+
+        .current.out {
+            -webkit-transition: -webkit-transform 1000ms;
+            -webkit-transform: translate3d(-100%,0,0);
+        }
+
+        .next {
+            display: block;
+            -webkit-transform: translate3d(100%,0,0);
+        }
+
+            .next.in {
+                -webkit-transition: -webkit-transform 1000ms;
+                -webkit-transform: translate3d(0,0,0);
+            }
+        .view p {
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="page1" class="view current">
+        page1
+        <br />
+        <p onclick="slide(2)">切换到2</p>
+    </div>
+    <div id="page2" class="view">
+        page2
+        <br />
+        <p onclick="slide(3)">切换到3</p>
+    </div>
+    <div id="page3" class="view">
+        page3
+        <br />
+        <p onclick="slide(1)">切换到1</p>
+    </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        function slide(pn) {
+            switch (pn) {
+                case 1:
+                    $("#page3").attr("class", "view current out");
+                    $("#page1").attr("class", "view next in");
+                    $("#page2").attr("class", "view");
+                    break;
+                case 2:
+                    $("#page1").attr("class", "view current out");
+                    $("#page2").attr("class", "view next in");                    
+                    $("#page3").attr("class", "view");
+                    break;
+                case 3:
+                    $("#page2").attr("class", "view current out");
+                    $("#page3").attr("class", "view next in");
+                    $("#page1").attr("class", "view");
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,674 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>业绩雷达系统</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
+    <style type="text/css">
+    * {
+        font-family: Helvetica, Arial, STHeiTi, "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", STHeiti, "华文细黑", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        color: #fff;
+        font-size: 13px;
+        background-color: #0b1030;
+    }
+    
+    ul {
+        list-style: none;
+    }
+    
+    p {
+        margin: 0;
+    }
+    
+    .header {
+        padding: 0 50px;
+        border-bottom: 1px solid #385d91;
+        background-color: #0d1f45;
+        height: 40px;
+        line-height: 40px;
+    }
+    
+    .header > img {
+        width: 120px;
+        vertical-align: middle;
+    }
+    
+    .title_wrap {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 300px;
+        height: 80px;
+        margin-left: -150px;
+        background-image: url(bg_header.png);
+        text-align: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .title_wrap .title {
+        font-size: 22px;
+        font-weight: bold;
+        letter-spacing: 2.4px;
+        line-height: 1;
+        margin-top: 18px;
+    }
+    
+    .title_wrap .date {
+        color: #67e5e7;
+    }
+    
+    .header .version {
+        float: right;
+        font-size: 14px;
+    }
+    
+    .main_con {
+        padding: 8px 0 0 8px;
+        margin-top: 40px;
+    }
+    
+    .module_item {
+        width: 25%;
+        height: 320px;
+        border: 1px solid #202675;
+        border-radius: 5px;
+        float: left;
+        margin-right: 0.6%;
+        margin-bottom: 8px;
+        padding: 8px;
+        color: #dde0f7;
+        overflow: hidden;
+    }
+    
+    .module_item_2x {
+        width: 48%;
+    }
+    
+    .item_title {
+        font-size: 16px;
+        color: #dde0f7;
+        text-align: center;
+        padding: 10px 0 5px;
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+    
+    .item_title_two {
+        color: #6fafc4;
+        text-align: center;
+        font-size: 13px;
+        padding: 5px 0 10px;
+    }
+    
+    .tab {
+        border: 1px solid #202675;
+    }
+    
+    .tab li {
+        float: left;
+        width: 50%;
+        text-align: center;
+        padding: 4px 0;
+    }
+    
+    .tab li.selected_li {
+        color: #b2b5e0;
+    }
+    
+    .compare_item {
+        width: 50%;
+        text-align: center;
+        margin: 15px 0;
+        font-size: 14px;
+        float: left;
+    }
+    
+    .compare_item p:first-child {
+        font-size: 18px;
+        color: #fff;
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    
+    .sale_target {
+        font-size: 14px;
+        padding-left: 20px;
+        margin-top: 15px;
+    }
+    
+    .sale_head {
+        height: 80px;
+        font-size: 14px;
+    }
+    
+    .sale_head > div {
+        float: left;
+        height: 80px;
+        width: 33.3%;
+    }
+    
+    .sale_digital {
+        margin-top: 15px;
+    }
+    
+    .sale_digital > span {
+        color: #43e4f7;
+        background-color: #485575;
+        padding: 5px;
+        font-size: 22px;
+        border-radius: 3px;
+    }
+    
+    .ranks {
+        text-align: center;
+    }
+    
+    .ranks .ranking {
+        color: #79f3ff;
+        font-size: 20px;
+    }
+    
+    .ranks .arrow {
+        margin-left: 5px;
+        color: #79f3ff;
+        vertical-align: top;
+    }
+    
+    .chart_distribute {
+        width: 100%;
+        height: 232px;
+        border: 1px solid #202675;
+        border-radius: 5px;
+        padding: 8px;
+    }
+    
+    .chart_name {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    /*start progress style*/
+    
+    .progress {
+        height: 20px;
+        background: #262626;
+        padding: 5px;
+        overflow: visible;
+        border-radius: 20px;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #7992a8;
+        margin-top: 20px;
+    }
+    
+    .progress .progress-bar {
+        border-radius: 20px;
+        position: relative;
+        animation: animate-positive 2s;
+    }
+    
+    .progress .progress-value {
+        display: block;
+        padding: 3px 7px;
+        font-size: 13px;
+        color: #8ea7c2;
+        border-radius: 4px;
+        background: #091237;
+        border: 1px solid #000;
+        position: absolute;
+        top: -30px;
+        right: -10px;
+        border: 1px solid #202675;
+    }
+    
+    .progress .progress-value:after {
+        content: "";
+        border-top: 10px solid #091237;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        position: absolute;
+        bottom: -6px;
+        left: 26%;
+    }
+    
+    .progress-bar.active {
+        animation: reverse progress-bar-stripes 0.40s linear infinite, animate-positive 2s;
+    }
+    
+    @-webkit-keyframes animate-positive {
+        0% {
+            width: 0;
+        }
+    }
+    
+    @keyframes animate-positive {
+        0% {
+            width: 0;
+        }
+    }
+    /*end progress style*/
+    
+    .module_item table {
+        width: 100%;
+        border: 1px solid #202675;
+        border-right: 0;
+        margin: 5px 0;
+        table-layout: fixed;
+    }
+    
+    .table_head th,
+    .table_con td {
+        border-right: 1px solid #202675;
+        padding: 5px 0;
+        text-align: center;
+        font-weight: normal;
+        word-break: break-all;
+    }
+    
+    .table_con tr {
+        border-bottom: 1px solid #202675;
+    }
+    
+    .table_con tr:last-child {
+        border-bottom: 0;
+    }
+    
+    #zbwarn_module th,
+    #zbwarn_module td {
+        width: 20%;
+    }
+    
+    .module_item .table_con_wrap {
+        max-height: 220px;
+        overflow-y: auto;
+        margin-top: 10px;
+    }
+    
+    .rise_txt {
+        color: #92f1d4;
+    }
+    
+    .drop_txt {
+        color: #f68b56;
+    }
+    
+    .month_complate {
+        margin-top: 10px;
+    }
+    
+    .complate_item {
+        margin-top: 20px;
+    }
+    
+    .complate_item > p {
+        display: inline-block;
+        width: 30%;
+        text-align: right;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: 1;
+    }
+    
+    .complate_item .bar_wrap {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        width: 50%;
+    }
+    
+    .complate_item .bar_wrap .bar_value {
+        position: absolute;
+        right: -32px;
+    }
+    
+    .complate_item .bar_wrap:before {
+        content: "";
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: table;
+    }
+    
+    .complate_item .bar_purple:before {
+        background-color: #3f4bf7;
+    }
+    
+    .complate_item .bar_purple .bar {
+        background-color: #3f4bf7;
+    }
+    
+    .complate_item .bar_green:before {
+        background-color: #4cf4f5;
+    }
+    
+    .complate_item .bar_green .bar {
+        background-color: #4cf4f5;
+    }
+    
+    .complate_item .bar_wrap:after {
+        content: "";
+        display: table;
+        background-color: #f5fdff;
+        height: 20px;
+        width: 2px;
+        position: absolute;
+        top: 20px;
+        left: 8px;
+    }
+    
+    .complate_item .last_bar:after {
+        width: 0;
+        height: 0;
+    }
+    
+    .complate_item .bar {
+        height: 12px;
+        position: absolute;
+        top: 4px;
+        left: 10px;
+        border-radius: 10px;
+    }
+    
+    .mdradar_wrap {
+        width: 100%;
+        height: 250px;
+        margin-top: 10px;
+    }
+    
+    .mdradar_wrap > div {
+        width: 50%;
+        float: left;
+        height: 100%;
+        text-align: center;
+        overflow: hidden;
+    }
+    
+    .complex_rank {
+        padding: 0 20px;
+    }
+    
+    #radar_module th,
+    #radar_module td {
+        width: 50%;
+    }
+    
+    .warn_list {
+        list-style-type: disc;
+        padding: 10px 10px 10px 20px;
+        overflow-y: auto;
+        height: 250px;
+        width: 100%;
+    }
+    
+    .warn_list li {
+        margin-top: 15px;
+    }
+    
+    .floatfix:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="../../res/img/lilanz_logo.png">
+        <div class="title_wrap">
+            <p class="title">利郎轻商务总店</p>
+            <p class="date">2017-11-03 10:27:00</p>
+        </div>
+        <p class="version">业绩雷达系统 V1.0</p>
+    </div>
+    <div class="main_con floatfix">
+        <!-- 销售预测分析器 -->
+        <div class="module_item">
+            <p class="item_title">销售预测分析器</p>
+            <p class="item_title_two">利郎轻商务总店</p>
+            <ul class="tab floatfix">
+                <li class="selected_li" style="border-right: 1px solid #202675">月目标设定</li>
+                <li>促销计划日</li>
+            </ul>
+            <div class="sale_compare floatfix">
+                <div class="compare_item" style="border-right: 1px solid #202675">
+                    <p>12.00万</p>
+                    <p>月度销售额目标</p>
+                </div>
+                <div class="compare_item">
+                    <p>15.00万</p>
+                    <p>预测月销售</p>
+                </div>
+            </div>
+            <p class="sale_target">今日销售额目标：4800.00元</p>
+            <p class="sale_target">今日交易量目标：52</p>
+            <p class="sale_target">7日平均客单价：92.00元</p>
+        </div>
+        <!-- 小时销售分布 -->
+        <div class="module_item module_item_2x" style="border:0;padding: 8px 0 0;">
+            <div class="sale_head floatfix">
+                <div class="today_sale">
+                    <p>今日销售</p>
+                    <p class="sale_digital">
+                        <span>0</span>
+                        <span>0</span>
+                        <span>4</span>
+                        <span>0</span>
+                        <span>6</span>
+                        <span>0</span>
+                    </p>
+                </div>
+                <div class="ranks">
+                    <p>完成率排名：<span class="ranking">13</span>名<span class="arrow">↑</span></p>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: 80%;">
+                            <div class="progress-value">80%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="today_sale" style="text-align:right">
+                    <p>今日目标</p>
+                    <p class="sale_digital">
+                        <span>0</span>
+                        <span>0</span>
+                        <span>4</span>
+                        <span>8</span>
+                        <span>0</span>
+                        <span>0</span>
+                    </p>
+                </div>
+            </div>
+            <div class="chart_distribute">
+                <p class="chart_name">小时销售分布</p>
+                <img src="sale_chart.png" style="width:65%;display:block;margin:0 auto">
+            </div>
+        </div>
+        <!-- 门店指标预警器 -->
+        <div class="module_item" id="zbwarn_module">
+            <p class="item_title">门店指标预警器</p>
+            <table class="table_head" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>项目</th>
+                        <th>今日</th>
+                        <th>昨日</th>
+                        <th>最近7日</th>
+                        <th>去年同期</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="table_con_wrap">
+                <table class="table_con" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <tr>
+                            <td>销售额</td>
+                            <td>4060.00</td>
+                            <td class="rise_txt">5216.69</td>
+                            <td>3493.76</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>客单价</td>
+                            <td>90.00</td>
+                            <td class="drop_txt">85.00</td>
+                            <td>90.00</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>件单价</td>
+                            <td>22.50</td>
+                            <td class="rise_txt">47.00</td>
+                            <td>40.12</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>连带率</td>
+                            <td>4.0</td>
+                            <td class="drop_txt">1.0</td>
+                            <td>2.0</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>动销率</td>
+                            <td>80%</td>
+                            <td class="rise_txt">90%</td>
+                            <td>87%</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>会员贡献</td>
+                            <td>98%</td>
+                            <td class="drop_txt">97.5%</td>
+                            <td>98.6%</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>新增会员</td>
+                            <td>4</td>
+                            <td class="rise_txt">6</td>
+                            <td>7</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 月销售完成率 -->
+        <div class="module_item">
+            <p class="item_title">月销售完成率</p>
+            <div class="month_complate">
+                <div class="complate_item">
+                    <p>本月累计完成</p>
+                    <div class="bar_wrap bar_purple">
+                        <div class="bar" style="width:65%">
+                            <span class="bar_value">65%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="complate_item">
+                    <p>标准进度</p>
+                    <div class="bar_wrap bar_purple">
+                        <div class="bar" style="width:55%">
+                            <span class="bar_value">55%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="complate_item">
+                    <p>昨日完成率</p>
+                    <div class="bar_wrap bar_green">
+                        <div class="bar" style="width:93%">
+                            <span class="bar_value">93%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="complate_item">
+                    <p>预计本月完成率</p>
+                    <div class="bar_wrap bar_green">
+                        <div class="bar" style="width:115%">
+                            <span class="bar_value">115%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="complate_item">
+                    <p>最近7日完成率</p>
+                    <div class="bar_wrap bar_green last_bar">
+                        <div class="bar" style="width:91%">
+                            <span class="bar_value">91%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 门店雷达探测器 -->
+        <div class="module_item module_item_2x" id="radar_module">
+            <p class="item_title">门店雷达探测器</p>
+            <div class="mdradar_wrap floatfix">
+                <div class="chart_radar">
+                    <img src="radar_chart.png" style="width:80%;display:block;margin:0 auto">
+                </div>
+                <div class="complex_rank">
+                    <p>店铺综合指标排名</p>
+                    <table class="table_head" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>店铺</th>
+                                <th>分数</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="table_con_wrap">
+                        <table class="table_con" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td>石鼓山店1</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <td>黄浦区店</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td>朝阳区店</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>朝阳区店</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>朝阳区店</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>朝阳区店</td>
+                                    <td>2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 预警 -->
+        <div class="module_item">
+            <p class="item_title">预警</p>
+            <ul class="warn_list">
+                <li>今日会员贡献率<span class="rise_txt">98%</span>，昨日<span class="drop_txt">97.5%</span>，最近7日98.6%</li>
+                <li>今日动销率<span class="rise_txt">50%</span>，昨日<span class="drop_txt">40.5%</span>，最近7日51%</li>
+                <li>今日销售冠军李炳坤，销售金额<span class="rise_txt">￥1318.00</span></li>
+                <li>截止昨日库存天数大于90天SKU数：10</li>
+                <li>昨日销售最大的单据金额：896.2元，商品数：6</li>
+            </ul>
+        </div>
+</body>
+
+</html>

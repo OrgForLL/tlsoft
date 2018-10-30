@@ -1,0 +1,11 @@
+长度不能小于 0。
+参数名: lengthSystem.ArgumentOutOfRangeException: 长度不能小于 0。
+参数名: length
+   在 nrWebClass.clsJsonHelper.SetjSon(String initJson)
+   在 nrWebClass.clsJsonHelper.CreateJsonHelper(String strJson)
+   在 ASP.interface_lockrecords_aspx.Page_Load(Object sender, EventArgs e)
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

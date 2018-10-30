@@ -1,0 +1,51 @@
+微信卡券的开发目录位于qywx/test/weixincard
+部署后放到web_tlerp/interface/下
+对应正式为:oa/project/weixincard
+
+测试数据库使用23.weChatTest
+部署到正式环境后使用62.weChatPromotion
+
+相关JS文件统一放在web_tlerp/js_ui下
+document.write("<script src='../js_ui/jquery-1.4.2.min.js'><\/script>");
+document.write("<script src='../JSON/json2.js'><\/script>");
+
+报表调用的相关接口统一放在web_tlerp/interface/wxcardinterface.aspx
+
+        string EventName=px.GetElementsByTagName("Event")[0].InnerText;
+            List<String> CardEvents = new List<string>();
+            CardEvents.Add("card_pass_check");//卡券审核通过事件
+            CardEvents.Add("card_not_pass_check");//卡券审核未通过事件
+            CardEvents.Add("user_get_card");//用户领取卡券事件
+            CardEvents.Add("user_del_card");//用户删除事件
+            CardEvents.Add("user_consume_card");//核销事件
+            CardEvents.Add("user_pay_from_pay_cell");//买单事件
+            CardEvents.Add("user_view_card");//进入会员卡事件
+            CardEvents.Add("update_member_card");//会员卡内容更新事件
+            CardEvents.Add("user_enter_session_from_card");//从卡券进入公众号事件
+            CardEvents.Add("card_sku_remind");//库存报警事件 
+
+
+核销页面:
+web_tlerp/tl_ls/zmd_poscl_2016_coupon.aspx
+
+==============================================================================
+
+微信群发的开发目录从位于QYWX/Test/WXMassMessage
+部署后放到web_tlerp/interface
+开发时仍然在QYWX/TEST下开发！！
+
+
+测试数据库使用23.weChatTest
+部署到正式环境后使用62.weChatPromotion
+
+相关JS文件统一放在web_tlerp/js_ui下
+document.write("<script src='../js_ui/jquery-1.4.2.min.js'><\/script>");
+document.write("<script src='../JSON/json2.js'><\/script>");
+
+报表调用的相关接口统一放在web_tlerp/interface/wxmassmessagecore.aspx
+
+EventName == "MASSSENDJOBFINISH"
+
+==============================================================================
+利郎男装会将所有接收到的报文POST一份到以下地址
+http://10.0.0.15/oa/project/interface/WXCallBackReceive.aspx

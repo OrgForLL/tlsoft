@@ -1,0 +1,82 @@
+.page {
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.title {
+    margin-left: 8%;
+    font-size: 16px;
+    /*color: #a09d9d;*/
+    color: #333;
+    font-style: italic;
+    margin-top: 15px;
+}
+
+.logo {
+    width: 100%;
+    text-align: center;
+    padding: 15px 8% 30px;
+}
+
+.logo img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.coupon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    width: 82%;
+    margin: 0 auto 30px;
+    height: 80px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 2px 2px rgba(221, 221, 221, 0.5);
+    box-shadow: 0 2px 2px rgba(221, 221, 221, 0.6);
+}
+
+#exist i:first-child {
+    background-color: #448bd7;
+}
+
+#create i:first-child {
+    background-color: #22a571;
+}
+
+#grant i:first-child {
+    background-color: #AE00AE;
+    font-size: 26px;
+}
+
+.coupon i:first-child {
+    font-size: 30px;
+    height: 80px;
+    line-height: 80px;
+    width: 25%;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px 0 0 6px;
+    border-right: 2px dotted #ddd;
+}
+
+.coupon i:last-child {
+    font-size: 22px;
+    color: #888;
+    margin-right: 6px;
+}
+
+.coupon p {
+    flex: 1;
+    font-size: 18px;
+    line-height: 1;
+    text-align: center;
+    color: #555;
+}
+
+.coupon .en-name {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 6px;
+    font-style: italic;
+}

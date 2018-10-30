@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>门店信息</title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <style type="text/css">
+        .page {
+            background-color: #f8f8f8;
+            font-family: "Helvetica Neue", "Microsoft Yahei","微软雅黑",sans-serif;
+            font-weight: 400;
+            bottom: 30px;
+            padding: 0;
+        }
+
+        .footer {
+            height: 30px;
+            line-height: 30px;
+            background-color: #f8f8f8;
+            color: #888;
+            font-size: 12px;
+        }
+
+        .item {
+            background-color: #fff;
+            padding: 10px;
+            margin-top: 10px;
+            position:relative;
+        }
+            .item .right {
+                position:absolute;
+                top:50%;
+                right:0;
+                width:60px;
+                transform:translate(0,-50%);
+                border-left:1px solid #ccc;
+                height:50px;
+                line-height:50px;                
+                text-align:center;
+            }
+        .name {
+            font-size:16px;
+            color:#323232;
+            font-weight:600;
+        }
+        .address {
+            margin-top: 5px;
+            color: #909090;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 60px;
+        }
+        .phone>a {
+            color:#63b359;            
+        }
+        .location_icon {
+            width:30px;
+            margin-top:10px;            
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap-page">
+        <div class="page page-not-footer" id="main">
+            <div class="item" onclick="goMap(0)">
+                <div class="left">
+                    <p class="name">晋江长兴路轻商务展厅</p>
+                    <p class="address">福建省泉州晋江市长兴路200号</p>
+                    <p class="phone"><a href="tel:0595-82039919">0595-82039919</a></p>
+                </div>
+                <div class="right">
+                    <img class="location_icon" src="../../res/img/easybusiness/location_icon.png" />
+                </div>
+            </div>
+            <div class="item" onclick="goMap(1)">
+                <div class="left">
+                    <p class="name">天津一店</p>
+                    <p class="address">天津市和平区滨江道143号光明影院一楼</p>
+                    <p class="phone"><a href="tel:022-83219627">022-83219627</a></p>
+                </div>
+                <div class="right">
+                    <img class="location_icon" src="../../res/img/easybusiness/location_icon.png" />
+                </div>
+            </div>
+            <div class="item" onclick="goMap(2)">
+                <div class="left">
+                    <p class="name">北京一店</p>
+                    <p class="address">北京市大兴龙湖购物中心</p>
+                    <p class="phone"><a href="tel:010-53956719">010-53956719</a></p>
+                </div>
+                <div class="right">
+                    <img class="location_icon" src="../../res/img/easybusiness/location_icon.png" />
+                </div>
+            </div>
+            <div class="item" onclick="goMap(3)">
+                <div class="left">
+                    <p class="name">江西南昌店</p>
+                    <p class="address">江西南昌市九龙湖区九龙湖大道万达室内步行街</p>
+                    <p class="phone"><a href="tel:0791-87362803">0791-87362803</a></p>
+                </div>
+                <div class="right">
+                    <img class="location_icon" src="../../res/img/easybusiness/location_icon.png" />
+                </div>
+            </div>
+            <div class="item" onclick="goMap(4)">
+                <div class="left">
+                    <p class="name">浙江宁波店</p>
+                    <p class="address">浙江宁波市鄞州区天童南路环球城三楼</p>
+                    <p class="phone"><a href="tel:0574-88317563">0574-88317563</a></p>
+                </div>
+                <div class="right">
+                    <img class="location_icon" src="../../res/img/easybusiness/location_icon.png" />
+                </div>
+            </div>
+            <div class="item" onclick="goMap(5)">
+                <div class="left">
+                    <p class="name">上海一店</p>
+                    <p class="address">上海市松江区中山中路265-383号申越广场</p>
+                    <p class="phone"><a href="tel:021-37652859">021-37652859</a></p>
+                </div>
+                <div class="right">
+                    <img class="location_icon" src="../../res/img/easybusiness/location_icon.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        &copy;2016 利郎信息技术部提供技术支持
+    </div>
+
+    <script type="text/javascript" src="../../res/js/LeeJSUtils.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            LeeJSUtils.stopOutOfPage("#main",true);
+            LeeJSUtils.stopOutOfPage(".footer", false);
+        }
+
+        function goMap(StoreIndex) {
+            var url = "http://tm.lilanz.com/project/EasyBusiness/EasyBusinessMap.aspx?StoreIndex=" + StoreIndex;
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

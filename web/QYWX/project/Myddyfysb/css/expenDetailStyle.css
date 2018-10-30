@@ -1,0 +1,542 @@
+ html {
+     -webkit-user-select: none;
+     user-select: none;
+ }
+ 
+ @font-face {
+     font-family: "iconfont";
+     src: url('../fonts/expendec.ttf?t=1497510330157') format('truetype');
+ }
+ 
+ .iconfont {
+     font-family: "iconfont" !important;
+     font-size: 16px;
+     font-style: normal;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+ }
+ 
+ .global_mask {
+     position: fixed;
+     z-index: 8000;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     background-color: rgba(0, 0, 0, 0.6);
+     display: none;
+ }
+ 
+ .dialog {
+     position: fixed;
+     z-index: 8005;
+     width: 80%;
+     max-width: 300px;
+     top: 50%;
+     left: 50%;
+     -webkit-transform: translate(-50%, -50%);
+     transform: translate(-50%, -50%);
+     background-color: #FFFFFF;
+     text-align: center;
+     border-radius: 3px;
+     overflow: hidden;
+     display: none;
+ }
+ 
+ .loading,
+ .prompt {
+     position: fixed;
+     z-index: 8004;
+     width: 120px;
+     height: 80px;
+     top: 50%;
+     left: 50%;
+     -webkit-transform: translate(-50%, -50%);
+     transform: translate(-50%, -50%);
+     background-color: rgba(0, 0, 0, .4);
+     text-align: center;
+     border-radius: 3px;
+     overflow: hidden;
+     color: #fff;
+     align-items: center;
+     flex-direction: column;
+     justify-content: center;
+     display: none;
+ }
+ 
+ .prompt {
+     background-color: rgba(0, 0, 0, .7);
+ }
+ 
+ .prompt > .iconfont {
+     font-size: 24px;
+     font-weight: bold;
+ }
+ 
+ .loading>img {
+     width: 28px;
+     height: 28px;
+     margin-bottom: 5px;
+ }
+ 
+ .dialog_hd {
+     padding: 15px 10px 10px 10px;
+     font-size: 18px;
+ }
+ 
+ .dialog_ft {
+     position: relative;
+     line-height: 48px;
+     font-size: 16px;
+     display: -webkit-box;
+     display: -webkit-flex;
+     display: flex;
+ }
+ 
+ .dialog_ft:after {
+     content: " ";
+     position: absolute;
+     left: 0;
+     top: 0;
+     right: 0;
+     height: 1px;
+     border-top: 1px solid #D5D5D6;
+     color: #D5D5D6;
+     -webkit-transform-origin: 0 0;
+     transform-origin: 0 0;
+     -webkit-transform: scaleY(0.5);
+     transform: scaleY(0.5);
+ }
+ 
+ .dialog_bd {
+     padding: 0 10px 15px 10px;
+     min-height: 40px;
+     font-size: 15px;
+     line-height: 1.3;
+     word-wrap: break-word;
+     word-break: break-all;
+     color: #999999;
+ }
+ 
+ .dialog_btn {
+     display: block;
+     -webkit-box-flex: 1;
+     -webkit-flex: 1;
+     flex: 1;
+     color: #3CC51F;
+     text-decoration: none;
+     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+     position: relative;
+ }
+ 
+ .dialog_btn:active {
+     background-color: rgb(238, 238, 238);
+ }
+ 
+ .dialog_btn:after {
+     content: " ";
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 1px;
+     bottom: 0;
+     border-left: 1px solid #D5D5D6;
+     color: #D5D5D6;
+     -webkit-transform-origin: 0 0;
+     transform-origin: 0 0;
+     -webkit-transform: scaleX(0.5);
+     transform: scaleX(0.5);
+ }
+ 
+ .icon-time:before {
+     content: "\e630";
+ }
+ 
+ .icon-money:before {
+     content: "\e783";
+ }
+ 
+ .icon-edit:before {
+     content: "\e610";
+ }
+ 
+ .icon-plus:before {
+     content: "\e776";
+ }
+ 
+ .icon-calendar:before {
+     content: "\e61b";
+ }
+ 
+ .icon-kh:before {
+     content: "\e61f";
+ }
+ 
+ .icon-save:before {
+     content: "\e60b";
+ }
+ 
+ .icon-remark:before {
+     content: "\e64c";
+ }
+ 
+ .icon-attach:before {
+     content: "\e684";
+ }
+ 
+ .icon-type:before {
+     content: "\e668";
+ }
+ 
+ .icon-remove:before {
+     content: "\e67a";
+     color: rgb(247, 98, 96);
+ }
+ 
+ .icon-successed:before {
+     content: "\e620";
+     color: rgb(32, 155, 163);
+ }
+ 
+ .icon-error:before {
+     content: "\e61e";
+     color: rgb(247, 98, 96);
+ }
+ 
+ .page {
+     background-color: #efefef;
+     padding: 0
+ }
+ 
+ .footer {
+     height: 42px;
+     border-top: 1px solid #ececec;
+ }
+ 
+ .page-not-footer {
+     bottom: 42px;
+ }
+ 
+ .icon-money:before {
+     content: "\e664";
+ }
+ 
+ .icon-down:before {
+     content: "\e650";
+ }
+ 
+ .top {
+     background-color: #209ba3;
+     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+     padding: 5px 0;
+ }
+ 
+ .form_item {
+     position: relative;
+     padding: 5px 15px;
+     font-size: 1.15em;
+     color: #fff;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     align-content: space-between;
+ }
+ 
+ .form_item label {
+     min-width: 70px;
+ }
+ 
+ .form_item label >i {
+     font-size: 1.4em;
+     margin-right: 10px;
+     vertical-align: middle;
+ }
+ 
+ .form_item .bd {
+     flex: 1;
+     width: 100%;
+     padding-left: 10px;
+     position: relative;
+     text-align: right;
+ }
+ 
+ .bd>i {
+     position: absolute;
+     top: 50%;
+     right: 10px;
+     transform: translate(0, -50%);
+     line-height: 1;
+     margin-top: 3px;
+ }
+ 
+ .bd input,
+ .bd select {
+     border: 0;
+     outline: 0;
+     -webkit-appearance: none;
+     background-color: transparent;
+     font-size: inherit;
+     color: inherit;
+     border-radius: 2px;
+     padding: 0 10px;
+     background-color: rgba(255, 255, 255, .2);
+     display: block;
+     width: 100%;
+     height: 28px;
+     line-height: 26px;
+ }
+ 
+ .bd select option {
+     color: #333;
+ }
+ 
+ #detail {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .bot {
+     flex: 1;
+     overflow-y: auto;
+     -webkit-overflow-scroll: touch;
+ }
+ 
+ .bot .row {
+     background-color: #fff;
+     position: relative;
+     margin-top: 40px;
+     margin-bottom: 10px;
+     padding-top: 25px;
+ }
+ 
+ .row:before {
+     content: " ";
+     position: absolute;
+     left: 0;
+     top: 0;
+     right: 0;
+     height: 1px;
+     border-top: 1px solid #e5e5e5;
+     color: #e5e5e5;
+     -webkit-transform-origin: 0 0;
+     transform-origin: 0 0;
+     -webkit-transform: scaleY(0.5);
+     transform: scaleY(0.5);
+ }
+ 
+ .row:after {
+     content: " ";
+     position: absolute;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     height: 1px;
+     border-bottom: 1px solid #e5e5e5;
+     color: #e5e5e5;
+     -webkit-transform-origin: 0 100%;
+     transform-origin: 0 100%;
+     -webkit-transform: scaleY(0.5);
+     transform: scaleY(0.5);
+ }
+ 
+ .row .order {
+     width: 50px;
+     height: 50px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background-color: #209ba3;
+     font-weight: bold;
+     font-size: 24px;
+     color: #fff;
+     border-radius: 50%;
+     position: absolute;
+     left: 15px;
+     top: -25px;
+     font-style: italic;
+     box-shadow: 2px 2px 6px #ccc;
+ }
+ 
+ .row .row_del {
+     position: absolute;
+     right: 0;
+     width: 50px;
+     background-color: #F76260;
+     top: 0;
+     color: #fff;
+     height: 72px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     z-index: 1000;
+ }
+ 
+ .row_item {
+     padding: 12px 15px;
+     position: relative;
+ }
+ 
+ .row_item.flex {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+ 
+ .row_item.title,
+ .row_item .title {
+     font-size: 16px;
+     font-weight: 600;
+     color: #209ba3;
+ }
+ 
+ .row_item .title,
+ .row_item .left {
+     min-width: 90px;
+     color: #209ba3;
+ }
+ 
+ .row_item .left {
+     border-right: 1px solid #ececec;
+ }
+ 
+ .row_item.title:after,
+ .row_item:after {
+     content: " ";
+     position: absolute;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     height: 1px;
+     border-bottom: 1px solid #e5e5e5;
+     color: #e5e5e5;
+     -webkit-transform-origin: 0 100%;
+     transform-origin: 0 100%;
+     -webkit-transform: scaleY(0.5);
+     transform: scaleY(0.5);
+     left: 15px;
+ }
+ 
+ textarea {
+     display: block;
+     border: 0;
+     resize: none;
+     width: 100%;
+     color: inherit;
+     font-size: 1.1em;
+     line-height: 1.4;
+     outline: 0;
+     border-bottom: 1px solid #efefef;
+     border-radius: 0;
+ }
+ 
+ .remark {
+     padding: 10px 15px;
+ }
+ 
+ .row_item select,
+ .row_item input {
+     -webkit-appearance: none;
+     border: 0;
+     outline: 0;
+     background-color: transparent;
+     width: 100%;
+     font-size: inherit;
+     position: relative;
+     z-index: 1;
+     padding-left: 15px;
+ }
+ 
+ .row_item .iconfont {
+     font-size: 18px;
+     vertical-align: top;
+ }
+ 
+ .attach_wrap {
+     padding: 20px 15px 5px 15px;
+     display: flex;
+     justify-content: flex-start;
+     flex-wrap: wrap;
+     width: 100%;
+ }
+ 
+ .attach_item {
+     width: 23.8%;
+     height: 80px;
+     border: 1px dashed #ccc;
+     position: relative;
+     margin-bottom: 15px;
+     margin-right: 1.6%;
+     background-repeat: no-repeat;
+     background-position: center center;
+     background-size: 100% auto;
+ }
+ 
+ .attach_item:nth-child(4n) {
+     margin-right: 0;
+ }
+ 
+ .attach_item .icon-remove {
+     position: absolute;
+     top: 0;
+     right: 0;
+     transform: translate(50%, -50%);
+     font-size: 20px;
+     z-index: 100;
+ }
+ 
+ .attach_item.add {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+ 
+ .attach_item.add .icon-plus {
+     font-size: 40px;
+     color: #ccc;
+ }
+ 
+ .footer .btn {
+     display: none;
+     width: 100%;
+     height: 100%;
+     color: #fff;
+     font-weight: bold;
+     font-size: 16px;
+     align-items: center;
+     justify-content: center;
+ }
+ 
+ .footer .btn_save {
+     background-color: rgb(32, 155, 163);
+     display: flex;
+ }
+ 
+ .footer .btn_oa {
+     background-color: rgb(51, 186, 154);
+     display: flex;
+ }
+ 
+ .btn_addrow {
+     position: fixed;
+     z-index: 2000;
+     right: 15px;
+     bottom: 60px;
+     background-color: rgb(32, 155, 163);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     color: #fff;
+     width: 50px;
+     height: 50px;
+     border-radius: 50%;
+     box-shadow: 2px 2px 6px #ccc;
+ }
+ 
+ .btn_addrow:active {
+     background-color: #888;
+ }
+ 
+ .btn_addrow>i {
+     font-size: 30px;
+ }

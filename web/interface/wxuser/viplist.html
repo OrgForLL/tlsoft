@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/vipliststyle.css" />
+    <style type="text/css">
+        .search {
+            height: 44px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 201;
+            background-color: #f0f0f0;
+            padding: 0 10px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        #searchtxt {
+            position: absolute;
+            outline: none;
+            display: block;
+            width: 92%;
+            left: 50%;
+            margin-left: -46%;
+            height: 31px;
+            margin-top: 6px;
+            -webkit-appearance: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            padding: 0 10px;
+            box-sizing: border-box;
+            border: 1px solid #dedee0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <div class="backbtn"><i class="fa fa-chevron-left"></i></div>
+            <img src="img/lllogo6.png" alt="" />
+        </div>
+        <div class="tags" onclick="showtags()">打标签</div>
+    </div>
+    <div class="container">
+        <div class="topnav">
+            <div class="tagcontent">
+                <div class="tagitem">
+                    <p>决策风格：</p>
+                    <ul class="tagitemul floatfix">
+                        <li>分析型</li>
+                        <li>价格主导型</li>
+                        <li>感观型</li>
+                    </ul>
+                </div>
+
+                <div class="tagitem">
+                    <p>视觉风格：</p>
+                    <ul class="tagitemul floatfix">
+                        <li dm="yd">运动</li>
+                        <li dm="sy">商务</li>
+                        <li>时尚</li>
+                        <li>保守</li>
+                        <li>综合</li>
+                    </ul>
+                </div>
+
+                <div class="tagitem">
+                    <p>肤色：</p>
+                    <ul class="tagitemul floatfix">
+                        <li>偏白</li>
+                        <li>偏黑</li>
+                        <li>正常</li>
+                    </ul>
+                </div>
+                <div class="tagitem">
+                    <p>体型：</p>
+                    <ul class="tagitemul floatfix">
+                        <li>偏胖</li>
+                        <li>偏瘦</li>
+                        <li>正常</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer" id="subtags">提 交</div>
+        </div>
+        <div class="viplist">
+            <div class="search">
+                <input id="searchtxt" type="text" placeholder="请输入昵称关键字" />
+            </div>
+            <ul class="vipul" id="prevent-scroll">
+                <li>
+                    <div class="userimg">
+                        <img src="img/headimg.jpg" alt="" />
+                    </div>
+                    <h3>李家的风</h3>
+                    <p>性别:男 &nbsp;加入时间:2015-05-23</p>
+                    <div class="ri">
+                        <img src="img/righticon.png" />
+                    </div>
+                </li>
+                <li>
+                    <div class="userimg">
+                        <img src="img/defaulticon.jpg" alt="" />
+                    </div>
+                    <h3>Elilee</h3>
+                    <p>性别:男 &nbsp;加入时间:2015-02-21</p>
+                    <div class="ri">
+                        <img src="img/righticon.png" />
+                    </div>
+                </li>
+                <li>
+                    <div class="userimg">
+                        <img src="img/defaulticon.jpg" alt="" />
+                    </div>
+                    <h3>VIP3</h3>
+                    <p>性别:男 &nbsp;加入时间:2015-02-21</p>
+                    <div class="ri">
+                        <img src="img/righticon.png" />
+                    </div>
+                </li>
+                <li>
+                    <div class="userimg">
+                        <img src="img/defaulticon.jpg" alt="" />
+                    </div>
+                    <h3>VIP4</h3>
+                    <p>性别:女 &nbsp;加入时间:2015-02-21</p>
+                    <div class="ri">
+                        <img src="img/righticon.png" />
+                    </div>
+                </li>
+                <li>
+                    <div class="userimg">
+                        <img src="img/defaulticon.jpg" alt="" />
+                    </div>
+                    <h3>VIP4</h3>
+                    <p>性别:女 &nbsp;加入时间:2015-02-21</p>
+                    <div class="ri">
+                        <img src="img/righticon.png" />
+                    </div>
+                </li>
+                <li>
+                    <div class="userimg">
+                        <img src="img/defaulticon.jpg" alt="" />
+                    </div>
+                    <h3>VIP4</h3>
+                    <p>性别:女 &nbsp;加入时间:2015-02-21</p>
+                    <div class="ri">
+                        <img src="img/righticon.png" />
+                    </div>
+                </li>
+                <li>
+                    <div class="userimg">
+                        <img src="img/defaulticon.jpg" alt="" />
+                    </div>
+                    <h3>VIP6</h3>
+                    <p>性别:女 &nbsp;加入时间:2015-02-21</p>
+                    <div class="ri">
+                        <img src="img/righticon.png" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--用户信息webview-->
+    <div class="userinfo" id="userview">
+        <div class="userheader">
+            <div class="headimg"></div>
+            <div class="peace1"></div>            
+            <p class="nickname">李家的风</p>
+            <hr />
+            <ul class="userinfoul floatfix">
+                <li>
+                    <p class="userval">10000</p>
+                    <p>用户积分</p>
+                </li>
+                <li>
+                    <p class="userval">2015-05-06</p>
+                    <p>最后消费</p>
+                </li>
+                <li>
+                    <p class="userval">¥1234.00</p>
+                    <p>消费总额</p>
+                </li>
+            </ul>
+        </div>
+        <div class="usernav">
+            <ul>
+                <li><span>积分记录</span><i class="fa fa-chevron-right"></i></li>
+                <li><span>消费记录</span><i class="fa fa-chevron-right"></i></li>
+                <li><span>平均折扣</span><i class="fa fa-chevron-right"></i></li>
+                <li><span>平均单价</span><i class="fa fa-chevron-right"></i></li>
+            </ul>
+        </div>
+        <div class="copyright">&copy;2015 利郎信息技术部</div>
+    </div>
+    <!--用户信息End-->
+    <div class="bottomnav">
+        <ul class="navul floatfix">
+            <li onclick="switchMenu(0)">
+                <i class="fa fa-comments"></i>
+                <p>消 息</p>
+            </li>
+            <li onclick="switchMenu(1)" id="selected">
+                <i class="fa fa-users"></i>
+                <p>客 户</p>
+            </li>
+            <li onclick="switchMenu(2)">
+                <i class="fa fa-retweet"></i>
+                <p>引 流</p>
+            </li>
+            <li onclick="switchMenu(3)">
+                <i class="fa fa-user"></i>
+                <p>我 的</p>
+            </li>
+        </ul>
+    </div>
+    <div class="mask">
+        <div class="loader">
+            <div>
+                <i class="fa fa-2x fa-spinner fa-pulse"></i>
+            </div>
+            <p id="loadtext">正在加载...</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type='text/javascript' src='js/fastclick.min.js'></script>
+    <script type="text/javascript">
+        var tagsShow = false;
+
+        $(function () {
+            FastClick.attach(document.body);
+        });
+
+        function switchMenu(order) {
+            //$(".navul li[id=selected]").removeAttr("id");
+            //$(".navul li").eq(order).attr("id", "selected");
+
+            switch (order) {
+                case 0:
+                    window.location.href = "message.html";
+                    break;
+                case 1:
+                    window.location.href = "viplist.html";
+                    break;
+                case 2:
+                    window.location.href = "weschool2.html";
+                    break;
+                case 3:
+                    window.location.href = "usercenter.html";
+                    break;
+                default:
+                    showLoader("warn", "正在开发中...");
+                    setTimeout(function () {
+                        $(".mask").hide();
+                    }, 1000);
+                    break;
+            }
+        }
+
+        function showtags() {
+            if (tagsShow) {
+                $(".topnav").removeClass("showtags");
+                setTimeout(function () {
+                    $(".header").css("border-bottom", "1px solid #cbcbcb");
+                }, 400);
+                $(".tags").text("打标签");
+            }
+            else {
+                $(".header").css("border-bottom", "none");
+                $(".topnav").addClass("showtags");
+                $(".tags").text("关 闭");
+            }
+            tagsShow = !tagsShow;
+        }
+
+        $(".tagitemul li").click(function (e) {
+            var obj = $(e.target);
+            if (obj.hasClass("tagselected"))
+                obj.removeClass("tagselected");
+            else
+                obj.addClass("tagselected");
+        });
+
+        function showUserInfo(userid) {
+            $(".tags").fadeIn(500);
+            $(".vipul").addClass("viewout");
+            $(".userinfo").addClass("showinfo");
+        }
+
+        $(".backbtn").click(function () {
+            if (tagsShow)
+                showtags();
+            $(".tags").fadeOut(500);
+            $(".backbtn").fadeOut(500);
+            $(".userinfo").removeClass("showinfo");
+            $(".vipul").removeClass("viewout");
+        });
+
+        $(".vipul li").click(function () {
+            showLoader("loading", "正在加载...");
+            setTimeout(function () {
+                $(".mask").hide();
+                $(".tags").fadeIn(500);
+                $(".backbtn").fadeIn(500);
+                $(".vipul").addClass("viewout");
+                $(".userinfo").addClass("showinfo");
+            }, 500);
+        });
+
+        $("#subtags").click(function () {
+            showLoader("loading", "正在提交...");
+            setTimeout(function () {
+                showLoader("successed", "提交成功！");
+                setTimeout(function () {
+                    $(".mask").hide();
+                }, 1000);
+            }, 1000);
+        });
+
+        function showLoader(type, txt) {
+            switch (type) {
+                case "loading":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-spinner fa-pulse");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "successed":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-check");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "error":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-close (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "warn":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-warning (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+            }
+        }
+
+        //$("#searchtxt").change(function () {
+        //    var obj = $(".vipul li h3");
+        //    if (obj.length > 0) {
+        //        var stxt = $("#searchtxt").val();
+        //        for (var i = 0; i < obj.length; i++) {
+        //            if (obj.eq(i).text().indexOf(stxt) == -1)
+        //                $(".vipul li").eq(i).hide();
+        //            else
+        //                $(".vipul li").eq(i).show();
+        //        }
+        //    }
+        //});
+
+        //搜索框实时本地检索
+        $("#searchtxt").bind("input propertychange", function () {
+            var obj = $(".vipul li h3");
+            if (obj.length > 0) {
+                var stxt = $("#searchtxt").val();
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj.eq(i).text().indexOf(stxt) == -1)
+                        $(".vipul li").eq(i).hide();
+                    else
+                        $(".vipul li").eq(i).show();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

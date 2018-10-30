@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-tap-highlight-color: transparent
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+input {
+    -webkit-appearance: none;
+}
+
+body {
+    font-family: Helvetica, Arial, STHeiTi, "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", STHeiti, "华文细黑", sans-serif;
+    font-size: 14px;
+    color: #303133;
+    background-color: #f0f0f0;
+}
+
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    background: #fff;
+    padding: 0 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 3px #f2f7f9;
+}
+
+.header>img {
+    width: 18px;
+    margin-right: 5px;
+}
+
+.header .nearest_title {
+    min-width: 70px;
+}
+
+.header .nearest_shop {
+    color: #303133;
+    text-decoration: underline;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.container {
+    position: absolute;
+    top: 48px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    -webkit-overflow-scroll: touch;
+    background: #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.container .row {
+    background: #fff;
+    margin-top: 10px;
+}
+
+.row .row_top {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.row_top .shop_img {
+    background-image: url(../../img/EasyBusiness/qswlogo1.jpg);
+    width: 60px;
+    height: 60px;
+    border-radius: 3px;
+    background-size: cover;
+    background-position: center;
+    margin-right: 15px;
+}
+
+.row_top .right_info {
+    flex: 1;
+    color: #888;
+    overflow: hidden;
+}
+
+.right_info .name-dis {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.name-dis .shop_name {
+    color: #303133;
+    font-size: 17px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 6px;
+}
+
+.name-dis .distance {
+    font-size: 14px;
+    color: #c39b3c;
+}
+
+.right_info .address {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.row .row_bot {
+    padding: 0 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row_bot>div {
+    width: 50%;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+
+.row_bot>div:active {
+    background-color: #eee;
+}
+
+.row_bot img {
+    width: 18px;
+    vertical-align: middle;
+}
+
+.row_bot a {
+    color: #303133;
+}

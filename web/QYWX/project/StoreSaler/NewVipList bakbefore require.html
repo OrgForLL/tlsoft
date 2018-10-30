@@ -1,0 +1,839 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <style type="text/css">
+        .page {
+            padding: 0;
+        }
+
+        .header {
+            background-color: #272b2e;
+            border-bottom: 1px solid #161A1C;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .logo {
+            height: 22px;
+            margin: 0 auto;
+            margin-top: 18px;
+            color: #fff;
+            z-index: 110;
+        }
+
+            .logo img {
+                height: 100%;
+                width: auto;
+            }
+
+        .tags, .sorts {
+            background-color: #272B2E;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            margin-top: -15px;
+            padding: 0 12px;
+            height: 30px;
+            border-radius: 4px;
+            line-height: 29px;
+            border: 1px solid #161A1C;
+            box-shadow: 0 1px 1px #2B2F32 inset;
+            font-size: 15px;
+            color: #DFE0E0;
+            z-index: 120;
+            cursor: pointer;
+            display: none;
+        }
+
+        .backbtn {
+            position: absolute;
+            font-size: 1.4em;
+            color: #b1afaf;
+            left: 0;
+            display: none;
+            padding: 0 20px;
+        }
+
+        /*底部菜单样式*/
+        .bottomnav {
+            height: 60px;
+            background-color: #f8f8f8;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            border-top: 1px solid #cbcbcb;
+            z-index: 200;
+        }
+
+        .navul {
+            padding: 10px 0 6px 0;
+        }
+
+            .navul li {
+                width: 25%;
+                float: left;
+                text-align: center;
+                height: 40px;
+                color: #989898;
+                cursor: pointer;
+            }
+
+            .navul i {
+                display: block;
+                font-size: 1.5em;
+            }
+
+            .navul p {
+                font-weight: 400;
+                font-size: 1em;
+                line-height: 30px;
+            }
+
+        #selected {
+            color: #272b2e;
+        }
+
+        /*vipul*/
+        .vipul {
+            width: 100%;
+            list-style: none;
+            /*box-shadow: inset 0 0 0 1px rgba(0,0,0,.16),0 1px 3px rgba(0,0,0,.06);*/
+            background-color: #f0f0f0;
+        }
+
+            .vipul li {
+                height: 54px;
+                padding: 6px 10px;
+                position: relative;
+                opacity: 1;
+                box-sizing: content-box;
+            }
+
+                .vipul li:not(:last-child) {
+                    border-bottom: 1px solid #cbcbcb;
+                }
+
+                .vipul li:after {
+                    content: "";
+                    display: table;
+                    clear: both;
+                }
+
+        .userimg {
+            border: 2px solid #fff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            float: left;
+            box-sizing: content-box;
+        }
+
+            .userimg img {
+                width: 100%;
+                height: 100%;
+            }
+
+        .vipul li > h3 {
+            color: #515151;
+            font-weight: 400;
+            font-size: 16px;
+            margin: 2px 0 0 66px;
+            line-height: 1.5;
+            letter-spacing: 1px;
+        }
+
+        .vipul li p {
+            color: #888;
+            line-height: 1;
+            margin: 8px 0 0 66px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .ri {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            margin-top: -10px;
+        }
+
+            .ri img {
+                height: 20px;
+                width: auto;
+            }
+
+        /*search style*/
+        .search {
+            height: 44px;
+            position: relative;
+            z-index: 201;
+            background-color: #f0f0f0;
+            padding: 0 10px;
+            text-align: center;
+        }
+
+        #searchtxt {
+            position: absolute;
+            outline: none;
+            display: block;
+            width: 92%;
+            left: 50%;
+            margin-left: -46%;
+            height: 31px;
+            margin-top: 6px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            padding: 0 10px;
+            border: 1px solid #dedee0;
+            text-align: center;
+        }
+
+        /*userinfo*/
+        #info-page {
+            background-color: rgb(229,229,229);
+            padding: 0 5px;
+        }
+
+        .headimg {
+            width: 70px;
+            height: 70px;
+            border: 4px solid #ebebeb;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            background-image: url(../../res/img/StoreSaler/headimg.jpg);
+            background-size: cover;
+            margin: 0 auto;
+        }
+
+        .userinfo hr {
+            width: 80%;
+            margin: 10px auto 15px auto;
+            border: none;
+            height: 1px;
+            background-color: #ccc;
+        }
+
+        .nickname {
+            text-align: center;
+            font-size: 1.4em;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .userinfo ul {
+            list-style: none;
+        }
+
+        .userheader ul li {
+            font-size: 1em;
+            color: #808080;
+            float: left;
+            width: 33.33%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+            .userheader ul li:not(:first-child) {
+                border-left: 1px solid #ccc;
+            }
+
+        .userval {
+            color: #494747;
+            font-size: 1.1em;
+            text-shadow: 0 0 1px #ccc;
+        }
+
+        .userheader, .usernav {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px 0;
+            margin: 10px auto;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,.16),0 1px 3px rgba(0,0,0,.06);
+        }
+
+            .usernav ul {
+                padding: 0 10px;
+            }
+
+                .usernav ul li {
+                    position: relative;
+                    padding: 8px;
+                    font-size: 1.1em;
+                    color: #757575;
+                    border-bottom: 1px solid #ebebeb;
+                }
+
+                    .usernav ul li:last-child {
+                        border-bottom: none;
+                    }
+
+                    .usernav ul li i {
+                        color: #ababab;
+                        position: absolute;
+                        top: 50%;
+                        margin-top: -7px;
+                        right: 10px;
+                    }
+
+            .usernav .title {
+                color: #555;
+                font-weight: bold;
+                font-size: 1.2em;
+                margin-left: 10px;
+                padding-left: 5px;
+                border-left: 4px solid #555;
+            }
+
+        /*usertags*/
+        .topnav {
+            background: #333537;
+            color: #fff;
+        }
+
+        .tagcontent {
+            width: 100%;
+            color: #eee;
+            padding: 0 10px 20px 10px;
+        }
+
+            .tagcontent ul li {
+                text-align: center;
+                float: left;
+                font-size: 1em;
+                width: 30.6%;
+                border: 1px solid #eee;
+                padding: 6px 0;
+                border-radius: 5px;
+                margin-top: 10px;
+                cursor: pointer;
+            }
+
+                .tagcontent ul li:not(:first-child) {
+                    margin-left: 4.1%;
+                }
+
+                .tagcontent ul li:nth-child(4n) {
+                    margin-left: 0;
+                }
+
+        .tagselected {
+            background-color: #ebebeb;
+            color: #333;
+        }
+
+        .tagitem p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+            .tagitem p:first-child {
+                margin-top: 0;
+                padding-top: 10px;
+            }
+        #tagdefine {
+            margin-top:15px;
+            width:100%;
+            height:34px;
+            line-height:24px;
+            font-size:1.1em;
+            color:#555;            
+            border-radius:4px;
+            outline:none;
+            border:1px solid #fff;
+            box-shadow:none;            
+            padding:0 10px;
+        }
+
+        #subtags {
+            text-align: center;
+            font-size: 1.4em;
+            padding: 10px 0;
+            background-color: #eee;
+            color: #272b2e;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+
+        /*sortstyle*/
+        .mysort {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            z-index: 902;
+            -webkit-transition: -webkit-transform .4s cubic-bezier(.4,.01,.165,.99);
+            transition: transform .4s cubic-bezier(.4,.01,.165,.99);
+        }
+
+        .sortul li {
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 1.1em;
+            float: left;
+            padding: 8px;
+            width: 50%;
+            background-color: #272b2e;
+            border-bottom: 1px solid #161A1C;
+        }
+
+            .sortul li:nth-child(2n-1) {
+                border-right: 1px solid #161A1C;
+            }
+        
+        /*mask style*/
+        .mask {
+            color: #fff;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            font-size: 1.1em;
+            text-align: center;
+            display: none;
+            background-color: rgba(0,0,0,0.3);
+        }
+
+        .loader {
+            background-color: rgba(39, 43, 46, 0.9);
+            padding: 15px 25px;
+            border-radius: 5px;
+        }
+
+        #loadtext {
+            margin-top: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="backbtn"><i class="fa fa-chevron-left"></i></div>
+            <img src="../../res/img/StoreSaler/lllogo6.png" alt="" />
+        </div>
+        <div class="tags" onclick="switchTags()">打标签</div>
+        <div class="sorts" onclick="mysort()" style="display: block;" isshow="0">排 序</div>
+    </header>
+    <div id="main" class="wrap-page">
+        <section class="page page-not-header-footer" id="page-main">
+            <div class="viplist floatfix">
+                <div class="search">
+                    <input id="searchtxt" type="text" placeholder="请输入昵称关键字" />
+                </div>
+                <ul class="vipul">
+                    <li>
+                        <div class="userimg">
+                            <img src="../../res/img/StoreSaler/headimg.jpg" alt="" />
+                        </div>
+                        <h3>李家的风</h3>
+                        <p>性别:男 &nbsp;加入时间:2015-05-23</p>
+                        <div class="ri">
+                            <img src="../../res/img/StoreSaler/righticon.png" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="userimg">
+                            <img src="../../res/img/StoreSaler/defaulticon.jpg" alt="" />
+                        </div>
+                        <h3>Elilee</h3>
+                        <p>性别:男 &nbsp;加入时间:2015-02-21</p>
+                        <div class="ri">
+                            <img src="../../res/img/StoreSaler/righticon.png" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="userimg">
+                            <img src="../../res/img/StoreSaler/defaulticon.jpg" alt="" />
+                        </div>
+                        <h3>VIP3</h3>
+                        <p>性别:男 &nbsp;加入时间:2015-02-21</p>
+                        <div class="ri">
+                            <img src="../../res/img/StoreSaler/righticon.png" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="userimg">
+                            <img src="../../res/img/StoreSaler/defaulticon.jpg" alt="" />
+                        </div>
+                        <h3>VIP4</h3>
+                        <p>性别:女 &nbsp;加入时间:2015-02-21</p>
+                        <div class="ri">
+                            <img src="../../res/img/StoreSaler/righticon.png" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="userimg">
+                            <img src="../../res/img/StoreSaler/defaulticon.jpg" alt="" />
+                        </div>
+                        <h3>VIP4</h3>
+                        <p>性别:女 &nbsp;加入时间:2015-02-21</p>
+                        <div class="ri">
+                            <img src="../../res/img/StoreSaler/righticon.png" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="userimg">
+                            <img src="../../res/img/StoreSaler/defaulticon.jpg" alt="" />
+                        </div>
+                        <h3>VIP4</h3>
+                        <p>性别:女 &nbsp;加入时间:2015-02-21</p>
+                        <div class="ri">
+                            <img src="../../res/img/StoreSaler/righticon.png" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="userimg">
+                            <img src="../../res/img/StoreSaler/defaulticon.jpg" alt="" />
+                        </div>
+                        <h3>VIP6</h3>
+                        <p>性别:女 &nbsp;加入时间:2015-02-21</p>
+                        <div class="ri">
+                            <img src="../../res/img/StoreSaler/righticon.png" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--用户详情页-->
+        <section class="page page-not-header page-right" id="info-page" style="z-index: 901;">
+            <div class="userinfo" id="userview">
+                <div class="userheader">
+                    <div class="headimg"></div>
+                    <p class="nickname">李家的风</p>
+                    <hr />
+                    <ul class="userinfoul floatfix">
+                        <li>
+                            <p class="userval">10000</p>
+                            <p>用户积分</p>
+                        </li>
+                        <li>
+                            <p class="userval">15260825009</p>
+                            <p>电话</p>
+                        </li>
+                        <li>
+                            <p class="userval">金 卡</p>
+                            <p>VIP级别</p>
+                        </li>
+                    </ul>
+                </div>
+                <!--个人待定属性-->
+                <div class="usernav">
+                    <p class="title">个人属性待定</p>
+                    <ul>
+                        <li style="color: #f00;"><span>所属店铺、性别、年龄、收入</span><i class="fa fa-chevron-right"></i></li>
+                        <li style="color: #f00;"><span>爱好、教育程度、办卡日期</span><i class="fa fa-chevron-right"></i></li>
+                    </ul>
+                </div>
+                <div class="usernav">
+                    <p class="title">消费行为</p>
+                </div>
+                <!--消费行为待定属性-->
+                <div class="usernav">
+                    <p class="title">行为待定属性</p>
+                    <ul>
+                        <li style="color: #f00;"><span>RFM（最近消费日、最近消费额、消费频次、消费金额）</span><i class="fa fa-chevron-right"></i></li>
+                        <li style="color: #f00;"><span>积分、平均折扣、客单价</span><i class="fa fa-chevron-right"></i></li>
+                        <li style="color: #f00;"><span>客单量（四象情况-高频次/高金额）</span><i class="fa fa-chevron-right"></i></li>
+                        <li style="color: #f00;"><span>活跃度分析（按年）</span><i class="fa fa-chevron-right"></i></li>
+                    </ul>
+                </div>
+                <div class="usernav">
+                    <p class="title">消费偏好(最近两年)</p>
+
+                </div>
+            </div>
+        </section>
+        <!--打标签-->
+        <section class="page page-not-header page-top" id="tags-page" style="z-index: 902;">
+            <div class="topnav">
+                <div class="tagcontent">
+                    <div class="tagitem">
+                        <p>顾客性格：</p>
+                        <ul class="tagitemul floatfix">
+                            <li>主见型</li>
+                            <li>随和型</li>
+                            <li>热情型</li>
+                            <li>内向型</li>
+                        </ul>
+                    </div>
+
+                    <div class="tagitem">
+                        <p>决策风格：</p>
+                        <ul class="tagitemul floatfix">
+                            <li dm="yd">价格主导</li>
+                            <li dm="sy">感观型</li>
+                            <li>朋友主导</li>
+                            <li>性价比型</li>
+                        </ul>
+                    </div>
+
+                    <div class="tagitem">
+                        <p>穿着风格：</p>
+                        <ul class="tagitemul floatfix">
+                            <li>商务正装</li>
+                            <li>时尚个性</li>
+                            <li>休闲舒适</li>
+                            <li>高端精品</li>
+                        </ul>
+                    </div>
+                    <div class="tagitem">
+                        <p>肤色：</p>
+                        <ul class="tagitemul floatfix">
+                            <li>矮胖</li>
+                            <li>瘦高</li>
+                            <li>矮瘦</li>
+                            <li>胖高</li>
+                            <li>壮硕</li>
+                            <li>匀称</li>
+                        </ul>
+                    </div>
+                    <div class="tagitem">
+                        <p>年龄段：</p>
+                        <ul class="tagitemul floatfix">
+                            <li>70前</li>
+                            <li>75至80</li>
+                            <li>80至85</li>
+                            <li>85至90</li>
+                            <li>90后</li>
+                        </ul>
+                    </div>
+                    <div class="tagitem">
+                        <p>职业属性：</p>
+                        <ul class="tagitemul floatfix">
+                            <li>个体户</li>
+                            <li>公务员</li>
+                            <li>企业白领</li>
+                            <li>其它职业</li>
+                        </ul>
+                    </div>
+                    <div class="tagitem">
+                        <p>自定义：</p>
+                        <ul class="tagitemul floatfix">
+                            <li>自定义1</li>
+                        </ul>
+                        <input type="text" id="tagdefine" placeholder="在这写上没有提供的标签..." />
+                    </div>
+                </div>
+                <div id="subtags">提 交</div>
+            </div>
+        </section>
+        <!--筛选列表-->
+        <section class="mysort page-top">
+            <ul class="sortul">
+                <li>按积分高低</li>
+                <li>按加入时间</li>
+                <li>按姓名笔画</li>
+                <li>按性别</li>
+            </ul>
+        </section>
+        <!--加载提示层-->
+        <section class="mask">
+            <div class="loader center-translate">
+                <div>
+                    <i class="fa fa-2x fa-spinner fa-pulse"></i>
+                </div>
+                <p id="loadtext">正在加载...</p>
+            </div>
+        </section>
+    </div>
+    <footer class="footer">
+        <div class="bottomnav">
+            <ul class="navul floatfix">
+                <li onclick="switchMenu(0)">
+                    <i class="fa fa-comments"></i>
+                    <p>消 息</p>
+                </li>
+                <li onclick="switchMenu(1)" id="selected">
+                    <i class="fa fa-users"></i>
+                    <p>客 户</p>
+                </li>
+                <li onclick="switchMenu(2)">
+                    <i class="fa fa-retweet"></i>
+                    <p>引 流</p>
+                </li>
+                <li onclick="switchMenu(3)">
+                    <i class="fa fa-user"></i>
+                    <p>我 的</p>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type='text/javascript' src='../../res/js/StoreSaler/fastclick.min.js'></script>
+    <script type="text/javascript">
+        var tagShow = false;
+
+        $(function () {
+            FastClick.attach(document.body);
+            //var obj = $(".vipul").children();
+            //$(obj).fadeInWithDelay();      
+            GetVIPList();
+        });
+
+        //读取VIP用户列表数据
+        var vipliModule = "<li><div class='userimg'><img src='#headimg#' alt='' /></div><h3>#username#</h3><p>性别:#sex# &nbsp;加入时间:#jdrq#</p><div class='ri'><img src='../../res/img/StoreSaler/righticon.png' /></div></li>";
+        function GetVIPList() {
+            showLoader("loading","正在拉取数据...");
+            $.ajax({
+                url: "../../WebBLL/VIPListCore.aspx?ctrl=GetVipList",
+                type: "POST",
+                dataType: "text",
+                cache: false,//不使用缓存
+                timeout: 5000,
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("AJAX执行失败！");
+                },
+                success: function (result) {
+                    if (result.indexOf("Error") > -1) {
+                        alert(result);
+                    } else {
+                        var obj = JSON.parse(result);
+                        var viphtml = "";
+                        for (var i = 0; i < obj.rows.length; i++) {
+                            var row = obj.rows[i];
+                            var headimg = row.headimg == "" ? "../../res/img/StoreSaler/defaulticon.jpg" : row.headimg;
+                            var sex = row.xb == "0" ? "男" : "女";
+                            viphtml += vipliModule.replace("#headimg#", headimg).replace("#username#", row.xm).replace("#sex#", sex).replace("#jdrq#", row.jdrq);
+                        }//end for
+                        $(".vipul").children().remove();
+                        $(".vipul").append(viphtml);
+                        showLoader("successed","获取成功！");
+                    }
+                }
+            });
+        }
+
+        function showLoader(type, txt) {
+            switch (type) {
+                case "loading":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-spinner fa-pulse");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "successed":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-check");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    setTimeout(function () {
+                        $(".mask").fadeOut(200);
+                    }, 500);
+                    break;
+                case "error":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-close (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "warn":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-warning (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+            }
+        }
+
+        $(".vipul li").click(function () {
+            $("#page-main").addClass("page-left");
+            $("#info-page").removeClass("page-right");
+            $(".backbtn").fadeIn(200);
+            $(".sorts").fadeOut(200);
+            $(".tags").fadeIn(200);
+        });
+
+        $(".backbtn").click(function () {
+            $("#tags-page").addClass("page-top");
+            $("#info-page").addClass("page-right");
+            $("#page-main").removeClass("page-left");
+            $(".tags").hide();
+            $(".sorts").show();
+
+            $(".tags").text("打标签");
+            tagShow = false;
+        });
+
+        function switchTags() {
+            if (tagShow) {
+                $("#tags-page").addClass("page-top");
+                $(".tags").text("打标签");
+                tagShow = false;
+            } else {
+                $("#tags-page").removeClass("page-top");
+                $(".tags").text("关闭");
+                tagShow = true;
+            }
+        }
+
+        function switchMenu(order) {
+            switch (order) {
+                case 0:
+                    window.location.href = "message.html";
+                    break;
+                case 1:
+                    window.location.href = "viplist.html";
+                    break;
+                case 2:
+                    window.location.href = "weschool2.html";
+                    break;
+                case 3:
+                    window.location.href = "usercenter.aspx";
+                    break;
+                default:
+                    showLoader("warn", "正在开发中...");
+                    setTimeout(function () {
+                        $(".mask").hide();
+                    }, 1000);
+                    break;
+            }
+        }
+
+        $(".tagitemul li").click(function (e) {
+            var obj = $(e.target);
+            if (obj.hasClass("tagselected"))
+                obj.removeClass("tagselected");
+            else
+                obj.addClass("tagselected");
+        });
+
+        //搜索框实时本地检索
+        $("#searchtxt").bind("input propertychange", function () {
+            var obj = $(".vipul li h3");
+            if (obj.length > 0) {
+                var stxt = $("#searchtxt").val();
+                for (var i = 0; i < obj.length; i++) {
+                    if (obj.eq(i).text().indexOf(stxt) == -1)
+                        $(".vipul li").eq(i).hide();
+                    else
+                        $(".vipul li").eq(i).show();
+                }
+            }
+        });
+
+        function mysort() {
+            if ($(".mysort").attr("isshow") == "0") {
+                $(".mysort").attr("isshow", "1");
+                $(".mysort").removeClass("page-top");
+            }
+            else {
+                $(".mysort").attr("isshow", "0");
+                $(".mysort").addClass("page-top");
+            }
+        }
+    </script>
+</body>
+</html>

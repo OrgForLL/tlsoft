@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\expressInfo.aspx(51): error CS1501: “sendRTXmessage”方法没有采用“2”个参数的重载

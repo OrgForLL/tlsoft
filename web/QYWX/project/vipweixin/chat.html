@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <title></title>
+    <style type="text/css">
+    	.header{
+    		height: 40px;
+    		line-height: 40px;
+    		border-bottom: 1px solid #eee;
+    		-webkit-box-shadow: 0 1px 3px #ddd;
+            box-shadow: 0 1px 3px #ddd;
+            font-size: 16px;
+    	}
+    	.backBtn{
+    		position: absolute;
+    		padding: 0 15px;
+    		left: 0;
+    		font-size: 22px;
+    		color: #888;
+    		top: 9px;
+    	}
+    	#main_page{
+    		top: 40px;
+    		padding: 0;
+    		bottom: 50px;
+    		background-color: #f3f3f3;
+    	}
+    	.chatlist{
+    		margin-bottom: 15px;
+    	}
+    	.chatlist li{
+    		padding: 15px 10px 0 10px;
+    	}
+    	.chatlist li[data-type="date"]{
+    		text-align: center;
+    	}
+    	.chatlist li[data-type="server"]{
+    		text-align: left;
+    	}
+    	.chatlist li[data-type="customer"]{
+    		text-align: right;
+    	}
+    	.date{
+    		background-color: #d2d2d2;
+    		color: #fff;
+    		padding: 5px;
+    		border-radius: 5px;
+    		font-size: 13px;
+    		display: inline-block;
+    	}
+    	.avatar{
+    		width: 40px;
+    		height: 40px;
+    		background-image: url(../../res/img/vipweixin/headImg.jpg);
+    		background-size: cover;
+    		border-radius: 3px;
+    		display: inline-block;
+    		vertical-align: top;
+    	}
+    	.chatcon-wrap{
+    		display: inline-block;
+    		width: 70%;
+    	}
+    	.triangle{
+    		font-size: 26px;
+    		vertical-align: top;
+    	}
+    	.chatcon{
+    		display: inline-block;    		
+    		padding: 10px 6px;
+    		border-radius: 3px;
+    		max-width: 90%;
+    		word-break: break-word;
+    		text-align: left;
+    	}
+    	.chatlist li[data-type="server"] .triangle{
+    		color: #fff;
+    	}
+    	.chatlist li[data-type="customer"] .triangle{
+    		color: #9eea6a;
+    	}
+    	.chatlist li[data-type="customer"] .chatcon{
+    		background-color: #9eea6a;
+    		margin-right: -5px;
+    	}
+    	.chatlist li[data-type="server"] .chatcon{
+    		background-color: #fff;
+    		margin-left: -5px;
+    	}
+
+    	/*footer style*/
+    	.footer{
+    		border-top: 1px solid #e6e6e6;
+    		background-color: #f8f8f8;
+    		height: 50px;
+    	}
+        .inputwrap{
+            position: absolute;
+            left: 15px;
+            right: 90px;
+            top: 7.5px;
+            height: 35px;
+        }
+    	#inputbox{
+    		height: 35px;
+    		border: 1px solid #e6e6e6;
+    		border-radius: 3px;
+    		width: 100%;
+    		font-size: 14px;
+    		padding-left: 5px;
+    	}
+    	.sendBtn{
+    		display: inline-block;
+    		color: #fff;
+    		background-color: #322031;
+    		height: 35px;
+    		line-height: 35px;
+    		position: absolute;
+    		right: 15px;
+    		top: 7.5px;
+    		width: 60px;
+    		border-radius: 3px;
+    	}
+    </style>
+</head>
+<body>
+	<div class="header">
+		<i class="backBtn fa fa-angle-left" onclick="window.history.go(-1);"></i>
+		<p>客服</p>
+	</div>
+	<div class="wrap-page">
+        <div class="page page-not-header-footer" id="main_page">
+        	<ul class="chatlist">
+        		<!-- <li date-type="date">
+        			<span class="date">2017-02-28 14:58</span>
+        		</li>
+        		<li date-type="server">      			
+        			<div class="avatar"></div>
+        			<div class="chatcon-wrap">
+        				<i class="triangle fa fa-caret-left"></i>
+        				<div class="chatcon">nihao你好你好你好你好你好你好你好你好你好你好</div>
+        			</div>
+        		</li>
+        		<li date-type="date">
+        			<span class="date">2017-02-28 14:58</span>
+        		</li>
+        		<li date-type="customer">      			
+        			<div class="chatcon-wrap">   				
+        				<div class="chatcon">nihao你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好</div>
+        				<i class="triangle fa fa-caret-right"></i>
+        			</div>
+        			<div class="avatar"></div>
+        		</li>
+        		<li date-type="date">
+        			<span class="date">2017-02-28 14:58</span>
+        		</li>
+        		<li date-type="server">      			
+        			<div class="avatar"></div>
+        			<div class="chatcon-wrap">
+        				<i class="triangle fa fa-caret-left"></i>
+        				<div class="chatcon">nihao你好你好你好你好你好你好你好你好你好你好</div>
+        			</div>
+        		</li>
+        		<li date-type="date">
+        			<span class="date">2017-02-28 14:58</span>
+        		</li>
+        		<li date-type="server">      			
+        			<div class="avatar"></div>
+        			<div class="chatcon-wrap">
+        				<i class="triangle fa fa-caret-left"></i>
+        				<div class="chatcon">hello</div>
+        			</div>
+        		</li>
+        		<li date-type="customer">      			
+        			<div class="chatcon-wrap">   				
+        				<div class="chatcon">nihaonihaonihaonihaonihaonihaonihaonihaonihao</div>
+        				<i class="triangle fa fa-caret-right"></i>
+        			</div>
+        			<div class="avatar"></div>
+        		</li> -->
+        	</ul>
+        </div>
+    </div>
+    <div class="footer">
+    	<div class="inputwrap"><input type="text" id="inputbox"></div>
+    	<div class="sendBtn">发送</div>
+    </div>
+
+    <!-- 实时聊天服务器端模板区 -->
+    <script id="server_tpl" type="text/html">
+        <li data-type="server">                 
+            <div class="avatar"></div>
+            <div class="chatcon-wrap">
+                <i class="triangle fa fa-caret-left"></i>
+                <div class="chatcon">{{content}}</div>
+            </div>
+        </li>
+    </script>
+
+    <!-- 实时聊天客户端模板区 -->
+    <script id="customer_tpl" type="text/html">
+        <li data-type="customer">               
+            <div class="chatcon-wrap">                  
+                <div class="chatcon">{{content}}</div>
+                <i class="triangle fa fa-caret-right"></i>
+            </div>
+            <div class="avatar" style="background-image:url({{avatar}})"></div>
+        </li>
+    </script>
+
+    <!-- 历史记录服务器端模板区 -->
+    <script id="local_server" type="text/html">
+        <li data-type="server">                 
+            <div class="avatar" style="background-image:{{avatar}}"></div>
+            <div class="chatcon-wrap">
+                <i class="triangle fa fa-caret-left"></i>
+                <div class="chatcon">{{content}}</div>
+            </div>
+        </li>
+    </script>
+
+    <!-- 历史记录客户端模板区 -->
+    <script id="local_customer" type="text/html">
+        <li data-type="customer">               
+            <div class="chatcon-wrap">                  
+                <div class="chatcon">{{content}}</div>
+                <i class="triangle fa fa-caret-right"></i>
+            </div>
+            <div class="avatar" style="background-image:{{avatar}}"></div>
+        </li>
+    </script>
+
+    <!-- 历史记录时间模板区 -->
+    <script id="local_date" type="text/html">
+        <li data-type="date">
+            <span class="date">{{date}}</span>
+        </li>
+    </script>
+
+	<script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/LeeJSUtils.min.js"></script>
+    <script type="text/javascript" src="../../res/js/template.js"></script>
+    <script type="text/javascript" src="../../res/js/socket.io-1.3.7.js"></script>
+    <script type="text/javascript">
+
+        Date.prototype.datetime = function() { 
+            year = this.getFullYear(); 
+            month = this.getMonth() + 1; 
+            day = this.getDate(); 
+            hours = this.getHours(); 
+            minute = this.getMinutes(); 
+            second = this.getSeconds();
+            month = month > 10 ? month : '0' + month;
+            day = day > 10 ? day : '0' + day;
+            hours = hours > 10 ? hours : '0' + hours;
+            minute = minute > 10 ? minute : '0' + minute;
+            second = second > 10 ? second : '0' + second;
+            return year+'-'+month+'-'+day+' '+hours+':'+minute+':'+second;
+        };
+
+        var socket = null; 
+
+    	$(document).ready(function () {
+            LeeJSUtils.stopOutOfPage(".header", false);
+            LeeJSUtils.stopOutOfPage("#main_page", true);
+            LeeJSUtils.stopOutOfPage(".footer", false);
+
+            initSocket();
+            loadCacheData();
+            $('#main_page').scrollTop( $('.chatlist').height());
+        }); 
+
+        // 初始化socket.io
+        function initSocket(){
+
+            socket = io.connect('http://120.39.251.152:3000');
+
+             //socket.emit('reg',{'token':'f87526143cf9e1c1'});
+            // var data = {
+            //     user:{
+            //         id:14, 
+            //         head_ico:'',
+            //         username:'测试者'
+            //     }
+            // };
+            // socket.emit('message',{
+            //     type: 'reg',
+            //     content: {
+            //         uid: data.user.id,
+            //         type:'friend',
+            //         avatar:data.user.head_ico,
+            //         username:data.user.username,
+            //         groupid:1,
+            //         id:'1603',
+            //         remark:'我的注册时间是2017-02-28 11:43:13'
+            //     }
+            // });
+
+            jQuery.getJSON("http://tm.lilanz.com/lspx/jf.do?act=UserInfo",function(data){
+                if(data.code == 200){
+                    user = data.user;
+                    socket.send({
+                        type: 'reg',
+                        content: {
+                            uid: data.user.id,
+                            type:'friend',
+                            avatar:data.user.head_ico,
+                            username:data.user.username,
+                            groupid:1,
+                            id:'1603',
+                            remark:'我的注册时间是2017-02-28 11:43:13'
+                        }
+                    });
+                }
+                else{
+                    window.location.href = "http://tm.lilanz.com/lspx/jf.do?act=redirectL&url=http://tm.lilanz.com/project/vipweixin/chat.html";
+                    // alert(data.msg);
+                }
+            });
+
+            socket.on('chatMessage', function (data) {
+                
+                $(".chatlist").append('<li data-type="date"><span class="date">'+(new Date).datetime()+'</span></li>');
+                $(".chatlist").append(template("server_tpl", data));
+            });
+        }
+
+        // 发送按钮
+        $('.sendBtn').click(function(){ 
+            var messageText = $('#inputbox').val(); 
+            var data1 = {};
+          
+            $.ajax({
+                type: "POST",
+                cache: false,
+                timeout: 5 * 1000,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                url: "/lspx/jf.do?act=UserInfo",
+                success: function (msg) {
+                    var data = JSON.parse(msg);
+                    if (data.code == 200) {
+                        data1 = {
+                            mine:{
+                                username: data.user.username,
+                                avatar: data.user.head_ico,
+                                id: data.user.id,
+                                content:messageText,
+                                mine:true
+                            },
+                            to:{
+                                type:'friend',
+                                id:1
+                            }
+                        };
+
+                        if(messageText != "") { 
+                            $('#inputbox').val(null); 
+                            socket.emit('message', {type:'chatMessage',content:data1}); 
+                            $(".chatlist").append('<li data-type="date"><span class="date">'+(new Date).datetime()+'</span></li>');
+                            $(".chatlist").append(template("customer_tpl", data1.mine));
+                            $('#main_page').scrollTop( $('.chatlist').height());
+                            
+                        }else{
+
+                            LeeJSUtils.showMessage("warn", "不能发送空白消息");
+                        } 
+
+                    } else if(data.code == 202){
+
+                        window.location.href = "http://tm.lilanz.com/lspx/jf.do?act=redirectL&url=http://tm.lilanz.com/project/vipweixin/chat.html";
+                    }else
+                        LeeJSUtils.showMessage("error", data.msg);                           
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    
+                    LeeJSUtils.showMessage("error", "您的网络出问题啦..");
+                }
+            });
+      
+        });
+
+        // 加载本地缓存
+        function loadCacheData(){
+
+            var storage = window.localStorage;
+
+            //将JSON字符串转换成为JSON对象输出
+            var json = storage.getItem("chatdata");
+            var jsonObj = JSON.parse(json);
+            if(jsonObj.recordlist.length != 0){
+                for(var i = 0; i < jsonObj.recordlist.length; i++){
+                    var dataItem = jsonObj.recordlist[i];
+                    var type = dataItem.type;
+                    $(".chatlist").append(template("local_" + type, dataItem));
+                }
+            }
+            
+            //console.log(json);
+                    
+        }
+        
+        // 将聊天记录存入localstorage
+        function saveLocal(){
+
+            var storage=window.localStorage;
+
+            var chatrecord = [];    //聊天记录
+            var litype = "";
+            var chatcon = "";
+            var date = "";
+            var avatar ="";
+
+            for(var i = 0; i < $(".chatlist li").length; i++){
+                var row = $(".chatlist li").eq(i);
+                litype = row.attr("data-type");
+                chatcon = row.find(".chatcon").text();
+                date = row.find(".date").text();
+                avatar = row.find(".avatar").css("background-image");
+                chatrecord.push({type: litype, content: chatcon, date: date, avatar: avatar});
+            }
+
+            var chatdata = {recordlist:chatrecord};
+    
+            storage.setItem("chatdata",JSON.stringify(chatdata));         
+             
+        }
+
+        // window.onbeforeunload = function(){
+        //     saveLocal();
+        // }
+
+        window.onload = function () {
+            setInterval(saveLocal,1000);
+            // 清空本地存储
+            // localStorage.removeItem("chatdata");
+            
+        }
+    </script>
+</body>
+</html>

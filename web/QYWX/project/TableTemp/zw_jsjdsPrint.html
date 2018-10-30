@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>专利技术交底书</title>
+    <style type="text/css">
+    body {
+        font-family: "宋体", arial, "hiragino sans gb", "microsoft yahei", sans-serif;
+    }
+    
+    .outer_table {
+        border-left: 1px solid #000;
+        border-top: 1px solid #000;
+    }
+    
+    td {
+        padding: 4px 6px;
+        border-right: 1px solid #000;
+        border-bottom: 1px solid #000;
+        text-align: center;
+        font-family: "宋体", arial, "hiragino sans gb", "microsoft yahei", sans-serif;
+    }
+    
+    .table_name {
+        font-family: "黑体", arial, "hiragino sans gb", "microsoft yahei", sans-serif;
+        font-size: 22px;
+        line-height: 42px;
+    }
+    
+    .banben {
+        font-family: "黑体", arial, "hiragino sans gb", "microsoft yahei", sans-serif;
+        position: absolute;
+        right: 30px;
+        font-size: 14px;
+    }
+    
+    .red_txt {
+        font-family: "宋体", arial, "hiragino sans gb", "microsoft yahei", sans-serif;
+        color: #F00;
+    }
+    
+    .paragraph {
+        line-height: 1.6em;
+        text-indent: 2em;
+    }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/template.js"></script>
+    <script type="text/javascript" src="../../res/js/json2.js"></script>
+    <script id="tpl_table" type="text/html">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="outer_table">
+            <tr>
+                <td height="42" colspan="4" class="table_name"><span>技术交底书</span><span class="banben">（版本：2017-2）</span></td>
+            </tr>
+            <tr>
+                <td width="18%" height="40">发明名称</td>
+                <td height="40" colspan="3">{{jbzl[0].fmmc}}</td>
+            </tr>
+            <tr>
+                <td height="40">发明人</td>
+                <td width="28%" height="40">{{jbzl[0].fmr}}</td>
+                <td width="26%" height="40">申报时间</td>
+                <td width="28%" height="40">{{jbzl[0].rq}}</td>
+            </tr>
+            <tr>
+                <td height="40">是否RD项目</td>
+                <td height="40">{{jbzl[0].isRD}}</td>
+                <td height="40"></td>
+                <td height="40"></td>
+            </tr>
+            <tr>
+                <td>本发明所属技术领域
+                </td>
+                <td colspan="3">
+                    <p align="left" class="paragraph">{{jbzl[0].ssjsly}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>本发明背景技术</td>
+                <td colspan="3">
+                    <p align="left" class="paragraph">{{jbzl[0].bjjs}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>本发明所要解决的技术问题</td>
+                <td colspan="3">
+                    <p align="left" class="paragraph">{{jbzl[0].jswt}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>此项专利申请的技术方案简介</td>
+                <td colspan="3">
+                    <p align="left" class="paragraph">{{jbzl[0].jsfajj}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td height="120">附图说明</td>
+                <td height="120" colspan="3"></td>
+            </tr>
+        </table>
+    </script>
+    <script type="text/javascript">
+    $(function() {
+
+        var tzid = getUrlParam("tzid");
+        var id = getUrlParam("id");
+
+        // 声明模板格式化金额函数
+        template.helper('formatMoney', function(s, n) {
+            return formatMoney(s, n);
+        });
+
+        // 格式化金额
+        function formatMoney(s, n) {
+            n = n > 0 && n <= 20 ? n : 2;
+            s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+            var l = s.split(".")[0].split("").reverse(),
+                r = s.split(".")[1];
+            t = "";
+            for (i = 0; i < l.length; i++) {
+                t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+            }
+            return t.split("").reverse().join("") + "." + r;
+        }
+
+        // 获取地址栏参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+        // 加载表格数据
+        function loadTableInfo() {
+            $.ajax({
+                type: "POST",
+                timeout: 15 * 1000,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                url: "../../../tl_cw/cw_RDPrintApi.aspx?method=getZljsjdsInfo",
+                data: {
+                    tzid: tzid,
+                    id: id
+                },
+                success: function(msg) {
+                    var data = JSON.parse(msg);
+                    if (data.code == 200) {
+
+                        var item = data.info.jbzl[0];
+                        item.ssjsly = item.ssjsly.replace(/\r\n/g, "</p><p class=paragraph>");
+                        item.bjjs = item.bjjs.replace(/\r\n/g, "</p><p class=paragraph>");
+                        item.jswt = item.jswt.replace(/\r\n/g, "</p><p class=paragraph>");
+                        item.jsfajj = item.jsfajj.replace(/\r\n/g, "</p><p class=paragraph>");
+
+                        $("body").append(template("tpl_table", data.info));
+
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("[" + textStatus + "]：" + errorThrown);
+                }
+            }); //end AJAX
+        }
+
+        loadTableInfo();
+    });
+    </script>
+</body>
+
+</html>

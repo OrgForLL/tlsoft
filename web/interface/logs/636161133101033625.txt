@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx(12): error CS1501: “Write”方法没有采用“2”个参数的重载

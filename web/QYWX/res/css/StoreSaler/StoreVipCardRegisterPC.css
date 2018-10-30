@@ -1,0 +1,36 @@
+ .page
+{
+    position: relative;
+}
+
+.title-wrap, .description
+{
+    width: 400px;
+    margin: 0 auto;
+} 
+             
+.QR-code-wrap
+{
+    width: 400px;
+    height: 400px;
+}
+             
+.QR-code-wrap .qrcode
+{
+    width: 380px;
+    height: 380px;
+    top: 10px;
+    left: 10px;
+}
+
+.gradient
+{
+    width: 400px;
+    background: #fc82a6;
+    background: -webkit-linear-gradient(left, #fc82a6, #45c4ae);
+    background: -moz-linear-gradient(left, #fc82a6, #45c4ae);
+    background: -ms-linear-gradient(left, #fc82a6, #45c4ae);
+    background: linear-gradient(left, #fc82a6, #45c4ae);
+}   
+              
+        

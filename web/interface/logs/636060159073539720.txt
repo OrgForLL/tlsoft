@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\WSZXDDataPull.asmx(105): error CS0111: 类型“WSZXDDataPull”已定义了一个名为“getCLInfo”的具有相同参数类型的成员

@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/vipweixin/touchSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <style type="text/css">
+        body {
+            background-color: #f7f7f7;
+            color: #575d6a;
+            font-family: "San Francisco",Helvitica Neue,Helvitica,Arial,sans-serif;
+        }
+
+        .header {
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #575d6a;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .fa-angle-left {
+            font-size: 1.5em;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            padding: 0 18px;
+            line-height: 50px;
+        }
+
+            .fa-angle-left:hover {
+                background-color: rgba(0,0,0,.1);
+            }
+
+        .page {
+            top: 50px;
+            bottom: 48px;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .banner {
+            height: 220px;           
+            margin-top:-1px;
+        }
+
+        .footer {
+            height: 48px;
+            text-align: left;
+        }
+
+        .foot-btns {
+            background-color: #eceef1;
+            height: 48px;
+            line-height: 48px;
+            font-size: 0;
+        }
+
+            .foot-btns > a {
+                display: inline-block;
+                text-align: center;
+                width: 40%;
+                color: #575d6a;
+                font-size: 16px;
+            }
+
+            .foot-btns .color-btn {
+                background-color: #575d6a;
+                color: #fff;
+                width:60%;
+            }
+
+        .product-info, .product-detail1, .product-detail2 {
+            background-color: #fff;
+            margin: 5px 0;
+            padding: 10px;
+            box-shadow: 0 1px .5px #eceef1;
+            -webkit-box-shadow: 0 1px .5px #eceef1;
+        }
+
+            .product-info .pro-name {
+                font-size: 1.2em;
+                font-weight: bold;
+                color: #555;
+            }
+
+        .points {
+            color: #888;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+            .points span {
+                color: #ff6600;
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+
+        .product-detail1 {
+            font-size: 1.1em;
+        }
+
+            .product-detail1 > p {
+                line-height: 25px;
+            }
+
+        .product-detail2 {
+            padding-top:8px;
+        }
+            .product-detail2 > img {
+                width:100%;
+                height:auto;
+            }
+        .product-detail2 .title {
+            text-align: center;
+            font-size: 1.2em;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #f7f7f7;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .product-detail2 p {
+            line-height: 24px;            
+        }
+        /*幻灯区样式*/
+        .main_image,.main_image ul,.main_image li,.main_image li span,.main_image li a {
+            height:220px;
+        }
+        div.flicking_con .flicking_inner {
+            top:200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <i class="fa fa-angle-left" onclick="javascript:window.history.go(-1);"></i>
+        商品详情
+    </div>
+    <div class="wrap-page">
+        <div class="page page-not-header-footer">
+            <!--幻灯片区-->
+            <div class="banner">
+                <div class="main_visual">
+                    <div class="flicking_con">
+                        <div class="flicking_inner">
+                            <a href="javascript:">1</a>
+                            <a href="javascript:">2</a>
+                            <a href="javascript:">3</a>
+                            <a href="javascript:">4</a>
+                            <a href="javascript:">5</a>
+                        </div>
+                    </div>
+                    <div class="main_image">
+                        <ul>
+                            <li><span class="img_1"></span></li>
+                            <li><span class="img_2"></span></li>
+                            <li><span class="img_3"></span></li>
+                            <li><span class="img_4"></span></li>
+                            <li><span class="img_5"></span></li>
+                        </ul>
+                        <a href="javascript:;" id="btn_prev"></a>
+                        <a href="javascript:;" id="btn_next"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-info">
+                <p class="pro-name">iPhone 6s(金色) 商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                <p class="points">积分数：<span>10000</span></p>
+                <p class="money">市场价：￥<span style="text-decoration: line-through;">3600.00</span></p>
+            </div>
+            <div class="product-detail1">
+                <p>名称：商品相关参数</p>
+                <p>名称：商品相关参数</p>
+                <p>名称：商品相关参数</p>
+                <p>名称：商品相关参数</p>
+                <p>名称：商品相关参数</p>
+                <p>名称：商品相关参数</p>
+            </div>
+            <div class="product-detail2">
+                <p class="title">商品详情</p>
+                <img src="../../res/img/vipweixin/p1.jpg" />
+                <img src="../../res/img/vipweixin/p2.jpg" />
+                <img src="../../res/img/vipweixin/p3.png" />
+                <img src="../../res/img/vipweixin/p4.jpg" />
+            </div>
+            <div class="product-detail2">
+                <p class="title">兑换说明</p>
+                <p>*说明内容</p>
+                <p>*说明内容</p>
+                <p>*说明内容</p>
+                <p>*说明内容</p>
+                <p>*说明内容</p>
+                <p>*说明内容</p>
+                <p>*说明内容</p>
+                <p>*说明内容</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="foot-btns">
+            <a class="grey-btn" href="javascript:void(0);">加入购物车
+            </a>
+            <a class="color-btn" href="javascript:void(0);">立即兑换
+            </a>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/vipweixin/jquery.event.drag-1.5.min.js"></script>
+    <script type="text/javascript" src="../../res/js/vipweixin/jquery.touchSlider.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $dragBln = false;
+            $(".main_image").touchSlider({
+                flexible: true,
+                speed: 200,
+                btn_prev: $("#btn_prev"),
+                btn_next: $("#btn_next"),
+                paging: $(".flicking_con a"),
+                counter: function (e) {
+                    $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+                }
+            });
+            $(".main_image").bind("mousedown", function () {
+                $dragBln = false;
+            })
+            $(".main_image").bind("dragstart", function () {
+                $dragBln = true;
+            })
+            $(".main_image a").click(function () {
+                if ($dragBln) {
+                    return false;
+                }
+            })
+            timer = setInterval(function () { $("#btn_next").click(); }, 5000);
+            $(".main_visual").hover(function () {
+                clearInterval(timer);
+            }, function () {
+                timer = setInterval(function () { $("#btn_next").click(); }, 5000);
+            })
+            $(".main_image").bind("touchstart", function () {
+                clearInterval(timer);
+            }).bind("touchend", function () {
+                timer = setInterval(function () { $("#btn_next").click(); }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

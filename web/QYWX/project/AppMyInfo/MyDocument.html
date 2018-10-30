@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>我的档案</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="../../res/css/LeePageSlider.css" />
+    <link rel="stylesheet" type="text/css" href="../../res/css/AppMyInfo/mydocument.css" />
+    <style type="text/css">
+        .information ul li {
+            padding:15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header"></div>
+    <div class="wrap-page">
+        <div class="page">
+            <div class="department">
+                <div class="userinfo">
+                    <div class="img-border">
+                    <div class="usericon"></div>
+                </div>
+                <div class="de-info de-name">
+                    <p>部门</p>
+                    <hr/>
+                    <p id="bmmc"></p>
+                </div>
+                <div class="de-info de-title">
+                    <p id="zdmc"></p>
+                    <hr/>
+                    <p>职等</p>
+                </div>
+                <div class="de-info de-post">
+                    <p id="gwmc"></p>
+                    <hr/>
+                    <p>岗位</p>
+                </div>
+                </div>
+                <div class="username"><p id="xm"></p></div>
+            </div>
+            <div class="information">
+                <ul>
+                    <li><span>联系电话</span><span id="yddh"></span></li>
+                    <li><span>电子邮件</span><span id="dzyj"></span></li>
+                    <li><span>身份证有效日期</span><span id="sfzrq"></span></li>
+                    <li><span>政治面貌</span><span id="zzmm"></span></li>
+                    <li><span>婚否</span><span id="hfbs"></span></li>
+                    <li><span>学历</span><span id="xlmc"></span></li>
+                    <li><span>籍贯</span><span id="jgmc"></span></li>
+                    <li style="padding:10px 0;"><span>家庭地址</span><span id="txdz" style="line-height:1.5;"></span></li>
+                    <li><span>邮编</span><span id="yb"></span></li>
+                    <li><span>家庭电话</span><span id="jtdh"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+        <!--加载提示-->
+    <div class="load_toast" id="myLoading">
+        <div class="load_toast_mask"></div>
+        <div class="load_toast_container">
+            <div class="lee_toast">
+                <div class="load_img">
+                    <img src="../../res/img/my_loading.gif" />
+                </div>
+                <div class="load_text">加载中...</div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="../../res/js/jquery-3.2.1.min.js"></script>
+    
+    <script type="text/javascript">
+        $(function(){
+            getInfo();
+        });
+        
+        function getInfo(){
+            $("#myLoading").show();
+            var apptoken = GetQueryParams("apptoken");
+            if(apptoken == ''){
+                $("#myLoading").show();
+                $(".load_text").text("请在利郎APP中打开！");
+            }
+            
+            $.ajax({
+                url: "../../api/appmycore.ashx",
+                data: {
+                    action: "MyRecordInfo",
+                    apptoken: apptoken
+                },
+                dataType: 'JSON',
+                success: function(data){
+                    var info = data.info[0];
+                    
+                    if(info == undefined || info == null || info == ""){
+                        $("#myLoading").show();
+                        $(".load_text").text("未找到数据！");
+                    }
+                    
+                    if(data.code == '200'){
+                        if(info.avatar != null && info.avatar != undefined && info.avatar != ""){
+                            $(".usericon").css("background-image","url(" + info.avatar + ")");
+                        }else{
+                            $(".usericon").css("background-image","url(../../res/img/headimg.jpg)");
+                        }
+                        $("#xm").text(info.xm);
+                        $("#bmmc").text(info.bmmc);
+                        $("#zdmc").text(info.zdmc);
+                        $("#gwmc").text(info.gwmc);                        
+                        $("#yddh").text(info.yddh);
+                        $("#dzyj").text(info.dzyj);
+                        $("#sfzrq").text(info.sfzrq.split('T')[0]);
+                        $("#zzmm").text(info.zzmm);
+                        $("#hfbs").text(info.hfbs);
+                        $("#xlmc").text(info.xlmc);
+                        $("#jgmc").text(info.jgmc);
+                        $("#txdz").text(info.txdz);
+                        $("#yb").text(info.yb);
+                        $("#jtdh").text(info.jtdh);
+                        $("#myLoading").hide();
+                    }else{
+                        $(".load_text").text(data.msg);
+                    }
+                }
+            });
+        }
+        
+        var GetQueryParams = function (name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null)
+                return unescape(r[2])
+            else
+                return "";
+        };        
+    </script>
+</body>
+</html>

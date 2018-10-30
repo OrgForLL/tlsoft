@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\WSZXDDataPull.asmx(58): error CS0117: “System.Array”并不包含“Rows”的定义

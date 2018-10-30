@@ -1,0 +1,5 @@
+﻿<xianggang dn="day">
+<city cityX="295" cityY="181" cityname="新界" centername="新界" fontColor="FFFFFF" pyName="xinjie" state1="1" state2="1" stateDetailed="多云" tem1="15" tem2="19" temNow="暂无实况" windState="微风" windDir="暂无实况" windPower="暂无实况" humidity="暂无实况" time="99:99" url="101320103"/>
+<city cityX="348" cityY="241" cityname="九龙" centername="九龙" fontColor="FFFFFF" pyName="jiulong" state1="1" state2="1" stateDetailed="多云" tem1="15" tem2="19" temNow="暂无实况" windState="微风" windDir="暂无实况" windPower="暂无实况" humidity="暂无实况" time="99:99" url="101320102"/>
+<city cityX="362" cityY="307" cityname="香港岛" centername="香港岛" fontColor="FFFFFF" pyName="xianggangdao" state1="1" state2="1" stateDetailed="多云" tem1="15" tem2="19" temNow="暂无实况" windState="微风" windDir="暂无实况" windPower="暂无实况" humidity="暂无实况" time="99:99" url="101320101"/>
+</xianggang>

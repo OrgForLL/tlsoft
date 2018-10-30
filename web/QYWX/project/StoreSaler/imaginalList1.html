@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>利郎形象管理</title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <style type="text/css">
+        .page {
+            padding: 0;
+            background-color: #222;
+        }
+
+        .album_item {
+            height: 241px;
+            border-bottom: 1px solid #333;
+            position: relative;
+        }
+
+        .backimg {
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+        }
+
+        .album_item .infos {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            bottom: 0;
+            height: 60px;
+            background-color: rgba(0,0,0,.8);
+            color: #fff;          
+        }
+
+        .createtime {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            width: 56px;
+        }
+
+            .createtime .day {
+                padding: 3px 0;
+                font-size: 18px;
+                background-color:#265a63;
+            }
+
+            .createtime .month {
+                font-size: 14px;
+                margin-top: 2px;
+                background-color: #265a63;
+                border-radius: 0 0 4px 4px;
+            }
+
+        .infos .name {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .infos .statics {
+            color: #dfdfdf;
+        }
+
+        .veri_center {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translate(0,-50%);
+            -webkit-transform: translate(0,-50%);
+        }
+    </style>
+</head>
+<body>
+    <!--对于门店显示四种统计值：已通过、未通过、已上传、未上传
+    对于贸易公司显示四种统计值：未提交、待审、已通过、未通过-->
+    <div class="wrap-page">
+        <div class="page">
+            <div class="album_list">
+                <div class="album_item backimg" style="background-image: url(../../res/img/storesaler/8.png)">
+                    <div class="createtime">
+                        <p class="day">24</p>
+                        <p class="month">10月</p>
+                    </div>
+                    <div class="infos">
+                        <div class="veri_center">
+                            <p class="name">名称一名称一名称一名称一</p>
+                            <p class="statics">
+                                未通过:<span>20</span>
+                                已通过:<span>10</span>
+                                未上传:<span>4</span>
+                                已上传:<span>6</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="album_item backimg" style="background-image: url(../../res/img/storesaler/9.png)">
+                    <div class="createtime">
+                        <p class="day">24</p>
+                        <p class="month">10月</p>
+                    </div>
+                    <div class="infos">
+                        <div class="veri_center">
+                            <p class="name">名称一名称一名称一名称一</p>
+                            <p class="statics">
+                                未通过:<span>20</span>
+                                已通过:<span>10</span>
+                                未上传:<span>4</span>
+                                已上传:<span>6</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="album_item backimg" style="background-image: url(../../res/img/storesaler/1.png)">
+                    <div class="createtime">
+                        <p class="day">24</p>
+                        <p class="month">10月</p>
+                    </div>
+                    <div class="infos">
+                        <div class="veri_center">
+                            <p class="name">名称一名称一名称一名称一</p>
+                            <p class="statics">
+                                <strong>未通过:</strong><span>20</span>
+                                <strong>已通过:</strong><span>10</span>
+                                <strong>未上传:</strong><span>4</span>
+                                <strong>已上传:</strong><span>6</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="album_item backimg" style="background-image: url(../../res/img/storesaler/6.png)">
+                    <div class="createtime">
+                        <p class="day">24</p>
+                        <p class="month">10月</p>
+                    </div>
+                    <div class="infos">
+                        <div class="veri_center">
+                            <p class="name">名称一名称一名称一名称一</p>
+                            <p class="statics">
+                                <strong>未通过:</strong><span>20</span>
+                                <strong>已通过:</strong><span>10</span>
+                                <strong>未上传:</strong><span>4</span>
+                                <strong>已上传:</strong><span>6</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="album_item backimg" style="background-image: url(../../res/img/storesaler/7.png)">
+                    <div class="createtime">
+                        <p class="day">24</p>
+                        <p class="month">10月</p>
+                    </div>
+                    <div class="infos">
+                        <div class="veri_center">
+                            <p class="name">名称一名称一名称一名称一</p>
+                            <p class="statics">
+                                <strong>未通过:</strong><span>20</span>
+                                <strong>已通过:</strong><span>10</span>
+                                <strong>未上传:</strong><span>4</span>
+                                <strong>已上传:</strong><span>6</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</body>
+</html>

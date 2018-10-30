@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<MoblieView>
+  <EntityName>OA_t_ccsqb a INNER JOIN rs_v_zbryxxcx rs ON a.ryid = rs.id</EntityName>
+  <fields>
+    <MobileField>
+      <Field>a.djh</Field>
+      <Name>单据号:</Name>
+      <Width>0</Width>
+    </MobileField>
+    <MobileField>
+      <Field>rs.xm+'('+a.bmmc+')'</Field>
+      <Name>申请人</Name>
+      <Width>0</Width>
+    </MobileField>
+	<MobileField>
+      <Field>a.sxry</Field>
+      <Name>出差人员</Name>
+      <Width>0</Width>
+    </MobileField>
+    <MobileField>
+      <Field>Isnull(a.ccksrq, 0)</Field>
+      <Name>开始时间</Name>
+      <Width>0</Width>
+    </MobileField>
+    <MobileField>
+      <Field>Isnull(a.ccjsrq, 0)</Field>
+      <Name>结束时间</Name>
+      <Width>0</Width>
+    </MobileField>
+    <MobileField>
+      <Field>a.ccts</Field>
+      <Name>出差天数</Name>
+      <Width>0</Width>
+    </MobileField>
+	<MobileField>
+      <Field>a.ccsy</Field>
+      <Name>出差事宜</Name>
+      <Width>0</Width>
+    </MobileField>
+	<MobileField>
+      <Field>a.ccxc</Field>
+      <Name>行程</Name>
+      <Width>0</Width>
+    </MobileField>
+  </fields>
+  <mkey>a.id</mkey>
+</MoblieView>
+：
+
+SELECT rs.xm,
+       Isnull(a.shbs, 0)                                      shbs,
+       Isnull(a.ispc, 0)                                      ispc,
+       rs.xb,
+       Isnull(a.kssj, 0)                                      kssj,
+       Isnull(a.jssj, 0)                                      jssj,
+       CONVERT(VARCHAR(10), Isnull(a.ccksrq, Getdate()), 120) AS ccksrq,
+       CONVERT(VARCHAR(10), Isnull(a.ccjsrq, Getdate()), 120) AS ccjsrq,
+       Isnull(a.tcksbr, 0)                                    tcksbr,
+       Isnull(a.tckslu, 0)                                    tckslu,
+       Isnull(a.tckssp, 0)                                    tckssp,
+       Isnull(a.tcjsbr, 0)                                    tcjsbr,
+       Isnull(a.tcjslu, 0)                                    tcjslu,
+       Isnull(a.tcjssp, 0)                                    tcjssp,
+       a.tzid,
+       a.id,
+       a.bmdm,
+       a.ryid,
+       Convert(varchar(10),a.rq,120) as rq,
+       a.jtgj,
+       a.ccsy,
+       a.ccxc,
+       a.sxry,
+       a.bz,
+       a.jbr,
+       a.shr,
+       a.shrq,
+       a.bxbs,
+       a.ccts,
+       a.zdr,
+       a.zdrq,
+       a.kqts,
+       a.bmid,
+       a.bmmc,
+       a.djh,
+       a.lxdh,
+       a.jddz,
+       a.jdmc,
+       a.bxid,
+       a.tcksrq,
+       a.tcjsrq,
+       a.tccs,
+       a.istc,
+       a.cljg,
+       a.del,a.cljg,isnull(a.sqflowid,226) as sqflowid,
+	   rs.zwmc
+FROM   OA_t_ccsqb a
+       INNER JOIN rs_v_zbryxxcx rs
+         ON a.ryid = rs.id
+WHERE  a.id = '@MyDJid' 

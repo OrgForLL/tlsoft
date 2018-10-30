@@ -1,0 +1,14 @@
+索引超出范围。必须为非负值并小于集合大小。
+参数名: startIndexSystem.ArgumentOutOfRangeException: 索引超出范围。必须为非负值并小于集合大小。
+参数名: startIndex
+   在 nrWebClass.clsJsonHelper.SetjSon(String initJson)
+   在 nrWebClass.clsJsonHelper.CreateJsonHelper(String strJson)
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.SynchronousDate.GetAllInfo(String JsonStr) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 337
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.SynchronousDate.pullDatas1(String startDate, String endDate) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 185
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.SynchronousDate.tbData(String ctrl, String userid, String username, String date, String ids) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 70
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 575
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

@@ -1,0 +1,447 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>店长销售神器</title>
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
+            font-size: 14px;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .top {
+            width: 100%;
+            height: 90px;
+            /*background-image:-webkit-linear-gradient(top,#141414,#000);/*272b2e*/
+            background-image: linear-gradient(90deg,#141414,#272727);
+            background-image: -webkit-linear-gradient(90deg,#141414,#272727);
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-bottom: 1px solid #cbcbcb;
+            padding: 12px 0px 12px 20px;
+            box-sizing: border-box;
+            color: #fff;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+            .top div {
+                float: left;
+            }
+
+        .headimg {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #ebebeb;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            background-image: url(img/vip5.jpg);
+            background-size: cover;
+        }
+
+        .top img {
+            width: 100%;
+            height: auto;
+        }
+
+        .userinfo {
+            margin-left: 15px;
+            height: 64px;
+            line-height: 23px;
+            border-left: 2px solid #fff;
+            padding-left: 15px;
+        }
+
+        .wxnick {
+            letter-spacing: 2px;
+            font-size: 1.2em;
+        }
+
+        .wxnums {
+            font-size: 1em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            line-height: 20px;
+        }
+
+        .floatfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .icons {
+            width: 100%;
+            margin-top: 80px;
+            margin-bottom: 75px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .rows {
+            position: relative;
+            list-style: none;
+            color: #808080;
+            font-size: 1.1em;
+            margin-top: 30px;
+        }
+
+            .rows li {
+                position: relative;
+                width: 33.3333%;
+                float: left;
+                text-align: center;
+                cursor: pointer;
+                font-size: 0.9em;
+                margin-top: 30px;
+            }
+
+                .rows li img {
+                    width: 35%;
+                    height: auto;
+                }
+
+        .bottomnav {
+            height: 60px;
+            background-color: #f8f8f8;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            border-top: 1px solid #cbcbcb;
+        }
+
+        .navul {
+            list-style: none;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+
+            .navul li {
+                width: 25%;
+                float: left;
+                text-align: center;
+                height: 40px;
+                color: #989898;
+                cursor: pointer;
+            }
+
+            .navul i {
+                display: block;
+                font-size: 1.5em;
+            }
+
+            .navul p {
+                font-weight: 400;
+                font-size: 1em;
+                line-height: 24px;
+            }
+
+        #selected {
+            color: #272b2e;
+        }
+
+        .rightset {
+            position: absolute;
+            right: 15px;
+            top: 0;
+            font-size: 1.8em;
+            line-height: 90px;
+            vertical-align: middle;
+        }
+
+        .cube3d {
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        /*loader css*/
+        .mask {
+            color: #fff;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            font-size: 1em;
+            text-align: center;
+            display: none;
+        }
+
+        .qrmask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            background: #2d3132;  
+            display:none;                      
+        }
+
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 80px;
+            margin-top: -50px;
+            margin-left: -100px;
+            background-color: #272b2e;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            box-shadow: 0px 0px 1px #555;
+        }
+
+        #loadtext {
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .gray {
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+            filter: gray;
+        }
+
+        .qrcon {
+            background: #fff;
+            border-radius: 4px;
+            width: 80%;
+            margin: 0 auto;            
+            position: relative;            
+            top:50%;        
+            margin-top:-195px;    
+            padding:20px;
+            max-width:480px;   
+            box-sizing:border-box;  
+            overflow:hidden;                   
+        }
+            .qrcon .headimg {
+                float:left;
+                border-radius:6px;                
+            }
+            .qrcon .wxnick {
+                letter-spacing:0px;
+                font-weight:bold;
+                margin-left:74px;
+            }
+            .qrcon img {
+                width:96%;
+                height:auto; 
+                max-width:240px;                               
+            }
+        .area {
+            font-size:14px;
+            color:#808080;
+            font-weight:normal;
+            line-height:40px;
+        }
+        .qrtxt {
+            margin-top:100px;
+            width:100%;
+            text-align:center;
+            position:absolute;
+            left:0;
+            bottom:10px;
+            color:#808080;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="headimg"></div>
+            <div class="userinfo">
+                <p class="wxnick">李兴(店长)</p>
+                <p class="wxnums">电 话：15260825009</p>
+                <p class="wxnums">邮 箱：elilee@126.com</p>
+            </div>
+            <div class="rightset"><i class="fa fa-edit"></i></div>
+        </div>
+        <div class="icons">
+            <ul class="rows floatfix">
+                <li onclick="menuJump('school')">
+                    <img src="img/school.png" />
+                    <p>微学院</p>
+                </li>
+                <li class="gray" onclick="menuJump('xx')">
+                    <img src="img/gifticon.png" />
+                    <p>发礼券</p>
+                </li>
+                <li onclick="menuJump('yqhy')">
+                    <img src="img/qrcodeicon.png" />
+                    <p>邀请会员</p>
+                </li>
+                <li class="gray" onclick="menuJump('xx')">
+                    <img src="img/fpgw.png" />
+                    <p>分配顾问</p>
+                </li>
+                <li class="gray" onclick="menuJump('xx')">
+                    <img src="img/dpph.png" />
+                    <p>店铺业绩排行</p>
+                </li>
+                <li onclick="menuJump('spfx')">
+                    <img src="img/spglicon.png" />
+                    <p>商品分析</p>
+                </li>
+                <li class="gray" onclick="menuJump('xx')">
+                    <img src="img/zxdh.png" />
+                    <p>在线订货</p>
+                </li>
+                <li class="gray" onclick="menuJump('xx')">
+                    <img src="img/zxbh.png" />
+                    <p>在线补货</p>
+                </li>
+                <li class="gray" onclick="menuJump('xx')">
+                    <img src="img/yhxsicon.png" />
+                    <p>顾客心声</p>
+                </li>
+                <li onclick="menuJump('xx')">
+                    <img src="img/more.png" />
+                    <p>更多功能,敬请期待</p>
+                </li>
+            </ul>
+        </div>
+        <div class="bottomnav">
+            <ul class="navul floatfix">
+                <li onclick="switchMenu(0)">
+                    <i class="fa fa-comments"></i>
+                    <p>消 息</p>
+                </li>
+                <li onclick="switchMenu(1)">
+                    <i class="fa fa-users"></i>
+                    <p>客 户</p>
+                </li>
+                <li onclick="switchMenu(2)">
+                    <i class="fa fa-retweet"></i>
+                    <p>引 流</p>
+                </li>
+                <li onclick="switchMenu(3)" id="selected">
+                    <i class="fa fa-user"></i>
+                    <p>我 的</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mask">
+        <div class="loader">
+            <div>
+                <i class="fa fa-2x fa-warning (alias)"></i>
+            </div>
+            <p id="loadtext">正在开发中...</p>
+        </div>
+    </div>
+    <div class="qrmask">
+        <div class="qrcon">
+            <div class="headimg"></div>
+            <p class="wxnick">李兴(店长)</p>
+            <p class="wxnick area">门店：解放路嘉润洪直营店</p>
+            <p style="text-align:center;margin:10px 0 30px 0;"><img src="img/lilangcode.jpg" /></p>
+            <div class="qrtxt">扫一扫上面的二维码图案<br/>就可以关注我啦！</div>
+        </div>        
+    </div>
+    <script type="text/javascript" src="js/jquery.js"></script>    
+    <script type='text/javascript' src='js/fastclick.min.js'></script>
+    <script type="text/javascript">
+        $(function () {
+            FastClick.attach(document.body);
+        });
+
+        function switchMenu(order) {
+            //$(".navul li[id=selected]").removeAttr("id");
+            //$(".navul li").eq(order).attr("id", "selected");
+
+            switch (order) {
+                case 0:
+                    window.location.href = "message.html";
+                    break;
+                case 1:
+                    window.location.href = "viplist.html";
+                    break;
+                case 2:
+                    window.location.href = "weschool2.html";
+                    break;
+                case 3:
+                    window.location.href = "usercenter.html";
+                    break;
+                default:
+                    showLoader("warn", "正在开发中...");
+                    setTimeout(function () {
+                        $(".mask").hide();
+                    }, 1000);
+                    break;
+            }
+        }
+
+        function showLoader(type, txt) {
+            switch (type) {
+                case "loading":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-spinner fa-pulse");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "successed":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-check");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "error":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-close (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "warn":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-warning (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+            }
+        }
+
+        function menuJump(mname) {
+            switch (mname) {
+                case "school":
+                    window.location.href = "weschool.html";
+                    break;
+                case "spfx":
+                    window.location.href = "http://tm.lilanz.com/retail/ci/clothesInfos.aspx";
+                    break;
+                case "yqhy":
+                    $(".qrmask").show();
+                    break;
+                default:
+                    showLoader("warn", "正在开发中...");
+                    setTimeout(function () {
+                        $(".mask").hide();
+                    }, 1500);
+            }
+        }
+
+        $(".qrmask").click(function () {
+            $(".qrmask").fadeOut(200);
+        });
+    </script>
+</body>
+</html>

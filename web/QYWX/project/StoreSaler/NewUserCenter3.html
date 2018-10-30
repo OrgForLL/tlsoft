@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <style type="text/css">
+        #page-index {
+            max-width: 600px;
+            position: relative;
+            margin: 0 auto;
+            height: 100%;
+        }
+
+        .page {
+            padding: 0;
+        }
+
+        .page-head {
+            height: 181px;            
+            box-sizing: border-box;
+            position: relative;
+            background-color: #272b2e;
+            overflow: hidden;
+            padding: 0 6px;
+            z-index:2000;
+        }
+        .out-card {
+            width:100%;
+            height:100%;
+            border-bottom: 1px solid #140114;
+            padding-top:20px;
+        }
+        .card {
+            background-color: #ccc;
+            border-top-left-radius:8px;
+            border-top-right-radius:8px;
+            width: 96%;
+            height: 100%;
+            margin: 0 auto;
+            /*background: linear-gradient(90deg,#272b2e 0%,#555 100%);
+            background: -webkit-linear-gradient(90deg,#272b2e 0%,#555 100%);*/
+            /*background: linear-gradient(45deg,#5b636a 0%,#3c4246 100%);
+            background: -webkit-linear-gradient(45deg,#5b636a 0%,#3c4246 100%);*/
+            background: linear-gradient(45deg,#ea5868 0%,#e9507c 100%);
+            background: -webkit-linear-gradient(45deg,#ea5868 0%,#e9507c 100%); 
+            padding-top:15px; 
+            position:relative;                       
+        }
+
+        .headimg {
+            width:54px;
+            height:54px;
+            border-radius:50%;
+            overflow:hidden;
+            border:2px solid #fff;
+            margin-left:15px;
+        }
+
+            .headimg img {
+                width:100%;
+                height:100%;
+            }
+        .navs {
+            position: absolute;
+            top: 180px;
+            left: 0;
+            right: 0;
+            bottom: 26px;
+            background: #272b2e;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
+            z-index: 200;
+        }
+
+        .navul {
+            list-style: none;
+            color: #ccc;
+        }
+
+            .navul li {
+                width: 50%;
+                float: left;
+                position: relative;
+                height: 80px;
+                text-align: center;
+                border-right: 1px solid #333;
+                border-bottom: 1px solid #333;
+                box-sizing: border-box;
+                background-color: #272b2e;
+            }
+
+                .navul li:nth-child(2n) {
+                    border-right: none;
+                }
+
+                .navul li:hover {
+                    background-color: rgba(0,0,0,0.4);
+                }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            float: left;
+        }
+
+        .icontext {
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            padding: 0 5px;
+            font-size: 1.1em;
+        }
+
+        .item {
+            position: relative;
+            top: 20px;
+            display: inline-block;
+        }
+
+        .copy {
+            color: #aaa;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9em;
+            height: 27px;
+            line-height: 30px;
+            z-index: 100;
+            background-color: #272b2e;
+        }
+        .cardinfo {
+            width:100%;
+            height:56px;
+            background:rgba(0,0,0,.2);
+            margin-top:20px;
+            padding:5px 0;
+        }
+        .userinfo {
+            position:absolute;
+            top:15px;
+            width:100%;
+            height:54px;
+            padding-left:79px;
+            color:#fff;
+            font-weight:bold;                        
+        }
+        .userinfo p{
+            line-height:27px;
+        }
+
+        .cardinfo ul li {
+            width:33.33%;
+            float:left;
+            color:#f0f0f0;
+            text-align:center;
+        }
+            .cardinfo ul li > p {
+                line-height:23px;
+                border-right:1px solid rgba(255,255,255,.15);
+            }
+            .cardinfo ul li p:first-child {
+                font-size:1.1em;                
+            }
+            .cardinfo ul li p:last-child {
+                font-weight:bold;                                
+            }
+            .cardinfo ul li:last-child p {
+                border-right:none;
+            }
+    </style>
+</head>
+<body>
+    <div id="main" class="wrap-page">
+        <!--主页-->
+        <section id="page-index" class="page">
+            <div class="page-head">
+                <div class="out-card">
+                    <div class="card">
+                        <div class="headimg">
+                            <img src="../../res/img/storesaler/headimg.jpg" alt="" />
+                        </div>
+                        <div class="userinfo">
+                            <p style="font-size:1.2em;">李家的风</p>
+                            <p style="font-size:0.9em;"><i class="fa fa-map-marker"></i> 福建 泉州</p>
+                        </div>
+                        <div class="cardinfo">
+                            <ul>
+                                <li>
+                                    <p>2038</p>
+                                    <p>积 分</p>
+                                </li>
+                                <li>
+                                    <p>3058</p>
+                                    <p>魅力值</p>
+                                </li>
+                                <li>
+                                    <p>微信会员</p>
+                                    <p>等 级</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="navs floatfix">
+                <ul class="navul">
+                    <li>
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-my.png" alt="" />
+                            <span class="icontext">我的专属</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-support.png" alt="" />
+                            <span class="icontext">投诉建议</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-points.png" alt="" />
+                            <span class="icontext">积分查询</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-star.png" alt="" />
+                            <span class="icontext">我的收藏</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-message.png" alt="" />
+                            <span class="icontext">消息中心</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-myvip.png" alt="" />
+                            <span class="icontext">我的卡券</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item floatfix">
+                            <img class="icon" src="../../res/img/storesaler/f-task.png" alt="" />
+                            <span class="icontext">任务系统</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="copy">&copy;2016 利郎信息技术部</div>
+        </section>
+    </div>
+
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/StoreSaler/fastclick.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            FastClick.attach(document.body);
+            var UA = navigator.userAgent;
+            if (UA.indexOf("iPhone") == -1) {
+                $(".blurbg").hide();
+            }
+        });
+    </script>
+</body>
+</html>

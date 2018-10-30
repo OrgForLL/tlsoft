@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" type="text/css" href="./css/LeePageSlider.de3cc2dc.css" />
+    <link rel="stylesheet" type="text/css" href="./css/mobilebi.3f705155.css" />
+    <link rel="stylesheet" type="text/css" href="./css/loading.9cd153c9.css" />
+    <link rel="stylesheet" type="text/css" href="./css/extendstyle.173b212b.css" />
+    <title>数据连接未来</title>
+</head>
+
+<body>
+    <!--全局遮罩-->
+    <div class="loading_mask">
+        <div class="loading_content">
+            <div class="circles">
+                <div class="circle-container color1 circle-container-1"><span class="circle"></span></div>
+                <div class="circle-container color2 circle-container-2"><span class="circle"></span></div>
+                <div class="circle-container color3 circle-container-3"><span class="circle"></span></div>
+                <div class="circle-container color1 circle-container-4"><span class="circle"></span></div>
+                <div class="circle-container color2 circle-container-5"><span class="circle"></span></div>
+                <div class="circle-container color3 circle-container-6"><span class="circle"></span></div>
+                <div class="circle-container color1 circle-container-7"><span class="circle"></span></div>
+                <div class="circle-container color2 circle-container-8"><span class="circle"></span></div>
+                <div class="circle-container color3 circle-container-9"><span class="circle"></span></div>
+                <div class="circle-container color1 circle-container-10"><span class="circle"></span></div>
+                <div class="circle-container color2 circle-container-11"><span class="circle"></span></div>
+                <div class="circle-container color3 circle-container-12"><span class="circle"></span></div>
+                <div class="circle-container color1 circle-container-13"><span class="circle"></span></div>
+                <div class="circle-container color2 circle-container-14"><span class="circle"></span></div>
+                <div class="circle-container color3 circle-container-15"><span class="circle"></span></div>
+            </div>
+            <p class="loading_text">正在加载您的订阅 [ <span id="currentModule"></span> / <span id="totalModules"></span> ]
+            </p>
+        </div>
+    </div>
+    </div>
+    <div class="global_mask">
+        <div class="mask_content">
+            <img class="gif" src="./img/my_loading.gif" />
+            <p class="status">加载中..</p>
+        </div>
+    </div>
+    <div class="wrap-page">
+        <div class="page page-not-footer" id="app"></div>
+        <!--添加页-->
+        <div class="page page-not-footer page-bot" id="chartPanels">
+            <div class="panel_mask"></div>
+            <div class="panel_wrap">
+                <div class="title">请从下方列表点击添加<i class="iconfont icon-guanbi"></i></div>
+                <ul class="chartlist">
+                </ul>
+                <div class="no-result center-translate">对不起，您暂无权限....</div>
+            </div>
+        </div>
+        <!--更多应用页-->
+        <div class="page page-not-footer page-bot" id="moreapps">
+            <div class="more_mask"></div>
+            <div class="more_top">
+                <div class="headbanner"></div>
+                <div class="headbanner"></div>
+            </div>
+            <div class="more_bot">
+                <p class="title"><span>报表查询</span></p>
+                <div class="app_grid"></div>
+            </div>
+        </div>
+        <div id="particles-js"></div>
+        <div class="app-bottom">数据连接未来 LILANZ</div>
+    </div>
+    <div class="footer">
+        <a href="javascript:;" class="btn btn_add">添 加 <i class="iconfont icon-tianjia"></i></a>
+        <a href="javascript:;" class="btn btn_more">更 多 <i class="iconfont icon-xiangshang"></i></a>
+    </div>
+    <script type="text/html" id="tpl_goods10">
+<div class="bi_item" id="goods10">
+    <div class="title top_head">
+        <span>单品销售排行TOP10</span>
+        <div class="tools">
+            <i data-btn="delete" class="iconfont icon-shanchu"></i>
+            <i data-btn="refresh" class="iconfont icon-shuaxin"></i>
+        </div>
+    </div>
+    <div class="chart"></div>
+    <div class="datas">
+        <p class="title"><span>展 开</span><i class="iconfont icon-xiangshang"></i></p>
+        <div class="table_wrap">
+            <div class="ht"></div>
+            <div class="bt"></div>
+        </div>
+    </div>
+    <div class="mask">
+        <div class="mask_content">
+            <img class="gif" src="./img/my_loading.gif">
+            <p class="status">加载中..</p>
+        </div>
+    </div>
+    <script type="text/javascript">$(function(){var t="goods10",a=$("#"+t),e=a.find(".title.top_head > span").text(),i=new MobileChart({chartID:t,chartName:e,tplName:"tpl_"+t,$container:a});echartConfigs[t]=i;var n={columns:[{name:"sphh",cname:"货号",width:"100px"},{name:"spmc",cname:"品名",width:"120px"},{name:"sl",cname:"销量",width:"80px"}]};i.tableStruct=n,i.datasQuote=function(){this.tableDatas=this.originalDatas.info,this.chartDatas=this.originalDatas.info},i.createChart=function(){this.showLoading("正在生成图表..");for(var t=[],a=[],e=this.chartDatas,i=0;i<e.length;i++)i<6&&t.push(e[i].sphh),a.push({name:e[i].sphh,value:parseInt(e[i].sl)});var n={tooltip:{trigger:"item",formatter:"{a} <br/>{b} : {c} ({d}%)"},legend:{x:"center",data:t},series:[{name:"销量",type:"pie",radius:"55%",center:["50%","60%"],data:a}]},s=echarts.init(this.$container.find(".chart")[0]);return this.echarts.main=s,new Promise(function(t,a){setTimeout(function(){s.setOption(n),t()},200)})},i.init(i.api,{ctrl:"sphhranking"})});</script>
+</div>
+
+</script>
+    <script type="text/html" id="tpl_store20">
+<div class="bi_item" id="store20">
+    <div class="title top_head">
+        <span>本月单店排名TOP20</span>
+        <div class="tools">
+            <i data-btn="delete" class="iconfont icon-shanchu"></i>
+            <i data-btn="refresh" class="iconfont icon-shuaxin"></i>
+        </div>
+    </div>
+    <div class="chart"></div>
+    <div class="datas">
+        <p class="title"><span>展 开</span><i class="iconfont icon-xiangshang"></i></p>
+        <div class="table_wrap">
+            <div class="ht"></div>
+            <div class="bt"></div>
+        </div>
+    </div>
+    <div class="mask">
+        <div class="mask_content">
+            <img class="gif" src="./img/my_loading.gif">
+            <p class="status">加载中..</p>
+        </div>
+    </div>
+    <script type="text/javascript">$(function(){var t="store20",a=$("#"+t),e=a.find(".title.top_head > span").text(),n=new MobileChart({chartID:t,chartName:e,tplName:"tpl_"+t,$container:a});echartConfigs[t]=n;var i={columns:[{name:"mdmc",cname:"店名",width:"180px"},{name:"sjmj",cname:"面积",width:"80px"},{name:"je",cname:"本月销售额",width:"120px",formatMoney:!0},{name:"lastyear",cname:"上年本月",width:"120px",formatMoney:!0}],datas:["mdid"]};n.tableStruct=i,n.datasQuote=function(){this.tableDatas=this.originalDatas.info,this.chartDatas=this.originalDatas.info},n.createChart=function(){this.showLoading("正在生成图表..");for(var t=[],a=[],e=this.chartDatas,n=0;n<e.length;n++)t.push(e[n].mdmc),a.push(parseInt(e[n].je)/1e4);var i={tooltip:{trigger:"axis",formatter:"{b}<br />{a}：{c}万"},grid:{y:50,x2:20},dataZoom:{type:"slider",xAxisIndex:[0],handleIcon:"M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z",handleSize:"80%",handleStyle:{color:"#fff",shadowBlur:3,shadowColor:"rgba(0, 0, 0, 0.6)",shadowOffsetX:2,shadowOffsetY:2},start:0,end:50},legend:{x:"right",data:["本月销售额"],padding:[10,10]},xAxis:[{type:"category",data:t}],yAxis:{type:"value",name:"单位(万元)"},series:[{name:"本月销售额",type:"bar",data:a}]},r=echarts.init(this.$container.find(".chart")[0]);return this.echarts.main=r,new Promise(function(t,a){setTimeout(function(){r.setOption(i),t()},200)})},n.init(n.api,{ctrl:"storesranking"})});</script>
+</div>
+
+</script>
+    <script type="text/html" id="tpl_saleMap">
+<div class="bi_item" id="saleMap">
+    <div class="title top_head">
+        <span>省份销售额地图分布</span>
+        <div class="tools">
+            <i data-btn="delete" class="iconfont icon-shanchu"></i>
+            <i data-btn="refresh" class="iconfont icon-shuaxin"></i>
+        </div>
+    </div>
+    <div class="chart"></div>
+    <div class="datas">
+        <p class="title"><span>展 开</span><i class="iconfont icon-xiangshang"></i></p>
+        <div class="table_wrap">
+            <div class="ht"></div>
+            <div class="bt"></div>
+        </div>
+    </div>
+    <div class="mask">
+        <div class="mask_content">
+            <img class="gif" src="./img/my_loading.gif">
+            <p class="status">加载中..</p>
+        </div>
+    </div>
+    <script type="text/javascript">$(function(){var t="saleMap",a=$("#"+t),e=a.find(".title.top_head > span").text(),n=new MobileChart({chartID:t,chartName:e,tplName:"tpl_"+t,$container:a});echartConfigs[t]=n;var i={columns:[{name:"pro",cname:"省份",width:"80px"},{name:"je",cname:"销售额",width:"120px",formatMoney:!0}]};n.tableStruct=i,n.datasQuote=function(){this.tableDatas=this.originalDatas.info,this.chartDatas=this.originalDatas.info},n.createChart=function(){console.log("正在生成图表.."),this.showLoading("正在生成图表..");var t=[],a=0,e=null,n=this.chartDatas;e={"黑龙":"黑龙江","内蒙":"内蒙古"};for(var i=0;i<n.length;i++)e[n[i].pro]&&(n[i].pro=e[n[i].pro]),n[i].je>a&&(a=n[i].je),t.push({name:n[i].pro,value:parseInt(n[i].je)});var o={tooltip:{trigger:"item"},dataRange:{min:0,max:a,x:"left",y:"bottom",text:["高","低"],calculable:!0},series:[{name:"销售额",type:"map",mapType:"china",roam:!1,itemStyle:{normal:{label:{show:!0},z:1},emphasis:{label:{show:!0},z:1},z:1},data:t}]},r=echarts.init(this.$container.find(".chart")[0]);this.echarts.main=r;var s=this;return new Promise(function(t,a){setTimeout(function(){s.getEchartsMaps().then(function(){r.setOption(o),t()})},200)})},n.init(n.api,{ctrl:"provincesale"})});</script>
+</div>
+
+</script>
+    <script type="text/html" id="tpl_targetCompare">
+<div class="bi_item" id="targetCompare">
+    <div class="title top_head">
+        <span>本月实际目标销售对照</span>
+        <div class="tools">
+            <i data-btn="delete" class="iconfont icon-shanchu"></i>
+            <i data-btn="refresh" class="iconfont icon-shuaxin"></i>
+        </div>
+    </div>
+    <div class="chart">
+        <div class="ctop">
+            <div class="gauge g1">
+                <div></div>
+                <p class="sum"><span>--</span> / <span>--</span></p>
+            </div>
+            <div class="gauge g2">
+                <div></div>
+                <p class="sum"><span>--</span> / <span>--</span></p>
+            </div>
+        </div>
+        <div class="cbot"></div>
+    </div>
+    <div class="datas">
+        <p class="title"><span>展 开</span><i class="iconfont icon-xiangshang"></i></p>
+        <div class="table_wrap">
+            <div class="ht"></div>
+            <div class="bt"></div>
+        </div>
+    </div>
+    <div class="mask">
+        <div class="mask_content">
+            <img class="gif" src="./img/my_loading.gif">
+            <p class="status">加载中..</p>
+        </div>
+    </div>
+    <script type="text/javascript">$(function(){function t(){var t=new Date;return t.setDate(1),t}function e(){var t=new Date,e=t.getMonth(),a=++e,i=new Date(t.getFullYear(),a,1);return new Date(i-864e5)}var a="targetCompare",i=$("#"+a),n=i.find(".title.top_head > span").text(),s=new MobileChart({chartID:a,chartName:n,tplName:"tpl_"+a,$container:i});echartConfigs[a]=s;var o={columns:[{name:"mdmc",cname:"贸易公司",width:"150px"},{name:"xsje",cname:"实际销售额",width:"120px",formatMoney:!0},{name:"mbje",cname:"目标金额",width:"120px",formatMoney:!0},{name:"wcbl",cname:"完成比率(%)",width:"100px",formatMoney:!0},{name:"qnje",cname:"去年同期销售",width:"120px",formatMoney:!0},{name:"tqzzl",cname:"同期增长率(%)",width:"100px"}],datas:["mdid"]};s.tableStruct=o,s.datasQuote=function(){this.tableDatas=this.originalDatas.list,this.chartDatas=this.originalDatas.list};var r="http://tm.lilanz.com/QYWX/project/StoreSaler/saleTargetCore2Demo.ashx";s.getDatas=function(){var a=this;return console.log("正在请求数据.."),this.showLoading("正在统计数据,请稍候.."),new Promise(function(i,n){var s={ctrl:"LoadData",filters:JSON.stringify({ksrq:t().format("yyyy-MM-dd"),jsrq:e().format("yyyy-MM-dd")})};setTimeout(function(){$.ajax({url:r,type:"POST",dataType:"text",contentType:"application/x-www-form-urlencoded; charset=UTF-8",timeout:2e4,data:s,error:function(t,e,a){console.log("获取数据失败，请稍后重试！"+t.status+"|"+t.statusText),n("获取数据失败，请稍后重试！"+t.status+"|"+t.statusText)},success:function(t){var e=JSON.parse(t);a.originalDatas=e,a.datasQuote(),a.api=r,a.params=s,a.$container.find(".chart .g1 .sum span:nth-child(1)").text((e.Sum.SumXsje/1e4).toFixed(2)+"万"),a.$container.find(".chart .g1 .sum span:nth-child(2)").text((e.Sum.SumMbje/1e4).toFixed(2)+"万"),a.$container.find(".chart .g2 .sum span:nth-child(1)").text((e.Sum.SumXsje/1e4).toFixed(2)+"万"),a.$container.find(".chart .g2 .sum span:nth-child(2)").text((e.Sum.SumQnje/1e4).toFixed(2)+"万"),i()},z:1})},100)})},s.createChart=function(){this.showLoading("正在生成图表..");var t={title:{show:!0,textStyle:{fontSize:15,fontWeight:"bolder",color:"#fff"},x:"center",y:"bottom",text:"完成比率(总)"},series:[{name:"业务指标",type:"gauge",detail:{formatter:"{value}%",textStyle:{fontSize:16,color:"#fff"},z:1},axisLine:{show:!0,lineStyle:{width:5},z:1},splitLine:{show:!0,length:10,lineStyle:{color:"#2e8398",width:2,type:"solid"},z:1},axisTick:{show:!0,length:5,lineStyle:{width:1},z:1},axisLabel:{show:!1},splitNumber:4,pointer:{color:"#EB7D64",length:"70%",width:3},data:[{value:this.originalDatas.Sum.SumWcbl}]}]},e=echarts.init(this.$container.find(".chart .gauge.g1>div")[0]);e.setOption(t),this.echarts.g1=e,e=echarts.init(this.$container.find(".chart .gauge.g2>div")[0]),t.title.text="同期增长率(总)",t.series[0].data[0].value=this.originalDatas.Sum.SumTqzzl,e.setOption(t),this.echarts.g2=e;for(var a=[],i=[],n=[],s=[],o=this.chartDatas,r=0;r<o.length;r++){var h=o[r].mdmc;h=h.length>4?h.substring(0,4):h,a.push(h);var l=o[r].xsje,c=o[r].mbje,d=o[r].qnje;l=""==l?0:l,c=""==c?0:c,d=""==d?0:d,i.push(l),n.push(c),s.push(d)}return t={tooltip:{trigger:"axis"},legend:{top:5,data:["实际销售额","目标金额","去年同期销售"]},dataZoom:{type:"slider",yAxisIndex:[0,1,2],handleIcon:"M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z",handleSize:"80%",handleStyle:{color:"#fff",shadowBlur:3,shadowColor:"rgba(0, 0, 0, 0.6)",shadowOffsetX:2,shadowOffsetY:2},start:60,end:100},grid:{x:50,y:40,y2:30,x2:70},yAxis:[{type:"category",data:a,axisLabel:{rotate:45},z:1},{type:"category",axisLine:{show:!1},axisTick:{show:!1},axisLabel:{show:!1},splitArea:{show:!1},splitLine:{show:!1},data:a},{type:"category",axisLine:{show:!1},axisTick:{show:!1},axisLabel:{show:!1},splitArea:{show:!1},splitLine:{show:!1},data:a}],xAxis:[{type:"value",axisLabel:{interval:0,rotate:45,formatter:function(t,e){return t/1e4+"万"},z:1},z:1}],series:[{name:"实际销售额",type:"bar",yAxisIndex:0,itemStyle:{normal:{color:"rgba(193,35,43,0.8)"},z:1},data:i},{name:"目标金额",type:"bar",yAxisIndex:1,itemStyle:{normal:{color:"rgba(181,195,52,0.8)"},z:1},data:n},{name:"去年同期销售",type:"bar",yAxisIndex:2,itemStyle:{normal:{color:"rgba(252,206,16,0.8)"},z:1},data:s}]},(e=echarts.init(this.$container.find(".chart .cbot")[0])).setOption(t),this.echarts.main=e,new Promise(function(t,e){setTimeout(function(){t()},200)})},s.init()});</script>
+</div>
+
+</script>
+    <script type="text/html" id="tpl_saleCount">
+<div class="bi_item" id="saleCount">
+    <div class="title top_head">
+        <span>近一个月零售综合汇总</span>
+        <div class="tools">
+            <i data-btn="delete" class="iconfont icon-shanchu"></i>
+            <i data-btn="refresh" class="iconfont icon-shuaxin"></i>
+        </div>
+    </div>
+    <div class="chart"></div>
+    <div class="datas">
+        <p class="title"><span>展 开</span><i class="iconfont icon-xiangshang"></i></p>
+        <div class="table_wrap">
+            <div class="ht"></div>
+            <div class="bt"></div>
+        </div>
+    </div>
+    <div class="mask">
+        <div class="mask_content">
+            <img class="gif" src="./img/my_loading.gif">
+            <p class="status">加载中..</p>
+        </div>
+    </div>
+    <script type="text/javascript">$(function(){var a="saleCount",t=$("#"+a),e=t.find(".title.top_head > span").text(),i=new MobileChart({chartID:a,chartName:e,tplName:"tpl_"+a,$container:t});echartConfigs[a]=i;var n={columns:[{name:"khjc",cname:"贸易公司",width:"160px"},{name:"sl",cname:"销售数",width:"100px"},{name:"je",cname:"销售额",width:"120px",formatMoney:!0}],datas:["khid"]};i.tableStruct=n,i.datasQuote=function(){this.tableDatas=this.originalDatas.info,this.chartDatas=this.originalDatas.info},i.createChart=function(){this.showLoading("正在生成图表..");for(var a=[],t=[],e=[],i=this.chartDatas,n=0;n<i.length;n++){var r=i[n].khjc;r=r.length>4?r.substring(0,4):r,a.push(r),t.push(i[n].sl/100),e.push(parseInt(i[n].je)/1e4)}var s={tooltip:{trigger:"axis",formatter:"{b}<br />{a0}：{c0}万<br />{a1}：{c1}X100"},grid:{x2:20},dataZoom:{type:"slider",yAxisIndex:[0],handleIcon:"M10.7,11.9v-1.3H9.3v1.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4v1.3h1.3v-1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z",handleSize:"80%",handleStyle:{color:"#fff",shadowBlur:3,shadowColor:"rgba(0, 0, 0, 0.6)",shadowOffsetX:2,shadowOffsetY:2},start:80,end:100},legend:{top:5,data:["销售额","销售数","销售额走势"]},grid:{x:50,y:40,y2:30,x2:70},yAxis:[{type:"category",data:a,axisLabel:{rotate:45},z:1}],xAxis:[{type:"value",name:"单位(万元)",axisLabel:{interval:0,rotate:45},z:1}],series:[{name:"销售额",type:"bar",data:e},{name:"销售数",type:"bar",data:t}]},o=echarts.init(this.$container.find(".chart")[0]);return this.echarts.main=o,new Promise(function(a,t){setTimeout(function(){o.setOption(s),a()},200)})},i.init(i.api,{ctrl:"salecount"})});</script>
+</div>
+
+</script>
+    <script type="text/html" id="tpl_storeLocation">
+<div class="bi_item" id="storeLocation">
+    <div class="title top_head">
+        <span>全国门店分布图</span>
+        <div class="tools">
+            <i data-btn="delete" class="iconfont icon-shanchu"></i>
+            <i data-btn="refresh" class="iconfont icon-shuaxin"></i>
+        </div>
+    </div>
+    <div class="chart"></div>
+    <div class="datas">
+        <p class="title"><span>展 开</span><i class="iconfont icon-xiangshang"></i></p>
+        <div class="table_wrap">
+            <div class="ht"></div>
+            <div class="bt"></div>
+        </div>
+    </div>
+    <div class="mask">
+        <div class="mask_content">
+            <img class="gif" src="./img/my_loading.gif">
+            <p class="status">加载中..</p>
+        </div>
+    </div>
+    <script type="text/javascript">$(function(){function t(t,a,e){t.showLoading("正在加载汇总数据..");$.ajax({url:"http://tm.lilanz.com/qywx/project/storesaler/salesChartCore.ashx",type:"POST",dataType:"text",contentType:"application/x-www-form-urlencoded; charset=UTF-8",timeout:1e4,data:{ctrl:"mddistribution"},error:function(t,a,o){console.log("获取数据失败，请稍后重试！"+t.status+"|"+t.statusText),e("获取数据失败，请稍后重试！"+t.status+"|"+t.statusText)},success:function(o){console.log(o);var n=JSON.parse(o);"200"==n.code?(t.tableDatas=n.info,a()):e(o)},z:1})}var a="storeLocation",e=$("#"+a),o=e.find(".title.top_head > span").text(),n=new MobileChart({chartID:a,chartName:o,tplName:"tpl_"+a,$container:e});echartConfigs[a]=n;var i={columns:[{name:"sf",cname:"省份",width:"80px"},{name:"sl",cname:"数量",width:"80px"}]};n.tableStruct=i,n.getDatas=function(a,e){var o=this;return console.log("正在请求数据.."),this.showLoading("正在统计数据,请稍候.."),new Promise(function(e,n){$.getJSON(a,function(i,s,r){"success"==s?(o.api=a,o.chartDatas=i.info,t(o,e,n)):n(s)}).fail(function(t){n("请检查您的网络!!")})})};var s;n.createChart=function(){console.log("正在生成图表.."),this.showLoading("正在生成图表..");for(var t=[],a={},e=this.chartDatas,o=0;o<e.length;o++)t.push({name:e[o].mdmc,value:10}),a[e[o].mdmc]=[e[o].Lng,e[o].Lat];var n="全国总门店数："+this.tableDatas[this.tableDatas.length-1].sl;s={backgroundColor:"#1b1b1b",tooltip:{trigger:"item"},legend:{orient:"vertical",y:"bottom",x:"right",data:[n],textStyle:{color:"#fff"},z:1},geo:{map:"china",label:{emphasis:{show:!1},normal:{show:!1,textStyle:{color:"#ffffff"},z:1},z:1},itemStyle:{normal:{areaColor:"#323c48",borderColor:"#111"},emphasis:{areaColor:"#2a333d"},z:1},z:1},series:[{name:n,type:"scatter",coordinateSystem:"geo",data:function(t){for(var e=[],o=0;o<t.length;o++){var n=a[t[o].name];n&&e.push({name:t[o].name,value:n.concat(t[o].value)})}return e}(t),symbolSize:1,label:{normal:{formatter:"{b}",position:"right",show:!1},emphasis:{show:!0},z:1},itemStyle:{normal:{color:"#ddb926"},z:1},z:1}]};var i=echarts.init(this.$container.find(".chart")[0]);this.echarts.main=i,i.on("click",function(t){"china"!=s.geo.map&&(s.series[0].symbolSize=1,s.geo.map="china",s.geo.label.normal.show=!1,i.setOption(s))});var r=this;return new Promise(function(t,a){setTimeout(function(){r.getEchartsMaps().then(function(){r.$container.find(".bt>table td[data-col='0']").attr("data-link",""),i.setOption(s),t()})},200)})};var r=0;n.extendEvents={".bt>table td[data-col='0']":[{click:[function(){var t=$(this).text();if(t!=s.geo.map){if("china"==t)s.series[0].symbolSize=1,s.geo.label.normal.show=!1;else{s.series[0].symbolSize=4,s.geo.label.normal.show=!0;for(var a,e=0;e<n.echartsMap.length;e++){if(n.echartsMap[e].name==t){a=n.echartsMap[e];break}r++}if(!a.load)return n.showLoading("正在加载"+t+"地图数据.."),void $.getJSON(a.json,function(e){echarts.registerMap(t,e),a.load=!0,s.geo.map=t,n.echarts.main.setOption(s),n.hideLoading()}).fail(function(){n.showLoading(t+"地图下载失败,请尝试刷新!"),setTimeout(n.hideLoading.bind(n),1500)});r++}s.geo.map=t,n.echarts.main.setOption(s)}r++}]}]},n.init("./mapjson/storeLocation.json",{})});</script>
+</div>
+
+</script>
+    <!--公用模板集合-->
+<script type="text/html" id="tpl_appgridItem">
+    <a class="app_item" href="javascript:;" data-url="{{Url}}">
+        <div class="grid_icon">
+            <img src="{{Icon}}" />
+        </div>
+        <p class="grid_label">{{Cname}}</p>
+    </a>
+</script>
+
+<!--添加+ 菜单项-->
+<script type="text/html" id="tpl_chartListItem">
+    <li data-id="{{moduleid}}" data-tpl="tpl_{{moduleid}}" data-selected="{{isselect}}">
+        {{sort}}、{{name}}
+    </li>
+</script>
+
+    <script rel="ver" type='text/html' link="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js" name="jquery">
+    </script>
+    <script rel="ver" type='text/html' link="./js/LeeMobileChart.32c4e2be.js" name="LeeMobileChart"></script>
+    <script rel="ver" type='text/html' link="./js/template.min.dd622e58.js" name="template"></script>
+    <script rel="ver" type='text/html' link="./js/fastclick.min.549fdc14.js" name="fastclick"></script>
+    <script rel="ver" type='text/html' link="./js/particles.min.00debcf6.js" name="particles"></script>
+    <script rel="ver" type='text/html' link="http://cdn.bootcss.com/echarts/3.6.2/echarts.min.js" name="echarts"></script>
+    <script rel="ver" type='text/html' link="http://tm.lilanz.com/qywx/api/lilanzAppWVJBridge-0.1.5.min.js" name="JSBRIDGE"></script>
+    <script rel="ver" type='text/html' link="./js/business.5e4538e4.js" name="business"></script>
+    <script type="text/javascript" src="./js/entrance.1ec0904f.js"></script>
+</body>
+
+</html>

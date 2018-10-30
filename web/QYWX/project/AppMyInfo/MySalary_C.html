@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>我的工资</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0,maximum-scale=1" />
+        <link rel="stylesheet" type="text/css" href="../../res/css/font-awesome.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../res/css/LeePageSlider.css" />
+        <link rel="stylesheet" type="text/css" href="../../res/css/AppMyInfo/mysalary.css" />
+	</head>
+	<body>
+        <div class="wrap-page">
+            <div class="page">
+                <div class="salary-info">
+                    <div class="salary-month">
+                        <i id="lastmonth" class="fa fa-angle-left"></i>
+                        <input id="month" type="month" value="" />
+                        <i id="nextmonth" class="fa fa-angle-right"></i>
+                    </div>
+                    <div class="salary-data">
+                        <hr/>
+                        <div class="salary-should">
+                            <div class="icon">
+                                <img src="../../res/img/AppMyInfo/icon_yfgz.png" />
+                            </div>
+                            <div class="cost">
+                                <span>应发工资</span>
+                                <p id="yfgz">----</p>
+                            </div>
+                        </div>
+                        <div class="salary-actual">
+                            <div class="icon">
+                                <img src="../../res/img/AppMyInfo/icon_sfgz.png" />
+                            </div>
+                            <div class="cost">
+                                <span>实发工资</span>
+                                <p id="sfgz">----</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="calendar">
+                    <div class="Day">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>日</th>
+                                    <th>一</th>
+                                    <th>二</th>
+                                    <th>三</th>
+                                    <th>四</th>
+                                    <th>五</th>
+                                    <th>六</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="sign-title"><p>打卡记录</p></div>
+                </div>
+                <div class="sign-detail">
+                </div>
+                <div class="information">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!--加载提示-->
+        <div class="load_toast" id="myLoading">
+            <div class="load_toast_mask"></div>
+            <div class="load_toast_container">
+                <div class="lee_toast">
+                    <div class="load_img">
+                        <img src="../../res/img/my_loading.gif" />
+                    </div>
+                    <div class="load_text">加载中...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!--总部模板-->
+        <script id="zb-model" type="text/html">
+            <li><span>实际出勤天数</span><span>{{sjcqts}}</span></li>
+            <li><span>日工资</span><span>{{formatMoney(rgz)}}</span></li>
+            <li><span>固定岗位工资</span><span>{{formatMoney(gdgz)}}</span></li>
+            <li><span>周六固定加班费</span><span>{{formatMoney(gdjb)}}</span></li>
+            <li><span>住房公积金</span><span>{{formatMoney(zfgjj)}}</span></li>
+            <li><span>社会保险费</span><span>{{formatMoney(shbx)}}</span></li>
+            <li><span>公司代垫水费</span><span>{{formatMoney(gssf)}}</span></li>
+            <li><span>工作餐扣款</span><span>{{formatMoney(gzckk)}}</span></li>
+        </script>
+        <!--贸易模板-->
+        <script id="my-model" type="text/html">
+            <li><span>基本工资</span><span>{{formatMoney(jcgz)}}</span></li>
+            <li><span>绩效工资</span><span>{{formatMoney(jxgz)}}</span></li>
+            <li><span>岗位补贴</span><span>{{formatMoney(gwbt)}}</span></li>
+            <li><span>地区津贴</span><span>{{formatMoney(dqbt)}}</span></li>
+            <li><span>销售提成</span><span>{{formatMoney(xstc)}}</span></li>
+            <li><span>销售奖励</span><span>{{formatMoney(xsjl)}}</span></li>
+            <li><span>任务提出</span><span>{{formatMoney(rwtc)}}</span></li>
+            <li><span>话费津贴</span><span>{{formatMoney(hfbt)}}</span></li>
+            <li><span>其他补贴</span><span>{{formatMoney(qtbt2)}}</span></li>
+            <li><span>有关薪资其他补贴</span><span>{{formatMoney(fxsbt)}}</span></li>
+            <li><span>与销售相关代扣</span><span>{{formatMoney(fxskk)}}</span></li>
+            <li><span>考勤</span><span>{{formatMoney(kqje)}}</span></li>
+            <li><span>代扣</span><span>{{formatMoney(dkje)}}</span></li>
+        </script>
+        <!--签到详情模板 正常签到-->
+        <script id="sign-detail" type="text/html">
+            {{each}}
+                {{if $value == "缺"}}
+                    <span class="Yc">{{$value}}</span>
+                {{else}}
+                    <span>{{$value}}</span>
+                {{/if}}
+            {{/each}}
+        </script>
+        <!--签到详情模板 特殊情况-->
+        <script id="sign-error" type="text/html">
+            <span>{{$value}}</span>
+        </script>
+        <script type="text/javascript" src="../../res/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../../res/js/template.js"></script>
+        <script type="text/javascript" src="../../res/js/AppMyInfo/datepicker.js"></script>
+        <script type="text/javascript">
+            var apptoken;
+            var nowMonth = new Date().getMonth() + 1;
+            var nowYear = new Date().getFullYear();
+            var isInit = true;
+            var signData = {};
+            
+            $(function(){
+                bindEven();
+                getInfo();
+                getDate();
+                
+                /* 数值转化为货币格式 */
+                Number.prototype.formatMoney = function(places, symbol, thousand, decimal) {
+                    places = !isNaN(places = Math.abs(places)) ? places : 2;
+                    symbol = symbol !== undefined ? symbol : "¥";
+                    thousand = thousand || ",";
+                    decimal = decimal || ".";
+                    var number = this,
+                        negative = number < 0 ? "-" : "",
+                        i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
+                        j = (j = i.length) > 3 ? j % 3 : 0;
+                    return symbol + negative + (j ? i.substr(0,j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
+                }
+            });
+            
+            function bindEven(){
+                $("#lastmonth").click(function(){
+                    var date = $("#month").val();
+                    var year = parseInt(date.split('-')[0]);
+                    var month = parseInt(date.split('-')[1]);
+                    
+                    if(month == 1){
+                        month = 12;
+                        year--;
+                    }else{
+                        month--;
+                        if(month < 10){
+                            month = '0' + month;
+                        }
+                    }
+                    var year_month = year + '-' + month;
+                    getCanlender.setDay(year,month);
+                    $("#month").val(year_month);
+                    getSalaryInfo(apptoken,year_month);
+                });
+                
+                $("#nextmonth").click(function(){
+                    var date = $("#month").val();
+                    var year = parseInt(date.split('-')[0]);
+                    var month = parseInt(date.split('-')[1]);
+                    
+                    if(month == 12){
+                        month = '01';
+                        year++;
+                    }else{
+                        month++;
+                        if(month < 10){
+                            month = '0' + month;
+                        }
+                    }
+                    var year_month = year + '-' + month;
+                    getCanlender.setDay(year,month);
+                    $("#month").val(year_month);
+                    getSalaryInfo(apptoken,year_month);
+                });
+                
+                $("#month").change(function(){
+                    var date = $(this).val();
+                    var year = parseInt(date.split('-')[0]);
+                    var month = parseInt(date.split('-')[1]);
+                    
+                    if(year == nowYear && month > nowMonth || year > nowYear){
+                        onLoading("请在当前日期之前选择月份！");
+                        setTimeout(function(){
+                            $("#myLoading").hide();
+                            $("#month").val(getDate());
+                            $("#month").change();
+                        },2000);
+                    }else{
+                        onLoading();
+                        getSalaryInfo(apptoken,date);
+                    }
+                });
+                
+                $("#lastMonth").click(function(){
+                    var month = getCanlender.getMonth() - 2;
+                    var year = getCanlender.getYear();
+                    if(month < 0){
+                        year--;
+                        month = 11;
+                    }
+                    
+                    getCanlender.setDay(year,month);
+                    getCanlender.isSign();
+                });
+                
+                $("#nextMonth").click(function(){
+                    var month = getCanlender.getMonth();
+                    var year = getCanlender.getYear();
+                    if(month > 11){
+                        year++
+                        month = 0;
+                    }
+                    
+                    getCanlender.setDay(year,month);
+                    getCanlender.isSign();
+                });
+                
+                $(".calendar").on('click','.dataStyle',function(){
+                    $(this).parent().parent().find(".dataStyle").removeClass("onchoose");
+                    $(this).addClass("onchoose");
+                    var month = getCanlender.getMonth() < 10 ? "0" + getCanlender.getMonth() : getCanlender.getMonth();
+                    var sign = month + "-" + $(this).text();
+                    var html = "";
+                    
+                    signDetail = signData[sign];
+                    
+                    if(signDetail.indexOf('<font class="Yc">') > -1 && signDetail.indexOf("缺") > -1) {
+                        var reg = new RegExp('<font class="Yc">',"g");
+                        signDetail = signDetail.replace(reg,"");
+                        reg = new RegExp('</font>',"g");
+                        signDetail = signDetail.replace(reg,"");
+                        signDetail = signDetail.replace('</font><br>',"");
+                        signDetail = signDetail.split('<br>');
+                        signDetail.length = signDetail.length - 1;
+                        signDetail = signDetail[0].split("-").concat(signDetail[1].split("-"));
+                        html = template("sign-detail",signDetail);
+                    }else if(signDetail.indexOf('<font class="Yc">') > -1) {
+                        html = template("sign-error",signDetail);
+                    }else {
+                        if(signDetail) {
+                            signDetail = signDetail.split('<br>');
+                            signDetail.length = signDetail.length - 1;
+                            signDetail = signDetail[0].split("-").concat(signDetail[1].split("-"));
+                        }else {
+                            signDetail = {};
+                        }
+                            
+                        html = template("sign-detail",signDetail);
+                    }
+                    
+                    $(".sign-detail").empty().append(html);
+                });
+            }
+            
+            /* 获取工资数据 */
+            function getInfo(){
+                var date = getDate();
+                apptoken = GetQueryParams("apptoken");
+                if(apptoken == ''){
+                    onLoading("请在利郎APP中打开！");
+                }else{
+                    getSalaryInfo(apptoken,date);
+                }
+            }
+            
+            /* 根据日期获取工资信息 */
+            function getSalaryInfo(apptoken,date){
+                onLoading();
+                $(".calendar").hide();
+                $(".sign-detail").hide();
+                $(".information").show();
+                setTimeout(function(){
+                    $.ajax({
+                        url: '../../api/appmycore.ashx',
+                        data: {
+                            action: 'getEmploySalary',
+                            apptoken: apptoken,
+                            rq: date
+                        },
+                        dataType: 'JSON',
+                        success: function(data){
+                            var info = data.info;
+                            var html = '';
+                            if(data.code == '200'){
+                                $("#yfgz").text(parseFloat(info.yfgz).formatMoney());
+                                $("#sfgz").text(parseFloat(info.sfgz).formatMoney());
+                                template.helper('formatMoney',function(date){
+                                    return parseFloat(date).formatMoney();
+                                });
+                                
+                                if(info.rylx == 'zb'){
+                                    html = template("zb-model",info);
+                                }else{
+                                    html = template('my-model',info);
+                                }
+                                
+                                $(".information ul").empty().html(html);
+                                $("#myLoading").hide();
+                            }else{
+                                onLoading(data.msg);
+                                $("#yfgz").add("#sfgz").text("--");
+                                $(".information ul").empty();
+                                setTimeout(function(){
+                                    getCanlender.isSign();
+                                    $(".information").hide();
+                                    /*if(isInit){
+                                        isInit = !isInit;
+                                    }*/
+                                },1500);
+                            }
+                        }
+                    });
+                },100);
+            }
+            
+            /* 获取日期 */
+            function getDate(){
+                var date = new Date();
+                var year = date.getFullYear();
+                var month = date.getMonth();
+                if(month < 10){
+                    month = '0' + month;
+                }
+                $("#month").val(year + '-' + month);
+                return year + '-' + month;
+            }
+            
+            /* 获取URL GET参数 */
+            var GetQueryParams = function (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null)
+                    return unescape(r[2])
+                else
+                    return "";
+            };
+            
+            /* 显示加载状态 */
+            function onLoading(msg){
+                $(".load_text").text(msg || '加载中...');
+                $("#myLoading").show();
+            }
+            
+            function getCanlendar(){
+                var html = '';
+                var day = 1;
+                var firstDay = getCanlender.getfirstDay();
+                var month = getCanlender.getMonth() < 10 ? "0" + getCanlender.getMonth(): getCanlender.getMonth();
+
+                if(arguments.length == 2){
+                    firstDay = getCanlender.getfirstDay(arguments[0],arguments[1]);
+                }
+                
+                for(var i = 0; i < getCanlender.gettrLine();i++){
+                    html = html + '<tr>';
+                    
+                    for(var j = 0; j < 7; j++){
+                        if(i == 0 && j == 0){
+                            j = firstDay;
+                            html = html + new Array(firstDay + 1).join('<td></td>');
+                        }
+                        if(day <= getCanlender.getMonthDay()){
+                            day = day < 10 ? "0" + day : day;
+                            var sign = month + "-" + day;
+                            
+                            if(signData[sign] == "") {
+                                if(getCanlender.isToday(day)){
+                                    html = html + '<td class="dataStyle today onchoose">' + day + '</td>';
+                                    day++;
+                                    continue;
+                                }
+                                html = html + '<td class="dataStyle">' + day + '</td>' ;
+                            }else if(signData[sign].lastIndexOf("缺") > 90 && signData[sign].indexOf('<font class="Yc">') > -1) {
+                                html = html + '<td class="dataStyle">' + day + '</td>' ;
+                            }else if(signData[sign].indexOf('<font class="Yc">') == -1) {
+                                if(getCanlender.isToday(day)){
+                                    html = html + '<td class="dataStyle sign-in onchoose">' + day + '</td>';
+                                    day++;
+                                    continue;
+                                }
+                                html = html + '<td class="dataStyle sign-in">' + day + '</td>' ;
+                            }else {
+                                if(getCanlender.isToday(day)){
+                                    html = html + '<td class="dataStyle sign-error onchoose">' + day + '</td>';
+                                    day++;
+                                    continue;
+                                }
+                                html = html + '<td class="dataStyle sign-error">' + day + '</td>' ;
+                            }
+                            day++;
+                        }
+                    }
+                    html = html + '</tr>';
+                }
+                $(".Day").find("tbody").empty();
+                $(".Day").find("tbody").append(html);
+                $(".onchoose").click();
+            }
+            
+            function GetQueryString(name)
+            {
+                 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+                 var r = window.location.search.substr(1).match(reg);
+                 if(r!=null)return  unescape(r[2]); return null;
+            }
+            
+            function test(){
+                var month = getCanlender.getMonth() - 2;
+                var year = getCanlender.getYear();
+                if(month < 0){
+                    year--;
+                    month = 11;
+                }
+
+                getCanlender.setDay(year,month);
+                getCanlender.isSign();
+            }
+
+        </script>
+	</body>
+</html>

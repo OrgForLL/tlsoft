@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>摇一摇赢大奖</title>
+    <script src="./js/flexible.min.js"></script>
+    <script type="text/javascript" src="js/resLoader.js"></script>
+    <link rel="stylesheet" href="./css/main.css">
+    <style type="text/css">
+        /*loading style*/
+        .loading_mask, .message_mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #2aa133;
+            z-index: 5001;
+            color: #fff;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .message_mask {
+            background-color: rgba(0,0,0,.6);
+            display: none;
+        }
+
+        .loading_mask img {
+            height: 1.2rem;
+            vertical-align: middle;
+            padding-right: 5px;
+        }
+
+        .loading_mask span {
+            vertical-align: middle;
+            font-size: 0.360rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading_mask" id="loading">
+        <div style="display: inline-block; margin: 0 auto;">
+            <img src="./images/title.png" />
+            <span>正在加载资源（<span id="res_current">--</span> / <span id="res_total">--</span>）</span>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var loader = new resLoader({
+            resources: ["images/athletes.png",
+                        "images/bar.png",
+                        "images/bar2.png",
+                        "images/bar3.png",
+                        "images/bg_tx.png",
+                        "images/yyy-01.png",
+                        "images/yyy-02.png",
+                        "images/yyy-08/png",
+                        "images/yyy-09.png",
+                        "images/court.png",
+                        "images/grassland.jpg",
+                        "images/button.png",
+                        "images/logo.png",
+                        "images/title.png",
+                        "images/rock-top.png",
+                        "images/rock-bottom.png",
+                        "images/detail2.png",
+                        "images/xl.png",
+                        "images/football.png",
+                        "images/huodongjieshao.png",
+                        "images/price.png",
+                        "images/redpack.png",
+                        "images/redEnvelope.png",
+                        "images/ticket.png",
+                        "images/award_bg.png"],
+            onStart: function (total) {
+                document.getElementById("res_total").textContent = total;
+            },
+            onProgress: function (current, total) {
+                document.getElementById("res_current").textContent = current;
+            },
+            onComplete: function (total) {
+                // 预加载完成关闭预加载页面
+                document.querySelector('.loading_mask').style.display = 'none';
+                alert('内部测试页面，请勿转发！');
+            }
+        });
+
+        loader.start();
+    </script>
+    <!-- 主页面 -->
+    <div class="container">
+        <div class="main">
+            <div class="logo">
+                <img src="./images/logo.png" alt="">
+            </div>
+            <div class="title shake-anim">
+                <img src="./images/title.png" alt="">
+            </div>
+            <div class="bar bar-action"></div>
+            <div class="shake">
+                <div class="rock">
+                    <img class="rock-top" src="./images/yyy-08.png" alt="">
+                    <img class="rock-bottom" src="./images/yyy-09.png" alt="">
+                </div>
+            </div>
+            <div class="times">
+                您还有 <span>3</span> 次机会
+            </div>
+            <div class="detail">
+                <img src="./images/detail2.png" alt="">
+            </div>
+            <div class="footer">
+                <img class="athletes action" src="./images/athletes.png" alt="">
+                <img class="footerball" src="./images/football.png" alt="">
+                <img class="go-bottom" src="./images/xl.png" alt="">
+            </div>
+        </div>
+        <!-- 介绍与奖品 -->
+        <div class="details">
+            <div class="introduction">
+                <img class="int-title" src="./images/huodongjieshao.png" alt="">
+                <p class="int-time">2018年6月1日——6月30日</p>
+                <p>活动期间，凡在利郎线下门店单笔实付满666元，</p>
+                <p>即可参与门店【世界杯摇一摇】抽奖互动。</p>
+                <p>有机会赢取俄罗斯6天5日游（价值4999元），抽奖资质可累计。</p>
+                <p class="interpretation">(活动最终解释权归利郎中国所有)</p>
+            </div>
+            <div class="myprize">
+                <img src="./images/price.png" alt="">
+                <div class="prize-detail">
+                    <ul>
+                        <li>
+                            <div class="prize-info">
+                                <img src="./images/redEnvelope.png" alt="">
+                                <div class="prize-detail">
+                                    <p>利郎现金红包</p>
+                                    <span>中奖日期: 2018-06-05</span>
+                                </div>
+                            </div>
+                            <div class="cost">
+                                ￥1.68
+                            </div>
+                        </li>
+                        <li>
+                            <div class="prize-info">
+                                <img src="./images/redEnvelope.png" alt="">
+                                <div class="prize-detail">
+                                    <p>利郎现金红包</p>
+                                    <span>中奖日期: 2018-06-05</span>
+                                </div>
+                            </div>
+                            <div class="cost">
+                                ￥1.24
+                            </div>
+                        </li>
+                        <li>
+                            <div class="prize-info">
+                                <img src="./images/ticket.png" alt="">
+                                <div class="prize-detail">
+                                    <p>特等奖(俄罗斯游)</p>
+                                    <span>中奖日期: 2018-06-05</span>
+                                </div>
+                            </div>
+                            <div class="cost">
+                                ￥4999
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 奖品提示 -->
+    <div class="award">
+        <div class="bg-img">
+            <div class="bg-color">
+                <div class="prompt">
+                    <div class="color-bar"></div>
+                    <div class="redpack-bar"></div>
+                    <div class="award-winner">
+                        <p class="award-title">恭喜你</p>
+                        <p>获得特等奖</p>
+                        <p>俄罗斯6天5日游</p>
+                    </div>
+                    <!-- .. -->
+                    <div class="award-redpack">
+                        <p class="award-title">恭喜你</p>
+                        <p>获得现金红包 x 元</p>
+                    </div>
+                    <img class="redpack" src="./images/redpack.png" alt="">
+                    <img class="ball" src="./images/football.png" alt="">
+                </div>
+                <div class="form">
+                    <p class="form-title">请在下方填写相关信息</p>
+                    <div class="form-items">
+                        <div class="form-item">
+                            <span>手机* |</span>
+                            <input type="text">
+                        </div>
+                        <div class="form-item">
+                            <span>姓名* |</span>
+                            <input type="text">
+                        </div>
+                        <div class="form-item">
+                            <span>身份证* |</span>
+                            <input type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="prompt-redpack">
+                    <p>现金红包将通过公众号推送给您，</p>
+                    <p>请注意领取！</p>
+                    <p>领取时限: 24小时</p>
+                </div>
+                <a class="btn-submit">确 认</a>
+            </div>
+        </div>
+    </div>
+    <div class="sound"></div>
+    <script type="text/javascript">
+        const EMPTY_VALUE = 100;
+        const THREAD_HOLD = 13.8;
+        var minX = EMPTY_VALUE,
+            minY = EMPTY_VALUE;
+        var isShake = false;
+        // 监听手机摇动
+        window.ondevicemotion = function(event) {
+            var gravity = event.accelerationIncludingGravity,
+                x = gravity.x,
+                y = gravity.y;
+            if(x < minX) minX = x;
+            if(y < minY) minY = y;
+            if(Math.abs(x - minX) > THREAD_HOLD &&  
+                    Math.abs(y - minY) > THREAD_HOLD){
+                var event = new CustomEvent("shake");
+                window.dispatchEvent(event);
+                minX = minY = EMPTY_VALUE;
+            }
+        };
+
+        // 摇一摇事件
+        window.addEventListener('shake', function() {
+            if (isShake) return null;
+            document.getElementById('shakeSound').play();
+            document.querySelector('.rock-top').classList.add('rockup');
+            document.querySelector('.rock-bottom').classList.add('rockdown');
+            isShake = true;
+
+            setTimeout(function() {
+                document.querySelector('.rock-top').classList.remove('rockup');
+                document.querySelector('.rock-bottom').classList.remove('rockdown');
+                document.querySelector('.container').style.display = 'none';
+                document.querySelector('.award').style.display = 'block';
+                document.getElementById('shakeSound').src = './4092.mp3';
+                document.getElementById('shakeSound').play();
+            }, 1300)
+        });
+
+        // 监听微信 加载音效
+        document.addEventListener('WeixinJSBridgeReady', function() {
+            var audio = document.createElement("audio");
+            audio.id = "shakeSound";
+            audio.src = "./5018.mp3";
+            audio.style.display = "none";
+            document.querySelector(".sound").appendChild(audio);
+        });
+
+        // 确认按钮事件
+        document.querySelector('.btn-submit').addEventListener('click', function() {
+            document.querySelector('.container').style.display = 'block';
+            document.querySelector('.award').style.display = 'none';
+            document.getElementById('shakeSound').src = './5018.mp3';
+            isShake = false
+        });
+    </script>
+</body>
+</html>

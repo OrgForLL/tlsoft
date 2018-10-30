@@ -1,0 +1,11 @@
+无法解析此远程名称: 'http'System.Net.WebException: 无法解析此远程名称: 'http'
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 ASP.interface_sc_lab_jcbgsjtb1_aspx.SynchronousDate.downloadPDF(String id, String URL, String path, String filename) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb1.aspx:行号 244
+   在 ASP.interface_sc_lab_jcbgsjtb1_aspx.SynchronousDate.downloadPDF(String path, String ids) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb1.aspx:行号 309
+   在 ASP.interface_sc_lab_jcbgsjtb1_aspx.SynchronousDate.tbData(String ctrl, String userid, String username, String date, String ids) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb1.aspx:行号 89
+   在 ASP.interface_sc_lab_jcbgsjtb1_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb1.aspx:行号 573
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

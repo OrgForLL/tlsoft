@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>门店变更操作</title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../res/css/sweet-alert.css" />
+    <style type="text/css">
+        .page {
+            padding:0;
+            padding:70px 20px 20px 20px;
+            background-color:#fff;
+        }
+
+        .new-store {
+            height:160px;
+            background-color:#38c4a9;
+            border-radius:4px;            
+            border:1px solid #eee;            
+        }
+        .old-store {
+            height:160px;
+            background-color:#f0f0f0;
+            border-radius:4px;
+            border:1px solid #eee;            
+        }
+        .icon {
+            width:50px;
+            height:50px;
+            background-repeat:no-repeat;           
+            background-size:cover;
+            background-image:url(../../res/img/storesaler/store_icon2.png);
+            border-radius:50%;
+            border:2px solid #fff;
+            margin:35px auto 20px auto;                                       
+        }
+
+        .old-store .icon{
+            background-position:0 -46px;
+            border:2px solid #38c4a9;
+        }
+
+        .store_name {
+            text-align:center;
+            color:#fff;
+            font-size:16px;
+            font-weight:600;
+        }
+
+        .old-store .store_name {
+            color:#38c4a9;
+        }
+
+        .down-arrow {
+            width: 30px;
+            height: 30px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url(../../res/img/storesaler/down-arrow.png);
+            margin:5px auto;
+        }
+
+        .tips {
+            padding:20px;
+            text-indent:10px;
+            padding-bottom:0;
+        }
+
+        .user-info {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:50px;
+            line-height:50px;            
+            z-index:5000;
+            padding:0 20px;
+            background-color:rgba(18,149,124,0.8);
+            color:#fff;
+            border-bottom:1px solid #eee;
+            box-sizing:content-box;
+            font-weight:600;
+        }
+        .headimg {
+            width:40px;
+            height:40px;
+            background-repeat:no-repeat;           
+            background-size:cover;
+            background-position:center center;
+            border-radius:50%;
+            background-image:url(../../res/img/storesaler/vip1.jpg);
+            vertical-align:middle;
+            display:inline-block;
+            margin-right:5px;
+            border:2px solid #fff;
+        }
+
+        .footer > .btn {
+            width:38%;
+            display:inline-block;
+            background-color:#38c4a9;
+            color:#fff;
+            height:40px;
+            line-height:40px;
+            font-size:16px;
+            margin-top:10px;
+            border-radius:4px;
+            font-weight:bold;
+        }
+
+        .no.btn {
+            background-color:#f0f0f0;
+            color:#38c4a9;
+            margin-left:15px;
+        }
+    </style>
+</head>
+<body>    
+    <div class="user-info">
+        <div class="headimg"></div>
+        <span>尊敬的利郎VIP：李清峰</span>
+    </div>
+    <div class="wrap-page">
+        <div class="page page-not-footer" id="main">            
+            <div class="old-store">
+                <div class="icon"></div>
+                <div class="store_name">福建晋江第一分公司</div>
+            </div>
+            <div class="down-arrow"></div>
+            <div class="new-store">
+                <div class="icon"></div>
+                <div class="store_name">青阳阳光店</div>
+            </div>
+
+            <div class="tips">
+                尊敬的利郎VIP，系统发现您最近两笔消费均发生在【青阳阳光店】，为了给您提供更好的服务，是否将您的客户服务门店指定为【青阳阳光店】？
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <a class="btn yes" href="javascript:">是</a>
+        <a class="btn no" href="javascript:WeixinJSBridge.call('closeWindow');">否</a>
+    </div>
+
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/LeeJSUtils.min.js"></script>
+    <script type="text/javascript" src="../../res/js/sweet-alert.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            LeeJSUtils.LoadMaskInit();
+            LeeJSUtils.stopOutOfPage("#main", true);
+            //swal({
+            //    title: "",
+            //    text: "123",
+            //    type: "warning",
+            //    confirmButtonColor: "#DD6B55",
+            //    confirmButtonText: "知道了！"
+            //}, function (isConfirm) {
+            //    //WeixinJSBridge.call('closeWindow');                
+            //});
+        }        
+    </script>
+</body>
+</html>

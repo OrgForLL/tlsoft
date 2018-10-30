@@ -1,0 +1,11 @@
+索引(从零开始)必须大于或等于零，且小于参数列表的大小。System.FormatException: 索引(从零开始)必须大于或等于零，且小于参数列表的大小。
+   在 System.Text.StringBuilder.AppendFormat(IFormatProvider provider, String format, Object[] args)
+   在 System.String.Format(IFormatProvider provider, String format, Object[] args)
+   在 System.String.Format(String format, Object[] args)
+   在 ASP.interface_wxcardinterface_aspx.CheckCode(String khid, String code) 位置 e:\web_tlerp\interface\WXCardInterface.aspx:行号 340
+   在 ASP.interface_wxcardinterface_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\WXCardInterface.aspx:行号 97
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

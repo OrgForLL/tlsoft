@@ -1,0 +1,9 @@
+﻿<xizang dn="day">
+<city cityX="121" cityY="119" cityname="阿里" centername="阿里" fontColor="FFFFFF" pyName="ali" state1="2" state2="1" stateDetailed="阴转多云" tem1="-20" tem2="-4" temNow="1" windState="微风" windDir="北风" windPower="2级" humidity="5%" time="16:00" url="101140701"/>
+<city cityX="316" cityY="174" cityname="那曲" centername="那曲" fontColor="FFFFFF" pyName="naqu" state1="1" state2="2" stateDetailed="多云转阴" tem1="-18" tem2="1" temNow="2" windState="微风" windDir="西南风" windPower="4级" humidity="9%" time="16:00" url="101140601"/>
+<city cityX="258" cityY="286" cityname="日喀则" centername="日喀则" fontColor="FFFFFF" pyName="rikaze" state1="0" state2="1" stateDetailed="晴转多云" tem1="-14" tem2="5" temNow="5" windState="微风" windDir="东北风" windPower="1级" humidity="7%" time="16:00" url="101140201"/>
+<city cityX="376" cityY="282" cityname="拉萨" centername="拉萨" fontColor="FFFF00" pyName="lasa" state1="0" state2="0" stateDetailed="晴" tem1="-9" tem2="8" temNow="7" windState="微风" windDir="西南风" windPower="1级" humidity="5%" time="16:00" url="101140101"/>
+<city cityX="391" cityY="337" cityname="山南" centername="山南" fontColor="FFFFFF" pyName="shannan" state1="0" state2="1" stateDetailed="晴转多云" tem1="-12" tem2="8" temNow="7" windState="微风" windDir="西南风" windPower="3级" humidity="8%" time="16:00" url="101140301"/>
+<city cityX="479" cityY="316" cityname="林芝" centername="林芝" fontColor="FFFFFF" pyName="linzhi" state1="0" state2="1" stateDetailed="晴转多云" tem1="-5" tem2="7" temNow="8" windState="微风" windDir="南风" windPower="2级" humidity="21%" time="16:00" url="101140401"/>
+<city cityX="560" cityY="271" cityname="昌都" centername="昌都" fontColor="FFFFFF" pyName="changdu" state1="0" state2="1" stateDetailed="晴转多云" tem1="-10" tem2="10" temNow="12" windState="微风" windDir="西风" windPower="1级" humidity="6%" time="16:00" url="101140501"/>
+</xizang>

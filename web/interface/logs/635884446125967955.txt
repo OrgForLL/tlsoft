@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\tqhbint.aspx(24): error CS0119: “System.Text.UTF8Encoding”是一个“类型”，这在给定的上下文中无效

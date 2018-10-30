@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>关注利郎</title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <style type="text/css">
+        html,body {
+            background-color: #f0f0f0;
+        }
+
+        .page {
+            background-color: #f0f0f0;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .block {
+            background-color: #fff;
+            width: 40vh;
+            height: 40vh;
+            margin: 0 auto;
+        }
+
+        .tips_wraper {
+            background-color: rgb(31,31,31);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+            .tips_wraper > p {
+                text-align: center;
+                font-weight: bold;
+            }
+
+            .tips_wraper:before {
+                content: '';
+                width: 0;
+                height: 0;
+                border-left: 20px solid transparent;
+                border-right: 20px solid transparent;
+                border-top: 20px solid #fff;
+                position: absolute;
+                left: 50%;
+                top: 0;
+                transform: translate(-50%,0);
+            }
+
+        .copy_right {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            line-height: 24px;
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap-page">
+        <div class="page">
+            <div class="block qrcode_wraper">
+                <img id="gzh_qrcode" width="100%" class="follow_qrcode" src="" />
+            </div>
+            <div class="block tips_wraper">
+                <p style="font-size:16px;" id="gzh_name">LILANZ</p>
+                <p style="font-size:12px;font-weight:normal;color:rgba(255,255,255,.4);">LESS IS MORE</p>
+                <img style="width:70%;display:block;margin:20px auto;" src="../../res/img/finger_scan.png" />
+                <p>扫一扫或长按识别关注</p>
+            </div>
+            <p class="copy_right">&copy;2018 利郎(中国)有限公司</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return "";
+        }
+
+        window.onload = function () {
+            var configkey = getQueryString("key");
+            if (configkey == "5") {
+                document.querySelector("#gzh_name").innerText = "利郎男装";
+                document.querySelector("#gzh_qrcode").setAttribute("src", "../../res/img/NewVip/follow_5.png");
+            } else if (configkey == "7") {
+                document.querySelector("#gzh_name").innerText = "利郎轻商务";
+                document.querySelector("#gzh_qrcode").setAttribute("src", "../../res/img/NewVip/follow_7.png");
+            }
+        }
+    </script>
+</body>
+</html>

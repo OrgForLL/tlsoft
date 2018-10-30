@@ -1,0 +1,349 @@
+.wrap-page {
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.no-meeting {
+    text-align: center;
+    display: none;
+}
+
+.no-meeting img {
+    width: 5em;
+}
+
+.no-meeting p {
+    color: #6a6a6a;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/*.no-meeting p:last-child {
+    font-size: 14px;
+    margin: 8px;
+    font-weight: normal;
+}
+*/
+
+.page {
+    background: rgba(255, 255, 255, 0.2);
+    top: 10px;
+    bottom: 50px;
+    left: 10px;
+    right: 10px;
+    border-radius: 8px;
+    width: auto;
+    padding: 0;
+    -webkit-display: flex;
+    display: flex;
+    flex-direction: column;
+}
+
+.tip {
+    background-color: #cc5312;
+    color: #fff;
+    text-align: center;
+    padding: 4px 0;
+    display: none;
+}
+
+.info-wrap {
+    flex: 1;
+    color: #fff;
+    overflow-y: auto;
+    -webkit-overflow-scroll: touch;
+}
+
+.speaker-info {
+    padding: 15px 12px;
+    z-index: 1000;
+    border-bottom: 1px dashed #6c6a6a;
+}
+
+.speaker-info .identity {
+    display: inline-block;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+.speaker-info .avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-image: url(../../img/lilanzlogo1.jpg);
+    background-size: cover;
+    background-position: center;
+    border: 3px solid #fff;
+    margin: 0 auto;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.speaker-info .post {
+    background-color: #ddd;
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    color: #333;
+    font-size: 12px;
+}
+
+.speaker-info .speaker {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.meet-info,
+.score-info {
+    padding: 15px 12px;
+    border-bottom: 1px dashed #6c6a6a;
+}
+
+.meet-info div,
+.score-info div {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.meet-info div:last-child {
+    margin-bottom: 0;
+}
+
+.meet-info div.wrap-txt {
+    white-space: normal;
+    -webkit-display: flex;
+    display: flex;
+}
+
+.meet-info div.wrap-txt .title {
+    min-width: 62px;
+}
+
+.meet-info div.wrap-txt .txt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.meet-info div a {
+    color: #66c27e;
+    text-decoration: underline;
+    display: block;
+    margin-bottom: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.meet-info div a:last-child {
+    margin-bottom: 0;
+}
+
+.meet-info div a:visited {
+    color: #a6a5aa;
+}
+
+.meet-info div .title,
+.score-info div .title {
+    /*color: #a6a5aa;*/
+    color: #fff;
+    margin-right: 6px;
+}
+
+.meet-info div #theme {
+    color: #66c27e;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.comment-area {
+    padding: 15px 12px;
+    display: none;
+}
+
+.comment-area .heading {
+    text-align: center;
+    color: #a6a5aa;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.comment-area .comment-item {
+    margin-bottom: 12px;
+}
+
+.comment-area textarea {
+    border-radius: 0;
+    border: 0;
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.comment-area .star-wrap {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.comment-item .icon-star {
+    background-image: url(../../img/llMeeting/icon-star.png);
+    background-size: cover;
+    width: 22px;
+    height: 22px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.comment-item .icon-star-o {
+    background-position: 0 -4px;
+}
+
+.comment-item .icon-star-s {
+    background-position: 0 -27px;
+}
+
+.btn_comment,
+.btn_sumbit {
+    height: 45px;
+    line-height: 45px;
+    background-color: #18825e;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.btn_comment {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.btn_comment:active,
+.btn_sumbit:active {
+    background-color: #167a58;
+}
+
+.logo {
+    width: 30%;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+/*circle-loader style*/
+
+.loader-wrap {
+    position: absolute;
+    top: 10px;
+    bottom: 50px;
+    left: 10px;
+    right: 10px;
+    -webkit-display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 2000;
+    border-radius: 8px;
+}
+
+.circle-loader {
+    margin: 0 0 30px 10px;
+    border: 3px solid rgba(0, 0, 0, 0.2);
+    border-left-color: #5cb85c;
+    animation-name: loader-spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.circle-loader,
+.circle-loader:after {
+    border-radius: 50%;
+    width: 4.5em;
+    height: 4.5em;
+    z-index: 2000;
+}
+
+.load-complete {
+    -webkit-animation: none;
+    animation: none;
+    border-color: #5cb85c;
+    transition: border 500ms ease-out;
+}
+
+.checkmark {
+    display: none;
+}
+
+.checkmark.draw:after {
+    animation-duration: 800ms;
+    animation-timing-function: ease;
+    animation-name: checkmark;
+    transform: scaleX(-1) rotate(135deg);
+}
+
+.checkmark:after {
+    opacity: 1;
+    height: 2em;
+    width: 1em;
+    transform-origin: left top;
+    border-right: 2px solid #5cb85c;
+    border-top: 2px solid #5cb85c;
+    content: '';
+    left: 1em;
+    top: 2.2em;
+    position: absolute;
+}
+
+@keyframes loader-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes checkmark {
+    0% {
+        height: 0;
+        width: 0;
+        opacity: 1;
+    }
+    20% {
+        height: 0;
+        width: 1em;
+        opacity: 1;
+    }
+    40% {
+        height: 2em;
+        width: 1em;
+        opacity: 1;
+    }
+    100% {
+        height: 2em;
+        width: 1em;
+        opacity: 1;
+    }
+}

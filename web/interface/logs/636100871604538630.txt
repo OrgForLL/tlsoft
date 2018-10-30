@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\cmg.asmx(74): error CS0029: 无法将类型“System.Text.StringBuilder”隐式转换为“object[]”

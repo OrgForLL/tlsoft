@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>项目验收表模板</title>
+    <style type="text/css">
+    body {
+        font-family: "宋体", arial, "hiragino sans gb", "microsoft yahei", sans-serif;
+    }
+    
+    .outer_table {
+        border-left: 1px solid #000;
+        border-top: 1px solid #000;
+    }
+    
+    td {
+        padding: 4px 6px;
+        line-height: 1.8em;
+        border-right: 1px solid #000;
+        border-bottom: 1px solid #000;
+    }
+    
+    p {
+        margin: 0;
+    }
+    
+    .redtxt {
+        color: #F00;
+    }
+    
+    .paragraph {
+        line-height: 1.6em;
+        text-indent: 2em;
+    }
+    
+    .subtitle {
+        font-weight: bold;
+    }
+    
+    .tableName {
+        font-size: 18px;
+        font-family: "黑体", arial, "hiragino sans gb", "microsoft yahei", sans-serif;
+    }
+    
+    .inline_td {
+        padding: 0;
+        border-right: 0;
+        border-bottom: 0;
+    }
+    
+    .sign {
+        margin-top: 30px;
+        margin-left: 55%;
+    }
+    
+    .date {
+        text-align: right;
+    }
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/template.js"></script>
+    <script type="text/javascript" src="../../res/js/json2.js"></script>
+    <script id="tpl_table" type="text/html">
+        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="outer_table">
+            <tr>
+                <td height="37" colspan="6"><strong class="tableName">{{if (jbzl[0].lx) == 1}}研发项目验收表{{else}}研发项目总结{{/if}}</strong></td>
+            </tr>
+            <tr>
+                <td width="16%" height="34" align="center">项目名称</td>
+                <td colspan="5" align="center">{{jbzl[0].xmmc}}</td>
+            </tr>
+            <tr>
+                <td height="46" align="center">项目编号</td>
+                <td width="17%" align="center">{{jbzl[0].xmbh}}</td>
+                <td width="17%" align="center">项目负责人</td>
+                <td width="17%" align="center">{{jbzl[0].fzrxm}}</td>
+                <td width="17%" align="center">职务</td>
+                <td width="16%" align="center">{{jbzl[0].fzrzw}}</td>
+            </tr>
+            <tr>
+                <td height="46" align="center">填写日期</td>
+                <td align="center">{{jbzl[0].rq}}</td>
+                <td align="center">批准立项时间</td>
+                <td align="center">{{jbzl[0].lxsj}}</td>
+                <td align="center">计划完成时间</td>
+                <td align="center">{{jbzl[0].wcsj}}</td>
+            </tr>
+            <tr {{if (jbzl[0].lx)==1 }} style="display:table-row;" {{else}} style="display:none;" {{/if}}>
+                <td height="46" align="center">面料编号</td>
+                <td align="center" class="redtxt">{{jbzl[0].mlbh}}</td>
+                <td align="center"></td>
+                <td align="center"></td>
+                <td align="center"></td>
+                <td align="center"></td>
+            </tr>
+            <tr>
+                <td align="center">项目概述</td>
+                <td colspan="5" align="left" class="paragraph">{{jbzl[0].xmgs}}</td>
+            </tr>
+            <tr>
+                <td align="center">项目进度</td>
+                <td colspan="5" align="left" valign="top">
+                    <p align="left" class="paragraph">{{jbzl[0].xmjd}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">研发费用归集</td>
+                <td colspan="5" align="center" class="inline_td">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="inline_table">
+                        <tr>
+                            <td width="11%" align="center">序号</td>
+                            <td width="70%" align="center">费用项目</td>
+                            <td width="19%" align="center">金额(元)</td>
+                        </tr>
+                        {{each fyxx}}
+                        <tr>
+                            <td align="center">{{$value.xh}}</td>
+                            <td align="left">{{$value.fyxm}}</td>
+                            <td align="right">{{formatMoney($value.je,2)}}</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">费用分配说明</td>
+                <td colspan="5" align="center">
+                    <p align="left" class="paragraph">{{jbzl[0].fpsm}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td align="center">{{if (jbzl[0].lx) == 1}}验收评价{{else}}总结评价{{/if}}</td>
+                <td colspan="5" align="right">
+                    <p align="left" class="paragraph">{{jbzl[0].pj}}</p>
+                    <p align="left" class="sign">项目负责人确认 </p>
+                    <p align="left" class="date">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</p>
+                </td>
+            </tr>
+            <tr>
+                <td height="117" align="center">部门负责人意见</td>
+                <td colspan="5" align="center">
+                    <p align="left" class="sign">签章 </p>
+                    <p align="left" class="date">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</p>
+                </td>
+            </tr>
+        </table>
+    </script>
+    <script type="text/javascript">
+    $(function() {
+
+        var tzid = getUrlParam("tzid");
+        var id = getUrlParam("id");
+
+        // 声明模板格式化金额函数
+        template.helper('formatMoney', function(s, n) {
+            return formatMoney(s, n);
+        });
+
+        // 格式化金额
+        function formatMoney(s, n) {
+            n = n > 0 && n <= 20 ? n : 2;
+            s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+            var l = s.split(".")[0].split("").reverse(),
+                r = s.split(".")[1];
+            t = "";
+            for (i = 0; i < l.length; i++) {
+                t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+            }
+            return t.split("").reverse().join("") + "." + r;
+        }
+
+        // 获取地址栏参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+
+        // 加载表格数据
+        function loadTableInfo() {
+            $.ajax({
+                type: "POST",
+                timeout: 15 * 1000,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                url: "../../../tl_cw/cw_RDPrintApi.aspx?method=getYfxmysInfo",
+                data: {
+                    tzid: tzid,
+                    id: id
+                },
+                success: function(msg) {
+                    var data = JSON.parse(msg);
+                    if (data.code == 200) {
+
+                        var item = data.info.jbzl[0];
+                        item.xmjd = item.xmjd.replace(/\r\n/g, "</p><p class=paragraph>");
+                        item.pj = item.pj.replace(/\r\n/g, "</p><p class=paragraph>");
+                        // item.lx = 2;
+                        $("body").append(template("tpl_table", data.info));
+
+                    } else {
+                        alert(data.msg);
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("[" + textStatus + "]：" + errorThrown);
+                }
+            }); //end AJAX
+        }
+
+        loadTableInfo();
+    });
+    </script>
+</body>
+
+</html>

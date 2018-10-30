@@ -1,0 +1,15 @@
+由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 218.66.79.138:80System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。 218.66.79.138:80
+   在 System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   在 System.Net.Sockets.Socket.InternalConnect(EndPoint remoteEP)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.GetResponse()
+   在 nrWebClass.clsNetExecute.HttpRequest(String url)
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.SynchronousDate.pullDatas(String bdate, String edate) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 105
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.SynchronousDate.tbData(String ctrl, String userid, String username, String date, String ids) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 48
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 544
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

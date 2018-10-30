@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>利郎微学院</title>
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/flickity.css" media="screen" />
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
+            font-size: 1.2em;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        .top {
+            width: 100%;
+            height: 66px;
+            background-color: #272b2e;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-bottom: 1px solid #444;
+            padding: 10px 0px 10px 25px;
+            box-sizing: border-box;
+            color: #fff;
+            overflow: hidden;
+            z-index: 100;
+        }
+
+            .top div {
+                float: left;
+            }
+
+        .headimg {
+            width: 42px;
+            height: 42px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            background-image: url(img/headimg.png);
+            background-size: cover;
+        }
+
+        .top img {
+            width: 100%;
+            height: auto;
+        }
+
+        .userinfo {
+            margin-left: 5px;
+            height: 46px;
+            font-size: 18px;
+            line-height: 46px;
+            padding-left: 15px;
+        }
+
+        .wxnick {
+            letter-spacing: 2px;
+        }
+
+        .wxnums {
+            font-size: 0.8em;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            line-height: 20px;
+        }
+
+        .floatfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .icons {
+            width: 100%;
+            margin-top: 66px;
+            margin-bottom: 56px;
+        }
+
+        .bottomnav {
+            height: 56px;
+            background-color: #f8f8f8;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            border-top: 1px solid #cbcbcb;
+            font-size: 16px;
+        }
+
+        .navul {
+            list-style: none;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+
+            .navul li {
+                width: 25%;
+                float: left;
+                text-align: center;
+                height: 40px;
+                color: #989898;
+                cursor: pointer;
+            }
+
+            .navul i {
+                display: block;
+                font-size: 1.2em;
+            }
+
+            .navul p {
+                font-weight: 400;
+                font-size: 0.8em;
+                line-height: 24px;
+            }
+
+        #selected {
+            color: #272b2e;
+        }
+
+        .rightset {
+            position: absolute;
+            right:0;            
+            top: 0;
+            font-size: 1.2em;
+            line-height: 66px;
+            vertical-align: middle;
+            padding:0 20px;
+        }
+
+        .cube3d {
+            -webkit-transform: translateZ(0);
+            -moz-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            -o-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+
+        .gallery {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+            .gallery img {
+                height: 190px;
+                width: auto;
+            }
+
+        .flickity-page-dots {
+            bottom: -22px;
+        }
+
+            /* dots are lines */
+            .flickity-page-dots .dot {
+                height: 4px;
+                width: 40px;
+                margin: 0;
+                border-radius: 0;
+            }
+
+        .flickity-page-dots {
+            bottom: 4px;
+        }
+
+        .flickity-prev-next-button {
+            border-radius: 2px;
+            width: 30px;
+            height: 36px;
+        }
+
+        .iconul {
+            list-style: none;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+            .iconul li {
+                float: left;
+                width: 33.33%;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+
+        .circlebg {
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+            .circlebg img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .circlebg p {
+                font-size: 14px;
+                margin-top: -4px;
+                color: #555;
+            }
+        /*loader css*/
+        .mask {
+            color: #fff;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            font-size: 1em;
+            text-align: center;
+            display:none;
+        }
+
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 90px;
+            margin-top: -50px;
+            margin-left: -100px;
+            background-color: #272b2e;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            box-shadow: 0px 0px 1px #555;
+        }
+
+        #loadtext {
+            margin-top: 5px;
+            font-weight: bold;
+            font-size:0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <div class="headimg"></div>
+            <div class="userinfo">
+                <p class="wxnick">陈小红</p>
+            </div>
+            <div class="rightset"><i class="fa fa-share-alt"></i></div>
+        </div>
+        <div class="icons">
+            <div style="width: 100%; height: 190px;">
+                <div class="gallery  gallery--line-dots js-flickity"
+                    data-flickity-options='{ "imagesLoaded": false, "percentPosition": false, "autoPlay":3000,"contain":true }'>
+                    <img src="img/slider1.jpg" alt="" />
+                    <img src="img/slider2.jpg" alt="" />
+                    <img src="img/slider3.jpg" alt="" />
+                    <img src="img/slider4.jpg" alt="" />
+                </div>
+            </div>
+            <div class="iconlist floatfix">
+                <ul class="iconul floatfix">
+                    <li onclick="clickgo('xppx')">
+                        <div class="circlebg">
+                            <img src="img/xppx.png" alt="" />
+                            <p>新品培训</p>
+                        </div>
+                    </li>
+                    <li onclick="clickgo('xsjq')">
+                        <div class="circlebg">
+                            <img src="img/xsjq.png" alt="" />
+                            <p>销售技巧</p>
+                        </div>
+                    </li>
+                    <li onclick="clickgo('cljq')">
+                        <div class="circlebg">
+                            <img src="img/cljq.png" alt="" />
+                            <p>陈列技巧</p>
+                        </div>
+                    </li>
+                    <li onclick="clickgo('xljt')">
+                        <div class="circlebg">
+                            <img src="img/xljt.png" alt="" />
+                            <p>心灵鸡汤</p>
+                        </div>
+                    </li>
+                    <li onclick="clickgo('ppwh')">
+                        <div class="circlebg">
+                            <img src="img/ppwh.png" alt="" />
+                            <p>品牌文化</p>
+                        </div>
+                    </li>
+                    <li onclick="clickgo('sxy')">
+                        <div class="circlebg">
+                            <img src="img/sxy.png" alt="" />
+                            <p>商学院</p>
+                        </div>
+                    </li>
+                    <li onclick="clickgo('wdqz')">
+                        <div class="circlebg">
+                            <img src="img/wdqz.png" alt="" />
+                            <p>圈子</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottomnav">
+            <ul class="navul floatfix">
+                <li onclick="switchMenu(0)" id="selected">
+                    <i class="fa fa-desktop"></i>
+                    <p>首 页</p>
+                </li>
+                <li onclick="switchMenu(1)">
+                    <i class="fa fa-tasks"></i>
+                    <p>任 务</p>
+                </li>
+                <li onclick="switchMenu(2)">
+                    <i class="fa fa-pencil"></i>
+                    <p>考 核</p>
+                </li>
+                <li onclick="switchMenu(3)">
+                    <i class="fa fa-user"></i>
+                    <p>我 的</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="mask">
+        <div class="loader">
+            <div>
+                <i class="fa fa-2x fa-warning (alias)"></i>
+            </div>
+            <p id="loadtext">正在开发中...</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type='text/javascript' src='js/fastclick.min.js'></script>
+    <script type='text/javascript' src='js/flickity.pkgd.min.js'></script>
+    <script type="text/javascript">
+        $(function () {
+            FastClick.attach(document.body);
+        });
+
+        function switchMenu(order) {
+            //$(".navul li[id=selected]").removeAttr("id");
+            //$(".navul li").eq(order).attr("id", "selected");
+
+            switch (order) {
+                case 3:
+                    window.location.href = "usercenter.html";
+                    break;
+                default:
+                    showLoader("warn", "正在开发中...");
+                    setTimeout(function () {
+                        $(".mask").hide();
+                    }, 1500);
+                    break;
+            }
+        }
+
+        function showLoader(type, txt) {
+            switch (type) {
+                case "loading":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-spinner fa-pulse");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "successed":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-check");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "error":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-close (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+                case "warn":
+                    $(".mask .fa").removeAttr("class").addClass("fa fa-2x fa-warning (alias)");
+                    $("#loadtext").text(txt);
+                    $(".mask").show();
+                    break;
+            }
+        }
+
+        $(".rightset").click(function () {
+            showLoader('warn', '正在开发中...');
+            setTimeout(function () {
+                $(".mask").hide();
+            }, 1500);
+        });
+
+        function clickgo(mname) {
+            switch (mname) {
+                case "xppx":
+                    window.location.href = "http://tm.lilanz.com/retail/wxarticles/articlelist.aspx?ssid=15&autoAuth=enterprise";
+                    break;
+                case "xsjq":
+                    window.location.href = "http://tm.lilanz.com/retail/wxarticles/articlelist.aspx?ssid=12&autoAuth=enterprise";
+                    break;
+                case "cljq":
+                    window.location.href = "http://tm.lilanz.com/retail/wxarticles/articlelist.aspx?ssid=11&autoAuth=enterprise";
+                    break;
+                case "xljt":
+                    window.location.href = "http://tm.lilanz.com/retail/wxarticles/articlelist.aspx?ssid=13&autoAuth=enterprise";
+                    break;
+                case "ppwh":
+                    window.location.href = "http://tm.lilanz.com/retail/wxarticles/articlelist.aspx?ssid=14&autoAuth=enterprise";
+                    break;
+                case "wdqz":
+                    window.location.href = "http://tm.lilanz.com/wxDevelopment/WebBLL/LilanzGroupProject/OauthAndRedirect.aspx?gourl=GroupLists.aspx";
+                    break;
+                default:
+                    showLoader('warn', '正在开发中...');
+                    setTimeout(function () {
+                        $(".mask").hide();
+                    }, 1500);
+            }
+        }
+    </script>
+</body>
+</html>

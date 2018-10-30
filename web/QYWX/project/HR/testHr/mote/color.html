@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>2015秋冬色彩规划方案 - 移动端</title>
+		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=2.0 user-scalable=yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes">  
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">  
+		<meta content="telephone=no,email=no" name="format-detection">
+		<link rel="stylesheet" href="css/custom.css" />
+		<script src="js/modernizr.custom.js"></script>
+		<!--菜单样式-->
+		<link type="text/css" rel="stylesheet" href="css/dist/demo.css" />
+		<link type="text/css" rel="stylesheet" href="css/dist/jquery.mmenu.all.css" />
+		<script type="text/javascript" src="js/jquery-1.10.0.min.js"></script>
+		<script type="text/javascript" src="js/dist/jquery.mmenu.min.all.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('nav#menu').mmenu({
+					extensions	: [ 'effect-slide-menu', 'pageshadow' ],
+					searchfield	: false,       //修改为false
+					counters	: true,
+					navbars		: [
+						{
+							position	: 'top'
+						}, {
+							position	: 'bottom',
+							content		: [ '<a href="#">Visit website</a>' ]
+						}
+					]
+				});
+			});
+		</script>
+		<style>
+		.sl-content {
+			background: #fff;
+		}
+		</style>
+	</head>
+	<body>
+      <div id="page">
+			<div class="header">
+				<a href="#menu"></a>
+				2015秋冬色彩规划方案
+			</div>
+
+			<nav id="menu">
+				<ul>
+				    <li><a href="zhuti.html">2015秋季设计主题</a></li>
+				    <li><a href="color.html">2015秋冬色彩规划方案</a></li>
+				    <li><a href="beCare.html">产品陈列前注意事项</a></li>
+					<li><a href="mote.html">秋季模特搭配方案</a></li>
+					<li><a href="#">秋一波货物陈列指引</a>
+                        <ul>
+							<li><a href="serie1_1.html">第5代货柜陈列</a></li>
+							<li><a href="serie1_2.html">第5代精品货柜陈列</a></li>
+						</ul>
+					</li>
+					<li><a href="#">秋二波货物陈列指引</a>
+                        <ul>
+							<li><a href="serie2_1.html">第5代货柜陈列</a></li>
+							<li><a href="serie2_2.html">第5代精品货柜陈列</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+<!-- END -->
+
+
+
+ 		<div class="container demo-2">
+			<div id="slider" class="sl-slider-wrapper">
+				<div class="sl-slider">
+					
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/color1.jpg" class="bg-img">						
+							<p class="text_title">秋1（FALL 1）</p>
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-slide-inner">
+                            <img src="images/color2.jpg" class="bg-img">
+                            <p class="text_title">秋2（FALL 2）</p>
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/color3.jpg" class="bg-img">
+                            <p class="text_title">冬1（WINTER 1）</p>
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/color4.jpg" class="bg-img">						
+							<p class="text_title">冬2（WINTER 2）</p>
+						</div>
+					</div>
+
+					<div class="tc"><img class="arrowBtn" src="images/arrowBtn.png" alt="" /></div>
+					
+				</div>
+			</div> 
+		</div>
+
+		<script src="js/jquery.ba-cond.min.js"></script>
+		<script src="js/jquery.slitslider.js"></script>
+		<script src="js/jquery.touchSwipe.min.js"></script>
+	 	<script>
+			$(function() {
+				$('.sl-slider-wrapper').height($(window).height() - 40);
+				$('.bg-img').height($(window).height() - 75);
+				$('.bg-img').width($(window).width());
+				var Page = (function() {
+					var $nav = $('#nav-dots > span'), slitslider = $('#slider').slitslider({
+						//interval : 2000, //自动播放时间间隔
+						//autoplay : true, //是否自动播放
+						onBeforeChange : function(slide, pos) {
+							$nav.removeClass('nav-dot-current');
+							$nav.eq(pos).addClass('nav-dot-current');
+						}
+					})
+					
+					$('body').swipe({
+						swipeUp : function(event, direction, distance, duration, fingerCount) {
+							slitslider.next();
+						},
+						swipeDown : function(event, direction, distance, duration, fingerCount) {
+							slitslider.previous();
+						}
+					});
+				})();
+			});
+		</script> 
+	</body>
+</html>

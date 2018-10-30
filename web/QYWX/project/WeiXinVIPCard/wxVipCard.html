@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <title>激活会员卡</title>
+    <link rel="stylesheet" href="./wxvipcard/jquery-3.2.1.min.js" />
+    <style type="text/css">
+        * {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+        }
+
+        .vip-card-page {
+            height: 100%;
+            width: 100%;
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        .header-logo {
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+
+        .header-logo>img {
+            width: 100px;
+        }
+
+        .entry {
+            padding: 8px 20px;
+            position: relative;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            font-size: 14px;
+            line-height: 30px;
+            background-color: #FFF;
+        }
+
+        .entry::after {
+            content: " ";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            border-top: 1px solid #E5E5E5;
+            color: #E5E5E5;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            left: 15px;
+            right: 15px;
+            z-index: 2;
+        }
+
+        .entry input,
+        .entry label[for],
+        .entry textarea {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .entry-list {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .entry-link {
+            color: #586c94;
+            font-size: 14px;
+        }
+
+        .entry-bd {
+            -webkit-box-flex: 1;
+            flex: 1;
+        }
+
+        .entry-ft {
+            text-align: right;
+            color: #999;
+        }
+
+        .entry-ft i {
+            font-size: 24px;
+            color: #F43530;
+        }
+
+        .entry-warn {
+            color: #F43530;
+        }
+
+        .entry-label {
+            display: block;
+            width: 85px;
+            word-wrap: break-word;
+            word-break: break-all;
+            color: #969696;
+        }
+
+        .required {
+            color: #e70000;
+        }
+
+        .entry-input {
+            width: 100%;
+            border: 0;
+            outline: 0;
+            background-color: transparent;
+            font-size: 14px;
+            color: inherit;
+            height: 28px;
+            line-height: 28px;
+        }
+
+        .entry-textarea {
+            display: block;
+            border: 0;
+            resize: none;
+            width: 100%;
+            height: 100px;
+            color: inherit;
+            font-size: 14px;
+            line-height: inherit;
+            outline: 0;
+        }
+
+        .entry-btn {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .btn {
+            margin: 10px 15px 4px;
+        }
+
+        .btn-primart:not(.btn-disabled):visited {
+            color: #FFF;
+        }
+
+        .btn-primart {
+            background-color: #000;
+            /* #22a571; */
+        }
+
+        .prompt {
+            padding: 6px 15px;
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+        }
+
+        .prompt>p {
+            line-height: 1.6;
+        }
+
+        #submit {
+            position: relative;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 14px;
+            padding-right: 14px;
+            box-sizing: border-box;
+            font-size: 18px;
+            text-align: center;
+            text-decoration: none;
+            color: #FFF;
+            line-height: 40px;
+            border-radius: 2px;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            overflow: hidden;
+        }
+
+        #submit:after {
+            content: " ";
+            width: 200%;
+            height: 200%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            box-sizing: border-box;
+            border-radius: 10px;
+        }
+
+        /*--------onloag------------*/
+
+        #myLoading {
+            display: none;
+        }
+
+        .load_toast_mask,
+        .load_toast_container {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+        }
+
+        .load_toast_mask {
+            z-index: 9998;
+            background-color: rgba(37, 38, 45, .4);
+        }
+
+        .load_toast_container {
+            -webkit-transform: translate(100%, 100%);
+            transform: translate(100%, 100%);
+        }
+
+        .lee_toast {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: auto;
+            display: -webkit-box;
+            display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            padding: 13px 16px;
+            color: #ccc;
+            background-color: rgba(37, 38, 45, .9);
+            border-radius: 4px;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+
+        .load_img img {
+            width: 24px;
+            height: 24px;
+            display: block;
+            margin-right: 10px;
+        }
+
+        .load_text {
+            max-width: 40vw;
+            max-height: 200px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="vip-card-page">
+        <div class="header-logo">
+            <img src="./wxvipcard/lilanz-logo.png" alt="">
+        </div>
+        <div class="entry">
+            <div class="entry-hd">
+                <label class="entry-label">手机
+                    <!-- <span class="required">*</span> -->
+                </label>
+            </div>
+            <div class="entry-bd">
+                <p id="phone"></p>
+                <!-- <input class="entry-input" type="number" value="18833334444" /> -->
+            </div>
+        </div>
+        <div class="entry">
+            <div class="entry-hd">
+                <label class="entry-label">姓名
+                </label>
+            </div>
+            <div class="entry-bd">
+                <p id="vipName"></p>
+                <!-- <input id="vipName" class="entry-input" type="text" placeholder="请输入姓名" /> -->
+            </div>
+        </div>
+        <div class="entry">
+            <div class="entry-hd">
+                <label class="entry-label">性别
+                </label>
+            </div>
+            <div class="entry-bd">
+                <p id="vipSex"></p>
+                <!-- <input id="vipSex" class="entry-input" type="text" /> -->
+            </div>
+        </div>
+        <div class="entry">
+            <div class="entry-hd">
+                <label class="entry-label">生日
+                </label>
+            </div>
+            <div class="entry-bd">
+                <p id="birthday"></p>
+                <!-- <input id="birthday" class="entry-input" type="date" /> -->
+            </div>
+        </div>
+        <div class="entry">
+            <div class="entry-hd">
+                <label class="entry-label">门店
+                </label>
+            </div>
+            <div class="entry-bd">
+                <p id="mdmc"></p>
+                <!-- <input id="birthday" class="entry-input" type="date" /> -->
+            </div>
+        </div>
+        <div class="entry-btn">
+            <div class="btn">
+                <a class="btn-primart" href="javascript:void(0)" id="submit">激活会员卡</a>
+            </div>
+        </div>
+        <div class="prompt">
+            <p id="remark">亲爱的用户，以上信息将帮助我们为您定制会员福利，请您尽量准确提供，谢谢！</p>
+        </div>
+    </div>
+    <!--加载提示-->
+    <div class="load_toast" id="myLoading">
+        <div class="load_toast_mask"></div>
+        <div class="load_toast_container">
+            <div class="lee_toast">
+                <div class="load_img">
+                    <img src="./wxvipcard/my_loading.gif" />
+                </div>
+                <div class="load_text">加载中...</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./wxvipcard/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var activate_ticket = '', openid = '', card_id = '',
+                encrypt_code = '', mdid = '', mdmc = '';
+            
+            var isSubmit = true;
+
+            var URL = 'crmapi.jsp';
+            var URL_DEV = 'http://tm.lilanz.com/QYWX/Test/CRM/crmapi.ashx';
+            URL = URL_DEV;
+
+            function init() {
+                getUrlParams();
+                bindEvents();
+                getActivetempinfo();
+            }
+
+            function bindEvents() {
+                $('#submit').on('click', function () {
+                    if (isSubmit) {
+                        activateCard();
+                    }
+                })
+            }
+
+            function getUrlParams() {
+                activate_ticket = GetQueryParams('activate_ticket');
+                openid = GetQueryParams('openid');
+                card_id = GetQueryParams('card_id');
+                encrypt_code = GetQueryParams('encrypt_code');
+
+                var outer_str = GetQueryParams('outer_str');
+                outer_str = outer_str.split(',');
+
+                if (outer_str.length > 0) {
+                    mdid = outer_str[0];
+                    mdmc = outer_str[1];
+                }
+            }
+
+            /* 根据 activate_ticker 获取用户填写的信息 */
+            function getActivetempinfo() {
+                // var api = url + 'WxCardBag_getInfo';
+                var api = URL + '?act=WxCardBag_getInfo';
+                onLoading("正在获取用户数据");
+                $.ajax({
+                    url: api,
+                    type: 'POST',
+                    data: {
+                        ticket: encodeURIComponent(activate_ticket),
+                        orgid: mdid,
+                        code: encodeURIComponent(encrypt_code),
+                        wxopenid: encodeURIComponent(openid),
+                        card_id: encodeURIComponent(card_id)
+                    },
+                    dataType: 'JSON',
+                    timeout: 10000,
+                    contentType: 'application/x-www-form-urlencoded'
+                }).then(function (res) {
+                    if (res.errcode == 0) {
+                        if (res.data.errcode == 0) {
+                            var list = res.data.info.common_field_list;
+                            for (var i = 0; i < list.length; i++) {
+                                setUserInfo(list[i]);
+                            }
+                            $('#mdmc').text(mdmc);
+                            $('#remark').text(res.data.remark);
+
+                            $("#myLoading").hide();
+                        } else {
+                            isSubmit = false;
+                            $('#remark').text(res.data.remark);
+                            document.querySelector('#submit').style.backgroundColor = '#b0b0b0';
+                            document.querySelector('#submit').style.color = '#eeeeee';
+                            document.querySelector('#remark').style.color = '#e70000';
+                            onLoading(res.data.errmsg, true);
+                            setTimeout(function() {
+                                $("#myLoading").hide();
+                            }, 1000);
+                        }
+                    } else {
+                        onLoading("获取用户数据失败！", true);
+                        setTimeout(function () {
+                            $("#myLoading").hide();
+                        }, 1000);
+                        console.error(res.errmsg);
+                    }
+                }).fail(function (err) {
+                    console.error(err);
+                })
+            }
+
+            /* 激活会员卡 */
+            function activateCard() {
+                // var api = url + 'WxCardBag_activate';
+                var api = URL + '?act=WxCardBag_activate';
+                onLoading('正在激活会员卡！');
+                $.ajax({
+                    url: api,
+                    type: 'POST',
+                    data: {
+                        orgid: mdid,
+                        code: encodeURIComponent(encrypt_code),
+                        ticket: encodeURIComponent(activate_ticket),
+                        card_id: encodeURIComponent(card_id),
+                        wxopenid: encodeURIComponent(openid)
+                    },
+                    dataType: 'JSON',
+                    timeout: 10000,
+                    contentType: 'application/x-www-form-urlencoded'
+                }).then(function (res) {
+                    if (res.errcode == 0) {
+                        wx.closeWindow();
+                    } else {
+                        onLoading(res.errmsg, true);
+                        setTimeout(function () {
+                            $("#myLoading").hide();
+                        }, 1000);
+                        console.error(res.errmsg);
+                    }
+                }).fail(function (err) {
+                    console.error(err);
+                })
+            }
+
+            function setUserInfo(data) {
+                if (data.name === "USER_FORM_INFO_FLAG_MOBILE") {
+                    $('#phone').text(data.value);
+                } else if (data.name === "USER_FORM_INFO_FLAG_SEX") {
+                    $('#vipSex').text(data.value);
+                } else if (data.name === "USER_FORM_INFO_FLAG_BIRTHDAY") {
+                    $('#birthday').text(data.value);
+                } else if (data.name === "USER_FORM_INFO_FLAG_NAME") {
+                    $('#vipName').text(data.value);
+                }
+            }
+
+            /* 获取URL GET参数 */
+            function GetQueryParams(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null)
+                    return decodeURIComponent(r[2]);
+                else
+                    return "";
+            };
+
+            /* 显示加载状态 */
+            function onLoading(msg, trun) {
+                $(".load_text").text(msg || '加载中...');
+                if (trun) {
+                    $(".load_img").hide();
+                } else {
+                    $(".load_img").show();
+                }
+                $("#myLoading").show();
+            };
+
+            init();
+        })
+    </script>
+</body>
+
+</html>

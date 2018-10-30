@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-tap-highlight-color: transparent
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+input {
+    -webkit-appearance: none;
+}
+
+body {
+    font-family: Helvetica, Arial, STHeiTi, "Hiragino Sans GB", "Microsoft Yahei", "微软雅黑", STHeiti, "华文细黑", sans-serif;
+    font-size: 14px;
+    color: #303133;
+    background-color: #f3f3f3;
+}
+
+@font-face {
+    font-family: "iconfont";
+    src: url('../fonts/iconfont.ttf?t=1524444801362') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('../fonts/iconfont.svg?t=1524444801362#iconfont') format('svg');
+    /* iOS 4.1- */
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.page_wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    -webkit-overflow-scroll: touch;
+}
+
+.top_info {
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+    padding: 10px 15px;
+    font-size: 16px;
+}
+
+.top_info .avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 3px;
+    background-image: url(../img/default_avatar2.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-right: 15px;
+}
+
+.detail_info {
+    margin-top: 15px;
+}
+
+.detail_info .title {
+    padding: 0 0 10px 15px;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.detail_info .item_wrap {
+    padding-left: 15px;
+    background: #fff;
+}
+
+.item_wrap .item {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.item .item_name {
+    min-width: 70px;
+}
+
+.item .item_con {
+    margin-right: 15px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.item_con p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.item_con .icon_arrow_right {
+    display: none;
+    font-size: 22px;
+    color: #ccc;
+}
+
+.item_con .icon_arrow_right::before {
+    content: "\e612";
+}

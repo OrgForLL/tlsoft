@@ -1,0 +1,404 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="renderer" content="webkit" />
+    <link rel="icon" href="favicon.ico" />
+    <title>利郎图文编辑器 V2.2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Microsoft Yahei";
+            font-size: 12px;
+        }
+
+        .page-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            background: #fff url(bg6.jpg) 50% 50% no-repeat;
+            background-size:cover;            
+            -webkit-animation: zoom 20s ease-in-out infinite;
+            animation: zoom 20s ease-in-out infinite;
+            -moz-animation: zoom 20s ease-in-out infinite;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-left: -50px;
+            font-size: 30px;
+            font-weight: bold;
+            text-shadow: 0px 1px 1px #555;
+            margin-top: 165px;
+        }
+
+            h1 sup {
+                font-size: 22px;
+                font-style: normal;
+                position: absolute;
+                margin-left: 10px;
+            }
+
+        #login-form {
+            width: 370px;
+            background-color: rgba(255,255,255,.7);
+            margin: 0 auto;
+            box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            -webkit-transform: translate(-50%,-50%);
+            z-index: 2000;
+			border-radius:4px;
+        }
+
+            #login-form .header {
+                height: 50px;
+                border-bottom: 1px solid #999;
+                font-size: 17px;
+                text-align: center;
+                line-height: 50px;
+                color: #31343d;
+                letter-spacing: 2px;
+            }
+        #login-btn:active {
+            border-bottom:none;
+            height:38px;
+            margin-top:23px !important;         
+        }
+        .web-login {
+            height: 215px;
+            box-sizing: border-box;
+            padding-top: 30px;
+        }
+
+            .web-login .uinArea, .web-login .pwdArea {
+                height: 60px;
+                margin: 0 auto;
+                width: 272px;
+            }
+
+            .web-login .input-tips {
+                float: left;
+                margin-top: 10px;
+                width: 50px;
+                height: 42px;
+                font-size: 16px;
+                line-height: 42px;
+            }
+
+            .web-login .inputOuter {
+                width: 200px;
+                height: 42px;
+                margin-top: 10px;
+                float: left;
+            }
+
+        .floatfix {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .web-login .inputstyle {
+            width: 200px;
+            height: 38px;
+            padding-left: 5px;
+            line-height: 30px;
+            line-height: 38px;
+            border: 1px solid #999;
+            background: transparent;
+            color: #333;
+            border-radius: 2px;
+            font-family: Verdana, Tahoma, Arial;
+            font-size: 16px;
+            ime-mode: disabled;
+        }
+
+        .button_blue {
+            display: inline-block;
+            height: 41px;
+            line-height: 38px;
+            border-radius: 4px;
+            /*background: #4a5d87;*/
+            background-color:#555;
+            border: none;
+            cursor: pointer;
+            border-bottom: 3px solid #333;
+            color: #fff;
+            font-size: 16px;
+            padding: 0 10px;
+            text-align: center;
+            outline: none;
+            font-family: "Microsoft Yahei",Arial, Helvetica, sans-serif;
+            box-sizing: border-box;
+        }
+
+        #top-tips {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 34px;
+            width: 100%;
+            background-color: #d9534f;
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+            line-height: 34px;
+            font-weight: bold;
+            transition: all 0.5s;
+            -webkit-transition: all 0.5s;
+            z-index: 2000;
+        }
+
+        .ahide {
+            transform: translate(0,-100%);
+            -webkit-transform: translate(0,-100%);
+        }
+
+        /*ribbon style*/
+        .wrap {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            overflow: hidden;
+        }
+
+            .wrap:after {
+                content: "";
+                display: block;
+                border-radius: 0px 10px 10px 0px;
+                width: 8px;
+                height: 40px;
+                position: absolute;
+                right: 0px;
+                top: 52px;
+                background: #888;
+            }
+
+            .wrap:before {
+                content: "";
+                display: block;
+                border-radius: 10px 10px 0px 0px;
+                width: 40px;
+                height: 8px;
+                position: absolute;
+                right: 52px;
+                /*background: #4D6530;*/
+                background-color:#888;
+            }
+
+        .ribbon {
+            display: inline-block;
+            text-align: center;
+            width: 114px;
+            height: 26px;
+            line-height: 28px;
+            position: absolute;
+            top: 18px;
+            right: -27px;
+            z-index: 2;
+            overflow: hidden;
+            transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            border: 1px dashed;
+            box-shadow: 0 0 0 3px #476166, 0px 21px 5px -18px rgba(0,0,0,0.6);
+            background: #476166;
+            color: #fff;
+            font-weight: bold;
+            font-size: 15px;
+            letter-spacing:2px;
+        }
+
+            .ribbon:after {
+                content: "";
+                display: block;
+                border-radius: 0px 8px 8px 0px;
+                width: 8px;
+                height: 40px;
+                position: absolute;
+                right: 0px;
+                top: 100px;
+                background: #444;
+            }
+
+        .copy {
+            position: fixed;
+            height: 44px;
+            line-height: 20px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #f0f0f0;
+            font-size: 13px;
+            z-index:1001;
+            letter-spacing:1px;
+        }
+        .tips {
+            text-align: center;         
+            padding: 10px;
+            font-size: 14px;
+            color: #333;
+            letter-spacing:1px;
+        }
+        /*animation css*/
+        @-moz-keyframes zoom {
+            0%,100% {
+                -moz-transform: scale(1);
+                transform: scale(1);
+            }
+
+            50% {
+                -moz-transform: scale(1.08);
+                transform: scale(1.08);
+            }
+        }
+
+        @-webkit-keyframes zoom {
+            0%,100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            50% {
+                -webkit-transform: scale(1.08);
+                transform: scale(1.08);
+            }
+        }
+
+        @keyframes zoom {
+            0%,100% {
+                -moz-transform: scale(1);
+                -ms-transform: scale(1);
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            50% {
+                -moz-transform: scale(1.08);
+                -ms-transform: scale(1.08);
+                -webkit-transform: scale(1.08);
+                transform: scale(1.08);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-bg"></div>
+    <div id="top-tips" class="ahide"></div>
+    <div class="ll-container">
+        <!--<h1>利郎简约图文编辑器<sup>V2.0</sup></h1>-->
+        <form id="login-form">
+            <div class="header">利郎简约图文编辑器</div>
+            <div class="web-login">
+                <div class="uinArea floatfix">
+                    <label class="input-tips">账号：</label>
+                    <div class="inputOuter" id="uArea">
+                        <input type="text" id="u" name="username" class="inputstyle" />
+                    </div>
+                </div>
+                <div class="pwdArea floatfix" id="pwdArea">
+                    <label class="input-tips" for="p">密码：</label>
+                    <div class="inputOuter" id="pArea">
+                        <input type="password" id="p" name="p" class="inputstyle" />
+                    </div>
+                </div>
+                <a onclick="login();" style="width: 120px; margin: 20px auto 0 auto; display: block;" class="button_blue" id="login-btn">登 录</a>
+            </div>
+            <!--ribbon-->
+            <div class="wrap">
+                <span class="ribbon">V2.2</span>
+            </div>
+            <p class="tips">提示：请使用ERP系统账号登陆！</p>
+        </form>        
+    </div>
+    <div class="copy"><p>注意：请在谷歌浏览器下使用！</p><p>&copy 2016 利郎信息技术部</p></div>
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".web-login input").keydown(function(e){ 
+                var curKey = e.which; 
+                if (curKey == 13) {
+                    login();
+                } 
+            });        
+        });
+
+        function login() {
+            var username = $("#u").val();
+            var pwd = $("#p").val();
+            if (username == "" || username == undefined) {
+                showMessage("error", "用户名不能为空！");
+            } else if (pwd == "" || pwd == undefined) {
+                showMessage("error", "密码不能为空！");
+            } else {
+                $("#login-btn").attr("onclick", "javascript:");
+                showMessage("loading", "正在处理，请稍候...");
+                $.ajax({
+                    type: "POST",
+                    timeout: 5000,
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    url: "LLEditorCore.aspx",
+                    data: { ctrl: "login", username: username, pwd: pwd },
+                    success: function (msg) {
+                        if (msg.indexOf("Successed") > -1) {
+                            showMessage("successed", "验证成功，即将登录！");
+                            setTimeout(function () {
+                                window.location.href = "ArticleLists_PC.aspx";
+                            }, 1500);
+                        } else {
+                            showMessage("error", msg.replace("Error:", ""));
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        $("#login-btn").attr("onclick", "login()");
+                    }
+                });
+            }
+        }
+
+        function showMessage(type, text) {
+            switch (type) {
+                case "loading":
+                    $("#top-tips").css("background-color", "#f0ad4e");
+                    $("#top-tips").text(text);
+                    $("#top-tips").removeClass("ahide");
+                    break;
+                case "error":
+                    $("#top-tips").css("background-color", "#d9534f");
+                    $("#top-tips").text(text);
+                    $("#top-tips").removeClass("ahide");
+                    setTimeout(function () {
+                        $("#top-tips").addClass("ahide");
+                        $("#login-btn").attr("onclick", "login()");
+                    }, 2000);
+                    break;
+                case "successed":
+                    $("#top-tips").css("background-color", "#44b549");
+                    $("#top-tips").text(text);
+                    $("#top-tips").removeClass("ahide");
+                    setTimeout(function () {
+                        $("#top-tips").addClass("ahide");
+                    }, 1500);
+            }
+        }
+    </script>
+</body>
+</html>

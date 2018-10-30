@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://fcl-sz.org.cn/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://fcl-sz.org.cn/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">提供对企业用户的数据查询服务，包括检测结果、报告、费用、合格率，不合格项统计等; &lt;br /&gt;在线下单后续上线。。。</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://fcl-sz.org.cn/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SecurityContext" type="tns:SecurityContext" />
+      <s:complexType name="SecurityContext">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AppKey" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AppSecret" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="HelloWorld1">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorld1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorld1Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUsers">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUsersResult" type="tns:ArrayOfUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="tns:User" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="User">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSampleImages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="reportNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSampleImagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSampleImagesResult" type="tns:ArrayOfBase64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBase64Binary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="base64Binary" nillable="true" type="s:base64Binary" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSampleImage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sampleOrder" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSampleImageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSampleImageResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reqNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="propValue" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="methodName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustLinkman" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustLinkman" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestResultResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTestResultResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reqNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="propValue" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="rating" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustLinkman" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustLinkman" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTestReportResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestPrice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="propValue" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="payStatus" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustLinkman" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustLinkman" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestPriceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTestPriceResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestPrice_Print">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="localName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="propValue" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="payStatus" nillable="true" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustLinkman" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustLinkman" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestPrice_PrintResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTestPrice_PrintResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPassRate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reqNo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="propValue" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="methodName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="proxyCustLinkman" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendCustLinkman" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPassRateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPassRateResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSendQuantity">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startSendDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endSendDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSendQuantityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSendQuantityResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestReport2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userId" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="startSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="endSendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="propValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTestReport2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTestReport2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorld1SoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld1" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorld1SoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorld1Response" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUsersSecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:message name="GetSampleImagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSampleImages" />
+  </wsdl:message>
+  <wsdl:message name="GetSampleImagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSampleImagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSampleImagesSecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:message name="GetSampleImageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSampleImage" />
+  </wsdl:message>
+  <wsdl:message name="GetSampleImageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSampleImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSampleImageSecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:message name="GetTestResultSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTestResult" />
+  </wsdl:message>
+  <wsdl:message name="GetTestResultSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTestResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTestResultSecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:message name="GetTestReportSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTestReport" />
+  </wsdl:message>
+  <wsdl:message name="GetTestReportSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTestReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTestReportSecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:message name="GetTestPriceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTestPrice" />
+  </wsdl:message>
+  <wsdl:message name="GetTestPriceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTestPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTestPriceSecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:message name="GetTestPrice_PrintSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTestPrice_Print" />
+  </wsdl:message>
+  <wsdl:message name="GetTestPrice_PrintSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTestPrice_PrintResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPassRateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPassRate" />
+  </wsdl:message>
+  <wsdl:message name="GetPassRateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPassRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPassRateSecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:message name="GetSendQuantitySoapIn">
+    <wsdl:part name="parameters" element="tns:GetSendQuantity" />
+  </wsdl:message>
+  <wsdl:message name="GetSendQuantitySoapOut">
+    <wsdl:part name="parameters" element="tns:GetSendQuantityResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSendQuantitySecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:message name="GetTestReport2SoapIn">
+    <wsdl:part name="parameters" element="tns:GetTestReport2" />
+  </wsdl:message>
+  <wsdl:message name="GetTestReport2SoapOut">
+    <wsdl:part name="parameters" element="tns:GetTestReport2Response" />
+  </wsdl:message>
+  <wsdl:message name="GetTestReport2SecurityContext">
+    <wsdl:part name="SecurityContext" element="tns:SecurityContext" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld1">
+      <wsdl:input message="tns:HelloWorld1SoapIn" />
+      <wsdl:output message="tns:HelloWorld1SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据企业信息获取用户集合</wsdl:documentation>
+      <wsdl:input message="tns:GetUsersSoapIn" />
+      <wsdl:output message="tns:GetUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSampleImages">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">根据报告编号获取样品图片byte[]集合</wsdl:documentation>
+      <wsdl:input message="tns:GetSampleImagesSoapIn" />
+      <wsdl:output message="tns:GetSampleImagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSampleImage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取图片：byte[]</wsdl:documentation>
+      <wsdl:input message="tns:GetSampleImageSoapIn" />
+      <wsdl:output message="tns:GetSampleImageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestResult">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取测试结果数据集DataSet,返回byte[],调用时需要将byte[]解压缩并反序列化</wsdl:documentation>
+      <wsdl:input message="tns:GetTestResultSoapIn" />
+      <wsdl:output message="tns:GetTestResultSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestReport">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取检测报告数据集DataSet,返回byte[],调用时需要将byte[]解压缩并反序列化</wsdl:documentation>
+      <wsdl:input message="tns:GetTestReportSoapIn" />
+      <wsdl:output message="tns:GetTestReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestPrice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取检测费用数据集DataSet,返回byte[],调用时需要将byte[]解压缩并反序列化</wsdl:documentation>
+      <wsdl:input message="tns:GetTestPriceSoapIn" />
+      <wsdl:output message="tns:GetTestPriceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestPrice_Print">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取检测费用账单数据集DataSet,返回byte[],调用时需要将byte[]解压缩并反序列化</wsdl:documentation>
+      <wsdl:input message="tns:GetTestPrice_PrintSoapIn" />
+      <wsdl:output message="tns:GetTestPrice_PrintSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPassRate">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取合格率统计数据集DataSet,返回byte[],调用时需要将byte[]解压缩并反序列化</wsdl:documentation>
+      <wsdl:input message="tns:GetPassRateSoapIn" />
+      <wsdl:output message="tns:GetPassRateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSendQuantity">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取送检量数据集DataSet,返回byte[],调用时需要将byte[]解压缩并反序列化</wsdl:documentation>
+      <wsdl:input message="tns:GetSendQuantitySoapIn" />
+      <wsdl:output message="tns:GetSendQuantitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTestReport2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取报告数据，输出方式：json</wsdl:documentation>
+      <wsdl:input message="tns:GetTestReport2SoapIn" />
+      <wsdl:output message="tns:GetTestReport2SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://fcl-sz.org.cn/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:HelloWorldSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld1">
+      <soap:operation soapAction="http://fcl-sz.org.cn/HelloWorld1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUsersSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSampleImages">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetSampleImages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSampleImagesSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSampleImage">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetSampleImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSampleImageSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestResult">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetTestResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetTestResultSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestReport">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetTestReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetTestReportSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestPrice">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetTestPrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetTestPriceSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestPrice_Print">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetTestPrice_Print" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPassRate">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetPassRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetPassRateSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSendQuantity">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetSendQuantity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSendQuantitySecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestReport2">
+      <soap:operation soapAction="http://fcl-sz.org.cn/GetTestReport2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetTestReport2SecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:HelloWorldSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld1">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/HelloWorld1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetUsersSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSampleImages">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetSampleImages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSampleImagesSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSampleImage">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetSampleImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSampleImageSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestResult">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetTestResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetTestResultSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestReport">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetTestReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetTestReportSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestPrice">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetTestPrice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetTestPriceSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestPrice_Print">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetTestPrice_Print" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPassRate">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetPassRate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetPassRateSecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSendQuantity">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetSendQuantity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSendQuantitySecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTestReport2">
+      <soap12:operation soapAction="http://fcl-sz.org.cn/GetTestReport2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetTestReport2SecurityContext" part="SecurityContext" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">提供对企业用户的数据查询服务，包括检测结果、报告、费用、合格率，不合格项统计等; &lt;br /&gt;在线下单后续上线。。。</wsdl:documentation>
+    <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
+      <soap:address location="http://www.fcl-sz.org.cn/customSrv/service.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
+      <soap12:address location="http://www.fcl-sz.org.cn/customSrv/service.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

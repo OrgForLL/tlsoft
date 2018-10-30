@@ -1,0 +1,12 @@
+﻿<!--信息模板-->
+<script id="infolist" type="text/html"> 
+    <% for (var i = 0; i < list.length; i ++) { %>
+    <li myid="<%= list[i].id %>">
+            <div class="chat-info">
+                <p class="chat-name"><i class="fa fa-edit"></i><span><%= list[i].info %></span></p>
+                <p class="chat-time">记录于：<%= list[i].time %></p>
+            </div>
+            <div class="message-nums"><i class="fa fa-chevron-right"></i></div>					
+        </li>
+    <% } %>
+</script>

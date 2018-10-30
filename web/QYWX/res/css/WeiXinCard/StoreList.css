@@ -1,0 +1,68 @@
+.page {
+    background-color: #f8f8f8;
+    font-family: "Helvetica Neue", "Microsoft Yahei","微软雅黑",sans-serif;
+    font-weight: 400;
+    bottom: 30px;
+    padding: 0;
+}
+
+.footer {
+    height: 30px;
+    line-height: 30px;
+    background-color: #f8f8f8;
+    color: #888;
+    font-size: 12px;
+}
+.header
+{
+    line-height: 50px;
+}
+
+.item {
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    position:relative;
+}
+    .item .right {
+        position:absolute;
+        top:50%;
+        right:0;
+        width:60px;
+        transform:translate(0,-50%);
+        border-left:1px solid #ccc;
+        height:50px;
+        line-height:50px;                
+        text-align:center;
+    }
+.name {
+    font-size:16px;
+    color:#323232;
+    font-weight:600;
+}
+.address {
+    margin-top: 5px;
+    color: #909090;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 60px;
+}
+.phone a {
+    color:#63b359;            
+}
+.location_icon {
+    width:30px;
+    margin-top:10px;            
+}
+.msg
+{
+    display:none;
+    margin-top:15px;
+    font-size:18px;
+    margin-left:8px;
+}
+.msg p
+{
+    margin-top:2px;
+}

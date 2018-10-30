@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx(777): error CS0103: 当前上下文中不存在名称“mlid”

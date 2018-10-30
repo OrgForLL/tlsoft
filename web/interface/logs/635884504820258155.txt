@@ -1,0 +1,8 @@
+未将对象引用设置到对象的实例。System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 ASP.interface_tqhbint_aspx.GetFlightInfo(String fno, String fdate) 位置 e:\web_tlerp\interface\tqhbint.aspx:行号 56
+   在 ASP.interface_tqhbint_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\tqhbint.aspx:行号 31
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

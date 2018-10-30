@@ -1,0 +1,1169 @@
+﻿<%@ Page Title="零售综合分析" Language="C#" MasterPageFile="../../WebBLL/frmQQDBase.Master" AutoEventWireup="true" %>
+
+<%@ MasterType VirtualPath="../../WebBLL/frmQQDBase.Master" %>
+
+<%@ Import Namespace="nrWebClass" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+
+<script runat="server">
+    /*子页面首先运行Page_Load，再运行主页面Page_Load；因此，只需要在子页面Page_Load事件中对Master.SystemID 进行赋值；
+      主页面将会在其Page_Load事件中自动鉴权获取 AppSystemKey.之后请在子页面的Page_PreRender 或 JS中进行相关处理(比如：加载页面内容等)。
+      请格外注意：万万不要在子页面的Load事件中直接使用用户的Session，因为Session是在主页面中获取的顺序在后，这将会导致异常！
+    
+         附：母版页和内容页的触发顺序    
+         * 母版页控件 Init 事件。    
+         * 内容控件 Init 事件。
+         * 母版页 Init 事件。    
+         * 内容页 Init 事件。    
+         * 内容页 Load 事件。    
+         * 母版页 Load 事件。    
+         * 内容控件 Load 事件。    
+         * 内容页 PreRender 事件。    
+         * 母版页 PreRender 事件。    
+         * 母版页控件 PreRender 事件。    
+         * 内容控件 PreRender 事件。
+     */
+
+    public string ViewType = "";   //视图类型
+    public string AuthOptionCollect = "";   //选择栏
+    public int roleID = 0;
+    protected void Page_PreRender(object sender, EventArgs e)
+    {
+        ViewType = Convert.ToString(Request.Params["ViewType"]);
+        if (ViewType == null || ViewType == "") ViewType = "kh";
+
+        //clsWXHelper.CheckQQDMenuAuth(22);    //检查菜单权限
+
+        string optionBase = "<option value=\"{0}\"{2}>{1}</option>";
+        string opselect = " selected";
+        StringBuilder sbCompany = new StringBuilder();
+        roleID = Convert.ToInt32(Session["RoleID"]);
+          
+        if (roleID == 4)
+        {
+            //获取当前用户的身份。默认会自动选中第一个项
+            using (DataTable dt = clsWXHelper.GetQQDAuth(true, false))
+            {
+                DataRow dr; 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dr = dt.Rows[i]; 
+
+                    sbCompany.AppendFormat(optionBase, dr["khid"], dr["mdmc"], "");
+                }
+
+                if (dt.Rows.Count == 0) sbCompany.AppendFormat(optionBase, "0", "您还没有授权，请联系总部IT", opselect); 
+            }
+        }
+        else if (roleID < 3 && roleID > 0)
+        {
+            if (ViewType == "kh") ViewType = "md";  //门店职员 如果访问 “客户”则强制切回门店
+
+            string dbConn = clsConfig.GetConfigValue("OAConnStr");
+
+            using (LiLanzDALForXLM dal = new LiLanzDALForXLM(dbConn))
+            {
+                object objmdKhid = "";
+                string strSQL = string.Concat(@"SELECT TOP 1 CONVERT(VARCHAR(10),khid) + '|' + mdmc 
+                                        FROM t_mdb WHERE mdid = ", Session["mdid"]);
+                clsLocalLoger.WriteInfo(strSQL);
+                string strInfo = dal.ExecuteQueryFast(strSQL, out objmdKhid);
+                if (strInfo == "")
+                {
+                    string[] mdinfo = Convert.ToString(objmdKhid).Split('|');
+                    if (mdinfo.Length == 2) sbCompany.AppendFormat(optionBase, mdinfo[0], mdinfo[1], opselect);
+                    else sbCompany.AppendFormat(optionBase, "0", "门店人资权限错误！请联系总部IT", opselect);
+                }
+            }
+        }
+        else
+        {
+            sbCompany.AppendFormat(optionBase, "", "完整权限", opselect);
+        }
+
+        AuthOptionCollect = sbCompany.ToString();
+        sbCompany.Length = 0; 
+    }
+
+    //必须在内容页的Load中对Master.SystemID 进行赋值；
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        this.Master.IsTestMode = true; 
+    }
+
+</script>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <title>零售综合分析</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="spzhcx_style.css" />
+    <style type="text/css">
+        .data-container {
+            position: absolute;
+            top: 0;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            overflow-y: auto;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overflow-scrolling: touch;
+        }
+
+        .static_count {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            bottom: 0;
+            height: 40px;
+            background-color: #1cc1c7;
+            background-color: #f9f9f9;
+            border-top: 1px solid #dedede;
+            line-height: 40px;
+            overflow: hidden;
+        }
+
+            .static_count li {
+                float: left;
+            }
+
+        .col2 {
+            text-align: right;
+            width: 20%;
+            font-size: 14px;
+        }
+
+        .static_count .col4 {
+            text-align: center;
+            font-weight: bold !important;
+            font-size: 14px;
+        }
+
+        p.data-item[hidden] {
+            display: none;
+        }
+
+        /*sphhcmmx style*/
+        #sphhcmmx {
+            background-color: transparent;
+            height: 300px;
+            padding: 0;
+            bottom: 0;
+            top: initial;
+            z-index: 2002;
+        }
+
+        .sphhcmul {
+            background-color: #f5f5f5;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            border-top: 1px solid #efefef;
+            padding-top: 10px;
+        }
+
+            .sphhcmul li {
+                width: 17%;
+                height: 50px;
+                float: left;
+                margin-left: 2.5%;
+                margin-bottom: 10px;
+            }
+
+        .cmdm {
+            background-color: #1cc1c7;
+            color: #fff;
+        }
+
+        .cmsl {
+            background-color: #fff;
+        }
+
+        .sphhcmul li p {
+            line-height: 25px;
+            text-align: center;
+        }
+
+        #close-cmmx {
+            position: absolute;
+            bottom: 5px;
+            margin-left: 50%;
+            transform: translate(-50%,0);
+            -webkit-transform: translate(-50%,0);
+            color: #1cc1c7;
+            border: 1px solid #1cc1c7;
+            width: 46px;
+            height: 46px;
+            line-height: 44px;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        .viewicon {
+            position: absolute;
+            height: 44px;
+            top: 0;
+            left: 40px;
+            padding: 2px 5px;
+            line-height: 20px;
+            font-size: 14px;
+            color: #fff;
+            z-index: 100;
+        }
+
+        .fa-retweet {
+            font-size: 16px;
+        }
+
+        .searchdiv {
+            padding-left: 80px;
+        }
+
+        .viewtype {
+            position: fixed;
+            top: 60px;
+            left: 10px;
+            z-index: 2000;
+            background-color: rgb(71,71,71);
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            display: none;
+        }
+
+            .viewtype:before, .viewtype:after {
+                content: "";
+                width: 0px;
+                height: 0px;
+                position: absolute;
+                top: -20px;
+                left: 50px;
+                border: 10px solid transparent;
+                border-bottom-color: rgb(71,71,71);
+            }
+
+            .viewtype li {
+                text-align: center;
+                width: 120px;
+                height: 40px;
+                line-height: 40px;
+                position: relative;
+            }
+
+                .viewtype li:not(:last-child) {
+                    border-bottom: 1px solid #888;
+                }
+
+        .back-image {
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 9px;
+            left: 25px;
+        }
+
+        .viewtype li span {
+            padding-left: 20px;
+        }
+
+        .fa-check-square {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+
+        .active {
+            color: #1cc1c7;
+        }
+
+        .date input[type=date] {
+            color: #ccc;
+        }
+        .underline {
+            color:#cc5300;
+        }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <ul class="viewtype">
+        <li dm="kh">
+            <div class="back-image" style="background-image: url(../../res/img/spxx-icon.png)"></div>
+            <span>客户</span>
+        </li>
+        <li dm="lb">
+            <div class="back-image" style="background-image: url(../../res/img/spxx-icon.png); background-position: 0 -27px;"></div>
+            <span>类别</span>
+        </li>
+        <li dm="sphh">
+            <div class="back-image" style="background-image: url(../../res/img/spxx-icon.png); background-position: 0 -52px;"></div>
+            <span>货号</span>
+        </li>
+    </ul>
+    <div class="header">
+        <div class="wrapSearch">
+            <i class="fa fa-angle-left fa-2x" onclick="BackFunc();"></i>
+            <div class="viewicon">
+                <i class="fa fa-retweet">
+                    <br />
+                </i>
+                <p>方式</p>
+            </div>
+            <div class="searchdiv">
+                <input id="searchinput" type="text" placeholder="搜索货号" />
+                <i class="fa fa-search"></i>
+            </div>
+            <div class="filterdiv">
+                <i class="fa fa-filter">
+                    <br />
+                </i>
+                <p>筛选</p>
+            </div>
+        </div>
+        <div class="filterInfo">
+            <i class="fa fa-angle-down"></i>
+            <select id="comlist">
+                <%=AuthOptionCollect %>
+            </select>
+            <div class="filters"></div>
+        </div>
+    </div>
+    <div class="wrap-page">
+        <!--贸易公司数据页-->
+        <div class="page page-not-header page-right" id="kh">
+            <div class="data-container">
+                <ul class="data-ul floatfix">
+                    <li class="item-head">
+                        <p class="data-item col4" ordername="khdm">代码</p>
+                        <p class="data-item" ordername="cgsl">提货数</p>
+                        <p class="data-item" ordername="xssl">销售数</p>
+                        <p class="data-item" ordername="xsje">销售额</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="static_count">
+                <ul class="floatfix">
+                    <li class="col4">合 计</li>
+                    <li class="col2" col="s-cgsl">--</li>
+                    <li class="col2" col="s-xssl">--</li>
+                    <li class="col2" col="s-xsje">--</li>
+                </ul>
+            </div>
+        </div>
+        <!--专卖店数据页-->
+        <div class="page page-not-header page-right" id="md">
+            <div class="data-container">
+                <ul class="data-ul floatfix">
+                    <li class="item-head">
+                        <p class="data-item col4" ordername="khdm">专卖店</p>
+                        <p class="data-item" ordername="cgsl">提货数</p>
+                        <p class="data-item" ordername="xssl">销售数</p>
+                        <p class="data-item" ordername="xsje">销售额</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="static_count">
+                <ul class="floatfix">
+                    <li class="col4">合 计</li>
+                    <li class="col2" col="s-cgsl">--</li>
+                    <li class="col2" col="s-xssl">--</li>
+                    <li class="col2" col="s-xsje">--</li>
+                </ul>
+            </div>
+        </div>
+        <!--类别数据页-->
+        <div class="page page-not-header page-right" id="lb">
+            <div class="data-container">
+                <ul class="data-ul floatfix">
+                    <li class="item-head">
+                        <p class="data-item col4" ordername="lbmc">类别</p>
+                        <p class="data-item" ordername="cgsl">提货数</p>
+                        <p class="data-item" ordername="xssl">销售数</p>
+                        <p class="data-item" ordername="xsje">销售额</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="static_count">
+                <ul class="floatfix">
+                    <li class="col4">合 计</li>
+                    <li class="col2" col="s-cgsl">--</li>
+                    <li class="col2" col="s-xssl">--</li>
+                    <li class="col2" col="s-xsje">--</li>
+                </ul>
+            </div>
+        </div>
+        <!--货号数据页-->
+        <div class="page page-not-header page-right" id="sphh">
+            <div class="data-container">
+                <ul class="data-ul floatfix">
+                    <li class="item-head">
+                        <p class="data-item col4" ordername="sphh">货号</p>
+                        <p class="data-item" ordername="cgsl">提货数</p>
+                        <p class="data-item" ordername="xssl">销售数</p>
+                        <p class="data-item" ordername="xsje">销售额</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="static_count">
+                <ul class="floatfix">
+                    <li class="col4">合 计</li>
+                    <li class="col2" col="s-cgsl">--</li>
+                    <li class="col2" col="s-xssl">--</li>
+                    <li class="col2" col="s-xsje">--</li>
+                </ul>
+            </div>
+        </div>
+        <!--右侧筛选页-->
+        <div class="page page-right" id="fiterpage">
+            <div class="filtercontainer">
+                <!--开发编号-->
+                <div class="farea floatfix" filter="kfbh">
+                    <p class="title">开发编号</p>
+                    <div class="fitem selected" dm="20161">2016年春季产品</div>
+                    <div class="fitem" dm="20162">2016年夏季产品</div>
+                    <div class="fitem" dm="20163">2016年秋季产品</div>
+                    <div class="fitem" dm="20164">2016年冬季产品</div>
+                </div>
+                <!--日期范围-->
+                <div class="farea" style="border-top: 1px solid #e2e2e2; margin-bottom: 15px;">
+                    <p class="title">日期范围 <i class="fa fa-check-square"></i></p>
+                    <div class="date" filter="rq">
+                        <input type="date" id="ksrq">
+                        <div class="line"></div>
+                        <input type="date" id="jsrq" />
+                    </div>
+                </div>
+                <!--客户类别-->
+                <div class="farea fkhlb floatfix" style="border-top: 1px solid #e2e2e2;" filter="khfl">
+                    <p class="title">客户类别</p>
+                    <div class="fitem" cs="zh">综合套帐</div>
+                    <div class="fitem" cs="lh">领航套帐</div>
+                    <div class="fitem" cs="0">总部套帐</div>
+                    <div class="fitem" cs="xf">领航营销</div>
+                    <div class="fitem" cs="xd">市场管理中心</div>
+                    <div class="fitem" cs="xz">自营专卖店</div>
+                    <div class="fitem" cs="xg">直营大客户</div>
+                    <div class="fitem" cs="xj">加盟门店</div>
+                    <div class="fitem" cs="xq">其他客户</div>
+                    <div class="fitem" cs="xy">区域代理</div>
+                    <div class="fitem" cs="xl">历史客户</div>
+                </div>
+            </div>
+            <div class="fbtns">
+                <a href="javascript:ResetFilter()">重置</a>
+                <a href="javascript:SubmitFilter()" style="background-color: #1cc1c7; color: #fff;">完成</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <ul class="footer-ul floatfix">
+            <li class="data-item total">合计</li>
+            <li class="data-item" col="sum-cgsl">--</li>
+            <li class="data-item" col="sum-lssl">--</li>
+            <li class="data-item">--</li>
+        </ul>
+    </div>
+    <div class="mymask"></div>
+
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/storesaler/fastclick.min.js"></script>
+    <script type="text/javascript" src="../../res/js/LeeJSUtils.min.js"></script>
+    <script type="text/javascript" src="../../res/js/template.js"></script>
+
+    <!--模板区-->
+    <!--贸易公司-->
+    <script id="datali_1" type="text/html">
+        <li khid="{{khid}}">
+            <p class="data-item col4 num underline" col="khmc">{{khdm}}.{{khmc}}</p>
+            <p class="data-item num underline" col="cgsl">{{cgsl}}</p>
+            <p class="data-item" col="xssl">{{xssl}}</p>
+            <p class="data-item" col="xsje">{{xsje}}</p>
+        </li>
+    </script>
+
+    <!--门店-->
+    <script id="datali_2" type="text/html">
+        <li mdid="{{khid}}">
+            <p class="data-item col4">{{khdm}}.{{khmc}}</p>
+            <p class="data-item num underline" col="cgsl">{{cgsl}}</p>
+            <p class="data-item" col="xssl">{{xssl}}</p>
+            <p class="data-item" col="xsje">{{xsje}}</p>
+        </li>
+    </script>
+
+    <!--商品货号-->
+    <script id="datali_3" type="text/html">
+        <li>
+            <span style="display: none">{{sphh}}</span>
+            <p class="data-item col4 num underline" col="sphh">
+                <i class="fa fa-file-photo-o" /> {{sphh}}.{{spmc}}</p>
+            <p class="data-item underline" col="cgsl">{{cgsl}}</p>
+            <p class="data-item" col="xssl">{{xssl}}</p>
+            <p class="data-item" col="xsje">{{xsje}}</p>
+        </li>
+    </script>
+
+    <!--商品类别-->
+    <script id="datali_4" type="text/html">
+        <li lbid="{{lbid}}">
+            <p class="data-item col4 num underline" col="splb">{{lbmc}}</p>
+            <p class="data-item" col="cgsl">{{cgsl}}</p>
+            <p class="data-item" col="xssl">{{xssl}}</p>
+            <p class="data-item" col="xsje">{{xsje}}</p>
+        </li>
+    </script>
+
+    <script type="text/javascript">
+        var defaultSite = "<%= ViewType %>"
+        var CurrentSite = "", ViewRoute = "";
+        var filter = {
+            "core": {
+                "lx": defaultSite,
+                "khid": "",
+                "mdkhid": "",
+                "lbid": ""
+            },
+            "spsearch": "",
+            "filter": {
+                "kfbh": "20161",
+                "ksrq": "",
+                "jsrq": "",
+                "khfl": ""
+            },
+            "auth": {
+                "roleid": "<%=roleID %>",
+                "curkhid": "" 
+            },
+            "order": {
+                "colname":"", 
+                "ordertype": "" 
+            }
+        }; 
+
+        //用于排序
+        var orders = {
+                        "kh": {
+                            "colname": "cgsl",
+                            "ordertype": "desc"
+                        },
+                        "md": {
+                            "colname": "cgsl",
+                            "ordertype": "desc"
+                        },
+                        "lb": {
+                            "colname": "cgsl",
+                            "ordertype": "desc"
+                        },
+                        "sphh": {
+                            "colname": "cgsl",
+                            "ordertype": "desc"
+                        }
+                    };
+
+
+        $(document).ready(function () {
+            FastClick.attach(document.body);
+            LeeJSUtils.LoadMaskInit();
+            LeeJSUtils.stopOutOfPage(".filtercontainer", true);
+            $("#ksrq").val(new Date().format("yyyy-MM") + "-01");
+            $("#jsrq").val(new Date().format("yyyy-MM-dd"));
+
+            gotoSearch();
+        });
+
+        //按贸易公司汇总
+        function LoadDataMain() {
+            LeeJSUtils.showMessage("loading", "正在汇总数据...");
+            $.ajax({
+                type: "POST",
+                timeout: 20000,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                url: "LSZHFXCore.aspx",
+                data: { ctrl: "GetCGData", filters: JSON.stringify(filter) },
+                success: function (msg) {
+                    if (msg.indexOf("Error:") == -1 && msg != "") {
+                        var datas = JSON.parse(msg);
+                        var len = datas.rows.length;
+                        var html = "";
+                        for (var i = 0; i < len; i++) {
+                            row = datas.rows[i];
+                            html += template("datali_1", row);
+                        } //end for
+
+                        $("#kh .data-ul li:not(:first-child)").remove();
+                        $("#kh .data-ul").append(html);
+                        
+                        openFunc("kh"); 
+
+                        $("#kh .data-ul li p[col='khmc']").unbind("click");
+                        $("#kh .data-ul li p[col='khmc']").bind("click", function () {                            
+                            filter.core.lx = "md";
+                            filter.core.khid = $(this).parent().attr("khid");
+                            gotoSearch();// LoadZMData();
+                        });
+
+                        $("#kh .data-ul li p[col='cgsl']").unbind("click");
+                        $("#kh .data-ul li p[col='cgsl']").bind("click", function () {                            
+                            filter.core.lx = "lb";
+                            filter.core.khid = $(this).parent().attr("khid");
+                            gotoSearch();// LoadSPLBData();
+                        });
+                         
+                        StaticCount("kh");
+                        $("#leemask").hide();
+                    } else if (msg == "") {
+                        $("#md .data-ul li:not(:first-child)").remove();
+                        LeeJSUtils.showMessage("warn", "查询无结果！");
+                    } else
+                        $("#leemask").hide();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+						LeeJSUtils.showMessage("error", "网络连接失败！");
+                }
+            }); //end AJAX
+        }
+
+        function LoadSPLBData() {
+            LeeJSUtils.showMessage("loading", "正在汇总数据...");
+            setTimeout(function () {
+                $.ajax({
+                    type: "POST",
+                    timeout: 20000,                    
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    url: "LSZHFXCore.aspx",
+                    data: { ctrl: "GetCGData", filters: JSON.stringify(filter) },
+                    success: function (msg) {
+                        if (msg.indexOf("Error:") == -1 && msg != "") {
+                            var datas = JSON.parse(msg);
+                            var len = datas.rows.length;
+                            var html = "";
+                            for (var i = 0; i < len; i++) {
+                                var row = datas.rows[i];
+                                html += template("datali_4", row);
+                            } //end for
+                            $("#lb .data-ul li:not(:first-child)").remove();
+                            $("#lb .data-ul").append(html);
+                             
+                            openFunc("lb");
+
+                            $("#lb .data-ul li p[col='splb']").unbind("click");
+                            $("#lb .data-ul li p[col='splb']").bind("click", function () {                                
+                                filter.core.lx = "sphh";
+                                filter.core.lbid = $(this).parent().attr("lbid");
+                                gotoSearch();// LoadSPHHData();
+                            });
+                             
+                            StaticCount("lb");
+                            $("#leemask").hide();
+                        } else if (msg == "") {
+                            $("#md .data-ul li:not(:first-child)").remove();
+                            LeeJSUtils.showMessage("warn", "查询无结果！");
+                        } else
+                            $("#leemask").hide();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+						LeeJSUtils.showMessage("error", "网络连接失败！");
+                    }
+                }); //end AJAX
+            }, 50);
+        }
+
+        function LoadSPHHData() {
+            LeeJSUtils.showMessage("loading", "正在汇总数据...");
+            setTimeout(function () {
+                $.ajax({
+                    type: "POST",
+                    timeout: 20000,                    
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    url: "LSZHFXCore.aspx",
+                    data: { ctrl: "GetCGData", filters: JSON.stringify(filter) },
+                    success: function (msg) {
+                        if (msg.indexOf("Error:") == -1 && msg != "") {
+                            var datas = JSON.parse(msg);
+                            var len = datas.rows.length;
+                            var html = "";
+                            for (var i = 0; i < len; i++) {
+                                var row = datas.rows[i];
+                                html += template("datali_3", row);
+                            } //end for
+                            $("#sphh .data-ul li:not(:first-child)").remove();
+                            $("#sphh .data-ul").append(html);
+
+                            openFunc("sphh");  
+
+                            //点击货号跳转到该货号对应的详情页
+                            $("#sphh .data-ul li p[col='sphh']").unbind("click");
+                            $("#sphh .data-ul li p[col='sphh']").bind("click", function () {                                                         
+                                var sphh=$(this).text().split(".")[0].trim();
+                                window.location.href="../storesaler/goodsListV3.aspx?showType=1&sphh="+sphh;
+                            });
+
+                            //点击提货数进行相应的钻取
+                            $("#sphh .data-ul li p[col='cgsl']").unbind("click");
+                            $("#sphh .data-ul li p[col='cgsl']").bind("click", function () {                                                         
+                                filter.core.lx = "kh";     
+                                $("#searchinput").val($(this).parent().find("span:eq(0)").html());
+                                gotoSearch();
+                            });
+
+                            StaticCount("sphh");
+
+                            $("#leemask").hide();
+                        } else if (msg == "") {
+                            $("#md .data-ul li:not(:first-child)").remove();
+                            LeeJSUtils.showMessage("warn", "查询无结果！");
+                        } else
+                            $("#leemask").hide();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+						LeeJSUtils.showMessage("error", "网络连接失败！");
+                    }
+                }); //end AJAX
+            }, 50);
+        }
+
+        function LoadZMData() {
+            LeeJSUtils.showMessage("loading", "正在汇总数据...");
+
+            $.ajax({
+                type: "POST",
+                timeout: 20000,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                url: "LSZHFXCore.aspx",
+                data: { ctrl: "GetCGData", filters: JSON.stringify(filter) },
+                success: function (msg) {
+                    if (msg.indexOf("Error:") == -1 && msg != "") {
+                        var datas = JSON.parse(msg);
+                        var len = datas.rows.length;
+                        var html = "";
+                        for (var i = 0; i < len; i++) {
+                            var row = datas.rows[i];
+                            html += template("datali_2", row);
+                        } //end for
+                        $("#md .data-ul li:not(:first-child)").remove();
+                        $("#md .data-ul").append(html);
+
+                        openFunc("md"); 
+
+                        $("#md .data-ul li p[col='cgsl']").unbind("click");
+                        $("#md .data-ul li p[col='cgsl']").bind("click", function () {
+                            filter.core.lx = "lb";
+                            filter.core.mdkhid = $(this).parent().attr("mdid");
+                            gotoSearch();// LoadSPLBData();
+                        });
+                         
+                        StaticCount("md");
+                        $("#leemask").hide();
+                    } else if (msg == "") {
+                        $("#md .data-ul li:not(:first-child)").remove();
+                        LeeJSUtils.showMessage("warn", "查询无结果！");
+                    } else
+                        $("#leemask").hide();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+					LeeJSUtils.showMessage("error", "网络连接失败！");
+                }
+            });   //end AJAX
+        }
+
+        $(".filterdiv").on("click", function () {
+            $(".mymask").show();
+            $("#fiterpage").removeClass("page-right");
+        })
+
+        $(".mymask").on("click", function () {
+            $("#fiterpage").addClass("page-right");
+            $(".mymask").hide();
+        })
+
+        //筛选事件绑定
+        $("div[filter='kfbh'] .fitem").on("click", function () {
+            if ($(this).hasClass("selected"))
+                $(this).removeClass("selected");
+            else {
+                $("div[filter='kfbh'] .selected").removeClass("selected");
+                $(this).addClass("selected");
+            }
+        });
+
+        $("div[filter='khfl'] .fitem").on("click", function () {
+            if ($(this).hasClass("selected"))
+                $(this).removeClass("selected");
+            else {
+                $("div[filter='khfl'] .selected").removeClass("selected");
+                $(this).addClass("selected");
+            }
+        });
+
+        //重置
+        function ResetFilter() {
+            //$("#ksrq").val(new Date().format("yyyy-MM") + "-01");
+            //$("#jsrq").val(new Date().format("yyyy-MM-dd"));
+            filter.filter.ksrq="";
+            filter.filter.jsrq="";
+            $(".date input[type=date]").css("color", "#ccc").attr("readonly", "true");
+            $(".fa-check-square").removeClass("active");
+            $(".fitem.selected").removeClass("selected");
+            $("div[filter='kfbh'] .fitem[dm='20161']").addClass("selected");
+        }
+
+        //筛选提交
+        function SubmitFilter() {
+            var kfbh = $("div[filter='kfbh'] .fitem.selected").attr("dm");
+            var khfl = $("div[filter='khfl'] .fitem.selected").attr("cs");
+            var ksrq = "",jsrq="";
+
+            if($(".fa-check-square").hasClass("active")){
+                ksrq=$("#ksrq").val();
+                jsrq=$("#jsrq").val();
+            }
+
+            filter.filter.kfbh = typeof(kfbh) == "undefined" ? "" : kfbh;
+            filter.filter.khfl = typeof(khfl) == "undefined" ? "" : khfl;
+            filter.filter.ksrq = ksrq == "" ? "" : ksrq;
+            filter.filter.jsrq = jsrq == "" ? "" : jsrq;
+            $("#fiterpage").addClass("page-right");
+            $(".mymask").hide();
+            gotoSearch(); 
+        }
+
+        //返回动作
+        function BackFunc() {
+            if ("-" + defaultSite == ViewRoute) return;
+
+            switch (CurrentSite) {
+                case "md": 
+                    $("#md").addClass("page-right");
+                    ViewRoute = ViewRoute.substring(0, ViewRoute.lastIndexOf("-md"));
+                    CurrentSite = ViewRoute.substring(ViewRoute.lastIndexOf("-") + 1);
+                    break;
+                case "lb": 
+                    $("#lb").addClass("page-right");
+                    ViewRoute = ViewRoute.substring(0, ViewRoute.lastIndexOf("-lb"));
+                    CurrentSite = ViewRoute.substring(ViewRoute.lastIndexOf("-") + 1);
+                    break;
+                case "sphh":
+                    $("#sphh").addClass("page-right");
+                    ViewRoute = ViewRoute.substring(0, ViewRoute.lastIndexOf("-sphh"));
+                    CurrentSite = ViewRoute.substring(ViewRoute.lastIndexOf("-") + 1);
+                    break;
+                case "kh": 
+                    $("#kh").addClass("page-right");
+                    ViewRoute = ViewRoute.substring(0, ViewRoute.lastIndexOf("-kh"));
+                    CurrentSite = ViewRoute.substring(ViewRoute.lastIndexOf("-") + 1);
+                    break;
+            } //end switch
+             
+            if (CurrentSite != "") {
+                $("#" + CurrentSite).removeClass("page-right");
+				filter.core.lx = CurrentSite;
+				
+				switch (CurrentSite) {
+					case "md":
+						filter.core.mdkhid = ""; 
+						break;
+					case "lb":
+						filter.core.lbid = ""; 
+						break;
+					case "sphh":
+						$("#searchinput").val(""); 
+						break;
+					case "kh": 
+						filter.core.khid = ""; 
+						break;
+				} //end switch				
+            }
+
+            ShowSearchCaption();
+        }
+
+        function openFunc(newView) {
+            if (CurrentSite == newView) return;
+
+            if (CurrentSite != "") {
+                $("#" + CurrentSite).addClass("page-right");
+            }
+            CurrentSite = newView;
+            ViewRoute = ViewRoute + "-" + CurrentSite;
+
+            $("#" + CurrentSite).removeClass("page-right");
+        }
+         
+
+
+        //计算合计值
+        function StaticCount(id) {
+            var s_cgsl = 0, s_lssl = 0, s_xsje = 0;
+            var ulobj = $("#" + id + " .data-ul li");
+            for (var i = 1; i < ulobj.length; i++) {
+                var row = ulobj.eq(i);
+                var cgsl = ($("p[col='cgsl']", row).text());
+                var lssl = ($("p[col='xssl']", row).text());
+                var xsje = ($("p[col='xsje']", row).text());
+
+                $("p[col='xsje']", row).text(GetJeText(xsje));
+
+                if (cgsl == "")
+                    cgsl = "0";
+                if (lssl == "")
+                    lssl = "0";
+                if (xsje == "")
+                    xsje = "0";
+                s_cgsl += parseInt(cgsl);
+                s_lssl += parseInt(lssl);
+                s_xsje += parseInt(xsje);
+            } //end for
+            //console.log(s_cgsl + "|" + s_lssl);
+
+            $("#" + id + " [col='s-cgsl']").text(GetJeText(s_cgsl));
+            $("#" + id + " [col='s-xssl']").text(GetJeText(s_lssl));
+            $("#" + id + " [col='s-xsje']").text(GetJeText(s_xsje));
+        }
+
+        function GetJeText(xsje){
+            if (xsje == "") return "--";
+            else {
+                var intxsje = parseInt(xsje);
+
+                if (intxsje < 100000) return intxsje;
+                else return parseInt(intxsje * 0.0001).toString() + "万+";
+            } 
+        }
+         
+
+        //        //合计结果格式化
+        //        function toThousands(num) {
+        //            var result = '', counter = 0;
+        //            num = (num || 0).toString();
+        //            for (var i = num.length - 1; i >= 0; i--) {
+        //                counter++;
+        //                result = num.charAt(i) + result;
+        //                if (!(counter % 3) && i != 0) { result = ',' + result; }
+        //            }
+        //            return result;
+        //        }
+
+        //日期格式化
+        Date.prototype.format = function (format) {
+            var o = {
+                "M+": this.getMonth() + 1, //month 
+                "d+": this.getDate(), //day 
+                "h+": this.getHours(), //hour 
+                "m+": this.getMinutes(), //minute 
+                "s+": this.getSeconds(), //second 
+                "q+": Math.floor((this.getMonth() + 3) / 3), //quarter 
+                "S": this.getMilliseconds() //millisecond 
+            }
+
+            if (/(y+)/.test(format)) {
+                format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+                }
+            }
+            return format;
+        }
+
+        //检查视图路径,并返回路径是否重复
+        function CheckViewRouteOK(){
+            if (ViewRoute.indexOf(filter.core.lx + "-") > -1){
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+
+        //开始查询
+        function gotoSearch() {
+            if (CheckViewRouteOK() == false){ 
+                LeeJSUtils.showMessage("warn", "已经钻取到最后一层啦！");
+                return;
+            }
+
+            var SearchTxt = $("#searchinput").val();
+            filter.spsearch = SearchTxt;
+            filter.auth.curkhid = $("#comlist").val(); 
+
+            if (filter.auth.curkhid == null)    filter.auth.curkhid = "";
+             
+            var roleID = <%= roleID %>; //增加判定，如果是门店用户并且试图访问贸易公司报表，则强制指定到门店报表
+            if (roleID < 3 && roleID > 0 && filter.core.lx == "kh") filter.core.lx = "md";
+            
+            ShowSearchCaption(); 
+            
+            filter.order.colname = eval("orders." + filter.core.lx + ".colname");
+            filter.order.ordertype =  eval("orders." + filter.core.lx + ".ordertype");
+
+            switch (filter.core.lx) {
+                case "kh":  
+                    LoadDataMain();
+                    break;
+                case "lb":
+                    LoadSPLBData();
+                    break;
+                case "md":
+                    LoadZMData();
+                    break;
+                case "sphh":
+                    LoadSPHHData();
+                    break;
+                default:
+                    LoadSPHHData();
+                    break;
+            } //end switch 
+
+            ShowOrder();
+        }
+
+             //排序功能
+        $(".item-head p").on("click", function () {
+            var ordername = $(this).attr("ordername");
+            var viewID = $(this).parents(".page").attr("id"); 
+                         
+            if (ordername == orders[viewID].colname){
+                if (orders[viewID].ordertype == "asc") orders[viewID].ordertype = "desc";
+                else orders[viewID].ordertype = "asc";
+            }else{
+                orders[viewID].colname = ordername;
+                orders[viewID].ordertype = "desc";
+            }
+            
+            gotoSearch(); 
+
+//            var direc = $(this).attr("sort");
+//            if (direc == "desc")
+//                direc = "asc";
+//            else
+//                direc = "desc";
+//            filter.order.col = col;            
+//            filter.order.direc = direc;
+
+//            $(".item-head .sorted .fa").remove();
+//            $(".item-head .sorted").removeClass("sorted");
+//            $(this).addClass("sorted").attr("sort", direc);
+//            $("i", this).remove();
+//            $(this).append("<i class='fa fa-sort-" + direc + "'></i>");
+//            
+        });
+
+//        function SetOrder(ordername){
+//            if (ordername == filter.order.col){
+//                if (filter.order.direc == "ASC") filter.order.direc = "DESC";
+//                else filter.order.direc = "ASC";
+//            }else{
+//                filter.order.col = ordername;
+//                filter.order.direc = "ASC";
+//            }
+//            gotoSearch();
+//        }
+
+        function ShowOrder(){         
+            var viewID = filter.core.lx;
+            var $p = $("#" + viewID);
+            
+            $p.find("i").remove(); //移除所有的i标记
+
+            $p.find(".item-head p[ordername='" + orders[viewID].colname + "']").append("<i class='fa fa-sort-" + orders[viewID].ordertype + "'></i>");
+        }
+
+        
+        //显示钻取和筛选项 
+        function ShowSearchCaption(){　
+            var CoreText = "";
+            var FilterText = "";
+            var AllText = "";
+
+            if (filter.core.khid != "") { CoreText = CoreText + "[贸]"; }
+            if (filter.core.mdkhid != "") { CoreText = CoreText + "[店]"; }
+            if (filter.core.lbid != "") { CoreText = CoreText + "[类]"; }
+            
+            if (filter.filter.kfbh != "") { FilterText = FilterText + "|开发编号:" + filter.filter.kfbh; }
+            if (filter.filter.ksrq != "") { FilterText = FilterText + "|日期:" + filter.filter.ksrq + "～" + filter.filter.jsrq; }
+            if (filter.filter.khfl != "") { FilterText = FilterText + "|客户类别:" + filter.filter.khfl; }
+            　
+            if (CoreText != "") AllText = "钻取:<span style='color:#f00'>" + CoreText + "</span>";
+            if (FilterText != "") AllText = AllText + FilterText;
+            
+            //显示到外面　
+            $(".filterInfo .filters").html(AllText);
+        }
+
+
+        //搜索按钮
+        $(".fa-search").on("click",  gotoSearch);
+
+        //日期筛选条件是否生效
+        $(".fa-check-square").on("click", function () {
+            if ($(this).hasClass("active")) {
+                filter.filter.ksrq="";
+                filter.filter.jsrq="";
+                $(".date input").css("color", "#ccc").attr("readonly", "true");
+                $(this).removeClass("active");
+            } else {
+                $(".date input").css("color", "#000").removeAttr("readonly");
+                $(this).addClass("active");
+            }
+        });
+
+        //切换显示方式
+        $(".viewicon").on("click", function () {
+            var status = $(".viewtype").css("display");
+            if (status == "none")
+                $(".viewtype").fadeIn(200);
+            else
+                $(".viewtype").fadeOut(200);
+        });
+
+        $(".viewtype li").on("click", function () {
+            var dm=$(this).attr("dm");
+            var url=window.location.href;            
+            setUrlParam("ViewType",dm);            
+        });
+
+        //para_name 参数名称 para_value 参数值 url所要更改参数的网址
+        function setUrlParam(para_name, para_value) {
+            var strNewUrl = new String();
+            var strUrl = new String();
+            var url = new String();
+            url= window.location.href;
+            strUrl = window.location.href;
+            //alert(strUrl);
+            if (strUrl.indexOf("?") != -1) {
+                strUrl = strUrl.substr(strUrl.indexOf("?") + 1);
+                //alert(strUrl);
+                if (strUrl.toLowerCase().indexOf(para_name.toLowerCase()) == -1) {
+                    strNewUrl = url + "&" + para_name + "=" + para_value;
+                    window.location = strNewUrl;
+                    //return strNewUrl;
+                } else {
+                    var aParam = strUrl.split("&");
+                    //alert(aParam.length);
+                    for (var i = 0; i < aParam.length; i++) {
+                        if (aParam[i].substr(0, aParam[i].indexOf("=")).toLowerCase() == para_name.toLowerCase()) {
+                            aParam[i] = aParam[i].substr(0, aParam[i].indexOf("=")) + "=" + para_value;
+                        }
+                    }
+                    strNewUrl = url.substr(0, url.indexOf("?") + 1) + aParam.join("&");
+                    //alert(strNewUrl);
+                    window.location = strNewUrl;
+                    //return strNewUrl;
+                }
+            } else {
+                strUrl += "?" + para_name + "=" + para_value;                
+                window.location=strUrl;
+            }
+        }
+    </script>
+</asp:Content>

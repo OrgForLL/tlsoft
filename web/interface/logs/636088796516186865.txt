@@ -1,0 +1,1 @@
+找不到配置属性：WXDBConstr

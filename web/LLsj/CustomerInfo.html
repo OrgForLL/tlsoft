@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ 
+
+    <!-- Need to get a proper redirect hooked up. Blech. -->
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, follow">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>物流信息列表</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <script type="text/javascript">
+		$( document ).on( "pageshow", function(){
+			//$( "p.message" ).hide().delay( 1500 ).show( "fast" );
+		});
+		$(document).ready(function () {
+		    //$.mobile.ajaxLinksEnabled = false; 
+		    $("#CustCat a").bind("click", function () { 
+				//alert(this.getAttribute("cat")); 
+			});
+		    $.getJSON("CustomerListJson.aspx", null, function (obj) {
+		        //alert(obj.rows.length);
+		        var custlist = $("#CustList");
+		        //custlist.html("");
+				
+		        for (var i = 0; i < obj.rows.length; i++) {
+
+		            custlist.append("<li><a data-ajax='false' href='CustomerDetail.aspx?khid=" + obj.rows[i].khid + "'>" + obj.rows[i].khmc + "</a></li>")
+		        }
+				$("#CustList").listview({ inset: true ,icon: "star",filter: true,filterPlaceholder:"输入要查找的贸易公司"});
+});
+
+
+});
+        //function gotoDetail()
+	</script>
+</head>
+
+<body>
+<!-- Home -->
+<div data-role="page">
+  <div data-role="header">
+     
+    <h1>客户信息检索</h1>
+  </div>
+  <div data-role="content">
+    <ul id="CustList">
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>利郎2015岁末福利会</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">  
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">  
+		<meta content="telephone=no,email=no" name="format-detection">
+		<link rel="stylesheet" href="css/custom.css" />
+		<link rel="stylesheet" href="css/animate.min.css">
+		<script src="js/modernizr.custom.js"></script> 
+		<script src="js/jquery-1.10.0.min.js"></script>
+		<!--分享朋友圈-->
+		<link href="share/css/share.css" rel="stylesheet">
+	</head>
+	<body> 
+		<!--loading-->
+	        <script src="js/resLoader.js"></script>
+			<link rel="stylesheet" href="css/fakeLoader.css">
+			<div class="fakeloader" style="position:absolute;"></div>
+
+		
+           <div class="progressbar" style="position:absolute;padding-top:50%;padding-left: 45%;"></div>
+
+			    <script src="js/fakeLoader.min.js"></script>
+			    <script>
+				    $(document).ready(function(){
+			            $(".fakeloader").fakeLoader({
+			                timeToHide:12000000,
+			                bgColor:"black"
+			                //imagePath: "images/bg1.png"
+			            });
+			        });
+				</script>
+
+			<script>
+			    var loader = new resLoader({
+			        resources: [
+					'images/1.jpg',
+					'vedio/22.wav',
+					'images/1.png',
+					'images/2.png',
+					'images/3.png',
+					'images/4.jpg',
+					'images/5.jpg',
+					'images/6.jpg',
+					'images/6_1.png',
+					'images/077-078-2.png',
+					'images/081-082-3.png',
+					'http://file2.rabbitpre.com/6fcf1446-64fe-4ad4-b85f-8cd5f811d0f1-1671?imageMogr2/quality/70/auto-orient',
+					'images/code.png',
+					'vedio/bgm.mp3',
+
+				],
+			        onStart: function (total) {
+			            console.log('start:' + total);
+			        },
+			        onProgress: function (current, total) {
+			            console.log(current + '/' + total);
+			            var percent = parseInt(current / total * 100);  //百分比
+			            $('.progressbar').text(percent + '%');
+			        },
+			        onComplete: function (total) {
+			            //alert('加载完毕:'+total+'个资源');
+			            $(".progressbar").fakeLoader({
+			                timeToHide: true
+			            });
+
+			            $(".fakeloader").fakeLoader({
+
+			                timeToHide: true,
+			                bgColor: "black"
+			                // imagePath: "images/bg1.png"
+			            });
+
+
+			            //跳转页面
+			            window.location.href = "index.aspx";
+			        }
+			    });
+
+			loader.start();
+
+			</script> 
+	</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>领航公司资金管控表</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0,maximum-scale=1" />
+        <link rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+        <link rel="stylesheet" href="../../res/css/Report/summary.css" />
+        <style type="text/css">
+            
+        </style>
+	</head>
+
+	<body>
+        <div class="header">
+            <i id="goback" class="fa fa-angle-left"></i>
+            <div id="search">
+                <input type="text" placeholder="请输入客户代码" />
+                <button id="submit"><i class="fa fa-search"></i></button>
+            </div>
+            <div id="filter">
+                <i class="fa fa-filter"></i>
+                <p>筛选</p>
+            </div>
+        </div>
+        <div class="wrap-page page-not-header">
+            <div class="page">
+                <div class="shade">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2">客户代码</th>
+                                <th rowspan="2">客户名称</th>
+                                <th colspan="3">贷款回款总部</th>
+                                <th colspan="3">费用回款领航</th>
+                                <th rowspan="2">开支预算</th>
+                                <th rowspan="2">费用开支</th>
+                            </tr>
+                            <tr>
+                                <th>计划</th>
+                                <th>实际</th>
+                                <th>差额</th>
+                                <th>计划</th>
+                                <th>实际</th>
+                                <th>差额</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="detail">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2">客户代码</th>
+                                <th rowspan="2">客户名称</th>
+                                <th colspan="3">贷款回款总部</th>
+                                <th colspan="3">费用回款领航</th>
+                                <th rowspan="2">开支预算</th>
+                                <th rowspan="2">费用开支</th>
+                            </tr>
+                            <tr>
+                                <th>计划</th>
+                                <th>实际</th>
+                                <th>差额</th>
+                                <th>计划</th>
+                                <th>实际</th>
+                                <th>差额</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="total">
+                    <table>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="layer">
+            <div class="criteria">
+                <div class="options">
+                    <div class="date">
+                        <p class="title">
+                            <span>日期范围</span>
+                        </p>
+                        <div class="range">
+                            <input id="dateStart" type="date" value="2017-07-07" />
+                            <div class="line"></div>
+                            <input id="dateEnd" type="date" value="2017-07-07" />
+                        </div>
+                    </div>
+                    <div class="userSelect">
+                        <p class="title">贸易公司</p>
+                        <div class="range">
+                            <select id=khid>
+                            </select>
+                            <label class="fa fa-angle-down" for="company"></label>
+                        </div>
+                    </div>
+                    <div class="state">
+                        <p class="title">本期可调配状态</p>
+                        <div class="range">
+                            <select id=tpzt>
+                                <option value="0">全部</option>
+                                <option value="1">正数</option>
+                                <option value="2">负数</option>
+                            </select>
+                            <label class="fa fa-angle-down" for="company"></label>
+                        </div>
+                    </div>
+                    <div class="num">
+                        <p class="title">只含费用科目<input id="fykm" type="checkbox" /></p>
+                    </div>
+                </div>
+                <div class="confirm">
+                    <button id="reset">重置</button>
+                    <button id="complete">完成</button>
+                </div>
+            </div>
+        </div>
+        <!--加载提示-->
+        <div class="load_toast" id="myLoading">
+            <div class="load_toast_mask"></div>
+            <div class="load_toast_container">
+                <div class="lee_toast">
+                    <div class="load_img">
+                        <img src="../../res/img/my_loading.gif" />
+                    </div>
+                    <div class="load_text">加载中...</div>
+                </div>
+            </div>
+        </div>
+
+        <!--模板-->
+        <script id="detail" type="text/html">
+            <tr>
+                <td>{{djkhdm}}</td>
+                <td>{{djkhmc}}</td>
+                <td class="currency">{{formatMoney(hk_jh)}}</td>
+                <td class="currency">{{formatMoney(hk_sj)}}</td>
+                <td class="currency">{{formatMoney(hk_ce)}}</td>
+                <td class="currency">{{formatMoney(fy_jh)}}</td>
+                <td class="currency">{{formatMoney(fy_sj)}}</td>
+                <td class="currency">{{formatMoney(fy_ce)}}</td>
+                <td class="currency">{{formatMoney(kz_je)}}</td>
+                <td class="currency">{{formatMoney(fykz_hj)}}</td>
+            </tr>
+        </script>
+        <script type="text/javascript" src="../../res/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../../res/js/fastclick.min.js"></script>
+        <script type="text/javascript" src="../../res/js/template.js"></script>
+        <script type="text/javascript" src="../../res/js/Report/summary.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                summary.init();
+            });
+        </script>
+	</body>
+</html>

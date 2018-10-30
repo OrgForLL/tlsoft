@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" %>
-
 <%@ Import Namespace="System.Net" %>
 <%@ Import Namespace="System.IO" %>
 <%@ Import Namespace="System.IO.Compression" %>
@@ -20,17 +19,17 @@
         string now = Convert.ToInt64(ts.TotalSeconds).ToString();
         string date = DateTime.Now.ToString("yyyy-MM-dd");
         if (Request["date"] != null) date = DateTime.Parse(Request["date"].ToString()).ToString("yyyy-MM-dd");
-
-        string bs = "0"; //0:：福州；1：广州,2:天津
+        //0:：福州；1：广州,2:天津
+        string bs = "0";
         if (Request["bs"] != null) bs = Request["bs"];
         SynchronousDate synchronousDate = new SynchronousDate();
-        string tbInfo = synchronousDate.tbData(bs, "自动同步" + now, date, "");
+        string tbInfo = synchronousDate.SyncData(bs, "自动同步" + now, date);
 
         int cgNum = 0;
         if (tbInfo.IndexOf("SUCCESS") > -1)
         {
             //下载pdf到本地 start
-            string downPDFInfo = synchronousDate.tbData("downPDF", "自动同步" + now, "", GetTBSJIDS(date, bs, "自动同步" + now));
+            string downPDFInfo = synchronousDate.DownPDF(GetTBSJIDS(date, bs, "自动同步" + now));
 
             if (downPDFInfo.IndexOf("SUCCESS") > -1)
             {
@@ -59,14 +58,14 @@
                 }
                 else
                 {
-                    writeLog("没有对应的委托单！！！"); //创建日志
+                    WriteLog("没有对应的委托单！！！"); //创建日志
                     Response.Write("没有对应的委托单！！！");
                     Response.End();
                 }
             }
             else if (downPDFInfo.IndexOf("SUCCESS") == -1 || downPDFInfo.IndexOf("WARN") == -1)
             {
-                writeLog("下载pdf失败！！！  " + downPDFInfo); //创建日志
+                WriteLog("下载pdf失败！！！  " + downPDFInfo); //创建日志
                 Response.Write("下载pdf失败！！！");
                 Response.End();
             }
@@ -74,13 +73,13 @@
         }
         else if (tbInfo.IndexOf("WARN") > -1)
         {
-            writeLog(tbInfo); //创建日志
+            WriteLog(tbInfo); //创建日志
             Response.Write("检测数据不存在！！！");
             Response.End();
         }
         else
         {
-            writeLog(tbInfo); //创建日志
+            WriteLog(tbInfo); //创建日志
             Response.Write("同步失败！！！");
             Response.End();
         }
@@ -89,75 +88,66 @@
 
     public class SynchronousDate
     {
-        //验证调用的合法性
-        //String ctrl = "";
-        //String userid = "0";
-        //String username = "自动同步";
-
-        public string tbData(String ctrl, String username, String date, String ids)
+        /// <summary>
+        /// 同步数据
+        /// </summary>
+        /// <param name="ctrl"></param>
+        /// <param name="username"></param>
+        /// <param name="date"></param>    
+        /// <returns></returns>
+        public string SyncData(string ctrl, string username, string date)
         {
-
             string rtMsg = "";
-
-            if (ctrl == "0" || ctrl == "1" || ctrl == "2")
-            {
-                string bdate = date;
-                string edate = date;
-                string fz = "";
-                if (bdate == "" || bdate == null || edate == "" || edate == null)
-                    rtMsg = @"{""type"":""ERROR"",""msg"":""日期参数有误！""}";
-                else
-                {
-                    if (ctrl == "0")
-                    {
-                        fz = pullDatas(bdate, edate, username);  //福州
-                    }
-                    else if (ctrl == "1")
-                    {
-                        fz = pullDatas1(bdate, edate, username); //广州
-                    }
-                    else if (ctrl == "2")
-                    {
-                        fz = pullTJDatas(bdate, edate, username);  //天津
-                    }
-
-                    if (fz.IndexOf("WARN") > -1)
-                    {
-                        rtMsg = @"{""type"":""WARN"",""msg"":""检测数据不存在！！！""}";
-                    }
-                    else if (fz.IndexOf("SUCCESS") > -1 || fz.IndexOf("WARN") > -1)
-                    {
-                        rtMsg = @"{""type"":""SUCCESS""}";
-                    }
-                    else
-                    {
-                        rtMsg = @"{""type"":""ERROR"",""msg"":""检测数据同步失败！！！""}";
-                    }
-                }
-            }
-            else if (ctrl == "downPDF")
-            {
-                if (ids == "" || ids == null)
-                    rtMsg = @"{""type"":""ERROR"",""msg"":""参数【IDS】错误！""}";
-                else
-                {
-                    //实验报告文件保存位置
-                    rtMsg = downloadPDF(HttpContext.Current.Server.MapPath("../MyUpload/" + DateTime.Now.ToString("yyyyMM") + "/"), ids);
-                }
-            }
+            string bdate = date;
+            string edate = date;
+            string fz = "";
+            if (bdate == "" || bdate == null || edate == "" || edate == null)
+                rtMsg = @"{""type"":""ERROR"",""msg"":""日期参数有误！""}";
             else
             {
-                rtMsg = @"{""type"":""ERROR"",""msg"":""无ctrl对应操作！""}";
+                if (ctrl == "0")
+                    fz = PullFZDatas(bdate, edate, username);  //福州
+                else if (ctrl == "1")
+                    fz = PullGZDatas(bdate, edate, username); //广州
+                else if (ctrl == "2")
+                    fz = PullTJDatas(bdate, edate, username);  //天津
+
+                if (fz.IndexOf("WARN") > -1)
+                    rtMsg = @"{""type"":""WARN"",""msg"":""检测数据不存在！！！""}";
+                else if (fz.IndexOf("SUCCESS") > -1 || fz.IndexOf("WARN") > -1)
+                    rtMsg = @"{""type"":""SUCCESS""}";
+                else
+                    rtMsg = @"{""type"":""ERROR"",""msg"":""检测数据同步失败！！！""}";
             }
 
             return rtMsg;
         }
 
-        //调用实验室接口将报告信息存到本地数据库中-天津
-        public string pullTJDatas(String bdate, String edate, string username)
+
+        /// <summary>
+        /// 下载PDF
+        /// </summary>  
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public string DownPDF(string ids)
         {
-            String rtMsg = "";
-            String jls = "0";
+
+            string rtMsg = "";
+            if (ids == "" || ids == null)
+                rtMsg = @"{""type"":""ERROR"",""msg"":""参数【IDS】错误！""}";
+            else
+            {
+                //实验报告文件保存位置
+                rtMsg = DownloadPDF(HttpContext.Current.Server.MapPath("../MyUpload/" + DateTime.Now.ToString("yyyyMM") + "/"), ids);
+            }
+            return rtMsg;
+        }
+
+        //调用实验室接口将报告信息存到本地数据库中-天津
+        public string PullTJDatas(string bdate, string edate, string username)
+        {
+            string rtMsg = "";
+            string jls = "0";
             // 请求对象
             ReportsListRequestStructBean RequestBean = new ReportsListRequestStructBean();
             // 请求头对象
@@ -215,19 +205,19 @@
 
                 StringBuilder strSQL = new StringBuilder();
                 strSQL.Append("declare @id int;declare @jls int;set @jls=0;");
-                String zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='3')
+                string zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='2')
                                     begin
                                     insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,bs)
                                     values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','','{9}','{10}','{11}','2');
                                     set @id=(select SCOPE_IDENTITY());set @jls=@jls+1; ";
-                String mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
+                string mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
                 foreach (ResultContent r in contentList)
                 {
                     if (r.urlpdf.IndexOf("http://") == 0)
                     {
                         r.urlpdf = r.urlpdf.Substring(7, r.urlpdf.Length - 7);
                     }
-                    strSQL.Append(String.Format(zSQL, r.stfbreportno, r.ProductName, r.productsremark, r.AcceptDate, r.dapprovedate, "", r.SecurityCategories, (r.fails.Length == 0 ? "合格" : "不合格"), r.urlpdf, username, DateTime.Now.ToString(), r.SuperviseNoticeCode));
+                    strSQL.Append(string.Format(zSQL, r.stfbreportno, r.ProductName, r.productsremark, r.AcceptDate, r.dapprovedate, "", r.SecurityCategories, (r.fails.Length == 0 ? "合格" : "不合格"), r.urlpdf, username, DateTime.Now.ToString(), r.SuperviseNoticeCode));
                     if (r.SuperviseNoticeCode.Length > 0)
                     {
                         ReportsRequestStructBean rep = new ReportsRequestStructBean();
@@ -246,7 +236,7 @@
                             {
                                 foreach (Detail d in conList[0].detail)
                                 {
-                                    strSQL.Append(String.Format(mSQL, d.item, d.prefix, d.standvalue, d.acturevalue, d.result));
+                                    strSQL.Append(string.Format(mSQL, d.item, d.prefix, d.standvalue, d.acturevalue, d.result));
                                 }
                             }
                         }
@@ -264,7 +254,7 @@
                 if (rtMsg == "")
                 {
                     rtMsg = @"{{""type"":""SUCCESS"",""msg"":""成功同步【{0}】条数据！""}}";
-                    rtMsg = String.Format(rtMsg, jls);
+                    rtMsg = string.Format(rtMsg, jls);
                 }
             }
             else
@@ -276,12 +266,12 @@
         }
 
         //调用实验室接口将报告信息存到本地数据库中-福州
-        public string pullDatas(String bdate, String edate, string username)
+        public string PullFZDatas(string bdate, string edate, string username)
         {
-            String url = @"http://www.ffib.cn/query/55a81b96c60f8918e43.php?bdate={0}&edate={1}";
-            String rtMsg = "", jls = "0";
-            url = String.Format(url, bdate, edate);
-            String JSONdate = clsNetExecute.HttpRequest(url);
+            string url = @"http://www.ffib.cn/query/55a81b96c60f8918e43.php?bdate={0}&edate={1}";
+            string rtMsg = "", jls = "0";
+            url = string.Format(url, bdate, edate);
+            string JSONdate = clsNetExecute.HttpRequest(url);
             if (JSONdate != "Not+Found")
             {
                 //替换掉/
@@ -298,18 +288,18 @@
                 {
                     StringBuilder strSQL = new StringBuilder();
                     strSQL.Append("declare @id int;declare @jls int;set @jls=0;");
-                    String zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='0')
+                    string zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='0')
 										begin
 										insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,bs)
 										values ('{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','','{10}','{11}','{12}','0');
 										set @id=(select SCOPE_IDENTITY());set @jls=@jls+1; ";
-                    String mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
+                    string mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
                     for (int i = 0; i < root.data.Count; i++)
                     {
-                        String yphh = root.data[i].样品货款号;
+                        string yphh = root.data[i].样品货款号;
                         if (yphh.IndexOf("(NO:") > -1)
                             yphh = yphh.Substring(0, yphh.IndexOf("(NO:"));
-                        strSQL.Append(String.Format(zSQL, root.data[i].报告编号, root.data[i].报告编号,
+                        strSQL.Append(string.Format(zSQL, root.data[i].报告编号, root.data[i].报告编号,
                             root.data[i].样品名称, yphh, root.data[i].送样日期,
                             root.data[i].出证日期, root.data[i].检测依据, root.data[i].安全技术等级,
                             root.data[i].检验结论, root.data[i].下载地址, username, DateTime.Now.ToString(), root.data[i].委托序号));
@@ -323,7 +313,7 @@
                         {
                             for (int j = 0; j < row.Count; j++)
                             {
-                                strSQL.Append(String.Format(mSQL, row[j].检测项目, row[j].测试方法,
+                                strSQL.Append(string.Format(mSQL, row[j].检测项目, row[j].测试方法,
                                     row[j].技术要求, row[j].检测结果, row[j].单项判定));
                             }
                             strSQL.Append("end;");
@@ -340,7 +330,7 @@
                     if (rtMsg == "")
                     {
                         rtMsg = @"{{""type"":""SUCCESS"",""msg"":""成功同步【{0}】条数据！""}}";
-                        rtMsg = String.Format(rtMsg, jls);
+                        rtMsg = string.Format(rtMsg, jls);
                     }
                 }
 
@@ -357,12 +347,12 @@
         /// <param name="startDate">开始日期</param>
         /// <param name="endDate">结束日期</param>
         /// <returns></returns>
-        public string pullDatas1(String startDate, String endDate, string username)
+        public string PullGZDatas(string startDate, string endDate, string username)
         {
-            String url = @"http://m.gtt.net.cn/WSInterface/Handler/GetReportData_LiLang.ashx?AccessToken=D3865E240DB0445A9245F51D85119FBA&BeginQueryDate={0}&EndQueryDate={1}";
-            String rtMsg = "", jls = "0";
-            url = String.Format(url, startDate, endDate);
-            String JsonStr = clsNetExecute.HttpRequest(url);
+            string url = @"http://m.gtt.net.cn/WSInterface/Handler/GetReportData_LiLang.ashx?AccessToken=D3865E240DB0445A9245F51D85119FBA&BeginQueryDate={0}&EndQueryDate={1}";
+            string rtMsg = "", jls = "0";
+            url = string.Format(url, startDate, endDate);
+            string JsonStr = clsNetExecute.HttpRequest(url);
             if (JsonStr != "[]") //没有数据
             {
                 List<zbInfo> data = GetAllInfo(JsonStr);
@@ -371,16 +361,16 @@
                 {
                     StringBuilder strSQL = new StringBuilder();
                     strSQL.Append("declare @id int;declare @jls int;set @jls=0;");
-                    String zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='1')
+                    string zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='1')
                                         begin
                                             insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,bs)
                                             values ('{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','','{10}','{11}','{12}','1');
                                             set @id=(select SCOPE_IDENTITY());set @jls=@jls+1; ";
-                    String mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
+                    string mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
                     for (int i = 0; i < data.Count; i++)
                     {
-                        String yphh = data[i].样品货款号;
-                        strSQL.Append(String.Format(zSQL, data[i].报告编号, data[i].报告编号,
+                        string yphh = data[i].样品货款号;
+                        strSQL.Append(string.Format(zSQL, data[i].报告编号, data[i].报告编号,
                             data[i].样品名称, yphh, data[i].送样日期,
                             data[i].出证日期, data[i].检测依据, data[i].安全技术等级,
                             data[i].检验结论, data[i].下载地址, username, DateTime.Now.ToString(), data[i].委托序号));
@@ -394,7 +384,7 @@
                         {
                             for (int j = 0; j < row.Count; j++)
                             {
-                                strSQL.Append(String.Format(mSQL, row[j].检测项目, row[j].测试方法,
+                                strSQL.Append(string.Format(mSQL, row[j].检测项目, row[j].测试方法,
                                     row[j].技术要求, row[j].检测结果, row[j].单项判定));
                             }
                             strSQL.Append("end;");
@@ -411,7 +401,7 @@
                     if (rtMsg == "")
                     {
                         rtMsg = @"{{""type"":""SUCCESS"",""msg"":""成功同步【{0}】条数据！""}}";
-                        rtMsg = String.Format(rtMsg, jls);
+                        rtMsg = string.Format(rtMsg, jls);
                     }
                 }
             }
@@ -421,16 +411,21 @@
             return rtMsg;
         }
 
-        //下载接口
-        public String downloadPDF(string id, string URL, String path, string filename)
+        /// <summary>
+        /// 下载执行
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="URL"></param>
+        /// <param name="path"></param>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public string DownloadPDFExecutor(string id, string URL, string path, string filename)
         {
-            String rtMsg = "";
-            String strPath = Path.GetDirectoryName(path);
-            String _filename = "";
+            string rtMsg = "";
+            string strPath = Path.GetDirectoryName(path);
+            string _filename = "";
             if (!Directory.Exists(strPath))
-            {
                 Directory.CreateDirectory(strPath);
-            }
             try
             {
                 System.Net.HttpWebRequest Myrq = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(URL);
@@ -448,7 +443,6 @@
                     filename = path + filename;
                     System.IO.Stream so = new System.IO.FileStream(filename, System.IO.FileMode.Create);
                     long totalDownloadedByte = 0;//下载的总字节数B
-
                     while (osize > 0)
                     {
                         totalDownloadedByte = osize + totalDownloadedByte;
@@ -471,24 +465,29 @@
                     rtMsg = errSite.ToString();
             }
             catch (Exception ex)
-            {
-                rtMsg = @"{{""type"":""ERROR"",""msg"":""{0}""}}";
-                rtMsg = String.Format(rtMsg, ex.Message);
+            {                
+                rtMsg = string.Format(@"{{""type"":""ERROR"",""msg"":""{0}""}}", ex.Message);
             }
 
             return rtMsg;
         }
 
-        public String downloadPDF(string path, string ids)
+        /// <summary>
+        /// 下载PDF
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public string DownloadPDF(string path, string ids)
         {
-            String rtMsg = "", URL = "", filename = "", ID = "";
+            string rtMsg = "", URL = "", filename = "", ID = "";
             int succCount = 0, failCount = 0;
             using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
             {
                 DataTable dt = null;
-                String strsql = "select id,bgbh,pdf from yf_t_syjcbg where id in (" + ids + ")";
+                string strsql = "select id,bgbh,pdf from yf_t_syjcbg where id in (" + ids + ")";
 
-                String rt = dal.ExecuteQuery(strsql, out dt);
+                string rt = dal.ExecuteQuery(strsql, out dt);
                 if (rt == "" && dt.Rows.Count > 0)
                 {
                     if (dt.Rows.Count > 0)
@@ -501,14 +500,14 @@
 
                             if (!URL.Contains("http://") || !URL.Contains("https://"))
                                 URL = "http://" + URL;
-                            rtMsg = downloadPDF(ID, URL, path, filename);
+                            rtMsg = DownloadPDFExecutor(ID, URL, path, filename);
                             if (rtMsg == "")
                                 succCount++;
                             else
                                 failCount++;
                         }
                         rtMsg = @"{{""type"":""SUCCESS"",""msg"":""总共提交【{0}】条数据，成功:{1}，失败:{2}""}}";
-                        rtMsg = String.Format(rtMsg, succCount + failCount, succCount, failCount);
+                        rtMsg = string.Format(rtMsg, succCount + failCount, succCount, failCount);
                     }
                     else
                         rtMsg = @"{""type"":""WARN"",""msg"":""数据库中找不到对应数据！""}";
@@ -669,8 +668,12 @@
             return data;
         }
 
-        //转半角
-        public String ToDBC(String input)
+        /// <summary>
+        /// 转半角
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public string ToDBC(string input)
         {
             char[] c = input.ToCharArray();
             for (int i = 0; i < c.Length; i++)
@@ -683,9 +686,15 @@
                 if (c[i] > 65280 && c[i] < 65375)
                     c[i] = (char)(c[i] - 65248);
             }
-            return new String(c);
+            return new string(c);
         }
 
+        /// <summary>
+        /// 发送POST请求
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="postJson"></param>
+        /// <returns></returns>
         public string PostFunction(string url, string postJson)
         {
             string Result = "";
@@ -718,9 +727,9 @@
     public class PDFUploadCZ
     {
         LiLanzDAL sqlhelp = new LiLanzDAL();
-        public string Zyff(String ctrl, String ids, String mlid, String zd, String mxid)
+        public string Zyff(string ctrl, string ids, string mlid, string zd, string mxid)
         {
-            String rtMsg = "";
+            string rtMsg = "";
 
             if (ctrl == "" || ctrl == null)
             {
@@ -746,17 +755,17 @@
         //上传操作，将文件复制一份出来并写入数据库
         public string UploadPDF(string ids, string mlid, string zd)
         {
-            String[] tmp = ids.Split(',');
+            string[] tmp = ids.Split(',');
             DataTable dt = null;
-            String errInfo = "";
+            string errInfo = "";
             using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
             {
-                String sql = "select localpdf from yf_t_syjcbg where id in (" + ids + ");";
+                string sql = "select localpdf from yf_t_syjcbg where id in (" + ids + ");";
                 errInfo = dal.ExecuteQuery(sql, out dt);
                 if (errInfo == "" && dt.Rows.Count > 0)
                 {
-                    String path = "", filename = "", newfilename = "", errs = "";
-                    String toPath = "../photo/sygzb_pdf/";
+                    string path = "", filename = "", newfilename = "", errs = "";
+                    string toPath = "../photo/sygzb_pdf/";
                     int value = 0, sucCount = 0;
                     if (zd == "sygzb_tp")
                         value = 3311;
@@ -810,20 +819,20 @@
         }
 
         //删除文件，并操作数据库
-        public string DeletePDF(String mxid, String zd)
+        public string DeletePDF(string mxid, string zd)
         {
-            String errInfo = "";
-            String path = "../photo/sygzb_pdf/";
+            string errInfo = "";
+            string path = "../photo/sygzb_pdf/";
             using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
             {
                 DataTable dt = null;
-                String sql = "select top 1 text from ghs_t_zldamxb where mxid=@mxid;";
+                string sql = "select top 1 text from ghs_t_zldamxb where mxid=@mxid;";
                 List<SqlParameter> paras = new List<SqlParameter>();
                 paras.Add(new SqlParameter("@mxid", mxid));
                 errInfo = dal.ExecuteQuerySecurity(sql, paras, out dt);
                 if (errInfo == "" && dt.Rows.Count > 0)
                 {
-                    String filename = dt.Rows[0]["text"].ToString();
+                    string filename = dt.Rows[0]["text"].ToString();
                     if (File.Exists(HttpContext.Current.Server.MapPath(path + filename)))
                     {
                         File.Delete(HttpContext.Current.Server.MapPath(path + filename));
@@ -846,8 +855,470 @@
             return "删除失败！";
         }
     }
+    
+    /// <summary>
+    /// 获取指定同步日期数据的id串
+    /// </summary>
+    /// <param name="tbrq"></param>
+    /// <param name="bs"></param>
+    /// <param name="tbr"></param>
+    /// <returns></returns>
+    public string GetTBSJIDS(string tbrq, string bs, string tbr)
+    {
+        string sql = @"
+            SELECT id
+            FROM yf_t_syjcbg
+            WHERE bs='{1}' and CONVERT(VARCHAR(50),czrq,112)=CONVERT(VARCHAR(50),CAST('{0}' AS DATETIME),112) and isnull(localpdf,'')='' 
+            ORDER BY id DESC
+        ";
+        sql = string.Format(sql, tbrq, bs);
+        string ids = "0";
+        using (SqlDataReader sdr = sqlhelp.ExecuteReader(sql))
+        {
+            while (sdr.Read())
+            {
+                ids += "," + sdr["id"];
+            }
+        }
+        return ids;
+    }
 
-    //天津检测所
+    /// <summary>
+    /// 获取指定同步日期数据记录
+    /// </summary>
+    /// <param name="tbrq">同步日期</param>
+    /// <returns>返回指定出证日期数据记录表</returns>
+    public DataTable GetTBJL(string tbrq, string bs)
+    {
+        string sql = @"
+            SELECT b.sygzid mlid,b.djlx,a.id,a.bgbh,a.jcjg
+            FROM yf_t_syjcbg a
+            INNER JOIN yf_t_wtjyxy b ON a.wtid=b.id
+            WHERE bs='{1}' and CONVERT(VARCHAR(50),czrq,112)=CONVERT(VARCHAR(50),CAST('{0}' AS DATETIME),112)
+            ORDER BY a.id DESC
+        ";
+        sql = string.Format(sql, tbrq, bs);
+        using (DataTable dt = sqlhelp.ExecuteDataTable(sql))
+        {
+            return dt;
+        }
+    }
+
+    /// <summary>
+    /// 上传成分pdf
+    /// </summary>
+    /// <param name="dv">成分信息记录视图</param>
+    /// <returns>返回值成功条数</returns>
+    public int UploadCF(DataView dv)
+    {
+        int ztsm = 0;
+        string zd = "sygzb_cfbg";
+        DataTable mlidb = dv.ToTable(true, new string[] { "mlid" });//去重，并只有mlid列的表
+        foreach (DataRow dr in mlidb.Select())
+        {
+            dv.RowFilter = "djlx='3313' and mlid=" + dr["mlid"];
+            string ids = "0";
+            foreach (DataRow dr1 in dv.ToTable().Select())
+            {
+                ids += "," + dr1["id"];
+            }
+            PDFUploadCZ pDFUploadCZ = new PDFUploadCZ();
+            //Zyff(string ctrl, string userid, string ids, string mlid, string zd, string mxid, string StartPath)
+            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "").IndexOf("成功复制") > -1)
+            {
+                ztsm++;
+            }
+        }
+        //Response.Write("成分:" + ztsm + "<br />");
+        return ztsm;
+    }
+
+    /// <summary>
+    /// 上传贴牌pdf
+    /// </summary>
+    /// <param name="dv">贴牌信息记录视图</param>
+    /// <returns>返回值成功条数</returns>
+    public int UploadTP(DataView dv)
+    {
+        int ztsm = 0;
+        string zd = "sygzb_tp";
+        DataTable mlidb = dv.ToTable(true, new string[] { "mlid" });//去重，并只有mlid列的表
+        foreach (DataRow dr in mlidb.Select())
+        {
+            string iscg = "0";
+            //上传合格
+            dv.RowFilter = "djlx='3311' and mlid=" + dr["mlid"] + " and (bgbh like '%P' or jcjg='合格') ";
+            string ids = "0";
+            foreach (DataRow dr1 in dv.ToTable().Select())
+            {
+                ids += "," + dr1["id"];
+            }
+            PDFUploadCZ pDFUploadCZ = new PDFUploadCZ();
+            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "").IndexOf("成功复制") > -1)
+            {
+                ztsm++;
+            }
+            //上传不合格
+            dv.RowFilter = "djlx='3311' and mlid=" + dr["mlid"] + " jcjg <>'合格' ";
+            ids = "0";
+            foreach (DataRow dr1 in dv.ToTable().Select())
+            {
+                ids += "," + dr1["id"];
+            }
+            if (UploadPDF(ids, dr["mlid"].ToString(), zd).IndexOf("成功复制") > -1)
+            {
+                ztsm++;
+            }
+        }
+        //Response.Write("贴牌:" + ztsm + "<br />");
+        return ztsm;
+    }
+
+    /// <summary>
+    /// 上传自制pdf
+    /// </summary>
+    /// <param name="dv">自制信息记录视图</param>
+    /// <returns>返回值成功条数</returns>
+    public int UploadZZ(DataView dv)
+    {
+        int ztsm = 0;
+        string zd = "sygzb_sg";
+        DataTable mlidb = dv.ToTable(true, new string[] { "mlid" });//去重，并只有mlid列的表
+        foreach (DataRow dr in mlidb.Select())
+        {
+            string iscg = "0";
+            //上传合格
+            dv.RowFilter = "djlx='3312' and mlid=" + dr["mlid"] + " and (bgbh like '%P' or jcjg='合格') ";
+            string ids = "0";
+            foreach (DataRow dr1 in dv.ToTable().Select())
+            {
+                ids += "," + dr1["id"];
+            }
+            PDFUploadCZ pDFUploadCZ = new PDFUploadCZ();
+            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "").IndexOf("成功复制") > -1)
+            {
+                ztsm++;
+            }
+            //str+="mlid:"+dr["mlid"]+";"+ids+"<br />\n";
+            //上传不合格
+            dv.RowFilter = "djlx='3312' and mlid=" + dr["mlid"] + " and jcjg <>'合格' ";
+            ids = "0";
+            foreach (DataRow dr1 in dv.ToTable().Select())
+            {
+                ids += "," + dr1["id"];
+            }
+            if (UploadPDF(ids, dr["mlid"].ToString(), zd).IndexOf("成功复制") > -1)
+            {
+                ztsm++;
+            }
+        }
+        //Response.Write(str);
+        return ztsm;
+    }
+
+    /// <summary>
+    /// 上传操作，将文件复制一份出来并写入数据库
+    /// </summary>
+    /// <param name="ids"></param>
+    /// <param name="mlid">送样跟踪id</param>
+    /// <param name="zd">说明单据的类型 sygzb_tp：贴牌；sygzb_sg：自制；sygzb_cfbg：成分；</param>
+    /// <returns>返回值包含’成功复制‘表示成功</returns>
+    public string UploadPDF(string ids, string mlid, string zd)
+    {
+        string[] tmp = ids.Split(',');
+        DataTable dt = null;
+        string errInfo = "";
+        using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
+        {
+            string sql = "select localpdf,bgbh FileName from yf_t_syjcbg where id in (" + ids + ");";
+            errInfo = dal.ExecuteQuery(sql, out dt);
+            if (errInfo == "" && dt.Rows.Count > 0)
+            {
+                string path = "", filename = "", newfilename = "", errs = "";
+                string toPath = "../MyUpload/" + DateTime.Now.ToString("yyyyMM") + "/";
+                string filePath = Server.MapPath(toPath);
+                //检查是否有该路径  没有就创建
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                int sucCount = 0;
+                //生成文件名
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    path = "../" + dt.Rows[i]["localpdf"].ToString();
+                    filename = path.Split('/')[path.Split('/').Length - 1];
+                    newfilename = GetFileName() + ".pdf";
+                    if (File.Exists(Server.MapPath(path)))
+                    { //检查源文件是否存在
+                        sql = @"
+                            SELECT * from t_uploadfile where groupid=22454 AND TableID={0} AND FileName='{1}'
+                        ";
+                        sql = string.Format(sql, mlid, dt.Rows[i]["FileName"].ToString());
+                        using (DataTable dr = sqlhelp.ExecuteDataTable(sql))
+                        {
+                            if (dr.Rows.Count == 0)//则同一份mlid里面不能传相同的报告
+                            {
+                                File.Copy(Server.MapPath(path), Server.MapPath(toPath + newfilename), true);
+                                if (File.Exists(Server.MapPath(toPath + newfilename)))
+                                {
+                                    //检查是否复制成功，成功则接着写入数据库
+                                    sql = " INSERT INTO t_uploadfile(TableID,GroupID,URLAddress,CreateDate,FileName) values(@mlid,'22454',@url,GETDATE(),@FileName); ";
+                                    List<SqlParameter> paras = new List<SqlParameter>();
+                                    paras.Add(new SqlParameter("@mlid", mlid));
+                                    paras.Add(new SqlParameter("@url", toPath + newfilename));
+                                    paras.Add(new SqlParameter("@FileName", dt.Rows[i]["FileName"].ToString()));
+                                    errInfo = dal.ExecuteNonQuerySecurity(sql, paras);
+                                    if (errInfo == "")
+                                        sucCount++;
+                                    else
+                                        errs += errInfo + "|";
+                                }
+                            }
+                        }
+                    }
+                }//end for
+                if (errs == "")
+                    errInfo = "成功复制" + sucCount.ToString() + "份报告！";
+                else
+                    errInfo = errs;
+            }
+        }
+        return errInfo;
+    }
+
+    /// <summary>
+    /// 生成文件名
+    /// </summary>
+    /// <returns></returns>
+    public string GetFileName()
+    {
+        Random rd = new Random();
+        StringBuilder serial = new StringBuilder();
+        serial.Append(DateTime.Now.ToString("yyyyMMddHHmmssff"));
+        serial.Append(rd.Next(0, 999999).ToString());
+        return serial.ToString();
+
+    }
+
+    /// <summary>
+    /// 写日志文件方法
+    /// </summary>
+    /// <param name="info"></param>
+    public void WriteLog(string info)
+    {
+        try
+        {
+            clsLocalLoger.logDirectory = HttpContext.Current.Server.MapPath("ZDTBLogs/");
+            if (Directory.Exists(clsLocalLoger.logDirectory) == false)
+            {
+                Directory.CreateDirectory(clsLocalLoger.logDirectory);
+            }
+            clsLocalLoger.WriteInfo(info);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    public class RowItem
+    {
+        private string _检测项目;
+        /// <summary>
+
+        /// </summary>
+        public string 检测项目
+        {
+            get { return this._检测项目; }
+            set { this._检测项目 = value; }
+        }
+        private string _测试方法;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 测试方法
+        {
+            get { return this._测试方法; }
+            set { this._测试方法 = value; }
+        }
+        private string _技术要求;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 技术要求
+        {
+            get { return this._技术要求; }
+            set { this._技术要求 = value; }
+        }
+        private string _检测结果;
+        /// <summary>
+
+        /// </summary>
+        public string 检测结果
+        {
+            get { return this._检测结果; }
+            set { this._检测结果 = value; }
+        }
+        private string _单项判定;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 单项判定
+        {
+            get { return this._单项判定; }
+            set { this._单项判定 = value; }
+        }
+    }
+
+    public class DataItem
+    {
+        public string _委托序号;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 委托序号
+        {
+            get { return this._委托序号; }
+            set { this._委托序号 = value; }
+        }
+        public string _下载地址;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 下载地址
+        {
+            get { return this._下载地址; }
+            set { this._下载地址 = value; }
+        }
+        public string _报告编号;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 报告编号
+        {
+            get { return this._报告编号; }
+            set { this._报告编号 = value; }
+        }
+
+        public string _样品名称;
+        /// <summary>
+
+        /// </summary>
+        public string 样品名称
+        {
+            get { return this._样品名称; }
+            set { this._样品名称 = value; }
+        }
+        public string _样品货款号;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 样品货款号
+        {
+            get { return this._样品货款号; }
+            set { this._样品货款号 = value; }
+        }
+        public string _安全技术等级;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 安全技术等级
+        {
+            get { return this._安全技术等级; }
+            set { this._安全技术等级 = value; }
+        }
+        public string _送样日期;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 送样日期
+        {
+            get { return this._送样日期; }
+            set { this._送样日期 = value; }
+        }
+        public string _出证日期;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 出证日期
+        {
+            get { return this._出证日期; }
+            set { this._出证日期 = value; }
+        }
+        public string _检测依据;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 检测依据
+        {
+            get { return this._检测依据; }
+            set { this._检测依据 = value; }
+        }
+        public string _检验结论;
+        /// <summary>
+        ///
+        /// </summary>
+        public string 检验结论
+        {
+            get { return this._检验结论; }
+            set { this._检验结论 = value; }
+        }
+        public List<RowItem> _row;
+        /// <summary>
+        ///
+        /// </summary>
+        public List<RowItem> row
+        {
+            get { return this._row; }
+            set { this._row = value; }
+        }
+    }
+
+    public class Root
+    {
+        private List<DataItem> _data;
+        /// <summary>
+        ///
+        /// </summary>
+        public List<DataItem> data
+        {
+            get { return this._data; }
+            set { this._data = value; }
+        }
+    }
+
+    /// <summary>
+    /// 广州检测记录主信息
+    /// </summary>
+    public class zbInfo
+    {
+        public string 安全技术等级;
+        public string 送样日期;
+        public string 检测依据;
+        public string 委托序号;
+        public string 报告编号;
+        public string 样品名称;
+        public string 样品货款号;
+        public string 下载地址;
+        public string 检验结论;
+        public string 出证日期;
+        public List<ItemInfo> itemInfos;
+    }
+
+    /// <summary>
+    /// 广州检测记录检测项目信息
+    /// </summary>
+    public class ItemInfo
+    {
+        public string 检测项目;
+        public string 测试方法;
+        public string 技术要求;
+        public string 检测结果;
+        public string 单项判定;
+    }
+
+        //天津检测所
     //请求信息
     public class ReportsListInputStc
     {
@@ -1119,7 +1590,6 @@
             }
         }
     }
-
     public class ReportsListRequestStructBean
     {
         public ReportsListRequestStructBean() { }
@@ -1209,6 +1679,7 @@
         }
     }
     //请求信息 end
+
     //响兴信息
     public class MessageContentStc
     {
@@ -1413,7 +1884,6 @@
             }
         }
     }
-
     public class ReportsListResponseStructBean
     {
         public ReportsListResponseStructBean() { }
@@ -1903,467 +2373,5 @@
 
     }
     //响兴信息end
-
     //天津检测所end
-
-
-    /// <summary>
-    /// 获取指定同步日期数据的id串
-    /// </summary>
-    /// <param name="tbrq">同步日期</param>
-    /// <returns>返回指定同步日期数据的id串</returns>
-    public string GetTBSJIDS(string tbrq, string bs, string tbr)
-    {
-        string sql = @"
-            SELECT id
-            FROM yf_t_syjcbg
-            WHERE bs='{1}' and CONVERT(VARCHAR(50),czrq,112)=CONVERT(VARCHAR(50),CAST('{0}' AS DATETIME),112) and isnull(localpdf,'')='' 
-            ORDER BY id DESC
-        ";
-        sql = string.Format(sql, tbrq, bs);
-        string ids = "0";
-        using (SqlDataReader sdr = sqlhelp.ExecuteReader(sql))
-        {
-            while (sdr.Read())
-            {
-                ids += "," + sdr["id"];
-            }
-        }
-        return ids;
-    }
-
-    /// <summary>
-    /// 获取指定同步日期数据记录
-    /// </summary>
-    /// <param name="tbrq">同步日期</param>
-    /// <returns>返回指定出证日期数据记录表</returns>
-    public DataTable GetTBJL(string tbrq, string bs)
-    {
-        string sql = @"
-            SELECT b.sygzid mlid,b.djlx,a.id,a.bgbh,a.jcjg
-            FROM yf_t_syjcbg a
-            INNER JOIN yf_t_wtjyxy b ON a.wtid=b.id
-            WHERE bs='{1}' and CONVERT(VARCHAR(50),czrq,112)=CONVERT(VARCHAR(50),CAST('{0}' AS DATETIME),112)
-            ORDER BY a.id DESC
-        ";
-        sql = string.Format(sql, tbrq, bs);
-        using (DataTable dt = sqlhelp.ExecuteDataTable(sql))
-        {
-            return dt;
-        }
-    }
-
-    /// <summary>
-    /// 上传成分pdf
-    /// </summary>
-    /// <param name="dv">成分信息记录视图</param>
-    /// <returns>返回值成功条数</returns>
-    public int UploadCF(DataView dv)
-    {
-        int ztsm = 0;
-        string zd = "sygzb_cfbg";
-        DataTable mlidb = dv.ToTable(true, new string[] { "mlid" });//去重，并只有mlid列的表
-        foreach (DataRow dr in mlidb.Select())
-        {
-            dv.RowFilter = "djlx='3313' and mlid=" + dr["mlid"];
-            string ids = "0";
-            foreach (DataRow dr1 in dv.ToTable().Select())
-            {
-                ids += "," + dr1["id"];
-            }
-            PDFUploadCZ pDFUploadCZ = new PDFUploadCZ();
-            //Zyff(String ctrl, String userid, String ids, String mlid, String zd, String mxid, string StartPath)
-            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "").IndexOf("成功复制") > -1)
-            {
-                ztsm++;
-            }
-        }
-        //Response.Write("成分:" + ztsm + "<br />");
-        return ztsm;
-    }
-
-    /// <summary>
-    /// 上传贴牌pdf
-    /// </summary>
-    /// <param name="dv">贴牌信息记录视图</param>
-    /// <returns>返回值成功条数</returns>
-    public int UploadTP(DataView dv)
-    {
-        int ztsm = 0;
-        string zd = "sygzb_tp";
-        DataTable mlidb = dv.ToTable(true, new string[] { "mlid" });//去重，并只有mlid列的表
-        foreach (DataRow dr in mlidb.Select())
-        {
-            string iscg = "0";
-            //上传合格
-            dv.RowFilter = "djlx='3311' and mlid=" + dr["mlid"] + " and (bgbh like '%P' or jcjg='合格') ";
-            string ids = "0";
-            foreach (DataRow dr1 in dv.ToTable().Select())
-            {
-                ids += "," + dr1["id"];
-            }
-            PDFUploadCZ pDFUploadCZ = new PDFUploadCZ();
-            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "").IndexOf("成功复制") > -1)
-            {
-                ztsm++;
-            }
-            //上传不合格
-            dv.RowFilter = "djlx='3311' and mlid=" + dr["mlid"] + " jcjg <>'合格' ";
-            ids = "0";
-            foreach (DataRow dr1 in dv.ToTable().Select())
-            {
-                ids += "," + dr1["id"];
-            }
-            if (UploadPDF(ids, dr["mlid"].ToString(), zd).IndexOf("成功复制") > -1)
-            {
-                ztsm++;
-            }
-        }
-        //Response.Write("贴牌:" + ztsm + "<br />");
-        return ztsm;
-    }
-
-    /// <summary>
-    /// 上传自制pdf
-    /// </summary>
-    /// <param name="dv">自制信息记录视图</param>
-    /// <returns>返回值成功条数</returns>
-    public int UploadZZ(DataView dv)
-    {
-        int ztsm = 0;
-        string zd = "sygzb_sg";
-        DataTable mlidb = dv.ToTable(true, new string[] { "mlid" });//去重，并只有mlid列的表
-        foreach (DataRow dr in mlidb.Select())
-        {
-            string iscg = "0";
-            //上传合格
-            dv.RowFilter = "djlx='3312' and mlid=" + dr["mlid"] + " and (bgbh like '%P' or jcjg='合格') ";
-            string ids = "0";
-            foreach (DataRow dr1 in dv.ToTable().Select())
-            {
-                ids += "," + dr1["id"];
-            }
-            PDFUploadCZ pDFUploadCZ = new PDFUploadCZ();
-            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "").IndexOf("成功复制") > -1)
-            {
-                ztsm++;
-            }
-            //str+="mlid:"+dr["mlid"]+";"+ids+"<br />\n";
-            //上传不合格
-            dv.RowFilter = "djlx='3312' and mlid=" + dr["mlid"] + " and jcjg <>'合格' ";
-            ids = "0";
-            foreach (DataRow dr1 in dv.ToTable().Select())
-            {
-                ids += "," + dr1["id"];
-            }
-            if (UploadPDF(ids, dr["mlid"].ToString(), zd).IndexOf("成功复制") > -1)
-            {
-                ztsm++;
-            }
-        }
-        //Response.Write(str);
-        return ztsm;
-    }
-
-    /// <summary>
-    /// 上传操作，将文件复制一份出来并写入数据库
-    /// </summary>
-    /// <param name="ids"></param>
-    /// <param name="mlid">送样跟踪id</param>
-    /// <param name="zd">说明单据的类型 sygzb_tp：贴牌；sygzb_sg：自制；sygzb_cfbg：成分；</param>
-    /// <returns>返回值包含’成功复制‘表示成功</returns>
-    public string UploadPDF(string ids, string mlid, string zd)
-    {
-        String[] tmp = ids.Split(',');
-        DataTable dt = null;
-        String errInfo = "";
-        using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
-        {
-            String sql = "select localpdf,bgbh FileName from yf_t_syjcbg where id in (" + ids + ");";
-            errInfo = dal.ExecuteQuery(sql, out dt);
-            if (errInfo == "" && dt.Rows.Count > 0)
-            {
-                String path = "", filename = "", newfilename = "", errs = "";
-                String toPath = "../MyUpload/" + DateTime.Now.ToString("yyyyMM") + "/";
-                string filePath = Server.MapPath(toPath);
-                //检查是否有该路径  没有就创建
-                if (!Directory.Exists(filePath))
-                {
-                    Directory.CreateDirectory(filePath);
-                }
-                int sucCount = 0;
-                //生成文件名
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    path = "../" + dt.Rows[i]["localpdf"].ToString();
-                    filename = path.Split('/')[path.Split('/').Length - 1];
-                    newfilename = GetFileName() + ".pdf";
-                    if (File.Exists(Server.MapPath(path)))
-                    { //检查源文件是否存在
-                        sql = @"
-                            SELECT * from t_uploadfile where groupid=22454 AND TableID={0} AND FileName='{1}'
-                        ";
-                        sql = string.Format(sql, mlid, dt.Rows[i]["FileName"].ToString());
-                        using (DataTable dr = sqlhelp.ExecuteDataTable(sql))
-                        {
-                            if (dr.Rows.Count == 0)//则同一份mlid里面不能传相同的报告
-                            {
-                                File.Copy(Server.MapPath(path), Server.MapPath(toPath + newfilename), true);
-                                if (File.Exists(Server.MapPath(toPath + newfilename)))
-                                {
-                                    //检查是否复制成功，成功则接着写入数据库
-                                    sql = " INSERT INTO t_uploadfile(TableID,GroupID,URLAddress,CreateDate,FileName) values(@mlid,'22454',@url,GETDATE(),@FileName); ";
-                                    List<SqlParameter> paras = new List<SqlParameter>();
-                                    paras.Add(new SqlParameter("@mlid", mlid));
-                                    paras.Add(new SqlParameter("@url", toPath + newfilename));
-                                    paras.Add(new SqlParameter("@FileName", dt.Rows[i]["FileName"].ToString()));
-                                    errInfo = dal.ExecuteNonQuerySecurity(sql, paras);
-                                    if (errInfo == "")
-                                        sucCount++;
-                                    else
-                                        errs += errInfo + "|";
-                                }
-                            }
-                        }
-                    }
-                }//end for
-                if (errs == "")
-                    errInfo = "成功复制" + sucCount.ToString() + "份报告！";
-                else
-                    errInfo = errs;
-            }
-        }
-        return errInfo;
-    }
-
-    /// <summary>
-    /// 生成文件名
-    /// </summary>
-    /// <returns></returns>
-    public string GetFileName()
-    {
-        Random rd = new Random();
-        StringBuilder serial = new StringBuilder();
-        serial.Append(DateTime.Now.ToString("yyyyMMddHHmmssff"));
-        serial.Append(rd.Next(0, 999999).ToString());
-        return serial.ToString();
-
-    }
-
-    /// <summary>
-    /// 写日志文件方法
-    /// </summary>
-    /// <param name="info"></param>
-    public void writeLog(string info)
-    {
-        try
-        {
-            clsLocalLoger.logDirectory = HttpContext.Current.Server.MapPath("ZDTBLogs/");
-            if (Directory.Exists(clsLocalLoger.logDirectory) == false)
-            {
-                Directory.CreateDirectory(clsLocalLoger.logDirectory);
-            }
-            clsLocalLoger.WriteInfo(info);
-        }
-        catch (Exception ex)
-        {
-
-        }
-    }
-
-    public class RowItem
-    {
-        private string _检测项目;
-        /// <summary>
-
-        /// </summary>
-        public string 检测项目
-        {
-            get { return this._检测项目; }
-            set { this._检测项目 = value; }
-        }
-        private string _测试方法;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 测试方法
-        {
-            get { return this._测试方法; }
-            set { this._测试方法 = value; }
-        }
-        private string _技术要求;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 技术要求
-        {
-            get { return this._技术要求; }
-            set { this._技术要求 = value; }
-        }
-        private string _检测结果;
-        /// <summary>
-
-        /// </summary>
-        public string 检测结果
-        {
-            get { return this._检测结果; }
-            set { this._检测结果 = value; }
-        }
-        private string _单项判定;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 单项判定
-        {
-            get { return this._单项判定; }
-            set { this._单项判定 = value; }
-        }
-    }
-
-    public class DataItem
-    {
-        public string _委托序号;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 委托序号
-        {
-            get { return this._委托序号; }
-            set { this._委托序号 = value; }
-        }
-        public string _下载地址;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 下载地址
-        {
-            get { return this._下载地址; }
-            set { this._下载地址 = value; }
-        }
-        public string _报告编号;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 报告编号
-        {
-            get { return this._报告编号; }
-            set { this._报告编号 = value; }
-        }
-
-        public string _样品名称;
-        /// <summary>
-
-        /// </summary>
-        public string 样品名称
-        {
-            get { return this._样品名称; }
-            set { this._样品名称 = value; }
-        }
-        public string _样品货款号;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 样品货款号
-        {
-            get { return this._样品货款号; }
-            set { this._样品货款号 = value; }
-        }
-        public string _安全技术等级;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 安全技术等级
-        {
-            get { return this._安全技术等级; }
-            set { this._安全技术等级 = value; }
-        }
-        public string _送样日期;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 送样日期
-        {
-            get { return this._送样日期; }
-            set { this._送样日期 = value; }
-        }
-        public string _出证日期;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 出证日期
-        {
-            get { return this._出证日期; }
-            set { this._出证日期 = value; }
-        }
-        public string _检测依据;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 检测依据
-        {
-            get { return this._检测依据; }
-            set { this._检测依据 = value; }
-        }
-        public string _检验结论;
-        /// <summary>
-        ///
-        /// </summary>
-        public string 检验结论
-        {
-            get { return this._检验结论; }
-            set { this._检验结论 = value; }
-        }
-        public List<RowItem> _row;
-        /// <summary>
-        ///
-        /// </summary>
-        public List<RowItem> row
-        {
-            get { return this._row; }
-            set { this._row = value; }
-        }
-    }
-
-    public class Root
-    {
-        private List<DataItem> _data;
-        /// <summary>
-        ///
-        /// </summary>
-        public List<DataItem> data
-        {
-            get { return this._data; }
-            set { this._data = value; }
-        }
-    }
-
-    /// <summary>
-    /// 广州检测记录主信息
-    /// </summary>
-    public class zbInfo
-    {
-        public string 安全技术等级;
-        public string 送样日期;
-        public string 检测依据;
-        public string 委托序号;
-        public string 报告编号;
-        public string 样品名称;
-        public string 样品货款号;
-        public string 下载地址;
-        public string 检验结论;
-        public string 出证日期;
-        public List<ItemInfo> itemInfos;
-    }
-
-    /// <summary>
-    /// 广州检测记录检测项目信息
-    /// </summary>
-    public class ItemInfo
-    {
-        public string 检测项目;
-        public string 测试方法;
-        public string 技术要求;
-        public string 检测结果;
-        public string 单项判定;
-    }
 </script>

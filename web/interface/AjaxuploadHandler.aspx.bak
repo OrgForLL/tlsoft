@@ -1,0 +1,149 @@
+﻿<%@ Page Language="C#" %>
+<%@ Import Namespace="nrWebClass" %>
+<%@ Import Namespace="System.Data"%>
+<%@ Import Namespace="System.Data.SqlClient" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.IO" %>
+<%@ Import Namespace="System.Drawing" %>
+
+<!DOCTYPE html>
+<script runat="server">
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        string ctrl = Convert.ToString(Request.Params["ctrl"]);
+        if (ctrl == "" || ctrl == null) {
+            clsSharedHelper.WriteErrorInfo("请传入正确的CTRL参数！");
+            return;
+        }
+
+        switch (ctrl) { 
+            case "UploadImage":                
+                string info=UploadImageMain(HttpContext.Current);                
+                Response.Clear();
+                Response.Write(info);
+                Response.End();              
+                break;
+        }  
+        
+    }
+
+    public string UploadImageMain(HttpContext context) {
+        string rtMsg = "";      
+        context.Response.ContentType = "text/html";
+        
+        HttpPostedFile postedFile = context.Request.Files[0];
+        string savePath = "/Resource/Image/" + DateTime.Now.ToString("yyyyMMdd") + "/";
+        int filelength = postedFile.ContentLength;
+        int fileSize = 2097152; //2M 单位B
+        string fileName = "-1"; //返回的上传后的文件名
+        string sourceName = context.Request.Files[0].FileName;
+        writeLog(sourceName);
+        if (filelength <= fileSize)
+        {
+            try
+            {
+                byte[] buffer = new byte[filelength];
+                postedFile.InputStream.Read(buffer, 0, filelength);
+                fileName = UploadImage(buffer, savePath, "jpg");
+                if (fileName != "-1")
+                {
+                    //文件保存成功
+                    //保存数据库记录
+                    using (LiLanzDALForXLM dal = new LiLanzDALForXLM()) {
+                        string str_sql = @"insert into t_ArticleImages(imgpath,imgfilename,imgsourcename,createtime)
+                                            values(@savepath,@filename,@sourcename,getdate());";
+                        List<SqlParameter> paras = new List<SqlParameter>();
+                        paras.Add(new SqlParameter("@savepath", savePath));
+                        paras.Add(new SqlParameter("@filename", fileName));
+                        paras.Add(new SqlParameter("@sourcename", sourceName));
+                        
+                        string errInfo = dal.ExecuteNonQuerySecurity(str_sql,paras);
+                        if (errInfo == "")
+                        {
+                            rtMsg = "Succeed|" + fileName;
+                        }
+                        else {
+                            rtMsg = "Error:文件保存成功但是写入数据库失败：" + errInfo;
+                        }
+                    }
+                                        
+                }
+                else {
+                    rtMsg = "Error:" + fileName;
+                }                
+            }
+            catch (Exception ex)
+            {
+                rtMsg = "Error:" + ex.Message;
+            }
+        }
+        else
+            rtMsg = "Error:文件大小超过限制！";
+
+        return rtMsg;        
+    }
+    //上传图片文件
+    public string UploadImage(byte[] imgBuffer, string uploadpath, string ext)
+    {
+        try
+        {
+            System.IO.MemoryStream m = new MemoryStream(imgBuffer);
+
+            if (!Directory.Exists(HttpContext.Current.Server.MapPath(uploadpath)))
+                Directory.CreateDirectory(HttpContext.Current.Server.MapPath(uploadpath));
+
+            string imgname = CreateIDCode() + "." + ext;
+            string _path = HttpContext.Current.Server.MapPath(uploadpath) + imgname;
+
+            System.Drawing.Image img = System.Drawing.Image.FromStream(m);
+            img.Save(_path, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            m.Close();
+
+            return uploadpath + imgname;
+        }
+        catch (Exception ex)
+        {
+            return ex.Message;
+        }
+
+    }
+    //生成文件名
+    public string CreateIDCode()
+    {
+        DateTime Time1 = DateTime.Now.ToUniversalTime();
+        DateTime Time2 = Convert.ToDateTime("1970-01-01");
+        TimeSpan span = Time1 - Time2;   //span就是两个日期之间的差额   
+        string t = span.TotalMilliseconds.ToString("0");
+
+        return t;
+    }
+
+    //写日志文件方法
+    public static void writeLog(string info)
+    {
+        try
+        {
+            clsLocalLoger.logDirectory = HttpContext.Current.Server.MapPath("logs/");
+            if (System.IO.Directory.Exists(clsLocalLoger.logDirectory) == false)
+            {
+                System.IO.Directory.CreateDirectory(clsLocalLoger.logDirectory);
+            }
+            clsLocalLoger.WriteInfo(info);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+</script>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta charset="utf-8" />
+    <title></title>    
+</head>
+<body>
+    <form id="form1" runat="server">   
+    </form>
+</body>
+</html>

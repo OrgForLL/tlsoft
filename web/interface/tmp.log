@@ -1,0 +1,159 @@
+2015-11-10 14:21:13 - 信息
+
+
+-----------------------------------------JS---------------------------------------------
+function MySyjgxz2() {
+    var MyURL = "bbmain.aspx?bid=8399&chdm=" + MyForm.chdm.value + "&rq" + MyForm.rq.value;
+    var mywin = openModal(MyURL, 680, 500);
+}
+/*
+'修改内容:hmxid.length=0 但是实际上是已经保存过了的,有可能打开二个页面
+'修改人:张茂洪
+'修改日期:20150728
+'-------------------
+'修改内容:将报告里的母体数不合格数放在表cl_T_jhjcmx ,在采购经理审核的时候更
+'修改人:张茂洪
+'修改日期:20131205
+'-------------------
+*/
+function MyFunc_save() {
+    //更新申报单的合格数量
+    var sqid, sqmxid, mtzs, bhgsl, bhgzs, MySQL = "", hj_mtsl = 0, hj_bhgsl = 0, thph = "";
+    var dqshgwid = MyForm.shgwid.value;
+    var mykey = MyForm.jyid.value;
+    var xmzyj = MyForm.xmzyj.value;
+    MySQL += "_MyU Yf_T_bjdlb set cf='" + xmzyj + "' where id='" + mykey + "' and lxid=517; ";
+    with (top.bbDown) {
+        MySQL += " _MyU wl_t_dddjpmmx set thbs=0 where id=" + MyForm["mytext_0_id"].value + " and djlx=2222;";
+        for (var i = 0; i <= Number(MyForm.maxRow.value); i++) {
+            mtsl = Number(MyForm["mytext_" + i + "_mtsl"].value); if (isNaN(mtsl) == true) { mtsl = 0; }
+            hj_mtsl = hj_mtsl + mtsl;
+            sqid = Number(MyForm["mytext_" + i + "_id"].value); if (isNaN(sqid) == true) { sqid = 0; }
+            sqmxid = Number(MyForm["mytext_" + i + "_mxid"].value); if (isNaN(sqmxid) == true) { sqmxid = 0; }
+            if (sqid == 0 || sqmxid == 0) { continue; }
+            bhgsl = Number(MyForm["mytext_" + i + "_bhgsl"].value); if (isNaN(bhgsl) == true || bhgsl == "") { bhgsl = 0; }
+
+            bhgzs = Number(MyForm["mytext_" + i + "_bhgzs"].value); if (isNaN(bhgzs) == true) { bhgzs = 0; }
+            hj_bhgsl = hj_bhgsl + bhgsl;
+            //20131205 zhmh 使用cl_t_jhjcmx 表保存结果,在采购经理的时候更新 
+            MySQL += "_MyU cl_T_jhdjmxb  set bhgzs=" + bhgzs + " where id=" + sqid + " and mxid=" + sqmxid + " ;";
+
+            hmxid = MyForm["mytext_" + i + "_hmxid"].value;
+            if (hmxid.length > 0) {
+                MySQL += " _MyU cl_t_jhjcmx  set z3='" + mtsl + "',z4='" + bhgsl + "' where  id='" + mykey + "' and mbid ='" + sqmxid + "' and dm='sqd' ";
+            } else {
+                MySQL += " if not exists(select * from cl_T_jhjcmx where id='" + mykey + "' and dm='sqd' and mbid='" + sqmxid + "')"
+                MySQL += " begin "
+                MySQL += " _MyI cl_t_jhjcmx  (id,mbid,dm,z3,z4) values('" + mykey + "','" + sqmxid + "','sqd','" + mtsl + "','" + bhgsl + "')";
+                MySQL += " end "
+                MySQL += " else "
+                MySQL += " begin "
+                MySQL += " _MyU cl_t_jhjcmx  set z3='" + mtsl + "',z4='" + bhgsl + "' where  id='" + mykey + "' and mbid ='" + sqmxid + "' and dm='sqd' ";
+                MySQL += " end "
+            }
+
+
+            for (var j = 0; j <= MyForm["mytext_" + i + "_thph"].value.split(",").length - 1; j++) {
+                thph += "'" + MyForm["mytext_" + i + "_thph"].value.split(",")[j] + "',";
+            }
+            thph = thph.substring(0, thph.length - 1);
+            MySQL += "_MyU wl_t_dddjpmmx set thbs=1 where id=" + sqid + " and mxid=" + sqmxid + " and djlx=2222 and ph in(" + thph + ");";
+            thph = "";
+        } //wl_t_dddjpmmx        
+    }
+    if (Math.round(hj_mtsl * 100) / 100 != MyForm.mtsl.value) {
+        alert("母体数合计不等于主表母体数量！"); return;
+    }
+    var Rtn = openAjax(MySQL, 'bbupdate', MyForm.MyBBbid.value, '');
+    if (Rtn == "1") {
+        window.returnValue = "ok";
+
+        alert("保存成功")
+        window.close();
+    } else {
+        mywait.style.visibility = 'hidden';
+        alert("保存失败，请重试！");
+    }
+}
+ 
+
+try {
+    MyTab.rows(0).style.bgcolor = "#D4CFC9";
+    MyTab.rows(0).cells(0).innerHTML = "编号";
+    for (var i = 0; i <= Number(MyForm.maxRow.value); i++) {
+        MyForm["mytext_" + i + "_hj"].readOnly = true;
+        if (MyForm["mytext_" + i + "_mbid"] != null) { GetHj("mytext_" + i + "_mbid", ''); }
+    }
+} catch (e) { }
+//控制下报表的刷新
+try {
+    if (top.bbDown.MyForm.ids.value == "0") {
+        var ids = MyForm.ids.value;
+        if (ids.length > 0 && ids != "0") {
+            top.bbDown.MyForm.ids.value = ids;
+            top.bbDown.MyForm.nodeid.value = MyForm.nodeid.value;
+            top.bbDown.mywait.style.visibility = "visible";
+            top.bbDown.MyForm.submit();
+        }
+    }
+} catch (e) { }
+
+
+
+function check_Number(name) {
+    if (event.srcElement.name == name || event.srcElement.name.indexOf(name) == event.srcElement.name.length - name.length) {
+        if (String.fromCharCode(event.keyCode).search(/[0-9-.]/) >= 0) { event.returnValue = true; } else { event.returnValue = false; }
+    }
+}
+
+function MySyjgxz() {
+    var MyURL = "bbmain.aspx?bid=8399&chdm=" + MyForm.chdm.value + "&rq" + MyForm.rq.value;
+    var mywin = openModal(MyURL, 680, 500);
+
+}
+
+MyForm.mtsl.readOnly = true;
+if (MyForm.nodeid.value == "789" || MyForm.nodeid.value == "918") {
+     
+    top.mytd_button_保存.style.display = '';
+} else if ((MyForm.nodeid.value != "789" || MyForm.nodeid.value != "918") && MyForm.nodeid.value != "") {
+    
+    top.mytd_button_保存.style.display = 'none';
+}
+---------------------------------------主表SQL------------------------------------------
+select isnull(d.plsb,0) plsb,d.pkyj,d.dekz,d.desz,d.sjsz,d.zs,jh.id as ids,
+	   d.jfk,d.dsqk,d.bgbh,isnull(d.fhbs,0) as jyfhbs,d.ghsyj,d.cf as xmzyj,isnull(d.id,0) as jyid,d.bz,d.kz,d.fk,
+	   d.shqk,case when @userssid<>@zbid then '' else d.hpl end as hpl,
+              d.jcy,isnull(d.ddid,0) as bgid,a.rq,d.bjr as shr,isnull(d.zdr,'') as zdr,isnull(d.sl,0) as cys,d.shgwid,
+	 d.mtsl,a.sl as sqsl,d.bhgsl,c.chmc,d.chdm,d.sydw as khid,b.khdm,b.khmc,'' scddbh,0 bmid,d.mtzs,d.cgy,d.rq as zdrq,g.zpdjg as syjg
+ from Yf_T_bjdlb d
+ inner join yx_t_khb b on d.sydw=b.khid
+ inner join cl_V_chdmb c on d.chdm=c.chdm 
+ inner join
+   (select chdm,sum(sl) as sl,max(zbjs) as js,max(rq) as rq from cl_v_jhdjmxb where jyid='@jyid' and djlx=2222 group by chdm) a on d.chdm=a.chdm  
+ left outer join yf_T_bjdlb g on d.ddid=g.id 
+ inner join cl_T_jhdjb jh on d.id=jh.jyid  
+where d.id='@jyid'; 
+
+---------------------------------------明细SQL------------------------------------------
+ select case when a.mbid=0 then 0 else 1 end as bgcolor,cast(isnull(a.mbid,0) as varchar)+'|'+cast(isnull(b.bs,0) as varchar) as mbid,
+   --isnull(b.bs,0) bs, b.mc,
+   a.z1 as cmz1,a.z2 as cmz2,a.z3 as cmz3,a.z4 as cmz4,a.z5 as cmz5,a.z6 as cmz6,a.z7 as cmz7,
+   a.z8 as cmz8,a.z9 as cmz9,a.z10 as cmz10,a.z11 as cmz11,a.z12 as cmz12,a.z13 as cmz13,a.z14 as cmz14,
+   a.z15 as cmz15,a.z16 as cmz16,a.z17 as cmz17,a.z18 as cmz18,a.z19 as cmz19,a.z20 as cmz20,
+   case when a.mbid=0 then '合计' else '' end as hj
+   --else (a.z1+a.z2+a.z3+a.z4+a.z5+a.z6+a.z7+a.z8+a.z9+a.z10+
+   --        a.z11+a.z12+a.z13+a.z14+a.z15+a.z16+a.z17+a.z18+a.z19+a.z20) end as hj 
+ from cl_T_jhjcmx a 
+ left outer join Yf_T_bjdbjzb b on a.mbid=b.id and b.lx='@jylx'
+ where a.id='@jyid' order by a.mxid
+
+---------------------------------------尺码SQL------------------------------------------
+select top 20 'z'+cast(ROW_NUMBER()OVER(order by khdm) as varchar) as cmdm,
+              '-' as cmmc,'缺陷内容' as lmmc 
+from yx_t_khb
+/*
+'修改内容:换片率显示写成了'd.hpl'
+'修改人:张茂洪
+'修改日期:20150821
+*/

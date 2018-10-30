@@ -1,0 +1,1 @@
+d:\web_tlerp\interface\decode.aspx(10): error CS1501: “MyJm”方法没有采用“1”个参数的重载

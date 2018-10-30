@@ -1,0 +1,23 @@
+﻿
+.radial2 {
+    /*径向渐变 以距离圆形最远的边为参考半径*/
+    background: -moz-radial-gradient(30px 30px 45deg, circle farthest-side, #4ec7ff 0%, rgba(78, 199, 255, 0) 100%);
+    background:-webkit-gradient(radial, 0 0, 1, 0 0, 200, from(#4ec7ff), color-stop(100%, rgba(78, 199, 255, 0)));
+}
+.radial3 { 
+        /*径向渐变 以距离圆形最远的角为参考半径*/
+        background: -moz-radial-gradient(30px 30px 45deg, circle farthest-corner, #4ec7ff 0%, rgba(78, 199, 255, 0) 100%);
+        background:-webkit-gradient(radial, 0 0, 1, 0 0, 300, from(#4ec7ff), color-stop(100%, rgba(78, 199, 255, 0)));
+    }
+    
+    
+.itemCaption {
+    position:relative; width:100%; height:1.2em; font-size :1.5em;
+}
+.itemText {
+    position:relative; width:100%; height:1.7em; font-size:1.5em;
+}
+
+.itemMultiLine {
+    position:relative; width:100%; height:5em; font-size:2em;
+}

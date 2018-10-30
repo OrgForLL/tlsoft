@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\ajx.ashx(4): error CS0234: 命名空间“System”中不存在类型或命名空间名称“Linq”(是缺少程序集引用吗?)

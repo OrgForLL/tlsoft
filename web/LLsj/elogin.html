@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.4.2.min.css" />
+	<script src="js/jquery.js"></script>
+    <script src="js/jquery.mobile-1.4.2.min.js"></script>
+    <script type="text/javascript">
+	 jQuery(document).ready(function() {
+	 	//输入事件
+	 	$("input[id]").bind("focus",function () { 
+			if($(this).attr("id")=='username'||$(this).attr("id")=='password')
+				$(this).attr("value",""); 
+	 	}); 
+	 	//提交
+	 	$("#submit").bind("click", function() {  
+			  if (valid()) {
+				$.mobile.loading( "show", {
+				  text: "正在登录",
+				  textVisible: true,
+				  theme: "z",
+				  html: ""
+			    });
+			    $.ajax({
+				   type: "POST",
+				   url: "login.ashx",
+				   data: $("form#loginform").serialize(),
+				   success: function(msg){
+						if(msg=='success'){
+							$.mobile.changePage("approvalList.aspx","slidedown", true, true);
+						}else{
+						//$.mobile.changePage("loginfalse.html","slidedown", true, true);
+						    $.mobile.loading('hide'); 
+						    $( "#msg p" ).html("用户或密码错误.");
+							$( "#msg" ).popup( "open" );
+						}
+				   },
+				   ajaxComplete:function(ev) {
+					    $.mobile.loading('hide'); 
+				   }
+				}); 
+			  }
+			});
+		});
+		//输入信息验证
+		function valid(){
+			if($("#username").val()==''||$("#password").val()==''){
+				$( "#msg p" ).html("用户或密码不能为空.");
+			    $( "#msg" ).popup( "open" );
+				//$.mobile.changePage("content/loginfalse.html","slidedown", true, true);
+				return false;			
+			} 
+			return true;
+		};
+	</script>
+	
+	<style type="text/css">
+	p {
+		font-size: 1.5em;
+		font-weight: bold;
+	}
+	#submit{
+		/*float:right; margin:10px; */
+	}
+	#toregist{
+		/*float:left; margin:10px; */
+	}
+	</style>
+</head>
+
+<body>
+<!-- begin first page -->
+<section id="page1" data-role="page">
+  <header data-role="header"  data-theme="b" >
+    <h1>登陆</h1></header>
+  <div data-role="content" class="content">
+        <p style="backg"><font color="#2EB1E8" >登录协同移动办公</font></p>
+	    <form method="post" id="loginform">
+	    	<input type="text" name="username" id="username" value="" placeholder="用户名" /><br>
+	    	<input type="password" name="password" id="password" value=""  placeholder="密码"/>
+				 	<fieldset data-role="controlgroup" >
+						<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+						<label for="checkbox-1">保持登录状态</label>
+				    </fieldset>
+			<a href="content/regist.html" data-role="button" id="toregist" data-theme="e">注册</a>
+		    <a data-role="button" id="submit" data-theme="b">登录</a>
+        </form>
+  </div>
+  <footer data-role="footer" >
+    <h1>©2014 协同移动办公</h1></footer>
+    <div data-role="popup" id="msg">
+      <p></p>
+    </div>
+</section>
+<!-- end first page -->
+</body>
+</html>

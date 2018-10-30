@@ -1,0 +1,287 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>活动统计数据-结束</title>
+    <link type="text/css" rel="stylesheet" href="css/animate.min.css" />
+    <link rel="stylesheet" href="css/space.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: #000;
+            font-family: "微软雅黑";
+        }
+
+        .header {
+            background-color: #f0ad4e;
+            height: 70px;
+            line-height: 70px;
+            vertical-align: middle;
+        }
+
+        .title {
+            font-size: 28px;
+            color: rgb(55, 55, 55);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .showbody {
+            color: #fff;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .showarea {
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            overflow:hidden;
+        }
+
+        .rightline {
+            border-right: 1px solid #ccc;
+        }
+
+        .item {
+            border-top: 4px solid #03F;
+            padding: 5px 10px 10px 10px;
+            display: inline-block;
+            margin-top: 5px;
+            margin-left: 10px;
+            color: #fff;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .item2 {
+            width: 90%;
+            margin: 28px auto;
+            line-height: 40px;
+        }
+
+        .floatfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .nums {
+            background: #fff;
+            color: #000;
+            padding: 5px 30px;
+            display: inline-block;
+            border-radius: 4px;
+            margin-top: 4px;
+            min-width: 150px;
+            font-weight: bold;
+            letter-spacing: 4px;
+        }
+
+        .info {
+            font-size: 20px;
+            overflow: hidden;
+            width: 84%;
+            margin: 10px auto 0 auto;
+            text-align: left;
+            line-height: 30px;
+        }
+
+        .item3 {
+            width: 86%;
+            margin: 20px auto 0 auto;
+            border-top: 4px solid #f0ad4e;
+            padding-top: 25px;
+        }
+
+            .item3 img {
+                width: 160px;
+                height: auto;
+            }
+
+        #qrtext {
+            color: #fff;
+            font-size: 22px;
+            margin-top: 25px;
+            letter-spacing:2px;
+        }
+		
+		.right{
+		text-align:center;
+		margin-top:70px;
+		font-size:15px;
+		}
+        .item4 {
+            width:84%;
+            padding:12px;
+            color:#333;
+            font-size:20px;
+            margin-left:36px;            
+            background:#fff;
+            border-radius:5px;
+            line-height:27px;
+            text-align:left;
+        }
+		.item5{
+		display:table;
+		margin-top:35px;
+		margin-left:36px;
+		}
+		.icon{
+		background-color: #333;
+		border: 1px solid #ccc;
+		color:#fff;
+		padding:5px 10px;
+		line-height:1;
+		text-align:center;
+		position:relative;
+		z-index:99;
+		border-top-left-radius:5px;
+		border-bottom-left-radius:5px;
+		}
+		.key{
+		font-size:50px;
+		background:none;
+		color:#fff;
+		font-weight:bold;
+		text-align:center;
+		}
+		.keyval{
+		background:#fff;
+		padding:6px 43px;
+		position:relative;
+		z-index:100;
+		border-top-right-radius:5px;
+		border-bottom-right-radius:5px;
+		color:#000;
+		}
+		.fa-key{
+		margin-left:25px;
+		margin-bottom:10px;
+		}
+        .down {
+            font-size:40px;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="showarea rightline">
+                <div class="title">
+                    <i class="fa fa-gift" style="font-size: 33px;"></i>
+                    活 动 信 息
+                </div>
+            </div>
+            <div class="showarea">
+                <div class="title">
+                    <i class="fa fa-wifi" style="font-size: 33px;"></i>
+                    免 费 WIFI
+                </div>
+            </div>
+        </div>
+
+        <div class="showbody">
+            <!--屏幕左显示区域-->
+            <div class="showarea rightline" style="padding: 35px 10px 10px 10px;">
+                <div class="info">
+                    <i class="fa fa-arrow-circle-right"></i>
+                    12月18日起:凡订票成功，每日8:30-9:30前300名领票者，可凭身份证至“领票台”免费领取礼品1份。
+                </div>
+                <div class="item3">
+                    <img alt="" id="tvqrcode" src="img/tvqrcode.png" class="animated flip" />
+                    <p id="qrtext">扫描二维码获取更多精彩内容....</p>
+                </div>
+				<div class="right">&copy;2015 利郎信息技术部</div>
+            </div>
+            <!--屏幕右显示区域-->
+            <div class="showarea" style="margin-left: -10px; padding-top: 40px;">
+                <div style="text-align:left;margin-left:30px;font-size:25px;margin-bottom:20px;">使用方法：</div>
+                <div class="item4">
+                    1、在【设置】-【WLAN】中选择无线名称：<span style="font-size:25px;font-weight:bold;">lilanz-flh</span>
+                </div>
+                <div class="down"><i class="fa fa-angle-double-down" ></i></div>
+                <div class="item4">
+                    2、打开【浏览器】选择任意网站弹出鉴权页点击【微信连接WIFI】
+                </div>
+                <div class="down"><i class="fa fa-angle-double-down" ></i></div>
+                <div class="item4">
+                    3、自动呼起【微信】成功连接【lilanz-flh】
+                </div>
+                <div class="item5 key">
+                    <span class="icon">
+					密 码
+					</span>
+					<span class="keyval">
+					lilanz-flh
+					</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var animateArray = new Array("rubberBand", "shake", "swing", "tada", "bounceIn", "flipInX", "flipInY", "flip");
+        var ai = animateArray.length-1;
+        window.onload = function () {                        
+            setInterval(playanimate, 20 * 1000);
+		}
+
+        function GetRandomNum(Min, Max) {
+            var Range = Max - Min;
+            var Rand = Math.random();
+            return (Min + Math.round(Rand * Range));
+        }
+
+        function playanimate() {
+            var aniName=animateArray[GetRandomNum(0,ai)];
+            $("#tvqrcode").removeAttr("class");
+            setTimeout(function () {
+                $("#tvqrcode").addClass("animated " + aniName);
+            }, 500);
+
+            setTimeout(time_range("08:30", "09:30"), 10 * 1000);
+        }
+
+        //判断当前时间是否在某个范围
+        var mcount = 0;
+        var time_range = function (beginTime, endTime) {
+            var strb = beginTime.split(":");
+            if (strb.length != 2) {
+                return false;
+            }
+
+            var stre = endTime.split(":");
+            if (stre.length != 2) {
+                return false;
+            }
+
+            var b = new Date();
+            var e = new Date();
+            var n = new Date();
+
+            b.setHours(strb[0]);
+            b.setMinutes(strb[1]);
+            e.setHours(stre[0]);
+            e.setMinutes(stre[1]);
+
+            if (n.getTime() - b.getTime() > 0 && n.getTime() - e.getTime() < 0) {
+                //在指定范围内
+                window.location.href = "status.html";
+            }
+        }        
+    </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <style type="text/css">
+        body {
+            background-color:#eee;
+            color:#323232;
+        }
+        .header {
+            background-color:#f9f9f9;
+            border-bottom:1px solid #ccc;
+            line-height:60px;
+            font-size:1.4em;            
+        }
+        .fa-angle-left {
+            position:absolute;
+            top:0;
+            left:0;
+            height:100%;
+            font-size:1.6em;
+            line-height:60px;
+            padding:0 20px; 
+        }
+            .fa-angle-left:hover {
+                background-color:rgba(0,0,0,.1);
+            }
+        .page {
+            background-color:#eee;  
+            padding:0;          
+        }
+        .infosul {
+            margin-top:15px;
+        }
+        .infosul li {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            padding: 10px 15px;
+            font-size: 1.15em;
+            color: #414244;
+            background-color:#fff;
+            border-bottom:1px solid #e7e7e7;
+            position:relative;
+        }
+            .infosul li div {
+                text-align: right;
+                -webkit-flex: 1;
+                -webkit-box-flex: 1;
+                flex: 1;
+                color: #808080;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size:0.9em;   
+                position:absolute;
+                width:100%;
+                top:50%;
+                right:0;
+                transform:translate(0,-50%);
+                -webkit-transform:translate(0,-50%);
+                padding:0 30px 0 45px;
+            }
+
+                .infosul li i {
+                    position:absolute;
+                    top:50%;
+                    right:15px;
+                    transform:translate(0,-50%);
+                    -webkit-transform:translate(0,-50%);
+                    font-size:1.3em;
+                    color:#808080;
+                }
+
+        .headimg {
+            width:60px;
+            height:60px;
+            overflow:hidden;
+            border-radius:50%;
+            display:inline-block;
+            margin-top:5px;
+        }
+            .headimg img {
+                width:100%;
+                height:100%;
+            }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <i class="fa fa-angle-left" onclick="javascript:window.location.href='usercenter.aspx';"></i> 
+        个人资料
+    </div>
+    <div class="wrap-page">
+        <div class="page page-not-header">
+            <ul class="infosul">
+                <li style="height:70px;">
+                    <label style="line-height:50px;">头像</label>
+                    <div><p class="headimg"><img src="../../res/img/storesaler/headimg.jpg" alt="" /></p></div>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <label>昵称</label>
+                    <div>李家的风</div>                                        
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <label>性别</label>
+                    <div>男</div>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <label>加入时间</label>
+                    <div>2016-1-1</div>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <label>积分</label>
+                    <div>1230</div>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <label>所属门店</label>
+                    <div>福建晋江第一分公司</div>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+                <li>
+                    <label>我的二维码名片</label>
+                    <div></div>
+                    <i class="fa fa-angle-right"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../res/js/StoreSaler/fastclick.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            FastClick.attach(document.body);
+        });
+    </script>
+</body>
+</html>

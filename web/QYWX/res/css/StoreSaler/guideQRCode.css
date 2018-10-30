@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: Helvetica,Arial,STHeiTi,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
+    font-size: 14px;
+    color: #303133;
+    background-color: #f0f0f0;
+}
+
+.page {
+    /* background-color: #f0f0f0;  */
+    background: rgb(40,44,51);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+
+.container {
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 30px 20px;
+    box-shadow: 0px 4px 8px rgba(221,221,221,0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.guideInfo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #f0f0f0;
+}
+
+.avatar_wrap {
+    min-width: 66px;
+    min-height: 66px;
+    border-radius: 50%;
+    border: 2px solid #eee;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.guideInfo .avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background-image: url(../../img/StoreSaler/defaulticon2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.guide_txt .guide_name {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.guide_txt .guide_shop {
+    color: #606266;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 15px;
+}
+
+.qrcode {
+    display: block;
+    width: 70%;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 240px;
+}
+
+.tips {
+    color: #a6a6a6;
+    text-align: center;
+}
+
+.logo {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    text-align: center;
+    /* text-shadow: 0px 2px 0px #e5e5ee; */
+    left: 0;
+}
+
+    .logo .text {
+        font-weight: bold;
+        color: #999;
+    }
+
+    .logo .copyright {
+        font-size: 12px;
+        color: #888;
+    }

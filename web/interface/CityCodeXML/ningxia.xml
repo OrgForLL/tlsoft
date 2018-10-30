@@ -1,0 +1,7 @@
+﻿<ningxia dn="day">
+<city cityX="341" cityY="79" cityname="石嘴山" centername="石嘴山" fontColor="FFFFFF" pyName="shizuishan" state1="1" state2="0" stateDetailed="多云转晴" tem1="-19" tem2="-3" temNow="-6" windState="微风转北风小于3级" windDir="东南风" windPower="1级" humidity="38%" time="16:00" url="101170201"/>
+<city cityX="314" cityY="123" cityname="银川" centername="银川" fontColor="FFFF00" pyName="yinchuan" state1="1" state2="0" stateDetailed="多云转晴" tem1="-15" tem2="-2" temNow="-5" windState="微风转北风小于3级" windDir="南风" windPower="1级" humidity="33%" time="16:00" url="101170101"/>
+<city cityX="246" cityY="245" cityname="中卫" centername="中卫" fontColor="FFFFFF" pyName="zhongwei" state1="1" state2="0" stateDetailed="多云转晴" tem1="-15" tem2="-1" temNow="-6" windState="微风转北风小于3级" windDir="西北风" windPower="3级" humidity="55%" time="16:00" url="101170501"/>
+<city cityX="332" cityY="246" cityname="吴忠" centername="吴忠" fontColor="FFFFFF" pyName="wuzhong" state1="1" state2="0" stateDetailed="多云转晴" tem1="-13" tem2="-1" temNow="-6" windState="微风转北风小于3级" windDir="西风" windPower="1级" humidity="57%" time="16:00" url="101170301"/>
+<city cityX="316" cityY="382" cityname="固原" centername="固原" fontColor="FFFFFF" pyName="guyuan" state1="1" state2="0" stateDetailed="多云转晴" tem1="-14" tem2="-2" temNow="-7" windState="微风转北风小于3级" windDir="北风" windPower="2级" humidity="61%" time="16:00" url="101170401"/>
+</ningxia>

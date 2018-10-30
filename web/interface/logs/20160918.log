@@ -1,0 +1,503 @@
+【2016-9-18 15:09:33】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475251200
+                                           },
+                                           "get_limit": 10,                                                                                                                                   
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":0,"errmsg":"ok","send_check":true}
+【2016-9-18 15:17:02】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475337600
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":false,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":0,"errmsg":"ok","send_check":true}
+【2016-9-18 15:17:36】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475424000
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":0,"errmsg":"ok","send_check":true}
+【2016-9-18 17:43:12】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475510340
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":0,"errmsg":"ok","send_check":true}
+【2016-9-18 17:48:42】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472695200,
+                                               "end_timestamp": 1475506740
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [8oQsmA0139ent2]"}
+【2016-9-18 17:49:47】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475506740
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [_SMLBa0204ent1]"}
+【2016-9-18 17:50:35】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472702400,
+                                               "end_timestamp": 1475506740
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [4ivqHa0252ent1]"}
+【2016-9-18 17:51:33】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475510340
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":0,"errmsg":"ok","send_check":true}
+【2016-9-18 17:54:20】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475506740
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [JEzlTA0478ent3]"}
+【2016-9-18 17:54:33】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475506200
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [ZsNeZa0490ent2]"}
+【2016-9-18 17:54:41】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475506200
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [mgH1fa0499ent2]"}
+【2016-9-18 17:55:18】  更新卡券 {
+                              "card_id":"parMEtzawx9NXmjQtXfT9xijTh3U",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "请让营业员扫码销券",
+                                           "service_phone": "",
+                                           "description": "测试数据，不可实际使用",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475236800
+                                           },
+                                           "get_limit": 3, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":0,"errmsg":"ok","send_check":true}
+【2016-9-18 17:55:38】  更新卡券 {
+                              "card_id":"parMEtzawx9NXmjQtXfT9xijTh3U",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "请让营业员扫码销券",
+                                           "service_phone": "",
+                                           "description": "测试数据，不可实际使用",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475229600
+                                           },
+                                           "get_limit": 3, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [Chu5bA0555ent2]"}
+【2016-9-18 17:56:27】  更新卡券 {
+                              "card_id":"parMEt-O2uMih82J6Co7_5o4zxA8",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color102",
+                                           "notice": "请让营业员扫码销券",
+                                           "service_phone": "021-12345678",
+                                           "description": "每次消费仅能使用一张，且使用后不做返还。",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472695200,
+                                               "end_timestamp": 1473516000
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [enYWha0604ent3]"}
+【2016-9-18 17:56:42】  更新卡券 {
+                              "card_id":"parMEtzawx9NXmjQtXfT9xijTh3U",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "请让营业员扫码销券",
+                                           "service_phone": "",
+                                           "description": "测试数据，不可实际使用",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475200800
+                                           },
+                                           "get_limit": 3, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [1xvNoA0620ent2]"}
+【2016-9-18 17:56:53】  更新卡券 {
+                              "card_id":"parMEtzawx9NXmjQtXfT9xijTh3U",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "请让营业员扫码销券",
+                                           "service_phone": "",
+                                           "description": "测试数据，不可实际使用",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475233200
+                                           },
+                                           "get_limit": 3, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [1Xs69a0631ent1]"}
+【2016-9-18 17:57:21】  更新卡券 {
+                              "card_id":"parMEtzawx9NXmjQtXfT9xijTh3U",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "请让营业员扫码销券",
+                                           "service_phone": "",
+                                           "description": "测试数据，不可实际使用",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475247600
+                                           },
+                                           "get_limit": 3, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":0,"errmsg":"ok","send_check":true}
+【2016-9-18 17:59:11】  更新卡券 {
+                              "card_id":"",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "请让营业员扫码销券",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472702400,
+                                               "end_timestamp": 1473264000
+                                           },
+                                           "get_limit": 5, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40073,"errmsg":"invalid card id hint: [nu1H7a0768ent2]"}
+【2016-9-18 17:59:18】  更新卡券 {
+                              "card_id":"parMEtzawx9NXmjQtXfT9xijTh3U",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "请让营业员扫码销券",
+                                           "service_phone": "",
+                                           "description": "测试数据，不可实际使用",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472702400,
+                                               "end_timestamp": 1475247600
+                                           },
+                                           "get_limit": 3, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [0g0ZIA0776ent1]"}
+【2016-9-18 18:07:37】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475506200
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [psX880275ent3]"}
+【2016-9-18 18:07:43】  更新卡券 {
+                              "card_id":"parMEtzhGlkIkxogB05BvBLuTmno",
+                              "general_coupon": {
+                                       "base_info": {
+                                           "color": "Color010",
+                                           "notice": "使用提醒",
+                                           "service_phone": "",
+                                           "description": "使用说明处",                                           
+                                           "date_info": {
+                                               "type": "DATE_TYPE_FIX_TIME_RANGE",
+                                               "begin_timestamp": 1472659200,
+                                               "end_timestamp": 1475506200
+                                           },
+                                           "get_limit": 10, 
+                                           "can_give_friend":true,                                                                                                                                  
+                                           "custom_url_name": "外链入口名",
+                                           "custom_url": "http://www.lilanz.com",
+                                           "custom_url_sub_title": "外链提示语",
+                                           "promotion_url_name": "营销入口名",
+                                           "promotion_url": "http://www.lilanz.com",
+                                           "promotion_url_sub_title":"营销提示语"
+                                       }
+                                    }
+                                }提交结果：{"errcode":40100,"errmsg":"invalid DateInfo, Make Sure OldDateInfoType==NewDateInfoType && NewBeginTime<=OldBeginTime && OldEndTime<= NewEndTime hint: [GGHPLa0281ent2]"}

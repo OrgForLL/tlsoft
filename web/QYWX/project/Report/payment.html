@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>费用,回款汇总报表</title>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0,maximum-scale=1" />
+        <link rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+        <link rel="stylesheet" href="../../res/css/Report/payment.css" />
+	</head>
+
+	<body>
+        <div class="header">
+            <i id="goback" class="fa fa-angle-left"></i>
+            <div id="search">
+                <input type="text" placeholder="请输入客户代码" />
+                <button id="submit"><i class="fa fa-search"></i></button>
+            </div>
+            <div id="filter">
+                <i class="fa fa-filter"></i>
+                <p>筛选</p>
+            </div>
+        </div>
+        <div class="wrap-page page-not-header">
+            <div class="page">
+                <div class="shade">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2">客户代码</th>
+                                <th rowspan="2">贸易公司</th>
+                                <th rowspan="2">本期开支预算费用</th>
+                                <th rowspan="2">本期实际费用</th>
+                                <th colspan="3">往来款</th>
+                                <th rowspan="2">公司费用占比</th>
+                                <th rowspan="2">单店费用占比</th>
+                                <th rowspan="2">节超</th>
+                            </tr>
+                            <tr>
+                                <th>收入</th>
+                                <th>支出</th>
+                                <th>差额</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="detail">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2">客户代码</th>
+                                <th rowspan="2">贸易公司</th>
+                                <th rowspan="2">本期开支预算费用</th>
+                                <th rowspan="2">本期实际费用</th>
+                                <th colspan="3">往来款</th>
+                                <th rowspan="2">公司费用占比</th>
+                                <th rowspan="2">单店费用占比</th>
+                                <th rowspan="2">节超</th>
+                            </tr>
+                            <tr>
+                                <th>收入</th>
+                                <th>支出</th>
+                                <th>差额</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="total">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>合计</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="layer">
+            <div class="criteria">
+                <div class="options">
+                    <div class="date">
+                        <p class="title">
+                            <span>日期范围</span>
+                        </p>
+                        <div class="range">
+                            <input id="dateStart" type="date" value="2017-07-07" />
+                            <div class="line"></div>
+                            <input id="dateEnd" type="date" value="2017-07-07" />
+                        </div>
+                    </div>
+                    <div class="userSelect">
+                        <p class="title">贸易公司</p>
+                        <div class="range">
+                            <select id=khid>
+                            </select>
+                            <label class="fa fa-angle-down" for="company"></label>
+                        </div>
+                    </div>
+                    <div class="state">
+                        <p class="title">贸易公司分类</p>
+                        <div class="range">
+                            <select id="khfl">
+                            </select>
+                            <label class="fa fa-angle-down" for="state"></label>
+                        </div>
+                    </div>
+                    <div class="subject">
+                        <p class="title">可比选择</p>
+                        <div class="range">
+                            <select id="kbxz">
+                                <option value="0">全部</option>
+                                <option value="1">同期可比</option>
+                                <option value="2">不可比</option>
+                            </select>
+                            <label class="fa fa-angle-down" for="state"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="confirm">
+                    <button id="reset">重置</button>
+                    <button id="complete">完成</button>
+                </div>
+            </div>
+        </div>
+        <!--加载提示-->
+        <div class="load_toast" id="myLoading">
+            <div class="load_toast_mask"></div>
+            <div class="load_toast_container">
+                <div class="lee_toast">
+                    <div class="load_img">
+                        <img src="../../res/img/my_loading.gif" />
+                    </div>
+                    <div class="load_text">加载中...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!--模板-->
+        <script id="detail" type="text/html">
+            <tr>
+                <td>{{khdm}}</td>
+                <td>{{khmc}}</td>
+                <td class="currency">{{formatMoney(ys_hjfy)}}</td>
+                <td class="currency">{{formatMoney(sj_hjfy)}}</td>
+                <td class="currency">{{formatMoney(wlsr)}}</td>
+                <td class="currency">{{formatMoney(wlzc)}}</td>
+                <td class="currency">{{formatMoney(wlce)}}</td>
+                <td class="currency">{{formatMoney(gsfyzb)}}</td>
+                <td class="currency">{{formatMoney(ddfyzb)}}</td>
+                <td class="currency">{{formatMoney(jc_hjfy)}}</td>
+            </tr>
+        </script>
+        <script type="text/javascript" src="../../res/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../../res/js/fastclick.min.js"></script>
+        <script type="text/javascript" src="../../res/js/template.js"></script>
+        <script type="text/javascript" src="../../res/js/Report/payment.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                report.init();
+            });
+        </script>
+	</body>
+</html>

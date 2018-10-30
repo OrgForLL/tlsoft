@@ -1,0 +1,250 @@
+﻿<!--用户列表模板-->
+<script type="text/underscore-template" id="userlist">    
+  <% for(var i = 0; i < list.length; i++) { %>  
+    <% 
+      var item = list[i] 
+      var _headimg = item.headimg == "" ? "../../res/img/StoreSaler/defaulticon.jpg" : item.headimg;
+      var usertype=item.usertype;
+      var icons="",nick="("+item.nick+")";
+      if(usertype=="WX")
+          {icons="<img src='../../res/img/storesaler/icon-wechat-1.png' /><img src='../../res/img/storesaler/icon-vip-0.png' />";nick="";}
+      else if(usertype=="VIP")
+          icons="<img src='../../res/img/storesaler/icon-wechat-0.png' /><img src='../../res/img/storesaler/icon-vip-1.png' />";
+      else if(usertype=="VIP-WX")
+          icons="<img src='../../res/img/storesaler/icon-wechat-1.png' /><img src='../../res/img/storesaler/icon-vip-1.png' />";
+      else
+          icons="<img src='../../res/img/storesaler/icon-wechat-0.png' /><img src='../../res/img/storesaler/icon-vip-0.png' />";
+      %>  
+      <li onclick="userinfo(this)"  vipkh="<%=item.kh%>" vipid="<%=item.vipid%>" vipxh="<%=item.xh%>" vtype="<%=item.usertype%>" bid="<%=item.bid%>">
+          <div class='userimg' style="background-image:url('<%=_headimg%>');"></div>
+          <h3><%=item.xm%><%=nick%></h3>
+          <% if(item.dgxm!=""){%>
+          <div class="dgxx"><%=item.dgxm%></div>
+          <%}%>
+          <div class="icon-group"><%=icons%></div>
+          <p>性别:<%=item.xb%> 时间:<%=item.tbrq%></p>
+          <div class='ri'>
+              <img src='../../res/img/StoreSaler/righticon.png' />
+          </div>
+      </li> 
+    <% } %> 
+  </script>
+
+<!--用户详情模板-->
+    <script type="text/underscore-template" id="userview">
+            <div class="userinfo">
+                <div class="userheader">
+                    <div class="headimg" style="background-image:url(<%=data.headimg=="" ? "../../res/img/StoreSaler/defaulticon.jpg":data.headimg%>)"></div>
+                    <p class="nickname"><%=data.username%></p>
+                    <hr />
+                    <ul class="userinfoul floatfix">
+                        <li>
+                            <p class="userval"><%=data.sex%></p>
+                            <p>性 别</p>
+                        </li>
+                        <li>
+                            <p class="userval">--</p>
+                            <p>用户积分</p>
+                        </li>
+                        <li>
+                            <p class="userval"><%=data.mlz%></p>
+                            <p><%=data.viptitle=="" ? "--" : data.viptitle%></p>
+                        </li>
+                        <li>
+                            <p class="userval"><%=data.klb%></p>
+                            <p>VIP级别</p>
+                        </li>
+                    </ul> 
+                    <div class="usertags" id="tag-left">                        
+                    </div>
+                    <div class="usertags" id="tag-right">                         
+                    </div>                   
+                    <div class="moreinfo">                        
+                        <ul class="moreinfoul floatfix">
+                            <li>
+                                <label>VIP卡号</label>
+                                <div><%=data.vipkh%></div>                                
+                            </li> 
+                            <li>
+                                <label>生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</label>
+                                <div><%=data.csrq%></div>
+                            </li>     
+                            <li>
+                                <label>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</label>
+                                <div><%=data.nl%></div>
+                            </li>
+                            <li>                                
+                                <label>开卡日期</label>
+                                <div><%=data.jdrq%></div>
+                            </li>
+                            <li>
+                                <label>手机(点击可直接拨打)</label>
+                                <div><a href="tel:<%=data.yddh%>"><%=data.yddh%></a></div>                                
+                            </li>             
+                            <li>
+                                <label>开卡店铺</label>
+                                <div><%=data.kkdp%></div>                                                                
+                            </li>         
+                            <li>
+                                <label>送货地址</label>
+                                <div><%=data.lxdz%></div>                                
+                            </li>                                  
+                        </ul>
+                    </div>
+                    <p class="morebtn">查看更多 <i class="fa fa-caret-down" style="font-size:1.2em;"></i></p>
+                </div>
+                <div class="usernav">
+                    <p class="title" id="contitle">消费行为</p>
+                </div>
+                <div class="usernav" style="position:relative;">
+                    <p class="title" id="contitle">最近消费记录查询</p>
+                    <a href="javascript:;" class="consumebtn" onclick="LatestConsume()">点击加载</a>
+                    <ul id="latestconsumeul">
+                    </ul>
+                    <p id="noconsume" style="text-align:center;color:#d9534f;display:none;margin-top:10px;font-weight:bold;">该VIP用户暂无消费记录...</p>
+                </div>
+                <div class="usernav">
+                    <p class="title" id="l2title">消费偏好</p>
+                    <p id="lb" class="chart-title">按品类汇总分布</p>
+                    <p id="ys" class="chart-title">按颜色汇总分布</p>                    
+                </div>
+            </div>
+    </script>
+
+<!--最近消费记录模板-->
+<script type="text/underscore-template" id="latestcontemp">
+     <%for(var i=0; i<list.length; i++){
+        var item=list[i];
+        var djid=item.djid;
+        var djsj=item.djsj;
+        var djje=parseInt(item.djje);
+        var djh=item.djh;
+        var mdmc=item.mdmc;
+     %>
+        <li onclick="getConsumeDetail(this)" djid="<%=djid%>" djh="<%=djh%>"><label><strong>时间：</strong><span class="djsj"><%=djsj%></span><br /><strong>门店：</strong><%=mdmc%></label><div class="rmb">￥<%=djje%></div><label><i class="fa fa-angle-right"></i></label></li>
+     <% } %>
+</script>
+
+<!--消费单据详情模板-->
+<script type="text/underscore-template" id="cdetailtemp">
+     <%
+        var slcount=0,jecount=0;
+        for(var i=0; i<list.length; i++){
+        var item=list[i];
+        var sphh=item.sphh;
+        var spcm=item.cmmc;
+        var spsl=item.sl;
+        var spdj=parseInt(item.dj);        
+        slcount+=parseInt(spsl);
+        jecount+=parseFloat(spdj) * parseInt(spsl);
+     %>
+     <div class="cdetail floatfix">
+        <div class="citem sphh" onclick="previewImage('<%=sphh%>')"><%=sphh%></div>
+        <div class="citem cm"><%=spcm%></div>
+        <div class="citem sl"><%=spsl%></div>
+        <div class="citem dj"><%=spdj%></div>          
+     </div> 
+    <% } %> 
+    <div class="cdetail floatfix">
+        <div class="citem" style="width:50%;float:left;font-size:1.2em;font-weight:bold;">合 计</div>
+        <div class="citem" style="font-size:1.2em;"><%=slcount%></div>
+        <div class="citem" style="color:#d9534f;font-weight:bold;font-size:1.2em;">￥<%=jecount%></div>
+    </div>
+</script>
+
+<!--消费行为模板-->
+<script type="text/underscore-template" id="userconsume">
+     <ul>
+        <li><label>购买次数</label><div><%=gmcs%></div></li>        
+        <li><label>消费金额</label><div>￥<%=xfje%></div></li>
+        <li><label>最近消费时间</label><div><%=lastsj%></div></li>
+        <li><label>最近消费时间距现在</label><div><%=dists%></div></li>
+        <li><label>最近一次消费金额</label><div>￥<%=lastje%></div></li>
+        <li><label>平均单价</label><div>￥<%=pjdj%></div></li>
+        <li><label>客单量</label><div><%=pjdl%>件</div></li>
+        <li><label>平均折扣</label><div><%=pjzks%>折</div></li>
+        <li><label>购买品类</label><div><%=pl%></div></li>
+        <li><label>购买颜色</label><div><%=ys%></div></li>
+        <li><label>购买系列</label><div><%=fg%></div></li>
+     </ul>
+     <div style="margin:10px auto 0 auto;width:300px;"><canvas id="radar-chart"></canvas></div>    
+</script>
+
+ <!--标签模板数据-->
+    <script type="text/underscore-template" id="tagtemplate">
+        <div class="tagcontent">
+        <% var gname=list[0].groupname;%>
+        <div class="tagitem">
+          <p><%=gname%>：</p>
+          <ul class="tagitemul floatfix">       
+          <%for(var i=0;i<list.length;i++) {
+              if(gname!=list[i].groupname){
+                  gname=list[i].groupname
+             %>
+             </ul></div>
+             <div class="tagitem">
+               <p><%=gname%>：</p>
+               <ul class="tagitemul floatfix">
+                 <li tid="<%=list[i].id%>"><%=list[i].tagname%></li>
+            <%
+                 }else{
+                  %>
+                   <li tid="<%=list[i].id%>"><%=list[i].tagname%></li>                    
+                  <%
+                   }}//end for
+            %>
+           </ul></div>
+           <div class="tagitem">
+             <p>备注：</p>
+            <!--<input type="text" id="tagdefine" placeholder="该客户的相关备注写在这:)" />-->
+            <textarea id=tagdefine placeholder="该客户的相关备注写在这..." ></textarea>
+            </div>
+        </div>
+    </script>
+
+<!--粉丝引导页面-->
+<script type="text/underscore-template" id="guideTemp">
+    <div class="userinfo">
+       <div class="headimg"></div>
+       <div class="username">--</div>
+    </div>
+    <div class="confirm-btn" val="bind">帮TA绑定会员</div>
+    <div class="confirm-btn" val="register">帮TA申请会员</div>
+</script>
+<!--老用户VIP绑定页面-->
+<script type="text/underscore-template" id="bindTemp">
+    <div class="title">会员身份绑定</div>
+       <div class="input-area">
+       <div class="input-item">
+          <label>VIP号</label>
+          <input id="bind-vipkh" type="text" />
+       </div>
+       <div class="confirm-btn" onclick="BindVIP()">确 认</div>
+    </div>
+</script>
+<!--新用户注册VIP页面-->
+<script type="text/underscore-template" id="regTemp">
+            <div class="title">新会员注册</div>
+            <div class="input-area">
+                <div class="input-item">
+                    <label>姓名*</label>
+                    <input id="reg-username" type="text" />
+                </div>
+                <div class="input-item">
+                    <label>性别</label>
+                    <div class="sex-group">
+                        <div class="sex-item" onclick="sexSelect(this)" xb="0">男 <i class="fa fa-check-square-o"></i></div>
+                        <div class="sex-item" onclick="sexSelect(this)" xb="1">女 <i class="fa fa-square-o"></i></div>
+                    </div>
+                </div>
+                <div class="input-item">
+                    <label>生日*</label>
+                    <input type="text" name="birthday" id="reg-birthday" class="input" placeholder="格式 1990-1-1" />
+                </div>
+                <div class="input-item">
+                    <label>手机*</label>
+                    <input type="text" id="reg-phone" />
+                </div>
+                <div class="confirm-btn" onclick="RegisterVIP()">确 认</div>
+            </div>
+</script>

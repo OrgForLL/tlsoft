@@ -1,0 +1,144 @@
+﻿<!DOCTYPE>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>实时数据更新</title>
+    <link rel="stylesheet" href="css/space.css" type="text/css" />
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: #000;            
+            font-family: "微软雅黑";
+
+        }
+
+        .header {
+            background-color: #f0ad4e;
+            height: 60px;
+            line-height: 40px;
+            vertical-align: middle;
+        }
+
+        .title {
+            padding: 8px 10px 10px 10px;
+            font-size: 22px;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .showbody {
+            color: #fff;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+        }
+
+        .showarea {
+            position: relative;
+            float: left;
+            width: 50%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .rightline {
+            border-right: 1px solid #ccc;
+        }
+
+        .item {            
+            border-top: 4px solid #f0ad4e;
+            padding: 5px 10px 10px 10px;
+            display: inline-block;
+            margin: 20px 10px;            
+            color: #fff;
+            font-size: 35px;
+            line-height:40px;
+            text-align:center;
+        }
+        .ht {
+            font-size:25px;
+        }
+        .floatfix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="showarea rightline">
+                <div class="title">
+                    进场人数信息 现在时间：
+                    <span>2015-12-18 11:00</span>
+                </div>
+            </div>
+            <div class="showarea">
+                <div class="title">福利会礼品领取情况</div>
+            </div>
+        </div>
+
+        <div class="showbody">
+            <!--屏幕左显示区域-->
+            <div class="showarea rightline" style="padding: 10px;">
+                <div class="item">
+                    <div class="ht">开 始 时 间</div>
+                    <div>08:30</div>
+                </div>
+                <div class="item">
+                    <div style="font-size:25px;">开 始 时 间</div>
+                    <div>08:30</div>
+                </div>
+            </div>
+            <!--屏幕右显示区域-->
+            <div class="showarea" style="padding: 10px;">
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var ajaxsucc = 0, ajaxfail = 0;
+        var SI = null;
+        var _lock = false;
+        window.onload = function () {
+
+        }
+
+        function getdate() {
+            if (_lock)
+                return;
+            else {
+                _lock = true;
+                SI = setInterval(function () {
+                    $.ajax({
+                        type: "post", //AJAX请求类型
+                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                        url: "showtest.aspx", //请求url        
+                        cache: false,  //无缓存
+                        timeout: 2000,  //AJAX请求超时时间  
+                        data: {},
+                        success: function (data) {//data warn:有人占用 successd:成功
+                            _lock = false;
+                            if (data.indexOf("Successed") > -1)
+                                $("#show1").text(parseInt($("#show1").text()) + 1);
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            _lock = false;
+                            $("#show2").text(parseInt($("#show2").text()) + 1);
+                            $("#errmsg").append(textStatus);
+                        }
+                    });
+                }, 4000);
+            }
+        }
+    </script>
+</body>
+</html>

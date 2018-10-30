@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>移动盘点</title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <style type="text/css">
+        .header {
+            background-color: #fff;
+            padding: 10px 15px;
+            width: 100%;
+            border-bottom: 1px solid #f3f3f3;
+            -webkit-box-shadow: 0 2px 2px rgba(221, 221, 221, 0.6);
+            box-shadow: 0 2px 2px rgba(221, 221, 221, 0.6);
+            font-weight: 600;
+            display: -webkit-flex;
+            display: flex;
+            justify-content: space-between;
+            height: 40px;
+        }
+
+        .last_num {
+            background-color: #0b9444;
+            color: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .page {
+            top: 42px;
+            background-color: #f3f3f3;
+        }
+
+        .ycode-list {
+            background-color: #fff;
+            border: 1px dashed #ddd;
+            font-style: normal;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .ycode-list-hh {
+            background-color: #fff;
+            border: 1px dashed #ddd;
+            font-style: normal;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .ycode-list .code_item {
+            padding: 12px 6px;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+        }
+
+        .ycode-list-hh .code_item {
+            padding: 12px 6px;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+        }
+
+        .code_item:last-child {
+            border-bottom: none;
+        }
+
+        .code_item:nth-child(even) {
+            background-color: #f3fcef;
+        }
+
+        .code_item .item_num {
+            /*color: #338809;*/
+            font-weight: 600;
+        }
+
+        .layui-layer-dialog {
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%,-50%);
+        }
+
+        .layui-layer-hui .layui-layer-content {
+            padding: 12px !important;
+        }
+
+        #last_num {
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <span>单据号: <b id="djh"></b></span>
+        <div>
+            <span class="last_num"></span>
+            <i class="iconfont icon-r-arrow"></i>
+        </div>
+    </div>
+    <div class="wrap_page">
+        <div class="page page-not-header">
+            <div>按类别</div>
+            <ul class="ycode-list">
+            </ul>
+            <div style="padding-top: 10px;">按货号</div>
+            <ul class="ycode-list-hh">
+            </ul>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../res/js/jquery.js"></script>
+<script type="text/javascript" src="./layerui/layui.js"></script>
+<script type="text/javascript">
+    var name, value;
+    var layer = null;
+    var apptoken = getQueryString("apptoken");
+    var dept = getQueryString("dept");
+    var id = getQueryString("id");
+    var tzid = getQueryString("tzid");
+    var $list = $(".ycode-list");
+    var $list_hh = $(".ycode-list-hh");
+    //alert($list)
+    getList();
+    getList_hh();
+    //获取URL参数
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return "";
+    };
+    function getList() {
+        var para = {};
+
+        var par = new Array();
+        par[0] = id;
+        par[1] = "lb";
+        para.action = "getGoodsinfo";
+        para.token = apptoken;
+        para.dept = dept;
+        para.Parameter = par;
+        para.orgid = tzid;
+        List(para);
+    }
+    function List(para) {
+        $.ajax({
+            url: "./checkScan.ashx",
+            type: "POST",
+            dataType: "text",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            timeout: 10000,
+            data: JSON.stringify(para),
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            },
+            success: function (data) {
+                console.log(data);
+                var dt = JSON.parse(data);
+                var sl = 0;
+                if (dt.code == 200) {
+                    $("#djh").text(dt.data[0].djh);
+                    for (var m = 0; m < dt.data.length; m++) {
+
+                        var rtn = dt.data[m];
+                        sl += rtn.sl;
+                        $list.prepend("<li class='code_item'><span class='code'>" + rtn.lbmc + "</span><span class='item_num'>" + rtn.sl + "</span></li>");
+                    }
+                    $(".last_num").text(sl);
+                } else {
+                    //alert("获取列表信息失败！");
+                    layer.msg('获取列表信息失败', { time: 1200 });
+                }
+            }//end success
+        });
+    }
+    function getList_hh() {
+        var para = {};
+
+        var par = new Array();
+        par[0] = id;
+        par[1] = "sphh";
+        para.action = "getGoodsinfo";
+        para.token = apptoken;
+        para.dept = dept;
+        para.Parameter = par
+        para.orgid = tzid;
+        List_hh(para);
+    }
+    function List_hh(para) {
+        $.ajax({
+            url: "./checkScan.ashx",
+            type: "POST",
+            dataType: "text",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            timeout: 10000,
+            data: JSON.stringify(para),
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            },
+            success: function (data) {
+                console.log(data);
+                var dt = JSON.parse(data);
+                if (dt.code == 200) {
+                    for (var m = 0; m < dt.data.length; m++) {
+                        var rtn = dt.data[m];
+                        $list_hh.prepend("<li class='code_item'><span class='code'>" + rtn.sphh + "</span><span class='item_num'>" + rtn.sl + "</span></li>");
+                    }
+                } else {
+                    //alert("获取列表信息失败！");
+                    layer.msg('获取列表信息失败', { time: 1200 });
+                }
+            }//end success
+        });
+    }
+    layui.use(['layer'], function () {
+        layer = layui.layer;
+        layer.config({
+            anim: 5,
+            isOutAnim: false
+        })
+    });
+</script>
+
+</html>

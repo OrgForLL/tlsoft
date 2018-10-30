@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>刮刮卡</title>
+    <link href="css/activity-style.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        .info {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:40px;
+            line-height:40px;
+            vertical-align:middle;
+            text-align:center;
+            background-color:#ebebeb;
+            z-index:200;
+            font-size:1.2em;
+            display:none;
+        }
+        .Detail {
+            text-align:center;            
+        }
+        .main {
+            margin-top:10px;
+        }
+        .copyright {
+            margin:15px auto;
+            text-align:center;
+            font-size:1em;
+            color:#ccc;
+        }
+    </style>
+</head>
+<body data-role="page" class="activity-scratch-card-winning">
+    <div class="info">正在加载数据...</div>
+    <div class="main">
+        <div class="cover">
+            <img src="img/activity-scratch-card-bannerbg2.png">
+            <div id="prize">
+            </div>
+            <div id="scratchpad">
+            </div>
+        </div>
+        <div class="content">
+            <div id="zjl" style="display: none" class="boxcontent boxwhite">
+                <div class="box">
+                    <div class="title-red">
+                        <span>中奖用户信息登记
+                        </span>
+                    </div>
+                    <div class="Detail" style="padding-top:0;">
+                        <p class="red"></p>
+                       <p>
+                            <input name="" class="px" id="idcard" type="text" value="" placeholder="请输入您的身份证号码">
+                        </p>  
+                        <p>
+                            <input name="" class="px" id="tel" value="" type="text" placeholder="请输入您的手机号码">
+                        </p>                                              
+                        <p>
+                            <input class="pxbtn" name="提 交" id="save-btn" type="button" value="提交">
+                        </p>
+ 
+                    </div>
+                </div>
+            </div>
+            <div class="boxcontent boxwhite">
+                <div class="box">
+                    <div class="title-brown">
+                        <span>奖项设置：
+                        </span>
+                    </div>
+                    <div class="Detail">
+                        <p>
+                            一等奖： 袜子。奖品数量：200
+                        </p>
+                        <p>
+                            二等奖： 杯子。奖品数量：300
+                        </p>
+                        <p>
+                            三等奖： 水笔。奖品数量：500
+                        </p>
+                        <p>
+                            鼓励奖： 福利会入场券。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="boxcontent boxwhite">
+                <div class="box">
+                    <div class="title-brown">
+                        游戏规则：
+                    </div>
+                    <div class="Detail" style="text-align:left;">
+                        <p>
+                            1.每天可获得一次游戏机会。
+                        </p>
+                        <p>
+                            2.每天分享到朋友圈可多获得一次游戏机会。
+                        </p>
+                        <p>
+                            3.中奖后,必须按领奖说明,领奖后才能继续游戏。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="boxcontent boxwhite">
+                <div class="box">
+                    <div class="title-brown">
+                        领奖说明：
+                    </div>
+                    <div class="Detail" style="text-align:left;">
+                        <p>
+                            中奖用户凭身份证到指定领奖地点登记领奖。
+                        </p>       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both;">
+        </div>
+    </div>
+    <div class="copyright">&copy;2015 利郎信息技术部</div>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/wScratchPad.js" type="text/javascript"></script>
+    <script src="js/alert.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var gametoken = "", userid = Math.ceil(Math.random() * 100), prizeID = "", prizeName = "";
+        //Math.ceil(Math.random()*100)
+        var goon=true,isResgister=true,isShow=false;
+        window.onload = function () {            
+            canplay();
+        }
+
+        //判断用户是否能玩
+        function canplay() {            
+            $.ajax({
+                type: "POST",
+                timeout: 2000,
+                async:false,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                url: "../ggk/ggkProcess.aspx",
+                data: { ctrl: "IsCanPlay", gamecode:"guaguaka", userid:userid },
+                success: function (msg) {
+                    if (msg.indexOf("Successed") > -1) {
+                        GetGameData();
+                    } else {
+                        if (msg.indexOf("还未进行用户信息登记") > -1) {
+                            alert("您已经在【" + msg.split("|")[1] + "】刮中了【" + msg.split("|")[2] + "】,请登记信息并到领奖处领奖后才可继续！");
+                            $("#prize").html(msg.split("|")[2]);
+                            $("#zjl").slideToggle(500);
+                            return;
+                        }
+                        alert("提示："+msg);
+                        return;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    showInfo("服务器错误：" + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus);
+                }
+            });
+        }
+
+        //消费游戏token方法
+        function ConsumeToken() {
+            $.ajax({
+                type: "POST",
+                timeout: 2000,                
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                url: "../ggk/ggkProcess.aspx",
+                data: { ctrl: "ConsumeGameToken", gametoken: gametoken, userid: userid },
+                success: function (msg) {
+                    if (msg.indexOf("Successed") > -1) {                        
+                        alert("恭喜您获得了【"+prizeName+"】,而且您已经登记过信息，请直接到领奖处领奖。");
+                    } else if (msg.indexOf("Warn:") > -1) {
+                        isResgister = false;
+                    } else {
+                        alert(msg);
+                        return;
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    showInfo("服务器错误：" + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus);
+                }
+            });
+        }
+
+        function GetGameData() {
+            $.ajax({
+                type: "POST",
+                timeout: 2000,
+                async:false,
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                url: "../ggk/ggkProcess.aspx",
+                data: { ctrl: "PlayGame", gamecode: "guaguaka", userid: userid },
+                success: function (msg) {
+                    if (msg.indexOf("Error:") > -1) {
+                        alert(msg);
+                        return;
+                    } else {
+                        var str = msg.split("|");
+                        gametoken = str[0];
+                        prizeID = str[1];
+                        prizeName = str[2];                        
+                        //添加刮层效果
+                        $("#scratchpad").wScratchPad({
+                            size: 20,//擦除的半径大小
+                            width: 150,
+                            height: 80,
+                            color: "#a9a9a7",
+                            scratchMove: function (e, percent) {
+                                if (percent > 0 && goon) {
+                                    $("#prize").html(prizeName);
+                                    goon = false;
+                                    ConsumeToken();
+                                }
+                                if (percent > 30) {
+                                    //this.clear();
+                                    if (!isResgister && !isShow) {
+                                        isShow = true;
+                                        alert("恭喜您中奖了，别忘了登记信息！");
+                                        $("#zjl").slideToggle(500);                                        
+                                    }
+                                }
+                            }
+                        });
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    showInfo("服务器错误：" + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus);
+                }
+            });
+        }
+
+        //提交用户登记信息
+        $("#save-btn").bind("click", function () {
+            $("#save-btn").attr("disabled", "disabled");
+            var cardno = $("#idcard").val();
+            var tel = $("#tel").val();            
+            if (cardno == "") {
+                alert("身份证号码不能为空！");
+                $("#save-btn").attr("disabled", "");
+            } else if (tel == "") {
+                alert("电话号码不能为空！");
+                $("#save-btn").attr("disabled", "");
+            } else {                
+                $.ajax({
+                    type: "POST",
+                    timeout: 2000,
+                    contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                    url: "../ggk/ggkProcess.aspx",
+                    data: { ctrl: "RegisterUserInfo", gamecode: "guaguaka", userid: userid, idcard:cardno, phone:tel },
+                    success: function (msg) {
+                        if (msg.indexOf("Successed") > -1) {
+                            alert("登记用户信息成功！");
+                            $("#zjl").fadeOut(1000);
+                            $("#save-btn").attr("disabled", "");
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        showInfo("服务器错误：" + XMLHttpRequest.status + "|" + XMLHttpRequest.readyState + "|" + textStatus);
+                        $("#save-btn").attr("disabled", "");
+                    }
+                });
+            }            
+        });
+    </script>
+
+</body>
+
+</html>

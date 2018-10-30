@@ -1,0 +1,662 @@
+2016-09-01 16:10:38 - [信息]error:【数据库操作错误】字符串 '' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdm' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'''''' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:10:38 - [信息]error:【数据库操作错误】字符串 '' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdm' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'''''' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:10:47 - [信息]error:【数据库操作错误】字符串 '' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdm' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'''''' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:10:47 - [信息]error:【数据库操作错误】字符串 '' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdm' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'''''' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:10:50 - [信息]error:【数据库操作错误】字符串 '' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdm' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'''''' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:10:50 - [信息]error:【数据库操作错误】字符串 '' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdm' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'''''' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:11:30 - [信息]error:【数据库操作错误】字符串 ' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:11:30 - [信息]error:【数据库操作错误】字符串 ' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:14:10 - [信息]error:【数据库操作错误】在将 varchar 值 '487803,487989' 转换成数据类型 int 时失败。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   select a.* into #myzb from cl_v_dddjmx a where a.id in (@djids)               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb; 
+2016-09-01 16:14:11 - [信息]error:【数据库操作错误】在将 varchar 值 '487803,487989' 转换成数据类型 int 时失败。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   select a.* into #myzb from cl_v_dddjmx a where a.id in (@djids)               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb; 
+2016-09-01 16:14:18 - [信息]error:【数据库操作错误】在将 varchar 值 '487803,487989' 转换成数据类型 int 时失败。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   select a.* into #myzb from cl_v_dddjmx a where a.id in (@djids)               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb; 
+2016-09-01 16:14:19 - [信息]error:【数据库操作错误】在将 varchar 值 '487803,487989' 转换成数据类型 int 时失败。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   select a.* into #myzb from cl_v_dddjmx a where a.id in (@djids)               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb; 
+2016-09-01 16:24:53 - [信息]error:【数据库操作错误】'@str' 附近有语法错误。
+ declare @djids varchar(500),@str VARCHAR(max) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   SET @str=''
+                                   SELECT @str=@str+','+CAST(value AS VARCHAR(max)) FROM [dbo].SplitToTable(@djids, ',')
+
+                                   select a.* into #myzb from cl_v_dddjmx a where a.id in ('' @str)               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb; 
+2016-09-01 16:24:54 - [信息]error:【数据库操作错误】'@str' 附近有语法错误。
+ declare @djids varchar(500),@str VARCHAR(max) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   SET @str=''
+                                   SELECT @str=@str+','+CAST(value AS VARCHAR(max)) FROM [dbo].SplitToTable(@djids, ',')
+
+                                   select a.* into #myzb from cl_v_dddjmx a where a.id in ('' @str)               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb; 
+2016-09-01 16:24:57 - [信息]error:【数据库操作错误】'@str' 附近有语法错误。
+ declare @djids varchar(500),@str VARCHAR(max) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   SET @str=''
+                                   SELECT @str=@str+','+CAST(value AS VARCHAR(max)) FROM [dbo].SplitToTable(@djids, ',')
+
+                                   select a.* into #myzb from cl_v_dddjmx a where a.id in ('' @str)               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb; 
+2016-09-01 16:24:57 - [信息]error:【数据库操作错误】'@str' 附近有语法错误。
+ declare @djids varchar(500),@str VARCHAR(max) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   SET @str=''
+                                   SELECT @str=@str+','+CAST(value AS VARCHAR(max)) FROM [dbo].SplitToTable(@djids, ',')
+
+                                   select a.* into #myzb from cl_v_dddjmx a where a.id in ('' @str)               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb; 
+2016-09-01 16:33:59 - [信息]error:【数据库操作错误】字符串 ' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:34:00 - [信息]error:【数据库操作错误】字符串 ' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:34:13 - [信息]error:【数据库操作错误】字符串 ' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:34:13 - [信息]error:【数据库操作错误】字符串 ' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,'' lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:43:16 - [信息]error:【数据库操作错误】字符串 ') lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+') lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdm' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,isnull(null,'') lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:43:16 - [信息]error:【数据库操作错误】字符串 ') lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;' 后的引号不完整。
+') lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdm' 附近有语法错误。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,isnull(null,'') lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:44:30 - [信息]error:【数据库操作错误】必须声明标量变量 "@tzid"。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,0 lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:44:30 - [信息]error:【数据库操作错误】必须声明标量变量 "@tzid"。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,0 lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:44:32 - [信息]error:【数据库操作错误】必须声明标量变量 "@tzid"。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,0 lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:44:32 - [信息]error:【数据库操作错误】必须声明标量变量 "@tzid"。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,0 lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:44:51 - [信息]error:【数据库操作错误】必须声明标量变量 "@tzid"。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,0 lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:44:51 - [信息]error:【数据库操作错误】必须声明标量变量 "@tzid"。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,0 lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=1 and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:45:52 - [信息]error:【数据库操作错误】必须声明标量变量 "@tzid"。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,0 lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 
+2016-09-01 16:45:52 - [信息]error:【数据库操作错误】必须声明标量变量 "@tzid"。
+ declare @djids varchar(500) 
+                                   SELECT @djids=ids FROM  cl_t_cwdjtmIDgl WHERE id=@djid
+                                   IF(LEN(@djids)!=0)
+                                     SELECT  @djids=SUBSTRING(@djids,2,LEN(@djids))
+                                   ELSE 
+                                     SELECT @djids=0
+                                     
+                                   exec('select a.* into #myzb from cl_v_dddjmx a where a.id in ('+ @djids +')               
+                                   select distinct a.scddbh,a.chdm,a.sl,a.mxid,a.ckid,xx.id cwid,0 lyscddbh,0 dfckid  
+                                   from #myzb a 
+                                   inner join cl_v_chdmb c on a.chdm=c.chdm 
+                                   inner join  cl_T_chgzhkcmx ch on a.chdm=ch.chdm AND a.scddbh=ch.gzh AND a.ckid=ch.ckid  
+                                   left join cl_t_cwxxb xx on xx.tzid=@tzid and xx.chdm=ch.chdm and a.scddbh=xx.gzh and xx.ckid=a.ckid 
+                                   where c.tzid=@tzid and a.djlx=624
+                                   order by a.mxid 
+                                   drop table #myzb;') 

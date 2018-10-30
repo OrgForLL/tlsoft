@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx(200): error CS0117: “ASP.interface_sc_lab_jcbgsjtb_aspx.zbInfo”并不包含“样品货款号”的定义

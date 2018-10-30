@@ -1,0 +1,16 @@
+该字符串未被识别为有效的布尔值。System.ArgumentException: 该字符串未被识别为有效的布尔值。不能在 IsLock 列中存储 <1>。所需类型是 Boolean。 ---> System.FormatException: 该字符串未被识别为有效的布尔值。
+   在 System.Boolean.Parse(String value)
+   在 System.String.System.IConvertible.ToBoolean(IFormatProvider provider)
+   在 System.Data.Common.BooleanStorage.Set(Int32 record, Object value)
+   在 System.Data.DataColumn.set_Item(Int32 record, Object value)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Data.DataColumn.set_Item(Int32 record, Object value)
+   在 System.Data.DataRow.set_Item(DataColumn column, Object value)
+   在 System.Data.DataRow.set_Item(String columnName, Object value)
+   在 ASP.interface_lockrecords_aspx.CheckRecordsLock(String dataJson, String userid, String username, String token)
+   在 ASP.interface_lockrecords_aspx.Page_Load(Object sender, EventArgs e)
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

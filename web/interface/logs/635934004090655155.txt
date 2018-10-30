@@ -1,0 +1,10 @@
+列“rq”不属于表 。System.ArgumentException: 列“rq”不属于表 。
+   在 System.Data.DataRow.GetDataColumn(String columnName)
+   在 System.Data.DataRow.get_Item(String columnName)
+   在 ASP.interface_viplistcore_aspx._SyncVIPInfo(String vipkh, String synctime) 位置 e:\web_tlerp\interface\VIPListCore.aspx:行号 162
+   在 ASP.interface_viplistcore_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\VIPListCore.aspx:行号 115
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

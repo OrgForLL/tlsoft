@@ -15,10 +15,22 @@ namespace ConsoleCMD
         static Socket socket;
         static Thread thread;
         private static byte[] result = new byte[1024];
-
+        [ThreadStatic]
+        static string str = "hehe";
         static void Main(string[] args)
         {
-            
+
+            string sql = @"hell{0},{1}";
+            sql=string.Format(sql, "t", "a");
+            sql += @"2{0}{1}";
+            sql=string.Format(sql, "e", "f");
+            Console.Write(sql);
+            ////另一个线程只会修改自己TLS中的str变量
+            //Thread th = new Thread(() => { str = "Mgen"; Display(); });
+            //th.Start();
+            //th.Join();
+            //Display();
+
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPHostEntry ieh = Dns.GetHostEntry("localhost");
             IPAddress localServerIP = ieh.AddressList[1];
@@ -33,7 +45,10 @@ namespace ConsoleCMD
             Console.WriteLine("服务启动" + localIPEndPoint.ToString());
             Console.ReadLine();            
         }
-
+        static void Display()
+        {
+            Console.WriteLine("{0} {1}", Thread.CurrentThread.ManagedThreadId, str);
+        }
         static void AcceptClient()
         {
             

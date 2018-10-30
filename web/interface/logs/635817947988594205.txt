@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\LockRecords.aspx(129): error CS0029: 无法将类型“System.Collections.Generic.List<nrWebClass.clsJsonHelper>”隐式转换为“System.Collections.Generic.List<string>”

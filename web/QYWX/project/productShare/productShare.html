@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <style>
+        * {
+            font-family: Helvetica Neue, Helvetica, Microsoft YaHei, PingFang SC, Hiragino Sans GB, SimSun, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .page {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: #f8f8f8;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .content-wrap {
+            width: 90vw;
+            height: 90vw;
+            /* border: 1px solid #f3f3f3; */
+            -webkit-box-shadow: 0 6px 10px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.06);
+            background: #fff;
+            border-radius: 6px;
+        }
+
+        #nodata-wrap {
+            margin-top: 16%;
+            text-align: center;
+            padding: 10px;
+        }
+
+        #nodata-wrap>img {
+            width: 80%;
+            margin: 10px 0;
+        }
+
+        #nodata-wrap>p {
+            line-height: 28px;
+            color: #c7c8cb;
+        }
+
+        #product-wrap {
+            margin-top: 10%;
+            display: none;
+        }
+
+        #product-wrap img {
+            width: 100%;
+            border-radius: 6px;
+        }
+
+        #product-wrap .tips {
+            background-color: #f9ebdb;
+            color: #a06d3a;
+            padding: 6px 10px;
+            border-radius: 4px;
+            margin: 20px 0 10px;
+            font-size: 12px;
+        }
+
+        .foot-btn {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+
+        .foot-btn>button {
+            width: 40%;
+            height: 45px;
+            border-radius: 6px;
+            border: 0;
+            font-size: 14px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #btn-code {
+            background-color: #fe7857;
+            color: #fff;
+        }
+
+        #btn-code:active {
+            background-color: #f6663e;
+        }
+
+        #btn-record {
+            border: 1px solid #fe7857;
+            color: #fe7857;
+            background-color: transparent;
+        }
+
+        #btn-record:active {
+            background-color: #fe7857;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body ontouchstart>
+    <div class="page">
+        <p class="title">商品分享</p>
+        <!-- 未扫码无数据时 -->
+        <div class="content-wrap" id="nodata-wrap">
+            <img src="no_photo.png" alt="">
+            <p>还没有可分享的商品二维码，</p>
+            <p>赶紧点击「扫码分享」唤醒我把~</p>
+        </div>
+        <!-- 扫码后商品图片二维码 -->
+        <div id="product-wrap">
+            <p class="tips">温馨提示：可长按图片分享或者点击右上角转发</p>
+            <div class="content-wrap">
+                <img src="img_detail_cloth0.jpg">
+            </div>
+        </div>
+        <div class="foot-btn">
+            <button id="btn-code">扫码分享</button>
+            <button id="btn-record">扫码记录</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/jweixin-1.1.0.js"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            // 获取地址栏URL参数
+            function getUrlParam(name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 构造一个含有目标参数的正则表达式对象  
+                var r = window.location.search.substr(1).match(reg); // 匹配目标参数  
+                if (r != null) return unescape(r[2]);
+                return null; // 返回参数值  
+            }
+
+            function init() {
+
+                
+                var id = getUrlParam("id");
+                if (id) {
+                    $("#nodata-wrap").hide();
+                    $("#product-wrap").show();
+                }
+            }
+
+            // 点击扫码分享
+            $("#btn-code").click(function () {
+                window.location.replace("productShare.html?id=1");
+            });
+
+            // 点击分享记录
+            $("#btn-record").click(function () {
+                window.location.href = "shareRecord.html";
+            });
+
+            function loadImg() {
+
+            }
+
+            init();
+        });
+    </script>
+</body>
+
+</html>

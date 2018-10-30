@@ -1,0 +1,11 @@
+无效的 URI: 无法确定 URI 的格式。System.UriFormatException: 无效的 URI: 无法确定 URI 的格式。
+   在 System.Uri.CreateThis(String uri, Boolean dontEscape, UriKind uriKind)
+   在 System.Uri..ctor(String uriString)
+   在 System.Net.WebRequest.Create(String requestUriString)
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.HttpGet(String Url, String postDataStr) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 23
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 11
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

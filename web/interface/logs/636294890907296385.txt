@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\sc_lab_jcbgsjtb1.aspx(343): error CS0120: 非静态的字段、方法或属性“System.Web.UI.Page.Response.get”要求对象引用

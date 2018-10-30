@@ -1,0 +1,1 @@
+d:\web_tlerp\interface\wxcardcore.ashx(261): error CS1502: 与“nrWebClass.clsSharedHelper.DisponseDataTable(ref System.Data.DataTable)”最匹配的重载方法具有一些无效参数

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>退办</title>
+</head>
+
+<body>
+<div data-role="page" id="dialogPageReturn" href="KaoqinAduit.html" data-mini="true">
+	  <div data-role="header" data-theme="c">
+		<h2>退办</h2>
+	  </div>
+      <div data-role="content">
+          <ul data-role="listview" data-inset="true">
+              <li data-role="fieldcontain" >
+              	退办至节点:
+              </li>
+              <li data-role="fieldcontain" data-mini="true" >
+                <fieldset data-role="controlgroup" id="radio-group" data-mini="true">
+                </fieldset>
+              </li>
+              <li>
+                <label for="ReturnUserid">接收人:</label>
+                <select name="ReturnUserid" id="ReturnUserid" data-mini="true">
+                </select>
+              </li>
+              <li data-role="fieldcontain">
+                    <label for="ReturntextNote">审批意见:</label>
+                <textarea cols="40" rows="8" name="ReturntextNote" id="ReturntextNote"></textarea>
+              </li>
+              <li class="ui-body ui-body-a">
+                <fieldset class="ui-grid-a">
+                  <div class="ui-block-a">
+                  <a href="#page1" data-role="button"> 取消 </a></div>
+                  <div class="ui-block-b">
+                  <button type="button" data-theme="d" onclick="ReturnDone()"> 完成 </button>
+                  </div>
+                </fieldset>
+			  </li>
+          </ul>       
+      </div>
+    </div>
+</body>
+</html>

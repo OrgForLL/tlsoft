@@ -1,0 +1,2 @@
+WXCallBackReceive文件，请使用
+\\192.168.35.231\web_tlerp\QYWX\project\vipweixin\WXCallBackReceive.aspx

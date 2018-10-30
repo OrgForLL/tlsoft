@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title></title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
+            font-size: 14px;
+            color: #333;
+            background-color: #f8f8f8;
+            color: #fff;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .page {
+            position: fixed;
+            left: 0;
+            top: 100px;
+            bottom: 40px;
+            width: 100%;
+            -webkit-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+        }
+
+            .page.left {
+                -webkit-transform: translate3d(-100%,0,0);
+                transform: translate3d(-100%,0,0);
+            }
+
+            .page.right {
+                -webkit-transform: translate3d(100%,0,0);
+                transform: translate3d(100%,0,0);
+            }
+
+            .page.center {
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+            }
+
+            .page.transition {
+                -webkit-transition-duration: 1s;
+                transition-duration: 1s;
+            }
+
+        #page1 {
+            background: #ff6a00;
+        }
+
+        #page2 {
+            background: #333;
+        }
+
+        #page3 {
+            background: #573a3a;
+        }
+
+        .page p {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: #000;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: #808080;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">header</div>
+    <div class="container">
+        <div class="page" id="page1">
+            page1<br />
+            <p onclick="slide(2)">切换到2</p>
+        </div>
+        <div class="page right" id="page2">
+            page2<br />
+            <p onclick="slide(3)">切换到3</p>
+        </div>
+        <div class="page right" id="page3">
+            page3<br />
+            <p onclick="slide(1)">切换到1</p>
+        </div>
+    </div>
+    <div class="footer">footer</div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+        function slide(pn) {
+            switch (pn) {
+                case 1:
+                    $(".page.transition.left").attr("class", "page right");
+                    $("#page3").attr("class", "page transition left");
+                    $("#page1").attr("class", "page transition center");
+                    //$("#page3").attr("class", "page transition left");
+                    //$("#page1").attr("class", "page transition center");
+                    //$("#page2").attr("class", "page right");
+                    break;
+                case 2:
+                    $(".page.transition.left").attr("class", "page right");
+                    $("#page1").attr("class", "page transition left");
+                    $("#page2").attr("class", "page transition center");
+                    //$("#page1").attr("class", "page transition left");
+                    //$("#page2").attr("class", "page transition center");
+                    //$("#page3").attr("class", "page right");
+                    break;
+                case 3:
+                    $(".page.transition.left").attr("class", "page right");
+                    $("#page2").attr("class", "page transition left");
+                    $("#page3").attr("class", "page transition center");
+                    //$("#page2").attr("class", "page transition left");
+                    //$("#page3").attr("class", "page transition center");
+                    //$("#page1").attr("class", "page right");
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

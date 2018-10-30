@@ -1,0 +1,361 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/vipweixin/touchSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <style type="text/css">
+        body {
+            font-size: 16px;
+            background-color: #f7f7f7;
+            color: #575d6a;
+            font-family: "San Francisco",Helvitica Neue,Helvitica,Arial,sans-serif;
+        }
+
+        .header {
+            height: 50px;
+            line-height: 50px;
+            background: url(../../res/img/vipweixin/mall-logo.png) no-repeat center;
+            background-size: 126px auto;
+            border-bottom: 1px solid #575d6a;
+            width: 100%;
+            text-align: center;            
+        }
+
+        .footer {
+            height: 40px;
+            line-height: 40px;
+            font-size: 0.8em;
+        }
+
+        .page {
+            top: 50px;
+            bottom: 45px;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            overflow: hidden;
+        }
+
+        .banner {
+            width: 100%;
+            height: 170px;            
+            margin-top:-1px;
+        }
+
+        .container_menu {
+            list-style: none;
+            background: #fff;
+            box-shadow: 0 1px .5px #eceef1;
+            -webkit-box-shadow: 0 1px .5px #eceef1;            
+        }
+
+        .menu_item {
+            float: left;
+            display: inline-block;
+            font-size: 14px;
+            text-align: center;
+            width: 25%;
+        }
+
+        .clear {
+            zoom: 1;
+            content: ".";
+            display: block;
+            clear: both;
+            overflow: hidden;
+        }
+
+        .item_icon {
+            margin: 5px auto 0 auto;
+            line-height: 15px;
+        }
+
+        .menu_item > a {
+            display: block;
+            color: #31343b;
+            text-decoration: none;
+            margin: 10px 0;
+            border-right: 1px solid #eceef1;
+            box-sizing: border-box;
+        }
+
+        .container_xx {
+            margin-top: 5px;
+        }
+
+        .phone_title {
+            line-height: 40px;
+            background: #fff;
+            font-size: 16px;
+            padding-left: 10px;
+            box-shadow: 0 1px .5px #eceef1;
+        }
+
+        .phone_list {
+            box-shadow: 0 1px .5px #eceef1;
+            margin-top: 5px;
+            list-style: none;
+        }
+
+        .phone_item {
+            float: left;
+            width: 50%;
+            background: #fff;
+        }
+
+        .item_wrap {
+            height: 99%;
+            padding-top: 30px;
+            border-right: 1px solid #f7f7f7;
+            border-bottom: 1px solid #f7f7f7;
+            text-align: center;
+        }
+
+            .item_wrap > img {
+                max-width: 70%;
+            }
+
+            .item_wrap .item_price {
+                font-size: 14px;
+                color: #ed1c24;
+                margin-bottom: 10px;
+            }
+
+        .account-info {
+            padding:5px 0;
+            margin-bottom: 5px;
+            background-color: #fff;
+            box-shadow: 0 1px .5px #eceef1;
+            -webkit-box-shadow: 0 1px .5px #eceef1;
+        }
+
+            .account-info .info-item {
+                float: left;
+                width: 50%;                
+                text-align: center;
+                font-size: 0.9em;
+                font-weight: bold;
+            }
+
+        .info-item:first-child {
+            border-right: 1px solid #eceef1;
+        }
+
+        .info-item img {
+            height: 22px;
+            width: auto;
+            display:block;
+            margin:0 auto 2px auto;            
+        }
+
+        .mall-icons {
+            width: 30px;
+            height: 30px;
+            margin: 0 auto;
+            background: url(../../res/img/vipweixin/mallicons2.png) no-repeat;
+            background-size: 30px;
+        }
+
+        .car {
+            background-position: 0 -30px;
+        }
+
+        .orders {
+            background-position: 0 -60px;
+        }
+
+        .person {
+            background-position: 0 -90px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+    </div>
+    <div class="wrap-page">
+        <!--商城主页-->
+        <div class="page page-not-header-footer">
+            <div class="contaier">
+                <!--幻灯片区域-->
+                <div class="banner">
+                    <div class="main_visual">
+                        <div class="flicking_con">
+                            <div class="flicking_inner">
+                                <a href="javascript:">1</a>
+                                <a href="javascript:">2</a>
+                                <a href="javascript:">3</a>
+                                <a href="javascript:">4</a>
+                                <a href="javascript:">5</a>
+                            </div>
+                        </div>
+                        <div class="main_image">
+                            <ul>
+                                <li><span class="img_1"></span></li>
+                                <li><span class="img_2"></span></li>
+                                <li><span class="img_3"></span></li>
+                                <li><span class="img_4"></span></li>
+                                <li><span class="img_5"></span></li>
+                            </ul>
+                            <a href="javascript:;" id="btn_prev"></a>
+                            <a href="javascript:;" id="btn_next"></a>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="account-info clear">
+                    <div class="info-item">
+                        <img src="../../res/img/vipweixin/point-icon.png" />
+                        当前积分数:10000
+                    </div>
+                    <div class="info-item">
+                        <img src="../../res/img/vipweixin/signicon2.png" alt="" />
+                        签到得积分
+                    </div>
+                </div>-->
+                <ul class="container_menu clear">
+                    <li class="menu_item">
+                        <a href="#">
+                            <div class="mall-icons"></div>
+                            <div class="item_icon">积分兑换</div>
+                        </a>
+                    </li>
+                    <li class="menu_item">
+                        <a href="#">
+                            <div class="mall-icons car"></div>
+                            <div class="item_icon">购物车</div>
+                        </a>
+                    </li>
+                    <li class="menu_item">
+                        <a href="#">
+                            <div class="mall-icons orders"></div>
+                            <div class="item_icon">我的订单</div>
+                        </a>
+                    </li>
+                    <li class="menu_item">
+                        <a href="#">
+                            <div class="mall-icons person"></div>
+                            <div class="item_icon">个人中心</div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="container_xx">
+                    <div class="phone_title">最新推荐<span style="float:right;padding-right:15px;">更多 ></span></div>
+                    <p style="text-align:center;padding-top:100px;">礼品即将推出，敬请期待...</p>
+                    <ul class="phone_list clear">
+<!--                        <li class="phone_item">
+                            <div class="item_wrap">
+                                <img src="../../res/img/vipweixin/phone1.jpg" />
+                                <div class="item_name">iPhone 6 Plus</div>
+                                <div class="item_price">¥ 3359.00 起</div>
+                            </div>
+                        </li>
+                        <li class="phone_item">
+                            <div class="item_wrap">
+                                <img src="../../res/img/vipweixin/phone2.jpg" />
+                                <div class="item_name">iPhone 6</div>
+                                <div class="item_price">¥ 3059.00 起</div>
+                            </div>
+                        </li>
+                        <li class="phone_item">
+                            <div class="item_wrap">
+                                <img src="../../res/img/vipweixin/phone1.jpg" />
+                                <div class="item_name">iPhone 6 Plus</div>
+                                <div class="item_price">¥ 3359.00 起</div>
+                            </div>
+                        </li>
+                        <li class="phone_item">
+                            <div class="item_wrap">
+                                <img src="../../res/img/vipweixin/phone2.jpg" />
+                                <div class="item_name">iPhone 6</div>
+                                <div class="item_price">¥ 3059.00 起</div>
+                            </div>
+                        </li>
+                        <li class="phone_item">
+                            <div class="item_wrap">
+                                <img src="../../res/img/vipweixin/phone1.jpg" />
+                                <div class="item_name">iPhone 6 Plus</div>
+                                <div class="item_price">¥ 3359.00 起</div>
+                            </div>
+                        </li>
+                        <li class="phone_item">
+                            <div class="item_wrap">
+                                <img src="../../res/img/vipweixin/phone2.jpg" />
+                                <div class="item_name">iPhone 6</div>
+                                <div class="item_price">¥ 3059.00 起</div>
+                            </div>
+                        </li>
+                        <li class="phone_item">
+                            <div class="item_wrap">
+                                <img src="../../res/img/vipweixin/phone1.jpg" />
+                                <div class="item_name">iPhone 6 Plus</div>
+                                <div class="item_price">¥ 3359.00 起</div>
+                            </div>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        &copy;2016 利郎(中国)有限公司
+    </div>
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/vipweixin/jquery.event.drag-1.5.min.js"></script>
+    <script type="text/javascript" src="../../res/js/vipweixin/jquery.touchSlider.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $dragBln = false;
+            $(".main_image").touchSlider({
+                flexible: true,
+                speed: 200,
+                btn_prev: $("#btn_prev"),
+                btn_next: $("#btn_next"),
+                paging: $(".flicking_con a"),
+                counter: function (e) {
+                    $(".flicking_con a").removeClass("on").eq(e.current - 1).addClass("on");
+                }
+            });
+            $(".main_image").bind("mousedown", function () {
+                $dragBln = false;
+            })
+            $(".main_image").bind("dragstart", function () {
+                $dragBln = true;
+            })
+            $(".main_image a").click(function () {
+                if ($dragBln) {
+                    return false;
+                }
+            })
+            timer = setInterval(function () { $("#btn_next").click(); }, 5000);
+            $(".main_visual").hover(function () {
+                clearInterval(timer);
+            }, function () {
+                timer = setInterval(function () { $("#btn_next").click(); }, 5000);
+            })
+            $(".main_image").bind("touchstart", function () {
+                clearInterval(timer);
+            }).bind("touchend", function () {
+                timer = setInterval(function () { $("#btn_next").click(); }, 5000);
+            });            
+        });
+
+        $(".phone_item").click(function () {
+            window.location.href = "ProductDetail.html";            
+        });
+
+        $(".menu_item").click(function () {
+            alert("即将推出，敬请期待...");
+        });
+    </script>
+</body>
+</html>

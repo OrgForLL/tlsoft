@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="author" content="www.frebsite.nl" />
+		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=2.0 user-scalable=yes" />
+		<title>2015秋季主题版</title>
+		<link type="text/css" rel="stylesheet" href="css/dist/demo.css" />
+		<link type="text/css" rel="stylesheet" href="css/dist/jquery.mmenu.all.css" />
+
+		<script type="text/javascript" src="js/jquery-1.10.0.min.js"></script>
+		<script type="text/javascript" src="js/dist/jquery.mmenu.min.all.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('nav#menu').mmenu({
+					extensions	: [ 'effect-slide-menu', 'pageshadow' ],
+					searchfield	: false,       //修改为false
+					counters	: true,
+					navbars		: [
+						{
+							position	: 'top'
+						}, {
+							position	: 'bottom',
+							content		: [ '<a href="#">Visit website</a>' ]
+						}
+					]
+				});
+			});
+		</script>
+
+        <style>
+		.bg-img {
+					width: 100%;
+					height: 100%;
+					margin:0px;
+					-webkit-background-size: cover;
+					-moz-background-size: cover;
+					background-size: cover;
+					background-position: center center;
+
+					-webkit-animation:img 1.5s ease-out both;
+					-moz-animation:img 1.5s ease-out both;
+					-o-animation:img 1.5s ease-out both;
+					-ms-animation:img 1.5s ease-out both;
+					animation:img 1.5s ease-out both;
+				}
+
+				@-webkit-keyframes img{
+					0%{-webkit-transform:scale(0.8);opacity:0;}
+					100%{-webkit-transform:scale(1);opacity:1;}
+				}
+				@-moz-keyframes img{
+					0%{-moz-transform:scale(0.8);opacity:0;}
+					100%{-moz-transform:scale(1);opacity:1;}
+				}
+				@-o-keyframes img{
+					0%{-o-transform:scale(0.8);opacity:0;}
+					100%{-o-transform:scale(1);opacity:1;}
+				}
+				@-ms-keyframes img{
+					0%{-ms-transform:scale(0.8);opacity:0;}
+					100%{-ms-transform:scale(1);opacity:1;}
+				}
+				@keyframes img{
+					0%{transform:scale(0.8);opacity:0;}
+					100%{transform:scale(1);opacity:1;}
+				}
+
+
+		.a1{
+				 color: #666;position:absolute;text-align: center; padding:8px;
+				 font-size: 15px;
+				 -webkit-animation:img 1.5s ease-out both;
+				 -moz-animation:img 1.5s ease-out both;
+				 -o-animation:img 1.5s ease-out both;
+				 -ms-animation:img 1.5s ease-out both;
+				 animation:img 1.5s ease-out both;
+				}
+
+		.bgcolor{
+			     position:absolute;top:40%;left:30%;overflow:hidden;width:58%;height:40px;margin:-75px 0 0 0px;
+			     border:3px solid #eee;background:#e0e0e0;border-radius:6px;
+                -webkit-animation:animations 2s ease-out both;
+				-moz-animation:animations 2s ease-out both;
+				-o-animation:animations 2s ease-out both;
+				-ms-animation:animations 2s ease-out both;
+				animation:animations 2s ease-out both;
+			 }
+
+
+				@-webkit-keyframes animations{
+					0%{-webkit-transform:translate(0);opacity:0;}
+					100%{-webkit-transform:translate(10%);opacity:0.7;}
+				}
+				@-moz-keyframes animations{
+					0%{-moz-transform:translate(0);opacity:0;}
+					100%{-moz-transform:translate(10%);opacity:0.7;}
+				}
+				@-o-keyframes animations{
+					0%{-o-transform:translate(0);opacity:0;}
+					100%{-o-transform:translate(10%);opacity:0.7;}
+				}
+				@-ms-keyframes animations{
+					0%{-ms-transform:translate(0);opacity:0;}
+					100%{-ms-transform:translate(10%);opacity:0.7;}
+				}
+				@keyframes animations{
+					0%{transform:translate(0);opacity:0;}
+					100%{transform:translate(10%);opacity:0.7;}
+				}
+
+				
+		</style>
+		
+	</head>
+	<body>
+		<div id="page">
+			<div class="header">
+				<a href="#menu"></a>
+				2015秋季主题版
+			</div>
+			
+				<img src="images/c1.jpg" class="bg-img">
+				<div class="bgcolor"><span class="a1"><b>关键词：</b> 四川 竹子 熊猫</span></div>.
+			
+			<nav id="menu">
+				<ul>
+				    <li><a href="zhuti.html">2015秋季设计主题</a></li>
+				    <li><a href="color.html">2015秋冬色彩规划方案</a></li>
+				    <li><a href="beCare.html">产品陈列前注意事项</a></li>
+					<li><a href="mote.html">秋季模特搭配方案</a></li>
+					<li><a href="#">秋一波货物陈列指引</a>
+                        <ul>
+							<li><a href="serie1_1.html">第5代货柜陈列</a></li>
+							<li><a href="serie1_2.html">第5代精品货柜陈列</a></li>
+						</ul>
+					</li>
+					<li><a href="#">秋二波货物陈列指引</a>
+                        <ul>
+							<li><a href="serie2_1.html">第5代货柜陈列</a></li>
+							<li><a href="serie2_2.html">第5代精品货柜陈列</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+
+        <script>
+			$(function() {
+				$('.bg-img').height($(window).height()-70);
+				$('.bg-img').width($(window).width());
+            });
+		</script> 
+
+
+	</body>
+</html>

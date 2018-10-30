@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <link type="text/css" rel="stylesheet" href="../../res/css/vipweixin/loading.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/vipweixin/redeem.css" />
+    <title></title>
+	<script>
+	    var _hmt = _hmt || [];
+	    (function () {
+	        var hm = document.createElement("script");
+	        hm.src = "https://hm.baidu.com/hm.js?f274c2a4c37455fe3bba3b7477d74d26";
+	        var s = document.getElementsByTagName("script")[0];
+	        s.parentNode.insertBefore(hm, s);
+	    })();
+	</script>
+</head>
+<body>
+    <div class="loading-modal">
+        <div>
+            <span class="spinner spinner-white"></span>
+        </div>
+    </div>
+    <!-- 离线消息 -->
+    <div class="newmessage">
+        <div class="messageicon"></div>
+        <div class="tip twinkle"></div>
+    </div>
+    <!-- 向上滚动按钮 -->
+    <div class="scroll-top"></div>
+    <div class="header">
+        <div class="search-wrap">
+            <div class="backBtn storeback">
+                <i class="fa fa-angle-left"></i>
+            </div>
+            <input type="text" id="search" placeholder="搜索门店名称">
+            <div class="iconwrap">
+                <div class="search-icon"></div>
+            </div>
+        </div> 
+    </div>
+    <div class="wrap-page">
+        <!-- 积分兑换页 -->
+        <div class="page page-not-footer" id="index">
+            <!-- 顶部视窗 -->
+            <div class="top-wrap">
+                <div class="backBtn">
+                    <i class="fa fa-angle-left"></i>
+                </div>
+                <div class="topleft-wrap">
+                    <p>当前总积分</p>
+                    <p class="point"><span class="currentpoint">--</span>分</p>
+                </div>
+                <div class="topright-wrap floatfix">
+                    <div class="orderBtn">
+                        <div class="icon ordericon"></div>
+                        <p>兑换记录</p>
+                    </div>
+                    <div class="storeBtn">
+                        <div class="icon storeicon"></div>
+                        <p>适用门店</p>
+                    </div>
+                    <div class="explainBtn">
+                        <div class="icon explainicon"></div>
+                        <p>积分说明</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 商品列表 -->
+            <ul class="goodlist">
+                <!-- <li class="floatfix">
+                    <div class="goodimg-wrap">
+                        <div class="goodimg"></div>
+                    </div>
+                    <div class="info-wrap">
+                        <div class="good-info">
+                            <p>
+                                <span>1000积分兑换</span>
+                                <span>[50元利郎代金券]</span>
+                            </p>
+                            <p class="price">价值50元</p>
+                        </div>
+                        <div class="num-wrap">
+                            <span class="redBtn">-</span>
+                            <input type="number" class="number" value="0" pattern="[0-9]*">
+                            <span class="itempoint">1000</span>
+                            <span class="addBtn">+</span>
+                            <span class="tip">积分不足</span>
+                        </div>
+                    </div>
+                </li> -->
+            </ul>
+            <p class="nogood">暂无可兑换商品</p>
+        </div>
+        <!-- 适用门店页 -->
+        <div class="page page-not-header page-right" id="store">
+            <!-- <div class="search-wrap">
+                <input type="text" id="search" placeholder="搜索适用门店">
+                <div class="iconwrap">
+                    <div class="search-icon"></div>
+                </div>
+            </div> -->
+            <ul class="storelist">
+                <!-- <li>
+                    <div class="storemc">
+                        <span class="sicon"><i class="circle"></i></span>
+                        <span>mrss01.石狮步行街直营店</span>
+                    </div>
+                    <div class="storeaddr">
+                        <i class="fa fa-bank (alias) sicon"></i>
+                        <span>福建省晋江市青阳街道长兴路200号长兴路长兴路长兴路</span>
+                    </div>
+                    <div class="storedh">
+                        <i class="fa fa-phone sicon"></i>
+                        <span>0595-88875768</span>
+                    </div>
+                </li> -->
+            </ul>
+            <p class="noresult">已经没有数据了..</p>
+        </div>
+        <!-- 积分说明页 -->
+        <div class="page page-right" id="description">
+            <ul class="queslist">
+                <li>
+                    <div class="floatfix">
+                        <div class="ques-icon"></div>
+                        <p class="questitle">积分规则</p>
+                    </div>
+                    <div class="answer">
+                        <p>1.会员卡内积分不能转让</p>
+                        <p>2.积分不可用于兑换现金，仅限参加指定物品兑换</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="floatfix">
+                        <div class="ques-icon"></div>
+                        <p class="questitle">积分有什么用？</p>
+                    </div>
+                    <div class="answer">
+                        <p>会员可根据积分兑换相应的商品</p>
+                    </div>
+                </li>
+                 <li>
+                    <div class="floatfix">
+                        <div class="ques-icon"></div>
+                        <p class="questitle">如何获得积分？</p>
+                    </div>
+                    <div class="answer">
+                        <p>1.会员在适用门店消费商品即可获得积分</p>
+                        <p>2.不同会员等级获得的积分比例不同</p>
+                        <p>3.积分以实际支付金额计算可获得的积分为准</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="closeBtn">
+                <i class="fa fa-times-circle"></i>
+            </div>
+        </div>
+        <!-- 商品详情页 -->
+        <div class="page page-right" id="gooddetails">
+            <div class="deta-head">
+                <i class="backBtn fa fa-angle-left"></i>
+                <p>商品详情</p>
+            </div>
+            <div class="img-wrap" id="img-wrap">
+                <!-- <img class="lazy" src="../img/EasyBusiness/goodpreimg.jpg" data-original="../img/EasyBusiness/umbrella1.jpg">
+                <img class="lazy" src="../img/EasyBusiness/goodpreimg.jpg" data-original="../img/EasyBusiness/umbrella2.jpg">
+                <img class="lazy" src="../img/EasyBusiness/goodpreimg.jpg" data-original="../img/EasyBusiness/umbrella3.jpg">
+                <img class="lazy" src="../img/EasyBusiness/goodpreimg.jpg" data-original="../img/EasyBusiness/umbrella4.jpg"> -->
+            </div>
+            <div class="nodetail">
+                <p>暂无图片</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer floatfix">
+        <div class="leftfooter">
+            <span class="buypoint"><span class="redtxt">0</span>积分</span>
+            <span class="buygood">(共<span class="goodnum">0</span>件商品)</span>
+        </div>
+        <div class="exchangeBtn">立即兑换</div>
+    </div>
+
+    <!-- 商品列表模板区 -->
+    <script id="goodlist-temp" type="text/html"> 
+       {{each list}}       
+       <li class="floatfix" data-id="{{$value.id}}">
+            <div class="goodimg-wrap">
+                <div class="goodimg" style="background-image: url('{{$value.img}}')"></div>
+            </div>
+            <div class="info-wrap">
+                <div class="good-info">
+                    <p>
+                        <span style="display:block;" >[{{$value.name}}]</span>
+                        <span>兑换积分：<span style="color:#666;text-decoration: line-through;">{{$value.point * 2}}</span> <span style="color:#f00;font-weight: 700;">{{$value.point}}</span>                    
+                    </p>
+                    <p class="price">市场价{{$value.market_price}}元</p>
+                </div>
+                <div class="num-wrap">
+                    <span class="redBtn">-</span>
+                    <input type="number" class="number" value="0" pattern="[0-9]*">
+                    <span class="itempoint">{{$value.point}}</span>
+                    <span class="addBtn">+</span>
+                    <!-- <span class="tip">积分不足</span> -->
+                </div>
+            </div>
+        </li>
+       {{/each}}
+    </script>
+
+    <!-- 适用门店列表模板区 -->
+    <script id="storelist-temp" type="text/html">   
+        <li>
+            <div class="storemc">
+                <span class="sicon"><i class="circle"></i></span>
+                <span>{{mdmc}}</span>
+            </div>
+            <div class="storeaddr">
+                <i class="fa fa-map-marker sicon"></i>
+                <span>{{addressInfo}}</span>
+            </div>
+            <div class="storedh">
+                <i class="fa fa-phone sicon"></i>
+                <!--<span>{{lxdh}}</span>-->
+                <a href="tel:{{lxdh}}">{{lxdh}}</a>
+            </div>
+        </li>
+    </script>
+
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/LeeJSUtils.min.js"></script>
+    <script type="text/javascript" src="../../res/js/template.js"></script>
+    <script type="text/javascript" src="../../res/js/vipweixin/jquery.lazyload.min.js"></script>
+    <script type="text/javascript" src="../../res/js/vipweixin/redeem.js?ver=20170711"></script>
+</body>
+</html>

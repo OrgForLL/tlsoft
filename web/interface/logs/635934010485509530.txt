@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\VIPListCore.aspx(196): error CS0029: 无法将类型“string”隐式转换为“int”

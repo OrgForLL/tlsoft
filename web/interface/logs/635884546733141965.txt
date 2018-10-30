@@ -1,0 +1,14 @@
+需要命名空间管理器或 XsltContext。此查询具有前缀、变量或用户定义的函数。System.Xml.XPath.XPathException: 需要命名空间管理器或 XsltContext。此查询具有前缀、变量或用户定义的函数。
+   在 MS.Internal.Xml.XPath.CompiledXpathExpr.get_QueryTree()
+   在 System.Xml.XPath.XPathNavigator.Evaluate(XPathExpression expr, XPathNodeIterator context)
+   在 System.Xml.XPath.XPathNavigator.Evaluate(XPathExpression expr)
+   在 System.Xml.XPath.XPathNavigator.Select(XPathExpression expr)
+   在 System.Xml.XPath.XPathNavigator.Select(String xpath)
+   在 HtmlAgilityPack.HtmlNode.SelectSingleNode(String xpath)
+   在 ASP.interface_tqhbint_aspx.GetCityCurrentWea(String cityname) 位置 e:\web_tlerp\interface\tqhbint.aspx:行号 137
+   在 ASP.interface_tqhbint_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\tqhbint.aspx:行号 25
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

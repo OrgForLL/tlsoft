@@ -257,7 +257,13 @@
                 alert("JS注入失败！");
             });
         }
-
+        window.onload = function () {
+            var str = "  <img src=\"cl_cx_mlbjinfo_image.aspx?src=http://192.168.35.104:8080/file/download/downloadFile.do?filePath=fabric/1050390/fabric54301/canvas_COL_P500.jpg\" onclick=\"test()\" />";
+            $("#test").html(str);
+        }
+        function test() {
+            alert(1)
+        }
 
 
     </script>
@@ -297,6 +303,7 @@
         <div class="row" hidden>
             <div class="col-xs-12 ">
                 <button class="btn btn-primary btn-block" onclick="scan()">扫描</button>
+                
             </div>
         </div>
         <div class="row" hidden>
@@ -310,6 +317,7 @@
         <div class="row" style="padding-top: 5px;">
             <div class="col-xs-3">
                 <label>单据号</label>
+              <div id="test"></div>
             </div>
             <div class="col-xs-9">
                 <input type="text" class="form-control" id="djh" placeholder="请手动输入单据号">

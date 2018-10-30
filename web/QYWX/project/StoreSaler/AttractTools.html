@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <title>引流工具</title>
+    <style type="text/css">
+        body {
+            font-size: 14px;
+            font-family: 'Microsoft YaHei',San Francisco,Helvitica Neue,Helvitica,Arial,sans-serif;
+            line-height: 1;
+            color: #363c44;
+        }
+
+        .page {
+            padding: 0;
+        }
+
+        .footer {
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            background-color: #f2f2f2;
+        }
+
+        .page-not-footer {
+            bottom: 20px;
+            background-color: #f2f2f2;
+        }
+
+        .tool-item {
+            width: 30.666%;
+            margin-left: 2%;
+            margin-top: 8px;
+            float: left;
+            text-align: center;
+            padding: 0 0 7px 0;
+            box-sizing: border-box;
+            background-color: #fff;
+            font-size: 12px;
+            box-shadow: 0 1px 1px #eceef1;
+            -webkit-box-shadow: 0 1px 1px #eceef1;
+            color:#616161;
+        }
+
+        .tool-name {
+            font-weight: bold;
+        }
+
+        .tool-img img {
+            width: 100%;
+            max-width: 70px;
+        }
+
+        .back-image {
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            background-size: cover;
+        }
+
+        #loadtext {
+            font-size: 14px;
+        }
+
+        .gray {
+            -webkit-filter: grayscale(100%);            
+            filter: grayscale(100%);
+            filter: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap-page">
+        <div class="page page-not-footer">
+            <div class="tools floatfix" id="main-page">
+                <div class="tool-item" data-id="weixincard">
+                    <div class="tool-img">
+                        <img src="../../res/img/storesaler/weixincard.png" />
+                    </div>
+                    <p class="tool-name">微信卡券</p>
+                </div>
+                <div class="tool-item" data-id="activetoken">
+                    <div class="tool-img">
+                        <img src="../../res/img/storesaler/activetoken.png" />
+                    </div>
+                    <p class="tool-name">活动礼品券</p>
+                </div>
+                <div class="tool-item" data-id="payprize">
+                    <div class="tool-img">
+                        <img src="../../res/img/storesaler/payprize.png" />
+                    </div>
+                    <p class="tool-name">奖品发放</p>
+                </div>
+                <div class="tool-item" data-id="subbirth">
+                    <div class="tool-img">
+                        <img src="../../res/img/storesaler/subbirth.png" />
+                    </div>
+                    <p class="tool-name">VIP生日提醒</p>
+                </div>
+                 <div class="tool-item" data-id="verificationcode">
+                    <div class="tool-img">
+                        <img style="" src="../../res/img/storesaler/phone.png" />
+                    </div>
+                    <p class="tool-name">注册验证码查询</p>
+                </div>
+                <div class="tool-item gray">
+                    <div class="tool-img">
+                        <img src="../../res/img/storesaler/tool4.png" />
+                    </div>
+                    <p class="tool-name">红 包</p>
+                </div>
+                <div class="tool-item gray">
+                    <div class="tool-img">
+                        <img src="../../res/img/storesaler/tool6.png" />
+                    </div>
+                    <p class="tool-name">砸金蛋</p>
+                </div>
+                <div class="tool-item gray">
+                    <div class="tool-img">
+                        <img src="../../res/img/storesaler/tool5.png" />
+                    </div>
+                    <p class="tool-name">摇一摇</p>
+                </div>
+                <div class="tool-item gray">
+                    <div class="tool-img">
+                        <img src="../../res/img/storesaler/tool7.png" />
+                    </div>
+                    <p class="tool-name">刮刮卡</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">&copy;2016 利郎信息技术部提供技术支持</div>
+    <script type="text/javascript" src="../../res/js/jquery.js"></script>
+    <script type="text/javascript" src="../../res/js/storesaler/fastclick.min.js"></script>
+    <script type="text/javascript" src="../../res/js/LeeJSUtils.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            FastClick.attach(document.body);
+            LeeJSUtils.stopOutOfPage(".page", false);
+            LeeJSUtils.LoadMaskInit();
+        });
+
+        $(".tool-item").click(function () {
+            if ($(this).hasClass("gray"))
+                return;
+            var type = $(this).attr("data-id");
+            switch (type) {
+                case "weixincard":
+                    window.location.href = "../WeiXinCard/index.aspx";
+                    break;
+                case "activetoken":
+                    window.location.href = "giftTicketList.aspx";
+                    break;
+                case "payprize":
+                    window.location.href = "ConsumePrize.aspx";
+                    break;
+                case "subbirth":
+                    window.location.href = "SubscribeVIP.aspx";
+                    break;
+                case "verificationcode":
+                    window.location.href = "verificationcodesearch.aspx";
+                    break;
+                default:
+                    LeeJSUtils.showMessage("work", "即将推出，敬请期待...");
+            }
+        });
+    </script>
+</body>
+</html>

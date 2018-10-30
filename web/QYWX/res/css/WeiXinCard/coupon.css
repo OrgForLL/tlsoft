@@ -1,0 +1,123 @@
+.page {
+    background-color: #F0F0F0;
+    padding: 0;
+}
+
+.coupon {
+    width: 82%;
+    margin: 0 auto;
+    background-color: #FFF;
+    margin-top: 10%;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 2px 2px rgba(221, 221, 221, 0.5);
+    box-shadow: 0 2px 2px rgba(221, 221, 221, 0.6);
+}
+
+.coupon:last-child {
+    margin-bottom: 10%;
+}
+
+.coupon .title {
+    width: 100%;
+    height: 90px;
+    text-align: center;
+    border-radius: 6px 6px 0 0;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    border-bottom: 2px dotted #ddd;
+}
+
+.coupon #discount {
+    /*background-color: #509fc9;*/
+    background-color: #448bd7;
+}
+
+.coupon #offset {
+    background-color: #22a571;
+}
+
+.coupon .title div {
+    text-align: right;
+}
+
+.coupon .title p {
+    font-size: 26px;
+    color: #fff;
+    line-height: 1;
+}
+
+.coupon .title .en-title {
+    font-size: 14px;
+    color: #d6d6d6;
+    font-style: italic;
+    margin-top: 6px;
+}
+
+.coupon .title i {
+    background-color: #fff;
+    border-radius: 50%;
+    color: #448bd7;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    line-height: 50px;
+    font-size: 24px;
+}
+
+.coupon .options {
+    width: 100%;
+    padding: 20px 25px;
+}
+
+.coupon .options ul {
+    width: 100%;
+}
+
+.coupon .options li {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #FFF;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    border-bottom: 1px solid #eee;
+}
+
+.coupon:nth-child(2) .options li {
+    background-color: #effcf7;
+    color: #555;
+}
+
+.coupon:first-child .options li {
+    background-color: #eff4fa;
+    color: #555;
+}
+
+.coupon .options li:last-child {
+    margin-bottom: 0px;
+}
+
+.coupon .options li p {
+    /*flex: 1;*/
+    padding: 14px;
+    line-height: 1;
+    text-align: center;
+    font-size: 16px;
+}
+
+.coupon .options li i {
+    padding: 10px;
+    color: #888;
+}
+
+.coupon:nth-child(2) .title i {
+    background-color: #fff;
+    color: #22a571;
+}

@@ -1,0 +1,12 @@
+由于目标计算机积极拒绝，无法连接。 192.168.35.63:21000System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.35.63:21000
+   在 nrWebClass.TcpClientWithTimeout.Connect()
+   在 nrWebClass.ClientPoolManager.open(String ipaddr, Int32 port)
+   在 nrWebClass.MsgClient..ctor(String ipaddr, Int32 _port)
+   在 ASP.interface_expressinfo_aspx.sendWXnotice(String receiver, String msg) 位置 d:\web_tlerp\interface\expressInfo.aspx:行号 256
+   在 ASP.interface_expressinfo_aspx.sendRTXmessage(String dataid, String type) 位置 d:\web_tlerp\interface\expressInfo.aspx:行号 169
+   在 ASP.interface_expressinfo_aspx.Page_Load(Object sender, EventArgs e) 位置 d:\web_tlerp\interface\expressInfo.aspx:行号 51
+   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
+   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   在 System.Web.UI.Control.OnLoad(EventArgs e)
+   在 System.Web.UI.Control.LoadRecursive()
+   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

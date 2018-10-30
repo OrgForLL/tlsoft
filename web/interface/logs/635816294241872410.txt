@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\WSZXDDataPull.asmx(33): error CS1585: 成员修饰符“public”必须位于成员类型和名称之前

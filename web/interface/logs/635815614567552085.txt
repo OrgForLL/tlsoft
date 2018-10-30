@@ -1,0 +1,1 @@
+e:\web_tlerp\interface\LockRecords.aspx(110): error CS0117: “string”并不包含“Count”的定义

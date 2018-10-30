@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,maximum-scale=1" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../../res/css/LeePageSlider.css" />
+    <link type="text/css" rel="stylesheet" href="../../res/css/font-awesome.min.css" />
+    <style type="text/css">
+    	body {
+            background-color: #f7f7f7;
+            color: #2f2f2f;
+            font-family: Helvetica,Arial,STHeiTi,"Hiragino Sans GB","Microsoft Yahei",
+            "微软雅黑",STHeiti,"华文细黑",sans-serif;
+        }
+        .comment-index{
+        	background-color: #fff;
+            margin: 15px 0;
+            box-shadow: 0 1px .5px #eceef1;
+            -webkit-box-shadow: 0 1px .5px #eceef1;
+            position: relative;
+        }
+        .comment-tab{
+        	width: 100%;
+        	height: 50px;
+        	border-bottom: 1px solid #eee;
+        }
+        .tab-item{
+        	width: 50%;
+        	float: left;
+        	text-align: center;
+        	color: #a1a1a1;
+        	font-size: 15px;
+        	height: 20px;
+        	margin-top: 15px;
+        }
+        .tab-item:nth-child(1){
+        	border-right: 1px solid #eee;
+        }
+        .blacktxt{
+        	color: #333;
+        }
+        .comment-con{
+        	/*padding-top: 15px;*/
+        }
+        .label{
+        	width: 100%;
+        	padding: 0 12px;
+        }
+        .label li{
+        	float: left;
+        	margin: 15px 10px 0 0;
+        	background-color: #fce7dc;
+        	padding: 0 15px;
+        	border-radius: 8px;
+        	height: 26px;
+        	line-height: 26px;
+        	font-size: 12px;
+        }
+        /*comment-list style*/
+        .comment-list li{
+        	padding: 15px 12px;
+        	border-bottom: 1px solid #eee;
+        }
+        .top-item{
+        	height: 35px;
+        }
+        .user-img{
+        	background-image: url(../../res/img/StoreSaler/default-userimg.png);
+        	width: 35px;
+        	height: 35px;
+        	border-radius: 50%;
+        	background-size: cover;
+        	background-position: 50% 50%;
+        	float: left;
+        	vertical-align: middle;
+        }
+        .user-name{
+        	float: left;
+        	height: 35px;
+        	line-height: 35px;
+        	margin-left: 10px;
+        	max-width: 120px;
+        	overflow: hidden;
+        	text-overflow: ellipsis;
+        	white-space: nowrap;
+        }
+        .type-txt{
+        	float: right;
+        	height: 35px;
+        	line-height: 35px;
+        	font-size: 13px;
+        	color: #555;
+        }
+        .sort{
+        	color: #a1a1a1;
+        }
+        .bottom-item{
+        	margin-top: 10px;
+        }
+        .date{
+        	color: #b3b3b3;
+        	font-size: 13px;
+        	margin-top: 5px;
+        }
+        .upload-img-list li{
+        	float: left;
+        }
+        .upload-img{
+        	width: 70px;
+        	height: 70px;
+        	background-image: url(../../res/img/StoreSaler/vip3.jpg);
+        	background-position: 50% 50%;
+        	background-size: cover;
+        	margin-right: 5px;
+        }
+        /*end comment-list style*/
+        .more{
+        	text-align: center;
+        	width: 100%;
+        	height: 45px;
+        	line-height: 45px;
+        	color: #a1a1a1;
+        }
+    </style>
+</head>
+<body>
+	<div class="comment-index">
+		<div class="comment-tab floatfix">
+			<div class="tab-item blacktxt" data-type="salePoint">产品卖点</div>
+			<div class="tab-item" data-type="myComment">我要评论</div>
+		</div>
+		<div class="comment-con">
+			<!-- 标签列表 -->
+			<ul class="label floatfix">
+				<li>外形好看</li>
+				<li>面料舒适</li>
+				<li>物流快宝贝赞</li>
+				<li>服务不错</li>
+				<li>服务不错</li>
+				<li>服务不错</li>
+				<li>服务不错</li>
+			</ul>
+			<!-- 评论列表 -->
+			<ul class="comment-list">
+				<li class="floatfix">
+					<div class="top-item floatfix">
+						<div class="user-img"></div>
+						<p class="user-name">木木mmmmmmmmmmmmmmmmmmmmmmm</p>
+						<p class="type-txt">
+							<span class="comtype">产品卖点</span>
+							<span>|</span>
+							<span class="sort">关于面料</span>
+						</p>
+					</div>
+					<div class="bottom-item">
+						<p>服务态度非常好服务态度非常好服务态度非常好服务态度非常好服务态度非常好</p>
+						<p class="date">2016-09-07</p>
+						<!-- 上传图片列表 (没有图片时隐藏)-->
+						<ul class="upload-img-list floatfix">
+							<li class="upload-img"></li>
+							<li class="upload-img"></li>
+							<li class="upload-img"></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+			<div class="more" onclick="window.location.href='evaluateDetail.html'">查看更多></div>·
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../res/js/jquery.js"></script>
+	<script type="text/javascript" src="../../res/js/LeeJSUtils.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+		})
+
+		$(".tab-item").click(function(){
+			var type = $(this).attr("data-type");
+			$(".tab-item").removeClass("blacktxt");
+			if(type == "salePoint"){
+				window.location.href="evaluateDetail.html?typeId=" + type;
+			}else{
+				window.location.href="evaluateDetail.html?typeId=" + type;
+			}
+			$(this).addClass("blacktxt");
+		})
+												
+	</script>
+</body>
+</html>

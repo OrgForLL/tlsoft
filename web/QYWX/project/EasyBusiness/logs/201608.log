@@ -1,0 +1,52 @@
+2016-08-20 14:24:11 - [信息]轻商务游戏 通过CODE换取OPENID时出错！{"errcode":40029,"errmsg":"invalid code, hints: [ req_id: dZAKrA0263ns89 ]"}
+ CODE:001Rdctv0TBeio19Gjrv0VWetv0Rdctc
+2016-08-20 15:45:44 - {"pageIndex":1,"pageNum":20,"kfbh":20173,"xlid":04,"yplx":1,"ghsmc":鐮斿彂涓績鏍疯。锛堣璐т細锛?kflx":0,}
+2016-08-20 15:49:26 - {"pageIndex":1,"pageNum":20,"kfbh":20173,"xlid":04,"yplx":1,"ghsmc":鐮斿彂涓績鏍疯。锛堣璐т細锛?kflx":0,}
+2016-08-20 15:49:45 - {"pageIndex":1,"pageNum":20,"kfbh":20173,"xlid":04,"yplx":1,"ghsmc":鐮斿彂涓績鏍疯。锛堣璐т細锛?kflx":0,}
+2016-08-20 15:51:11 - 1111
+2016-08-20 15:51:35 - 1111
+2016-08-20 15:51:36 - 1111
+2016-08-20 15:52:24 - 1111
+2016-08-20 15:52:38 - 1111
+2016-08-20 15:52:39 - 1111
+2016-08-20 15:53:35 - 1111
+2016-08-20 15:53:35 - 1111
+2016-08-20 15:53:36 - 1111
+2016-08-20 15:53:36 - 1111
+2016-08-20 15:53:36 - 1111
+2016-08-20 15:53:36 - 1111
+2016-08-20 15:53:37 - 1111
+2016-08-20 15:54:12 - 1111
+2016-08-20 15:54:13 - 1111
+2016-08-20 15:54:13 - 1111
+2016-08-20 15:54:13 - 1111
+2016-08-20 15:54:14 - 1111
+2016-08-20 15:54:14 - 1111
+2016-08-20 15:54:14 - 1111
+2016-08-20 15:54:14 - 1111
+2016-08-23 15:12:59 - [信息]利郎轻商务游戏 检查创建用户信息档案(S1)失败！错误：【数据库操作错误】ConnectionString 属性尚未初始化。 【SQL】:DECLARE @ID INT,@ObjectID INT;
+                SELECT @ID = 0,@ObjectID = 4;
+                SELECT TOP 1 @ID = ID FROM wx_t_vipBinging WHERE wxOpenid = @openid and objectid=@ObjectID;
+                IF (@ID = 0)	    
+                BEGIN
+	                INSERT INTO [wx_t_vipBinging]([wxNick],[wxSex],[wxLanguage],[wxCity],[wxProvince],[wxCountry],[wxHeadimgurl],[wxOpenid],createTime,[ObjectID],wxUnionid)
+								                VALUES (@nickname,@sex,@language,@city,@province,@country,@headimgurl,@openid,GetDate(),@ObjectID,@wxUnionid);
+                    SELECT @ID = @@IDENTITY;
+                END
+                ELSE
+	                UPDATE wx_t_vipBinging SET wxNick = @nickname,wxSex = @sex,wxLanguage = @language,wxCity = @city,wxProvince = @province
+								                ,wxCountry = @country,wxHeadimgurl = @headimgurl,wxUnionid=@wxUnionid WHERE ID = @ID;
+                SELECT @ID;
+2016-08-23 15:12:59 - [信息]执行结果错误 {"openid":"o8SpZv4LGvgc6jNNQ9itS-H0L2EQ","nickname":"Elilee","sex":1,"language":"zh_CN","city":"泉州","province":"福建","country":"中国","headimgurl":"http:\/\/wx.qlogo.cn\/mmopen\/ajNVdqHZLLChf3x1t0qZEHGV2nlTyRIOd5Z3RD5rGCC80rr5r9ZnLc1ickgvxg3nsArjpoC7jEyZhYcVSgJ7gibA\/0","privilege":[],"unionid":"oarvQw7516wPpNru-hUOdCi1IOwk"}
+2016-08-23 15:14:38 - [错误]检查结果错误：40029
+2016-08-23 15:14:38 - [信息]轻商务游戏 通过CODE换取OPENID时出错！{"errcode":40029,"errmsg":"invalid code, hints: [ req_id: Uh0RBA0502ns81 ]"}
+ CODE:041mz6K42jUu6I0x1cK42f06K42mz6Kw
+2016-08-23 16:06:33 - [信息]获取到AccessToken！keyValue:7 AccessToken:GHJ0QwSSEd8bHAdW_7buHaWgvWSU0lWNloJlIWFpcVfVHgJlU3cCxVdaEwkrtFOnurRaVHZ_iiohv4JGsOML6-yIhL3x6A8fJXa-bmMZk0jRW4JKv1HM60XOIkndl7kjRRKiABANNG ValidTime:08-23 17:10:13
+2016-08-23 16:06:34 - [信息]读取微信基础配置表成功!数据量：7
+2016-08-24 10:14:17 - [信息]生成执行-1
+2016-08-24 10:17:33 - [信息]生成执行-1
+2016-08-24 10:17:35 - [信息]WXConStr:Data Source=192.168.35.62;Initial Catalog=weChatPromotion;User ID=erpUser;password=fjKL29ji.353|sql=SELECT count(1)  FROM dbo.wx_t_OpinionFeedback a INNER JOIN wx_t_RelateToSphh b ON a.id=b.RelateTableID where b.sphh='6QMS0105Y'
+2016-08-24 10:18:24 - [信息]WXConStr:Data Source=192.168.35.62;Initial Catalog=weChatPromotion;User ID=erpUser;password=fjKL29ji.353|sql=SELECT count(1)  FROM dbo.wx_t_OpinionFeedback a INNER JOIN wx_t_RelateToSphh b ON a.id=b.RelateTableID where b.sphh='6QMS0105Y'
+2016-08-24 10:18:47 - [信息]WXConStr:Data Source=192.168.35.62;Initial Catalog=weChatPromotion;User ID=erpUser;password=fjKL29ji.353|sql=SELECT count(1)  FROM dbo.wx_t_OpinionFeedback a INNER JOIN wx_t_RelateToSphh b ON a.id=b.RelateTableID where b.sphh='6QMS0101Y'
+2016-08-31 10:02:25 - [信息]生成执行-1
+2016-08-31 10:34:26 - [信息]读取微信基础配置表成功!数据量：7

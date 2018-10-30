@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>2015秋季模特搭配方案 - 移动端</title>
+		<meta name="viewport" content="width=device-width initial-scale=1.0 maximum-scale=2.0 user-scalable=yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes">  
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">  
+		<meta content="telephone=no,email=no" name="format-detection">
+		<link rel="stylesheet" href="css/custom.css" />
+		<script src="js/modernizr.custom.js"></script>
+		<!--菜单样式-->
+		<link type="text/css" rel="stylesheet" href="css/dist/demo.css" />
+		<link type="text/css" rel="stylesheet" href="css/dist/jquery.mmenu.all.css" />
+		<script type="text/javascript" src="js/jquery-1.10.0.min.js"></script>
+		<script type="text/javascript" src="js/dist/jquery.mmenu.min.all.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('nav#menu').mmenu({
+					extensions	: [ 'effect-slide-menu', 'pageshadow' ],
+					searchfield	: false,       //修改为false
+					counters	: true,
+					navbars		: [
+						{
+							position	: 'top'
+						}, {
+							position	: 'bottom',
+							content		: [ '<a href="#">Visit website</a>' ]
+						}
+					]
+				});
+			});
+		</script>
+		<!--loading-->
+        <script src="js/resLoader.js"></script>
+	</head>
+	<body>
+
+			<!--loading-->
+			<link rel="stylesheet" href="css/fakeLoader.css">
+			<div class="fakeloader" style="position:absolute;padding-top:50%;padding-left:50%;"></div>
+			    <script src="js/fakeLoader.min.js"></script>
+			    <script>
+				    $(document).ready(function(){
+			            $(".fakeloader").fakeLoader({
+			                timeToHide:12000000,
+			                bgColor:"#34495e",
+			                spinner:"spinner3"
+			            });
+			        });
+				</script>
+
+			<script>
+			var loader = new resLoader({
+				resources : [
+					'images/1.png',
+					'images/ABC1.png',
+					'images/2.png',
+					'images/ABC2.png',
+					'images/3.png',
+					'images/ABC3.png',
+					'images/4.png',
+					'images/ABC4.png',
+					'images/5.png',
+					'images/ABC5.jpg',
+					'images/6.png',
+					'images/ABC6.jpg',
+					'images/7.png',
+					'images/ABC7.jpg',
+					'images/8.png',
+					'images/ABC8.jpg',
+					'images/9.png',
+					'images/ABC9.jpg',
+					'images/10.png',
+					'images/ABC10.jpg',
+					'images/11.png',
+					'images/ABC11.jpg',
+					'images/12.png',
+					'images/ABC12.jpg',
+					'images/13.png',
+					'images/ABC13.jpg',
+					'images/14.png',
+					'images/ABC14.jpg',
+					'images/15.png',
+					'images/ABC15.jpg',
+					'images/16.png',
+					'images/ABC16.jpg',
+					'images/17.png',
+					'images/ABC17.jpg',
+					'images/18.png',
+					'images/ABC18.jpg',
+					'images/19.png',
+					'images/ABC19.jpg',
+					'images/20.png',
+					'images/ABC20.jpg',
+					'images/21.png',
+					'images/ABC21.jpg',
+					'images/22.png',
+					'images/ABC22.jpg',
+					'images/23.png',
+					'images/ABC23.jpg',
+					'images/24.png',
+					'images/ABC24.jpg',
+					'images/25.png',
+					'images/ABC25.jpg',
+					'images/26.png',
+					'images/ABC26.jpg',
+					'images/27.png',
+					'images/ABC27.jpg',
+					'images/28.png',
+					'images/ABC28.jpg',
+					'images/29.png',
+					'images/ABC29.jpg',
+					'images/30.png',
+					'images/ABC30.jpg',
+					'images/31.png',
+					'images/ABC31.jpg',
+					'images/32.png',
+					'images/ABC32.jpg',
+					'images/33.png',
+					'images/ABC33.jpg',
+					'images/34.png',
+					'images/ABC34.jpg',
+					'images/35.png',
+					'images/ABC35.jpg',
+					'images/36.png',
+					'images/ABC36.jpg',
+					
+				
+				],
+				onStart : function(total){
+					console.log('start:'+total);
+				},
+				onProgress : function(current, total){
+					console.log(current+'/'+total);
+					var percent = current/total*100;  //百分比
+					$('.progressbar').text(percent);
+				},
+				onComplete : function(total){
+					//alert('加载完毕:'+total+'个资源');
+
+			           $(".fakeloader").fakeLoader({
+
+			                timeToHide:true,
+			                bgColor:"#34495e",
+			                spinner:"spinner3"
+			            });
+				}
+			});
+
+			loader.start();
+
+			</script>
+
+
+
+
+
+
+
+
+
+      <div id="page">
+			<div class="header">
+				<a href="#menu"></a>
+				秋季模特搭配方案
+			</div>
+
+			<nav id="menu">
+				<ul>
+				    <li><a href="zhuti.html">2015秋季设计主题</a></li>
+				    <li><a href="color.html">2015秋冬色彩规划方案</a></li>
+				    <li><a href="beCare.html">产品陈列前注意事项</a></li>
+					<li><a href="mote.html">秋季模特搭配方案</a></li>
+					<li><a href="#">秋一波货物陈列指引</a>
+                        <ul>
+							<li><a href="serie1_1.html">第5代货柜陈列</a></li>
+							<li><a href="serie1_2.html">第5代精品货柜陈列</a></li>
+						</ul>
+					</li>
+					<li><a href="#">秋二波货物陈列指引</a>
+                        <ul>
+							<li><a href="serie2_1.html">第5代货柜陈列</a></li>
+							<li><a href="serie2_2.html">第5代精品货柜陈列</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+<!-- END -->
+
+
+
+ 		<div class="container demo-2">
+			<div id="slider" class="sl-slider-wrapper">
+				<div class="sl-slider">
+					
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/1.png" class="bg-img">						
+							<p class="text_title">第一组</p>
+							<img src="images/ABC1.png" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/2.png" class="bg-img">
+                            <p class="text_title">第二组</p>
+                            <img src="images/ABC2.png" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/3.png" class="bg-img">
+                            <p class="text_title">第三组</p>
+                            <img src="images/ABC3.png" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/4.png" class="bg-img">						
+							<p class="text_title">第四组</p>
+							<img src="images/ABC4.png" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/5.png" class="bg-img">
+                            <p class="text_title">第五组</p>
+                            <img src="images/ABC5.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/6.png" class="bg-img">
+                            <p class="text_title">第六组</p>
+                            <img src="images/ABC6.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/7.png" class="bg-img">						
+							<p class="text_title">第七组</p>
+							<img src="images/ABC7.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/8.png" class="bg-img">
+                            <p class="text_title">第八组</p>
+                            <img src="images/ABC8.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/9.png" class="bg-img">
+                            <p class="text_title">第九组</p>
+                            <img src="images/ABC9.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/10.png" class="bg-img">						
+							<p class="text_title">第十组</p>
+							<img src="images/ABC10.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/11.png" class="bg-img">
+                            <p class="text_title">第十一组</p>
+                            <img src="images/ABC11.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/12.png" class="bg-img">
+                            <p class="text_title">第十二组</p>
+                            <img src="images/ABC12.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/13.png" class="bg-img">						
+							<p class="text_title">第十三组</p>
+							<img src="images/ABC13.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/14.png" class="bg-img">
+                            <p class="text_title">第十四组</p>
+                            <img src="images/ABC14.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems" id="img15">
+							<img src="images/15.png" class="bg-img">
+                            <p class="text_title">第十五组</p>
+                            <img src="images/ABC15.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/16.png" class="bg-img">						
+							<p class="text_title">第十六组</p>
+							<img src="images/ABC16.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/17.png" class="bg-img">
+                            <p class="text_title">第十七组</p>
+                            <img src="images/ABC17.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/18.png" class="bg-img">
+                            <p class="text_title">第十八组</p>
+                            <img src="images/ABC18.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/19.png" class="bg-img">						
+							<p class="text_title">第十九组</p>
+							<img src="images/ABC19.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/20.png" class="bg-img">
+                            <p class="text_title">第二十组</p>
+                            <img src="images/ABC20.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/21.png" class="bg-img">
+                            <p class="text_title">第二十一组</p>
+                            <img src="images/ABC21.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/22.png" class="bg-img">						
+							<p class="text_title">第二十二组</p>
+							<img src="images/ABC22.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/23.png" class="bg-img">
+                            <p class="text_title">第二十三组</p>
+                            <img src="images/ABC23.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/24.png" class="bg-img">
+                            <p class="text_title">第二十四组</p>
+                            <img src="images/ABC24.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/25.png" class="bg-img">						
+							<p class="text_title">第二十五组</p>
+							<img src="images/ABC25.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/26.png" class="bg-img">
+                            <p class="text_title">第二十六组</p>
+                            <img src="images/ABC26.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/27.png" class="bg-img">
+                            <p class="text_title">第二十七组</p>
+                            <img src="images/ABC27.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/28.png" class="bg-img">						
+							<p class="text_title">第二十八组</p>
+							<img src="images/ABC28.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/29.png" class="bg-img">
+                            <p class="text_title">第二十九组</p>
+                            <img src="images/ABC29.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/30.png" class="bg-img">
+                            <p class="text_title">第三十组</p>
+                            <img src="images/ABC30.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/31.png" class="bg-img">						
+							<p class="text_title">第三十一组</p>
+							<img src="images/ABC31.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/32.png" class="bg-img">
+                            <p class="text_title">第三十二组</p>
+                            <img src="images/ABC32.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/33.png" class="bg-img">
+                            <p class="text_title">第三十三组</p>
+                            <img src="images/ABC33.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+						<div class="sl-trans-elems">
+							<img src="images/34.png" class="bg-img">						
+							<p class="text_title">第三十四组</p>
+							<img src="images/ABC34.jpg" class="deco" >
+						</div>
+					</div>
+
+                    <div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+                        <div class="sl-trans-elems">
+                            <img src="images/35.png" class="bg-img">
+                            <p class="text_title">第三十五组</p>
+                            <img src="images/ABC35.jpg" class="deco" >
+                        </div>
+                    </div>
+
+					<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+						<div class="sl-trans-elems">
+							<img src="images/36.png" class="bg-img">
+                            <p class="text_title">第三十六组</p>
+                            <img src="images/ABC36.jpg" class="deco" >
+						</div>
+					</div>
+
+					<div class="tc"><img class="arrowBtn" src="images/arrowBtn.png" alt="" /></div>
+					
+				</div>
+			</div> 
+		</div>
+
+		<script src="js/jquery.ba-cond.min.js"></script>
+		<script src="js/jquery.slitslider.js"></script>
+		<script src="js/jquery.touchSwipe.min.js"></script>
+	 	<script>
+			$(function() {
+				$('.sl-slider-wrapper').height($(window).height() - 40);  //滚动条
+				$('.bg-img').height($(window).height() - 165);  //屏幕高度-其余的高度
+				$('.bg-img').width($(window).width());
+				var Page = (function() {
+					var $nav = $('#nav-dots > span'), slitslider = $('#slider').slitslider({
+						//interval : 2000, //自动播放时间间隔
+						//autoplay : true, //是否自动播放
+						onBeforeChange : function(slide, pos) {
+							$nav.removeClass('nav-dot-current');
+							$nav.eq(pos).addClass('nav-dot-current');
+						}
+					})
+					
+					$('body').swipe({
+						swipeUp : function(event, direction, distance, duration, fingerCount) {
+							slitslider.next();
+						},
+						swipeDown : function(event, direction, distance, duration, fingerCount) {
+							slitslider.previous();
+						}
+					});
+				})();
+			});
+		</script> 
+	</body>
+</html>

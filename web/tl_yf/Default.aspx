@@ -21,7 +21,22 @@
 <script type="text/javascript">
     window.onload = function () {
         //tagPick();//测试吊牌分检
-        go();
+        //go();
+    }
+    function testJSON() {
+        $.ajax("ht.aspx?type=getinterfacelist", {//?Method=GetListJson&FormName=GetApplicationFeeList
+            data: { status: status },
+            dataType: 'json', //服务器返回json格式数据
+            type: 'post', //HTTP请求类型				
+            success: function (reutrn) {
+                alert(reutrn);
+           
+
+            },
+            error: function (xhr, type, errorThrown) {
+                alert(1)
+            }
+        });
     }
     function Goods(GoodsCode, GoodsSize, Qty) {
         this.GoodsCode = GoodsCode;
