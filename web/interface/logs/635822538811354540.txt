@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\lilanzWXKQ.aspx(51): error CS1501: “WriteSuccessedInfo”方法没有采用“0”个参数的重载

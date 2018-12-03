@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\WXCardInterface.aspx(256): error CS0103: 当前上下文中不存在名称“khid”

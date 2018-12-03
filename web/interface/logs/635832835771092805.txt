@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\clothesInfos.aspx(46): error CS0103: 当前上下文中不存在名称“jsapi_ticket”

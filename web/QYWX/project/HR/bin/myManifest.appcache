@@ -1,9 +1,0 @@
-﻿CACHE MANIFEST
-# 2014-10-07 v1.0.0
-
-
-NETWORK:
-*
-
-FALLBACK:
-/html5/ /404.html

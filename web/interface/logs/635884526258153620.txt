@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\tqhbint.aspx(80): error CS0103: 当前上下文中不存在名称“ftatus”

@@ -1,9 +1,0 @@
-远程服务器返回错误: (500) 内部服务器错误。System.Net.WebException: 远程服务器返回错误: (500) 内部服务器错误。
-   在 System.Net.HttpWebRequest.GetResponse()
-   在 ASP.interface_sc_lab_jcbgsjtb_aspx.HttpGet(String Url, String postDataStr) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 95
-   在 ASP.interface_sc_lab_jcbgsjtb_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\sc_lab_jcbgsjtb.aspx:行号 23
-   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
-   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
-   在 System.Web.UI.Control.OnLoad(EventArgs e)
-   在 System.Web.UI.Control.LoadRecursive()
-   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

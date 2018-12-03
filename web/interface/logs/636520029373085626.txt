@@ -1,1 +1,0 @@
-d:\web_tlerp\interface\decode.aspx(10): error CS0117: “Class_BBweb.Mydata”并不包含“Myjm”的定义

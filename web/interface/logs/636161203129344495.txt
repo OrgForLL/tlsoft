@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\getExpReportv2.aspx(158): error CS0117: “ASP.interface_getexpreportv2_aspx.DataItem”并不包含“委托序号”的定义

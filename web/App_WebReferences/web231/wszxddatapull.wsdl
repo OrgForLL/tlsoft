@@ -1,0 +1,1091 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetWlkInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="wlkbh" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWlkInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWlkInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveWlkInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="info">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dhtzdbh" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="chdm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveWlkInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveWlkInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClZCkDCw">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tmcode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ckid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClZCkDCwResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClZCkDCwResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getKHXX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jhdTm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getKHXXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getKHXXResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCHCKXX">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCHCKXXResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCHCKXXResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="setCLInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cwInfo">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="qwtm" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="comdjlx" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="chtm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="setCLInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="setCLInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCLInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="djid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="djly" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ckid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCLInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCLInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZXDList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ksrq" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsrq" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="khid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZXDListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getZXDListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZXDListWL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tmid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="exisIDS" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZXDListWLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getZXDListWLResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Result">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Errcode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Errmsg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Data" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getPDAVer">
+        <s:complexType />
+      </s:element>
+      <s:element name="getPDAVerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getPDAVerResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="saveDataWL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tmRecode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cwtm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="saveDataWLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="saveDataWLResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCLTMWL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tmid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCLTMWLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCLTMWLResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="saveCLTMWL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cwtm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="saveCLTMWLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="saveCLTMWLResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateTMWL">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="zdr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="txtTm" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="txbsl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="txbbz" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateTMWLResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateTMWLResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZXDMXList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ids" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getZXDMXListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getZXDMXListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkXM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tm" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ids" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkXMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="checkXMResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkTM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkTMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="checkTMResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="saveData">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="objStr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tmArray" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="xmArray" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="tmDict" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="saveDataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="saveDataResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLyJhDKhInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLyJhDKhInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLyJhDKhInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLyJhDInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="zdr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ids" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="chdm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLyJhDInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLyJhDInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTMInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tmcode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTMInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTMInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateTM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SourceID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="sl" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="zl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="kh" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bz" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="zdr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateTMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateTMResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkDJInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="datacldjh">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" name="tzid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkDJInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="checkDJInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetWlkInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetWlkInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetWlkInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetWlkInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveWlkInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveWlkInfo" />
+  </wsdl:message>
+  <wsdl:message name="SaveWlkInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveWlkInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClZCkDCwSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClZCkDCw" />
+  </wsdl:message>
+  <wsdl:message name="GetClZCkDCwSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClZCkDCwResponse" />
+  </wsdl:message>
+  <wsdl:message name="getKHXXSoapIn">
+    <wsdl:part name="parameters" element="tns:getKHXX" />
+  </wsdl:message>
+  <wsdl:message name="getKHXXSoapOut">
+    <wsdl:part name="parameters" element="tns:getKHXXResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCHCKXXSoapIn">
+    <wsdl:part name="parameters" element="tns:getCHCKXX" />
+  </wsdl:message>
+  <wsdl:message name="getCHCKXXSoapOut">
+    <wsdl:part name="parameters" element="tns:getCHCKXXResponse" />
+  </wsdl:message>
+  <wsdl:message name="setCLInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:setCLInfo" />
+  </wsdl:message>
+  <wsdl:message name="setCLInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:setCLInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCLInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getCLInfo" />
+  </wsdl:message>
+  <wsdl:message name="getCLInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getCLInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getZXDListSoapIn">
+    <wsdl:part name="parameters" element="tns:getZXDList" />
+  </wsdl:message>
+  <wsdl:message name="getZXDListSoapOut">
+    <wsdl:part name="parameters" element="tns:getZXDListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getZXDListWLSoapIn">
+    <wsdl:part name="parameters" element="tns:getZXDListWL" />
+  </wsdl:message>
+  <wsdl:message name="getZXDListWLSoapOut">
+    <wsdl:part name="parameters" element="tns:getZXDListWLResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPDAVerSoapIn">
+    <wsdl:part name="parameters" element="tns:getPDAVer" />
+  </wsdl:message>
+  <wsdl:message name="getPDAVerSoapOut">
+    <wsdl:part name="parameters" element="tns:getPDAVerResponse" />
+  </wsdl:message>
+  <wsdl:message name="saveDataWLSoapIn">
+    <wsdl:part name="parameters" element="tns:saveDataWL" />
+  </wsdl:message>
+  <wsdl:message name="saveDataWLSoapOut">
+    <wsdl:part name="parameters" element="tns:saveDataWLResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCLTMWLSoapIn">
+    <wsdl:part name="parameters" element="tns:getCLTMWL" />
+  </wsdl:message>
+  <wsdl:message name="getCLTMWLSoapOut">
+    <wsdl:part name="parameters" element="tns:getCLTMWLResponse" />
+  </wsdl:message>
+  <wsdl:message name="saveCLTMWLSoapIn">
+    <wsdl:part name="parameters" element="tns:saveCLTMWL" />
+  </wsdl:message>
+  <wsdl:message name="saveCLTMWLSoapOut">
+    <wsdl:part name="parameters" element="tns:saveCLTMWLResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateTMWLSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateTMWL" />
+  </wsdl:message>
+  <wsdl:message name="GenerateTMWLSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateTMWLResponse" />
+  </wsdl:message>
+  <wsdl:message name="getZXDMXListSoapIn">
+    <wsdl:part name="parameters" element="tns:getZXDMXList" />
+  </wsdl:message>
+  <wsdl:message name="getZXDMXListSoapOut">
+    <wsdl:part name="parameters" element="tns:getZXDMXListResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkXMSoapIn">
+    <wsdl:part name="parameters" element="tns:checkXM" />
+  </wsdl:message>
+  <wsdl:message name="checkXMSoapOut">
+    <wsdl:part name="parameters" element="tns:checkXMResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkTMSoapIn">
+    <wsdl:part name="parameters" element="tns:checkTM" />
+  </wsdl:message>
+  <wsdl:message name="checkTMSoapOut">
+    <wsdl:part name="parameters" element="tns:checkTMResponse" />
+  </wsdl:message>
+  <wsdl:message name="saveDataSoapIn">
+    <wsdl:part name="parameters" element="tns:saveData" />
+  </wsdl:message>
+  <wsdl:message name="saveDataSoapOut">
+    <wsdl:part name="parameters" element="tns:saveDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLyJhDKhInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLyJhDKhInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetLyJhDKhInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLyJhDKhInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLyJhDInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLyJhDInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetLyJhDInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLyJhDInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTMInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTMInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetTMInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTMInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateTMSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateTM" />
+  </wsdl:message>
+  <wsdl:message name="GenerateTMSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateTMResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkDJInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:checkDJInfo" />
+  </wsdl:message>
+  <wsdl:message name="checkDJInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:checkDJInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WSZXDDataPullSoap">
+    <wsdl:operation name="GetWlkInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">保存物料卡信息</wsdl:documentation>
+      <wsdl:input message="tns:GetWlkInfoSoapIn" />
+      <wsdl:output message="tns:GetWlkInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveWlkInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">保存物料卡信息</wsdl:documentation>
+      <wsdl:input message="tns:SaveWlkInfoSoapIn" />
+      <wsdl:output message="tns:SaveWlkInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClZCkDCw">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取某材料在某仓库的仓位</wsdl:documentation>
+      <wsdl:input message="tns:GetClZCkDCwSoapIn" />
+      <wsdl:output message="tns:GetClZCkDCwSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getKHXX">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取款号</wsdl:documentation>
+      <wsdl:input message="tns:getKHXXSoapIn" />
+      <wsdl:output message="tns:getKHXXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCHCKXX">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取材料仓库信息</wsdl:documentation>
+      <wsdl:input message="tns:getCHCKXXSoapIn" />
+      <wsdl:output message="tns:getCHCKXXSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="setCLInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">设置材料的仓位信息</wsdl:documentation>
+      <wsdl:input message="tns:setCLInfoSoapIn" />
+      <wsdl:output message="tns:setCLInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCLInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取要维护仓位的材料信息</wsdl:documentation>
+      <wsdl:input message="tns:getCLInfoSoapIn" />
+      <wsdl:output message="tns:getCLInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getZXDList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">加载主表数据 数据源是物料发货计划</wsdl:documentation>
+      <wsdl:input message="tns:getZXDListSoapIn" />
+      <wsdl:output message="tns:getZXDListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getZXDListWL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">五里陈佳发货出库单选择 加载主表数据 数据源是物料发货计划</wsdl:documentation>
+      <wsdl:input message="tns:getZXDListWLSoapIn" />
+      <wsdl:output message="tns:getZXDListWLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getPDAVer">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">PDA版本号</wsdl:documentation>
+      <wsdl:input message="tns:getPDAVerSoapIn" />
+      <wsdl:output message="tns:getPDAVerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="saveDataWL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">五里陈佳发货出库单选择 入库保存数据</wsdl:documentation>
+      <wsdl:input message="tns:saveDataWLSoapIn" />
+      <wsdl:output message="tns:saveDataWLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCLTMWL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">五里陈佳入库上架</wsdl:documentation>
+      <wsdl:input message="tns:getCLTMWLSoapIn" />
+      <wsdl:output message="tns:getCLTMWLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="saveCLTMWL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">五里陈佳入库上架保存</wsdl:documentation>
+      <wsdl:input message="tns:saveCLTMWLSoapIn" />
+      <wsdl:output message="tns:saveCLTMWLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTMWL">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">五里条码折分</wsdl:documentation>
+      <wsdl:input message="tns:GenerateTMWLSoapIn" />
+      <wsdl:output message="tns:GenerateTMWLSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getZXDMXList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">加载单据表明细 传入的是多张领用计划单</wsdl:documentation>
+      <wsdl:input message="tns:getZXDMXListSoapIn" />
+      <wsdl:output message="tns:getZXDMXListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkXM">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">检查箱码的有效性</wsdl:documentation>
+      <wsdl:input message="tns:checkXMSoapIn" />
+      <wsdl:output message="tns:checkXMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkTM">
+      <wsdl:input message="tns:checkTMSoapIn" />
+      <wsdl:output message="tns:checkTMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="saveData">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">保存数据</wsdl:documentation>
+      <wsdl:input message="tns:saveDataSoapIn" />
+      <wsdl:output message="tns:saveDataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLyJhDKhInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">获取'物料领用计划单'对应的所有款号</wsdl:documentation>
+      <wsdl:input message="tns:GetLyJhDKhInfoSoapIn" />
+      <wsdl:output message="tns:GetLyJhDKhInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLyJhDInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">通过'物料领用计划单'生成条码</wsdl:documentation>
+      <wsdl:input message="tns:GetLyJhDInfoSoapIn" />
+      <wsdl:output message="tns:GetLyJhDInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTMInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">条码生成模块的条码信息查询</wsdl:documentation>
+      <wsdl:input message="tns:GetTMInfoSoapIn" />
+      <wsdl:output message="tns:GetTMInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTM">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">条码生成模块的条码生成函数</wsdl:documentation>
+      <wsdl:input message="tns:GenerateTMSoapIn" />
+      <wsdl:output message="tns:GenerateTMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkDJInfo">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">查询单据是否有未保存的条码</wsdl:documentation>
+      <wsdl:input message="tns:checkDJInfoSoapIn" />
+      <wsdl:output message="tns:checkDJInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSZXDDataPullSoap" type="tns:WSZXDDataPullSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetWlkInfo">
+      <soap:operation soapAction="http://tempuri.org/GetWlkInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveWlkInfo">
+      <soap:operation soapAction="http://tempuri.org/SaveWlkInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClZCkDCw">
+      <soap:operation soapAction="http://tempuri.org/GetClZCkDCw" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getKHXX">
+      <soap:operation soapAction="http://tempuri.org/getKHXX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCHCKXX">
+      <soap:operation soapAction="http://tempuri.org/getCHCKXX" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setCLInfo">
+      <soap:operation soapAction="http://tempuri.org/setCLInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCLInfo">
+      <soap:operation soapAction="http://tempuri.org/getCLInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZXDList">
+      <soap:operation soapAction="http://tempuri.org/getZXDList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZXDListWL">
+      <soap:operation soapAction="http://tempuri.org/getZXDListWL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPDAVer">
+      <soap:operation soapAction="http://tempuri.org/getPDAVer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveDataWL">
+      <soap:operation soapAction="http://tempuri.org/saveDataWL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCLTMWL">
+      <soap:operation soapAction="http://tempuri.org/getCLTMWL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCLTMWL">
+      <soap:operation soapAction="http://tempuri.org/saveCLTMWL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTMWL">
+      <soap:operation soapAction="http://tempuri.org/GenerateTMWL" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZXDMXList">
+      <soap:operation soapAction="http://tempuri.org/getZXDMXList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkXM">
+      <soap:operation soapAction="http://tempuri.org/checkXM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkTM">
+      <soap:operation soapAction="http://tempuri.org/checkTM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveData">
+      <soap:operation soapAction="http://tempuri.org/saveData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLyJhDKhInfo">
+      <soap:operation soapAction="http://tempuri.org/GetLyJhDKhInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLyJhDInfo">
+      <soap:operation soapAction="http://tempuri.org/GetLyJhDInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTMInfo">
+      <soap:operation soapAction="http://tempuri.org/GetTMInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTM">
+      <soap:operation soapAction="http://tempuri.org/GenerateTM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkDJInfo">
+      <soap:operation soapAction="http://tempuri.org/checkDJInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSZXDDataPullSoap12" type="tns:WSZXDDataPullSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetWlkInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetWlkInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveWlkInfo">
+      <soap12:operation soapAction="http://tempuri.org/SaveWlkInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClZCkDCw">
+      <soap12:operation soapAction="http://tempuri.org/GetClZCkDCw" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getKHXX">
+      <soap12:operation soapAction="http://tempuri.org/getKHXX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCHCKXX">
+      <soap12:operation soapAction="http://tempuri.org/getCHCKXX" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setCLInfo">
+      <soap12:operation soapAction="http://tempuri.org/setCLInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCLInfo">
+      <soap12:operation soapAction="http://tempuri.org/getCLInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZXDList">
+      <soap12:operation soapAction="http://tempuri.org/getZXDList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZXDListWL">
+      <soap12:operation soapAction="http://tempuri.org/getZXDListWL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPDAVer">
+      <soap12:operation soapAction="http://tempuri.org/getPDAVer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveDataWL">
+      <soap12:operation soapAction="http://tempuri.org/saveDataWL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCLTMWL">
+      <soap12:operation soapAction="http://tempuri.org/getCLTMWL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCLTMWL">
+      <soap12:operation soapAction="http://tempuri.org/saveCLTMWL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTMWL">
+      <soap12:operation soapAction="http://tempuri.org/GenerateTMWL" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getZXDMXList">
+      <soap12:operation soapAction="http://tempuri.org/getZXDMXList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkXM">
+      <soap12:operation soapAction="http://tempuri.org/checkXM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkTM">
+      <soap12:operation soapAction="http://tempuri.org/checkTM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveData">
+      <soap12:operation soapAction="http://tempuri.org/saveData" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLyJhDKhInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetLyJhDKhInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLyJhDInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetLyJhDInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTMInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetTMInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateTM">
+      <soap12:operation soapAction="http://tempuri.org/GenerateTM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkDJInfo">
+      <soap12:operation soapAction="http://tempuri.org/checkDJInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSZXDDataPull">
+    <wsdl:port name="WSZXDDataPullSoap" binding="tns:WSZXDDataPullSoap">
+      <soap:address location="http://192.168.35.231/service/wszxddatapull.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSZXDDataPullSoap12" binding="tns:WSZXDDataPullSoap12">
+      <soap12:address location="http://192.168.35.231/service/wszxddatapull.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

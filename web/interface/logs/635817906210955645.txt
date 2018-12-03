@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\ajx.ashx(40): error CS0246: 找不到类型或命名空间名称“var”(是否缺少 using 指令或程序集引用?)

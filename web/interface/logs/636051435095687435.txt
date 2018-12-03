@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\WSZXDDataPull.asmx(35): error CS0231: params 参数必须是形参表中的最后一个参数

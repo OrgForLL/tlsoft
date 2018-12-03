@@ -26,14 +26,18 @@ public partial class tl_yf_Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         par p = new par();
-        p.partnerid = "16434";
-        p.servicetype = "LLWebApi_CL_GetPick";
+        p.partnerid = "20158";
+        p.servicetype = "LLWebApi_CL_GetSXB";
+        //传参待定
         p.bizdata = "{\"BeginDate\":\"2017-10-15\",\"EndDate\":\"2017-10-30\"}";
         p.timestamp = string.Format("{0:yyyyMMddHHmmss}", DateTime.Now);
         p.nonce = System.Guid.NewGuid().ToString();
+
         p.sign = GetSign(p.partnerid, p.servicetype,p.bizdata,p.timestamp,p.nonce);
-        //orderDetail("6dnk0021y");
-        string url = @"http://webt.lilang.com/LLService/ApiRoute.ashx?action=llwebapi";
+        //正式
+        //string url = @"http://webt.lilang.com/LLService/ApiRoute.ashx?action=llwebapi";
+        //测试
+        string url = @"http://192.168.35.231/LLWebApi/ApiRoute.ASHX?action=llwebapi";
         string postJson = string.Format( "partnerid={0}&servicetype={1}&bizdata={2}&timestamp={3}&nonce={4}&sign={5}",p.partnerid,p.servicetype,p.bizdata,p.timestamp,p.nonce,p.sign);
 
         string r=PostFunction(url, postJson);
@@ -41,7 +45,7 @@ public partial class tl_yf_Default : System.Web.UI.Page
 
     public static string GetSign(string partnerid,string servicetype,string bizdata,string timestamp,string nonce)
     {
-        string partnerKey = "7a6ee705-18cc-4614-b2bb-f8b6b0095e4e";
+        string partnerKey = "e37f9842-e6a5-46f2-87c1-ed65aa01c90f";
         List<String> lstParams = new List<string>();
         lstParams.Add("partnerid="+ partnerid);
         lstParams.Add("servicetype="+ servicetype);

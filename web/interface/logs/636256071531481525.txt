@@ -1,9 +1,0 @@
-未将对象引用设置到对象的实例。System.NullReferenceException: 未将对象引用设置到对象的实例。
-   在 ASP.interface_getexpreportv2_aspx.GetAllInfo(String JsonStr) 位置 e:\web_tlerp\interface\getExpReportv2.aspx:行号 318
-   在 ASP.interface_getexpreportv2_aspx.pullDatas1(String startDate, String endDate) 位置 e:\web_tlerp\interface\getExpReportv2.aspx:行号 239
-   在 ASP.interface_getexpreportv2_aspx.Page_Load(Object sender, EventArgs e) 位置 e:\web_tlerp\interface\getExpReportv2.aspx:行号 60
-   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
-   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
-   在 System.Web.UI.Control.OnLoad(EventArgs e)
-   在 System.Web.UI.Control.LoadRecursive()
-   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

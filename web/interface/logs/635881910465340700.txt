@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\tqhbint.aspx(18): error CS0029: 无法将类型“System.Xml.XmlNodeList”隐式转换为“System.Xml.XmlNode”

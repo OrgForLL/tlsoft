@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\WSZXDDataPull.asmx(38): error CS0029: 无法将类型“string”隐式转换为“int”

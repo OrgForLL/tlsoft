@@ -1,8 +1,0 @@
-由于目标计算机积极拒绝，无法连接。 192.168.36.132:2113System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 192.168.36.132:2113
-   在 System.Net.Sockets.TcpClient..ctor(String hostname, Int32 port)
-   在 ASP.interface_s2_aspx.Page_Load(Object sender, EventArgs e)
-   在 System.Web.Util.CalliHelper.EventArgFunctionCaller(IntPtr fp, Object o, Object t, EventArgs e)
-   在 System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
-   在 System.Web.UI.Control.OnLoad(EventArgs e)
-   在 System.Web.UI.Control.LoadRecursive()
-   在 System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)

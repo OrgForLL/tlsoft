@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://fcl-sz.org.cn/customsrv/Service4LiLang.asmx?wsdl" docRef="http://fcl-sz.org.cn/customsrv/Service4LiLang.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://fcl-sz.org.cn/customsrv/Service4LiLang.asmx" xmlns:q1="http://fcl-sz.org.cn/" binding="q1:Service4LiLangSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://fcl-sz.org.cn/customsrv/Service4LiLang.asmx" xmlns:q2="http://fcl-sz.org.cn/" binding="q2:Service4LiLangSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

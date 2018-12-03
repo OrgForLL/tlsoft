@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\WSZXDDataPull.asmx(32): error CS0270: 不能在变量声明中指定数组大小(请尝试使用“new”表达式初始化)

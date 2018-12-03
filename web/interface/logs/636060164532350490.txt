@@ -1,1 +1,0 @@
-e:\web_tlerp\interface\WSZXDDataPull.asmx(39): error CS1011: 空字符
