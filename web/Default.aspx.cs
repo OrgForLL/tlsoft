@@ -5,6 +5,18 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+public class p
+{
+    public string name;
+    public string sex;
+}
+public class s :p{    
+    public bool haveMoney=true;
+    public s()
+    {
+        this.sex = "man";
+    }
+}
 public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -31,5 +43,21 @@ public partial class _Default : System.Web.UI.Page
         Response.Write(report);
         //Object obj = RetrieveDataSet(report);
 
+    }
+    public void test<T>(T t ) {
+        
+    }
+    public void test2<T>(T t) where T:s
+    {
+        t.name = "test";
+    }
+
+    public void test3<T>(T t) where T:p
+    {
+        t.name = "2";
+    }
+    public void test4<T>(T t) where T:List<T>
+    {
+        //t.Count
     }
 }
