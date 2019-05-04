@@ -10,16 +10,48 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        
+        lilanz
     <%--<iframe id="mylabmain" src="http://web.nextsgo.com"></iframe>--%>
         <input type="button" onclick="test()" tabindex="1" value="test" />
         <input type="button" onclick="go()" value="go" />
         <input type="button" onclick="tb()" value="同步" />
+        <input type="text" id="cookieName" />
+        <input type="text" id="cookieValue" />
+        <input type="button" onclick="cookieFun(1)" value="写入" />
+        <input type="button" onclick="cookieFun(2)" value="读取" />
     </div>
     </form>
 </body>
 </html>
 <script type="text/javascript">
+
+    function cookieFun(tag) {
+        if (tag==1) {
+            setCookie(document.getElementById("cookieName").value, document.getElementById("cookieValue").value, 12)
+        } else if(tag==2) {
+            var r = getCookie(document.getElementById("cookieName").value);
+            document.getElementById("cookieValue").value = r;
+        }
+    }
+
+    function setCookie(c_name, value, expiredays) {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + expiredays);
+        document.cookie = c_name + "=" + escape(value)
+                          + ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
+                          + ";path=/"
+                          + ";domain=lilanz.nextsgo.com";
+    }
+
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)"); //正则匹配
+        if (arr = document.cookie.match(reg)) {
+            return unescape(arr[2]);
+        }
+        else {
+            return null;
+        }
+    }
 
     function tb() {
 
