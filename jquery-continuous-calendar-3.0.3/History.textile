@@ -1,0 +1,121 @@
+h3. Nightly
+
+h3. 3.0.2
+
+* Modify tinyscrollbar plugin: Stop options leaking as global variable, trigger scroll event also from wheel event 
+
+h3. 3.0.1
+
+* Fix syntax error in tinyscrollbar style file
+* Update dateTimeFormat for Estonian langueage, it shoud use kl instead of klo
+
+h3. 3.0.0
+
+* Remove duplicate or unused methods from DateTime:
+** getDaysInMonth (duplicate)
+** getWeekOfYear (duplicate)
+** getDayOfYear (use getDayInYear)
+** isLeapYear
+** getSuffix
+** stripped
+** getTimezone
+* Add new methods to DateTime:
+** fromDate(year, month, day)
+** fromMillis(ms)
+** fromDateObject(date)
+** withResetMS
+** toISOString
+** minusDays
+* Add more validation logic to following DateTime methods:
+** fromIsoDate
+** fromIsoDateTime
+** getDaysInMonth
+** isBetweenDates
+* Provide milliseconds for DateTime constructor and make it stricter
+* Fix spelling of DateTime.WEDNESDAY constant
+* Make dateTime.toString() return local instead of UTC times
+
+h3. 2.4.3
+
+* Update shortWeekday locales for estonian, english and australian and make calendar to use that instead of subtracting 2 letters from long weekday name
+* Force vertical alignment of text in continuous calendar 
+* Bugfix: Scroll viewport to selected date 
+
+h3. 2.4.2
+
+* Move calendar rendering to separate module
+* Move range behavior to separate module
+* Remove DateLocale.DEFAULT
+* Update custom scroll styles for all themes
+
+h3. 2.4.1
+
+* Add constants for all weekdays in DateTime
+* Add support for jquery 1.9.0+
+
+h3. 2.4.0
+
+* Add support for themes with elem.continuousCalendar({theme: 'transparent|rounded'})
+* Fix order of dependencies in build script
+
+h3. 2.3.0
+
+* Move hoursAndMinutes() from DateLocale to DateFormat
+* Move weekday constants from DateLocale to DateTime
+* Move getFirstDateOfWeek() from DateLocale to DateTime
+
+h3. 2.2.5
+
+* Take disabled dates into account also when selecting ranges
+* Fix bug related to fromIsoDate and fromIsoDateTime in DateTime.js
+
+h3. 2.2.4
+
+* Add DateTime.fromIsoDate and DateTime.fromIsoDateTime
+* Add support for swedish
+
+h3. 2.2.3
+
+* Fix issues when using custom scroll bar with popup version
+
+h3. 2.2.2
+
+* Overload constructor with y,m,d,h,m arguments
+* Bug fix: fix DateTime.withTime by resetting allways seconds
+* Bug fix: Update year title when using custom scroll
+
+h3. 2.2.1
+
+* Allow overriding bg image path for custom scrollbar
+
+h3. 2.2.0
+
+* Add support for Russian and Estonian translations
+* Allow setting locale as case insensitive string
+
+h3. 2.1.0
+
+* Provide script for compiling scss styles
+* Include compiling of scss files to build script 
+* Add support for custom scrollbar (jquery.tinyscrollbar)
+
+h3. 2.0.1
+
+* Introduce dayNames and shortDayNames in DateLocale
+* Define AMD paths as relative and let require.js determine module name from name of the file
+
+h3. 2.0.0
+
+* Use SASS for styles
+* Move all formatting related code from DateTime to DateFormat
+* Remove close icon from popup calendar
+* Update example and playground
+
+h3. 1.3.0
+
+* Add optional "AMD":http://requirejs.org/docs/whyamd.html support
+* Backwards incompatible change: rename global @Locale@ object to @DateLocale@
+
+h3. Older releases (1.2.x series and below)
+
+* (Changes not listed)

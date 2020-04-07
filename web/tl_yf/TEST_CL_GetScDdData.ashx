@@ -18,17 +18,17 @@ public class LLWebApi_CL_GetWTSData : IHttpHandler
 
     public void ProcessRequest(HttpContext context)
     {
-        string reqData = readStream(context.Request.InputStream, "utf-8");
 
-        IDictionary<string, string> pars = HttpPostUtil.getURLParameters(reqData);
         using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
         {
             connStr = "server='192.168.35.10';uid=ABEASD14AD;pwd=+AuDkDew;database=tlsoft";
             //connStr = dal.ConnectionString;
         }
-
-        string rtMsg = GetWtData(pars["bizdata"], pars["partnerid"]).ToString();
-
+        //    string reqData = readStream(context.Request.InputStream, "utf-8");
+        //IDictionary<string, string> pars = HttpPostUtil.getURLParameters(reqData);
+        //string rtMsg = GetWtData(pars["bizdata"], pars["partnerid"]).ToString();
+        string rtMsg;
+        List<string> a = getSpid("16434", "1796638,1787296,1789145,1789104,1789511,1788677,1786101,1795095,1789545,1757891,1789495,1787314,1787305,1796656,1796688", "1011", out rtMsg);
         context.Response.Write(rtMsg);
         context.Response.End();
 
@@ -96,16 +96,16 @@ public class LLWebApi_CL_GetWTSData : IHttpHandler
             {
                 string jsonMxStr = "";
                 //取明细
-                DataRow[] mxdrs = ds.Tables[1].Select(" id='"+ ds.Tables[0].Rows[i]["id"] +"' ");
+                DataRow[] mxdrs = ds.Tables[1].Select(" id='" + ds.Tables[0].Rows[i]["id"] + "' ");
                 for (int j = 0; j < mxdrs.Length; j++)
                 {
                     string jsonCmMxStr = "";
                     //取尺码明细
-                    DataRow[] cmmxdrs = ds.Tables[2].Select(" id='"+ ds.Tables[1].Rows[i]["id"] +"' and mxid='" + ds.Tables[1].Rows[i]["mxid"] + "' ");
+                    DataRow[] cmmxdrs = ds.Tables[2].Select(" id='" + ds.Tables[1].Rows[i]["id"] + "' and mxid='" + ds.Tables[1].Rows[i]["mxid"] + "' ");
                     for (int k = 0; k < cmmxdrs.Length; k++)
                     {
                         //string jsonMb4 = @" {{ ""cmdm"": ""{0}"", ""cmmc"": ""{1}"", ""sl"": {2} }} ";
-                        jsonCmMxStr += string.Format(jsonMb4, cmmxdrs[k]["cmdm"].ToString(), cmmxdrs[k]["cmmc"].ToString().Replace("\n","").Replace("<br>","/"), cmmxdrs[k]["sl0"].ToString()) + ",";
+                        jsonCmMxStr += string.Format(jsonMb4, cmmxdrs[k]["cmdm"].ToString(), cmmxdrs[k]["cmmc"].ToString().Replace("\n", "").Replace("<br>", "/"), cmmxdrs[k]["sl0"].ToString()) + ",";
                     }
                     if (jsonCmMxStr != "") jsonCmMxStr = jsonCmMxStr.Substring(0, jsonCmMxStr.Length - 1);
                     //string jsonMb3 = @" {{ ""sphh"": ""{0}"", ""shdm"": ""{1}"", ""shmc"": ""{2}"", ""htjq"": ""{3}"", ""cmData"": [{4}] }} ";
@@ -121,6 +121,80 @@ public class LLWebApi_CL_GetWTSData : IHttpHandler
             rtMsg = string.Format(jsonMb1, "0", "请求成功", jsonZbStr);
         }//end using
         return rtMsg;
+    }
+
+
+    private List<string> getSpid(string tzid, string keyid, string dxlx, out string tsxx)
+    {
+        List<string> strlist = new List<string>();
+        StringBuilder strB = new StringBuilder();
+        int jls = 0;
+        string tj = "";
+        if (keyid.Length > 0)
+        {
+            tj = " and a.id in (" + keyid + ") ";
+        }
+        else
+        {
+            tj = " and sy.khid=@tzid and ISNULL(sy.XMZJYBS,0)=1  and a.sphh like 'Q9%' ";
+        }
+        string strSql = @"select top 50000 spid.spid from yx_v_dddjmx a inner Join yx_T_spidb spid on a.id=spid.lydjid 
+                                inner join cl_T_sygzb sy on sy.lymxid=a.id 
+                            and sy.gzlx=@dxlx left outer join yx_T_spidb_rfid hex on spid.spid=hex.spid and hex.tzid=1 
+                            where  a.djlx=905 " + tj + "  and hex.spid is null  group by spid.spid"
+                            ;
+        List<SqlParameter> lstParams = new List<SqlParameter>();
+        lstParams.AddRange(new SqlParameter[]{ new SqlParameter("@tzid" ,tzid) ,
+                                                    new SqlParameter("@dxlx" ,@dxlx)
+                                                 });
+        //查询语句  and a.rq>='20180901'
+        tsxx = "刷新成功";
+        try
+        {
+            using (LiLanzDALForXLM dal = new LiLanzDALForXLM(connStr))
+            {
+                DataTable dt = null;
+                string strInfo = dal.ExecuteQuerySecurity(strSql, lstParams, out dt);
+                if (strInfo == "")
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        if (jls % 3000 == 0) //每三千个分一组；
+                        {
+                            if (jls > 0)
+                            {
+                                strlist.Add(strB.ToString());
+                                strB.Remove(0, strB.Length);//清空StringBuilder的方法
+                            }
+                            strB.Append(dt.Rows[i]["spid"].ToString());
+                        }
+                        else
+                        {
+                            strB.Append("," + dt.Rows[i]["spid"].ToString());
+                        }
+                        jls++;
+                    }
+                    //缓存最后一次分组记录
+                    if (strB.Length > 0)
+                    {
+                        strlist.Add(strB.ToString());
+                    }
+                }
+                else
+                {
+                    clsLocalLoger.WriteError(string.Concat("SpidEpcServer 处理任务执行失败！错误：", strInfo));
+                    //SetTaskStatus(TaskStatus.Fail, false);
+                }
+                //DisposeDataTable(ref dt);
+            }
+            if (strlist.Count == 0) { tsxx = "无记录，不用刷新！"; }
+        }
+        catch (Exception e)
+        {
+            tsxx = "数据库查询异常：" + e.ToString();
+            clsLocalLoger.WriteError(string.Concat("SpidEpcServer 处理任务执行失败！错误：", tsxx));
+        }
+        return strlist;
     }
 
     private string readStream(Stream iStream, string charset)

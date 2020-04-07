@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    sub
+    <input type="button" onclick="test()" value="test" />
+    <input type="text" id="te1" value="txxx" />
+    <input type="text" id="te2" value="txxx" />
+</body>
+</html>
+<script type="text/javascript">
+    var abc = function () {
+        return "a";
+    }
+    window.onload = function () {
+        //var t = window.dialogArguments;
+        //t.te1.value = "2";
+        //t.te2.value = "1";
+        //alert(t.te);
+        var p = window.opener;
+        p.setText();
+    }
+
+    function test() {
+        var o = {}; o.te1 = document.getElementById("te1");
+        o.te2 = document.getElementById("te2");
+        //window.showModalDialog("sub.html", o);
+        window.open("son.html", "_self")
+    }
+    function setText() {
+        document.getElementById("te2").value = "2";
+    }
+
+</script>

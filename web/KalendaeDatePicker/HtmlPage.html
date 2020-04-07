@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="css/kalendae.css" rel="stylesheet" />
+    <script src="js/kalendae.standalone.js"></script>
+</head>
+<body>
+    <p>Multi-Select</p>
+    <script type="text/javascript" charset="utf-8">
+ 
+
+		new Kalendae({
+			attachTo:document.body,
+			months:13,
+			mode:'multiple',
+			selected:[Kalendae.moment().subtract({M:1}), Kalendae.moment().add({M:1})]
+		});
+
+    </script>
+</body>
+</html>

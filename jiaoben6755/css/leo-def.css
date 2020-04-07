@@ -1,0 +1,23 @@
+html,body{height: 100%;}
+
+body, dl, dd, h1, h2, h3, h4, h5, h6, p, form,ol, li, ul{margin:0;padding:0;}
+
+body{font-family: "Arial","Microsoft YaHei","微软雅黑";font-size: 14px;}
+   
+ol,li,ul{list-style: none;}
+
+a{cursor:pointer;text-decoration: none;	color: unset;}
+
+input , textarea{outline:none;vertical-align: top;background: transparent;padding: 0 14px;font-size: 14px;}
+
+input::-ms-clear, ::-ms-reveal{	display: none;}
+
+textarea{resize: none;}
+
+table{border-collapse: collapse;font-size: 14px;padding:0;margin:0;width: 100%;}
+
+table td , table th{padding:0;}
+
+img{border: none;}
+
+*{box-sizing: border-box;}

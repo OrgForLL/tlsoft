@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -14,8 +15,11 @@ public partial class WebService_SaveFileWebForm : System.Web.UI.Page
             {
                 //得到客户端上传的文件
                 HttpPostedFile file = Request.Files[0];
+                Encoding gb = Encoding.GetEncoding("utf-8");
+                byte[] bytes = gb.GetBytes(file.FileName);
+
                 //服务器端要保存的路径
-                string filePath = "d:\\web_tlerp\\MyUpload\\file\\" + file.FileName + ".rtf";
+                string filePath = "d:\\web_tlerp\\MyUpload\\file\\" + System.Web.HttpUtility.UrlDecode(file.FileName, System.Text.Encoding.UTF8) + ".rtf";
                 file.SaveAs(filePath);
                 //返回结果
                 Response.Write("Success");

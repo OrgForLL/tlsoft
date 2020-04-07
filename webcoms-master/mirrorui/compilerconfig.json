@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "mirrorui.css",
+    "inputFile": "stylus/index.styl"
+  },
+  {
+    "outputFile": "test.css",
+    "inputFile": "test.styl"
+  }
+]

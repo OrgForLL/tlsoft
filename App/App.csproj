@@ -65,6 +65,7 @@
       <DependentUpon>ScoketServer.cs</DependentUpon>
     </Compile>
     <Compile Include="ScoketUtils.cs" />
+    <Compile Include="xps.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

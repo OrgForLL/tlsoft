@@ -14,7 +14,7 @@
     <%--<iframe id="mylabmain" src="http://web.nextsgo.com"></iframe>--%>
         <input type="button" onclick="test()" tabindex="1" value="test" />
         <input type="button" onclick="go()" value="go" />
-        <input type="button" onclick="tb()" value="同步" />
+        <input type="button" onclick="tb()" value="同步111" />
         <input type="text" id="cookieName" />
         <input type="text" id="cookieValue" />
         <input type="button" onclick="cookieFun(1)" value="写入" />
