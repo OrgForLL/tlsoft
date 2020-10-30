@@ -25,24 +25,25 @@ public partial class tl_yf_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        par p = new par();
-        p.partnerid = "17855";
-        p.servicetype = "LLWebApi_CL_GetSXB";
-        //传参待定
-        //p.data = "{\"Type\":\"list\",\"gzlx\":\"2010\",\"startDate\":\"2019-09-01\",\"endDate\":\"2019-09-21\"}";
-        p.data = "{\"Type\":\"detail\",\"gzlx\":\"1012\",\"id\":\"1887852\"}";
-        p.timestamp = string.Format("{0:yyyyMMddHHmmss}", DateTime.Now);
-        p.nonce = System.Guid.NewGuid().ToString();
+        //par p = new par();
+        //p.partnerid = "17855";
+        //p.servicetype = "LLWebApi_CL_GetSXB";
+        ////传参待定
+        //p.data = "{\"Type\":\"list\",\"gzlx\":\"2010\",\"startDate\":\"2020-05-15\",\"endDate\":\"2020-05-15\"}";
+        //p.data = "{\"Type\":\"detail\",\"gzlx\":\"1012\",\"id\":\"2553960\"}";
+        ////p.data = "{\"Type\":\"detail\",\"gzlx\":\"2010\",\"id\":\"2511495\"}";
+        //p.timestamp = string.Format("{0:yyyyMMddHHmmss}", DateTime.Now);
+        //p.nonce = System.Guid.NewGuid().ToString();
 
-        p.sign = GetSign(p.partnerid, p.servicetype,p.data, p.timestamp,p.nonce);
-        //正式
-        string url = @"http://webt.lilang.com/LLService/ApiRoute.ashx?action=llwebapi";
-        //测试
-        //string url = @"http://192.168.35.231/LLWebApi/ApiRoute.ASHX?action=llwebapi";
-        string postJson = string.Format( "partnerid={0}&servicetype={1}&data={2}&timestamp={3}&nonce={4}&sign={5}",p.partnerid,p.servicetype,p.data, p.timestamp,p.nonce,p.sign);
+        //p.sign = GetSign(p.partnerid, p.servicetype,p.data, p.timestamp,p.nonce);
+        ////正式
+        //string url = @"http://webt.lilang.com/LLService/ApiRoute.ashx?action=llwebapi";
+        ////测试
+        ////string url = @"http://192.168.35.231/LLWebApi/ApiRoute.ASHX?action=llwebapi";
+        //string postJson = string.Format( "partnerid={0}&servicetype={1}&data={2}&timestamp={3}&nonce={4}&sign={5}",p.partnerid,p.servicetype,p.data, p.timestamp,p.nonce,p.sign);
 
-        string r=PostFunction(url, postJson);
-        Response.Write(r);
+        //string r=PostFunction(url, postJson);
+        //Response.Write(r);
     }
 
     public static string GetSign(string partnerid,string servicetype,string bizdata,string timestamp,string nonce)

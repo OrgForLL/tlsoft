@@ -20,7 +20,7 @@
         string date = DateTime.Now.ToString("yyyy-MM-dd");
         if (Request["date"] != null) date = DateTime.Parse(Request["date"].ToString()).ToString("yyyy-MM-dd");
         //0:：福州；1：广州,2:天津
-        string bs = "0";
+        string bs = "1";
         if (Request["bs"] != null) bs = Request["bs"];
         SynchronousDate synchronousDate = new SynchronousDate();
         string tbInfo = synchronousDate.SyncData(bs, "自动同步" + now, date);
@@ -349,7 +349,8 @@
         /// <returns></returns>
         public string PullGZDatas(string startDate, string endDate, string username)
         {
-            string url = @"http://m.gtt.net.cn/WSInterface/Handler/GetReportData_LiLang.ashx?AccessToken=D3865E240DB0445A9245F51D85119FBA&BeginQueryDate={0}&EndQueryDate={1}";
+            string url = @"http://www.gttc.net.cn/WSInterface/Handler/GetReportData_LiLang.ashx?AccessToken=D3865E240DB0445A9245F51D85119FBA&BeginQueryDate={0}&EndQueryDate={1}";
+                          //http://www.gttc.net.cn/WSInterface/Handler/GetReportData_LiLang.ashx?AccessToken=D3865E240DB0445A9245F51D85119FBA&BeginQueryDate
             string rtMsg = "", jls = "0";
             url = string.Format(url, startDate, endDate);
             string JsonStr = clsNetExecute.HttpRequest(url);

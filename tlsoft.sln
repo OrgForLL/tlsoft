@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web", "web", "{FA2C3585-4578-4B18-8B93-E9D496A543D8}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
-		ProjectReferences = "{ada4c8f6-9c26-46cc-81cf-83671664e410}|Stock.dll;{39975760-c93e-4845-90a1-6201eecc9727}|LLWebService.dll;{b18333d1-fa49-4d78-b09b-805043740d9e}|lbclass.dll;"
+		ProjectReferences = "{ada4c8f6-9c26-46cc-81cf-83671664e410}|Stock.dll;{39975760-c93e-4845-90a1-6201eecc9727}|LLWebService.dll;{b18333d1-fa49-4d78-b09b-805043740d9e}|lbclass.dll;{24AC6637-C081-4AA1-B6A6-42718F158E28}|LiLanzModel.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_65097"
 		Debug.AspNetCompiler.PhysicalPath = "web\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65097\"
@@ -26,8 +26,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "web", "web", "{FA2C3585-457
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroService", "Y:\全渠道\开发知识库\微服务学习\源码\调用中台服务-前端\MS\MicroService.csproj", "{ADA4C8F6-9C26-46CC-81CF-83671664E410}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLWebService", "..\project\LLWebService\LLWebService.csproj", "{39975760-C93E-4845-90A1-6201EECC9727}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{E71C545E-0475-403E-8753-0A9D4778D478}"
 EndProject
@@ -57,7 +55,12 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "wx", "wx", "{84618E36-9C82-
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "64186"
+		SlnRelativePath = "wx\"
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLWebService", "..\LLWebService\LLWebService.csproj", "{39975760-C93E-4845-90A1-6201EECC9727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiLanzModel", "..\LiLanzModel\LiLanzModel.csproj", "{24AC6637-C081-4AA1-B6A6-42718F158E28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,10 +76,6 @@ Global
 		{ADA4C8F6-9C26-46CC-81CF-83671664E410}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADA4C8F6-9C26-46CC-81CF-83671664E410}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADA4C8F6-9C26-46CC-81CF-83671664E410}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39975760-C93E-4845-90A1-6201EECC9727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39975760-C93E-4845-90A1-6201EECC9727}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39975760-C93E-4845-90A1-6201EECC9727}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39975760-C93E-4845-90A1-6201EECC9727}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E71C545E-0475-403E-8753-0A9D4778D478}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E71C545E-0475-403E-8753-0A9D4778D478}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E71C545E-0475-403E-8753-0A9D4778D478}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -101,9 +100,20 @@ Global
 		{84618E36-9C82-4860-9BC5-1DC5025B91E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84618E36-9C82-4860-9BC5-1DC5025B91E8}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{84618E36-9C82-4860-9BC5-1DC5025B91E8}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{39975760-C93E-4845-90A1-6201EECC9727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39975760-C93E-4845-90A1-6201EECC9727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39975760-C93E-4845-90A1-6201EECC9727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39975760-C93E-4845-90A1-6201EECC9727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24AC6637-C081-4AA1-B6A6-42718F158E28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24AC6637-C081-4AA1-B6A6-42718F158E28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24AC6637-C081-4AA1-B6A6-42718F158E28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24AC6637-C081-4AA1-B6A6-42718F158E28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {396744E8-8097-4C69-B711-268FF3BC225B}
 	EndGlobalSection
 	GlobalSection(SourceCodeControl) = preSolution
 		SccNumberOfProjects = 1

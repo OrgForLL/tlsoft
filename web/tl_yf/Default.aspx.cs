@@ -11,87 +11,237 @@ using System.Text;
 using System.Net;
 using System.IO;
 
-/// <summary>
-/// POST数据
-/// </summary>
-public class Par {
-    public string partnerid;
-    public string servicetype;
-    public string bizdata;
-    public string timestamp;
-    public string nonce;
-    public string sign;
-}
-/// <summary>
-/// 疵点
-/// </summary>
-public class FabricFault
-{
-    public string cdmc;
-    public float cdwz;
-    public int cdfs;
-}
-/// <summary>
-/// 码单
-/// </summary>
-public class WtMemoVO
-{
-    public string serviceuuid;
-    public string ph;
-    public string gh;
-    public string ys;
-    public float mdsl;
-    public string xhdx;
-    public string mfk;
-    public float fk;
-    public string kz;
-    public string jh;
-    public string sphh;
-    public float mc;
-    public string qtj;
-    public string qtw;
-    public string sxj;
-    public string sxw;
-    public float wx;
-    public float sjsl;
-    public float twsc;
-    public float bzsc;
-    public string tm;
-    public string lltm;
-    public string mdbz;
-    public float wh;
-    public float hpl;
-    public string sjb;
-    public string juanb;
-    public string dxm;
-    public List<FabricFault> fabricFaultList = new List<FabricFault>();
-
-}
-/// <summary>
-/// 报告数据
-/// </summary>
-public class BillData
-{
-    public string clientuuid;
-    public string djh;
-    public string rq;
-    public bool mlyqryzx;
-    public string mlyqryzxbz;
-    public bool dhyjdyzx;
-    public string dhyjdyzxbz;
-    public bool sghfgyqryzx;
-    public string sghfgyqryzxbz;
-    public bool pypzjsgyzx;
-    public string pypzjsgyzxbz;
-    public float hpl;
-    public string bz;
-    public int bgzt;
-    public string tsrq;
-    public List<WtMemoVO> wtMemoVOList = new List<WtMemoVO>();
-}
 
 public partial class tl_yf_Default : System.Web.UI.Page
 {
+
+    public void Page_Loadd2()
+    {
+        string startDate = "2020-06-28"; string endDate = startDate; string username = "";
+        string url = @"http://www.gttc.net.cn/WSInterface/Handler/GetReportData_LiLang.ashx?AccessToken=D3865E240DB0445A9245F51D85119FBA&BeginQueryDate={0}&EndQueryDate={1}";
+        string rtMsg = "", jls = "0";
+        url = string.Format(url, startDate, endDate);
+        string JsonStr = clsNetExecute.HttpRequest(url);
+        if (JsonStr != "[]") //没有数据
+        {
+            //List<zbInfo> data = GetAllInfo(JsonStr);
+
+            //if (data.Count != 0)
+            //{
+            //    StringBuilder strSQL = new StringBuilder();
+            //    strSQL.Append("declare @id int;declare @jls int;set @jls=0;");
+            //    string zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='1')
+            //                            begin
+            //                                insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,bs,isForce)
+            //                                values ('{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','','{10}','{11}','{12}','1',{13});
+            //                                set @id=(select SCOPE_IDENTITY());set @jls=@jls+1; ";
+            //    string mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
+            //    for (int i = 0; i < data.Count; i++)
+            //    {
+            //        string yphh = data[i].样品货款号;
+            //        strSQL.Append(string.Format(zSQL, data[i].报告编号, data[i].报告编号,
+            //            data[i].样品名称, yphh, data[i].送样日期,
+            //            data[i].出证日期, data[i].检测依据, data[i].安全技术等级,
+            //            data[i].检验结论, data[i].下载地址, username, DateTime.Now.ToString(), data[i].委托序号, data[i].是否强标));
+            //        if (data[i].itemInfos == null)
+            //        {
+            //            strSQL.Append("end;");
+            //            continue;
+            //        }
+            //        List<ItemInfo> row = data[i].itemInfos;
+            //        if (row.Count > 0)
+            //        {
+            //            for (int j = 0; j < row.Count; j++)
+            //            {
+            //                strSQL.Append(string.Format(mSQL, row[j].检测项目, row[j].测试方法,
+            //                    row[j].技术要求, row[j].检测结果, row[j].单项判定));
+            //            }
+            //            strSQL.Append("end;");
+            //        }
+            //    }
+            //    strSQL.Append("select @jls;");
+            //    using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
+            //    {
+            //        DataTable dt = null;
+            //        rtMsg = dal.ExecuteQuery(strSQL.ToString(), out dt);
+            //        if (rtMsg == "" && dt.Rows.Count > 0)
+            //            jls = dt.Rows[0][0].ToString();
+            //    }
+            //    if (rtMsg == "")
+            //    {
+            //        rtMsg = @"{{""type"":""SUCCESS"",""msg"":""成功同步【{0}】条数据！""}}";
+            //        rtMsg = string.Format(rtMsg, jls);
+            //    }
+            //}
+        }
+        
+    
+    }
+
+
+    public void Page_Load1222()
+    {
+        string bdate = "2020-06-28"; string edate = bdate; string username = "test";
+        string rtMsg = "";
+        string jls = "0";
+        // 请求对象
+        ReportsListRequestStructBean RequestBean = new ReportsListRequestStructBean();
+        // 请求头对象
+        RequestHeadStc Head = new RequestHeadStc();
+        // 请用户名
+        Head.AppKey = "lilang";
+        // 请求用户密码
+        Head.SecretKey = "96B94FF9-EC8A-4E73-8394-B97029C72DC8";
+        // 请求方法
+        Head.Method = "GetReportsList";
+        // 请求唯一标识 建议用UUID 双方排查日志用
+        Head.AskSerialNo = Guid.NewGuid().ToString();
+        // 请求时间
+        Head.SendTime = System.DateTime.Now.ToString("yyyyMMddHHmmss");
+        // 请求体对象
+        ReportsListInputStc Body = new ReportsListInputStc();
+        Body.ProductName = "";
+        Body.GoodsName = "";
+        Body.EnterpriseNo = "";
+        Body.TrustCustomerName = "";
+        Body.MakeCustomerName = "";
+        Body.TestItem = "";
+        Body.FailItem = "";
+        Body.ProductStandardNo = "";
+        Body.MethodStandardNo = "";
+        Body.TrustDateFrom = (Convert.ToDateTime(bdate)).AddDays(-30).ToString("yyyy-MM-dd");//委托日期
+        Body.TrustDateTo = edate;
+        Body.AuditDateFrom = bdate;//出证日期
+        Body.AuditDateTo = (Convert.ToDateTime(bdate)).AddDays(1).ToString("yyyy-MM-dd");
+        RequestBean.Head = Head;
+        RequestBean.Body = Body;
+        // 返回对象
+        ReportsListResponseStructBean ResponseBean = new ReportsListResponseStructBean();
+        // 请求功能URL
+        string url = "http://data.cnttts.com:59600/dmz/v1/M0001";
+        // 请求明细功能URL
+        string urlDetail = "http://data.cnttts.com:59600/dmz/v1/M0002";
+        string postJson = JsonConvert.SerializeObject(RequestBean, Newtonsoft.Json.Formatting.None);
+        // 请求后台
+        string retmp = "";
+        try
+        {
+            retmp = PostFunctionV3(url, postJson);
+        }
+        catch (SystemException ex)
+        {
+            rtMsg = @"{""type"":""ERROR"",""msg"":""无法链接天津外部服务器！""}";
+          //  return rtMsg;
+        }
+
+        ResponseBean = JsonConvert.DeserializeObject<ReportsListResponseStructBean>(retmp);
+        List<ResultContent> contentList = JsonConvert.DeserializeObject<List<ResultContent>>(ResponseBean.Body.ResultContent);
+        if (contentList != null && contentList.Count > 0)
+        {
+
+            StringBuilder strSQL = new StringBuilder();
+            strSQL.Append("declare @id int;declare @jls int;set @jls=0;");
+            string zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='2')
+                                    begin
+                                    insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,bs)
+                                    values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','','{9}','{10}','{11}','2');
+                                    set @id=(select SCOPE_IDENTITY());set @jls=@jls+1; ";
+            string mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
+            foreach (ResultContent r in contentList)
+            {
+                if (r.urlpdf.IndexOf("http://") == 0)
+                {
+                    r.urlpdf = r.urlpdf.Substring(7, r.urlpdf.Length - 7);
+                }
+                strSQL.Append(string.Format(zSQL, r.stfbreportno, r.ProductName, r.productsremark, r.AcceptDate, r.dapprovedate, "", r.SecurityCategories, (r.fails.Length == 0 ? "合格" : "不合格"), r.urlpdf, username, DateTime.Now.ToString(), r.SuperviseNoticeCode));
+                if (r.SuperviseNoticeCode.Length > 0)
+                {
+                    ReportsRequestStructBean rep = new ReportsRequestStructBean();
+                    ReportsInputStc body = new ReportsInputStc();
+                    body.reportNO = r.SuperviseNoticeCode;
+                    Head.Method = "getreportdetail";
+                    rep.Head = Head; rep.Body = body;
+                    // 返回对象
+                    ReportsListResponseStructBean ReqBean = new ReportsListResponseStructBean();
+                    string postJs = JsonConvert.SerializeObject(rep, Newtonsoft.Json.Formatting.None);
+                    ReqBean = JsonConvert.DeserializeObject<ReportsListResponseStructBean>(PostFunctionV3(urlDetail, postJs));
+                    List<ResultContent> conList = JsonConvert.DeserializeObject<List<ResultContent>>(ReqBean.Body.ResultContent);
+                    if (conList.Count > 0)
+                    {
+                        if (conList[0].detail.Count > 0)
+                        {
+                            foreach (Detail d in conList[0].detail)
+                            {
+                                strSQL.Append(string.Format(mSQL, d.item, d.prefix, d.standvalue, d.acturevalue, d.result));
+                            }
+                        }
+                    }
+                }
+                strSQL.Append("end;");
+            }
+            strSQL.Append("select @jls;");
+            //using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
+            //{
+            //    DataTable dt = null;
+            //    rtMsg = dal.ExecuteQuery(strSQL.ToString(), out dt);
+            //    if (rtMsg == "" && dt.Rows.Count > 0)
+            //        jls = dt.Rows[0][0].ToString();
+            //}
+            //if (rtMsg == "")
+            //{
+            //    rtMsg = @"{{""type"":""SUCCESS"",""msg"":""成功同步【{0}】条数据！""}}";
+            //    rtMsg = string.Format(rtMsg, jls);
+            //}
+        }
+        else
+        {
+            rtMsg = @"{""type"":""WARN"",""msg"":""Sorry,没有找到数据！""}";
+        }
+
+       // return rtMsg;
+    }
+    protected void Page_Load3322(object sender, EventArgs e)
+    {
+        BillData billData = new BillData();
+        billData.clientuuid = "客户端uuid1";     
+
+      
+
+        Par p = new Par();
+        p.partnerid = "16143";
+        p.servicetype = "bodyInspReportSearchFabricForClient";//查询
+        //p.bizdata = "{\"clientuuid\":\"客户端uuid1\"}";
+        p.bizdata = "{\"djh\":\"102904\",\"rq\":\"2020-07-23\"}";
+        //p.bizdata = "{\"djh\":\"102904\",\"rq\":\"2020-07-23\",\"ph\":\"\"}";
+        p.timestamp = "1569053559";
+        p.nonce = "15690535598";
+
+        p.sign = GetSign2("661CFD62-CE04-49A1-A7E8-015B6E04BB69", p.partnerid, p.servicetype, p.bizdata, p.timestamp, p.nonce);
+        //正式
+        string url = @"http://127.0.0.1:9309/ApiRoute?action=llwebapi";
+        url = @"http://api.lilanz.com:9307/ApiRoute?action=llwebapi";
+        string postJson = string.Format("partnerid={0}&servicetype={1}&data={2}&timestamp={3}&nonce={4}&sign={5}", p.partnerid, p.servicetype, p.bizdata, p.timestamp, p.nonce, p.sign);
+        string r = PostFunctionjson(url, postJson);
+    }
+ 
+    protected void Page_Load2231(object sender, EventArgs e)
+    {
+        BillData billData = new BillData();  
+
+        Par p = new Par();
+        p.partnerid = "16214";
+        p.servicetype = "bodyInspReportSearchFabricListForClient";
+        //p.bizdata = "{\"djh\":\"100295\",\"rq\":\"2020-03-18\"}";
+        p.bizdata = "{\"userid\":\"27648\",\"startDate\":\"2020-07-31\",\"endDate\":\"2020-07-31\"}";
+        p.timestamp = "1569053559";
+        p.nonce = "15690535598";
+        p.sign = GetSign2("B8AF8A07-4CB1-48C9-99C3-60F2D4B1C45C", p.partnerid, p.servicetype, p.bizdata, p.timestamp, p.nonce);
+        //正式
+        string url = @"http://127.0.0.1:9309/ApiRoute?action=llwebapi";
+         url = @"http://api.lilanz.com:9307/ApiRoute?action=llwebapi";
+        string postJson = string.Format("partnerid={0}&servicetype={1}&data={2}&timestamp={3}&nonce={4}&sign={5}", p.partnerid, p.servicetype, p.bizdata, p.timestamp, p.nonce, p.sign);
+        string r = PostFunctionjson(url, postJson);
+    }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -99,6 +249,10 @@ public partial class tl_yf_Default : System.Web.UI.Page
         billData.clientuuid = "客户端uuid1";
         billData.djh = "100078";
         billData.rq = "2019-03-07";
+        billData.lydjid = 12;
+        billData.lydjlx = 13;
+        billData.userid = 14;
+        billData.type = "gc";
         billData.dhyjdyzx = false;
         billData.dhyjdyzxbz = "整批大货包装方法与接单要求一致性备注";
         billData.sghfgyqryzx = true;
@@ -109,9 +263,10 @@ public partial class tl_yf_Default : System.Web.UI.Page
         billData.mlyqryzxbz = "整批面料材料名称与确认样一致性备注";
         billData.hpl = 3;
         billData.bz = "";
-     
+
         WtMemoVO v1 = new WtMemoVO();
-        v1.ph = "150";
+        v1.tm = "afasdfasf";
+        v1.ph = "2";
         v1.gh = "1";
         v1.ys = "黑色";
         v1.mdsl = 60;
@@ -129,23 +284,24 @@ public partial class tl_yf_Default : System.Web.UI.Page
         v1.sjsl = 60;
         v1.twsc = 4;
         v1.bzsc = 4;
-        v1.tm = "条码";
+        v1.mdbz = "（asfasdf(af)";
         v1.xhdx = "循环大小";
         v1.wh = 2;
-        v1.mdbz = "码单备注";
+       // v1.mdbz = "码单备注";
         v1.sjb = "松紧边，荷叶边 ";
         v1.juanb = "卷边 ";
         v1.dxm = "倒顺毛";
         v1.hpl = 3;//换片率
         FabricFault f = new FabricFault();
-        f.cdmc = "G";
+        f.cdmc = "破洞";
         f.cdwz = 2;
         f.cdfs = 2;
+        f.url = "asfasdfaf";
         FabricFault f2 = new FabricFault();
-        f2.cdmc = "K";
+        f2.cdmc = "粗纱";
         f2.cdwz = 1;
         f2.cdfs = 2;
-         
+        f2.url = "http";
         v1.fabricFaultList.Add(f);
         v1.fabricFaultList.Add(f2);
         billData.wtMemoVOList.Add(v1);
@@ -153,19 +309,19 @@ public partial class tl_yf_Default : System.Web.UI.Page
         bDlist.Add(billData);
 
         Par p = new Par();
-        p.partnerid = "1";
+        p.partnerid = "18209";
         p.servicetype = "bodyInspReport";
         p.bizdata = JsonConvert.SerializeObject(bDlist);
-        p.timestamp = "1569053559";
-        p.nonce = "15690535598";
-
-        p.sign = GetSign2("test", p.partnerid, p.servicetype,p.bizdata,p.timestamp,p.nonce);
-        //正式
-        string url = @"http://192.168.36.121:9307/ApiRoute?action=llwebapi";
-        url = @"http://api.lilanz.com:9307/ApiRoute?action=llwebapi";
-        string postJson = string.Format( "partnerid={0}&servicetype={1}&data={2}&timestamp={3}&nonce={4}&sign={5}",p.partnerid,p.servicetype,p.bizdata,p.timestamp,p.nonce,p.sign);
+        p.timestamp = "20200926103912";
+        p.nonce = "3410f33283";
+        p.bizdata = "[{\"clientuuid\":\"04cb1a41-66bc-41be-8632-bfd9ee3da439\",\"djh\":\"单据号001\",\"rq\":\"2020-09-21\",\"dhyjdyzx\":0,\"sghfgyqryzx\":0,\"pypzjsgyzx\":0,\"bgshnr\":0,\"hpl\":\"0.12\",\"bz\":null,\"wtMemoVOList\":[{\"ph\":null,\"gh\":\"缸号002\",\"ys\":null,\"mdsl\":\"1.0\",\"mfk\":\"150.0\",\"mc\":\"1.0\",\"sjsl\":\"1.0\",\"fk\":\"幅宽001\",\"kz\":null,\"jh\":null,\"sphh\":null,\"qtj\":null,\"qtw\":null,\"sxj\":null,\"sxw\":null,\"wx\":\"0.0\",\"twsc\":\"4.0\",\"bzsc\":\"4.0\",\"xhdx\":\"无\",\"wh\":\"0.0\",\"sjb\":\"无\",\"juanb\":\"无\",\"dxm\":\"无\",\"hpl\":\"0.0\",\"fabricFaultList\":[{\"cdmc\":\"油渍\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"污渍\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"分匹\",\"cdwz\":3,\"cdfs\":null}]},{\"ph\":null,\"gh\":\"缸号002\",\"ys\":null,\"mdsl\":\"1.0\",\"mfk\":\"150.0\",\"mc\":\"1.0\",\"sjsl\":\"1.0\",\"fk\":\"幅宽001\",\"kz\":null,\"jh\":null,\"sphh\":null,\"qtj\":null,\"qtw\":null,\"sxj\":null,\"sxw\":null,\"wx\":\"0.0\",\"twsc\":\"4.0\",\"bzsc\":\"4.0\",\"xhdx\":\"无\",\"wh\":\"0.0\",\"sjb\":\"无\",\"juanb\":\"无\",\"dxm\":\"无\",\"hpl\":\"200.0\",\"fabricFaultList\":[{\"cdmc\":\"油渍\",\"cdwz\":3,\"cdfs\":2},{\"cdmc\":\"分匹\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"接匹\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"横档\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"污渍\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"水渍\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"油渍\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"水渍\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"接匹\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"分匹\",\"cdwz\":3,\"cdfs\":null},{\"cdmc\":\"分匹\",\"cdwz\":3,\"cdfs\":null}]}]}]";
         
-        string r =PostFunctionjson(url, postJson);
+        p.sign = GetSign2("E0E64B8A-D4F1-469F-9B46-66256B42F4CC", p.partnerid, p.servicetype, p.bizdata, p.timestamp, p.nonce);
+        //正式
+        string url = @"http://127.0.0.1:9309/ApiRoute?action=llwebapi";
+        url = @"http://api.lilanz.com:9307/ApiRoute?action=llwebapi";
+        string postJson = string.Format("partnerid={0}&servicetype={1}&data={2}&timestamp={3}&nonce={4}&sign={5}", p.partnerid, p.servicetype, p.bizdata, p.timestamp, p.nonce, p.sign);
+        string r = PostFunctionjson(url, postJson);
     }
     /*SELECT TOP 11  * FROM dbo.Yf_T_bjdlb WHERE lxid=517  AND id=1902399
 SELECT jyid,* FROM dbo.cl_v_jhdjmxb WHERE id=168183
@@ -194,7 +350,7 @@ SELECT * FROM wl_t_dddjpmmx WHERE id=168183
         }
         return sign.ToString();
     }
-    protected void Page_Load3(object sender, EventArgs e)
+    protected void Page_Load31(object sender, EventArgs e)
     {
         Par p = new Par();
         p.partnerid = "18134";
@@ -237,13 +393,49 @@ SELECT * FROM wl_t_dddjpmmx WHERE id=168183
         }
         return sign.ToString();
     }
+
     /// <summary>
     /// 发送POST请求
     /// </summary>
     /// <param name="url"></param>
     /// <param name="postJson"></param>
     /// <returns></returns>
-    public string PostFunction(string url, string postJson)
+    public string PostFunctionV3(string url, string postJson)
+    {
+        string Result = "";
+        string serviceAddress = url;
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serviceAddress);
+
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        string strContent = postJson;
+        using (StreamWriter dataStream = new StreamWriter(request.GetRequestStream()))
+        {
+            dataStream.Write(strContent);
+            dataStream.Close();
+        }
+        HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+        string encoding = response.ContentEncoding;
+        if (encoding == null || encoding.Length < 1)
+        {
+            encoding = "UTF-8"; //默认编码
+        }
+        // Encoding.GetEncoding(encoding)
+        StreamReader reader = new StreamReader(response.GetResponseStream());
+        Result = reader.ReadToEnd();
+        Console.WriteLine(Result);
+        return Result;
+
+    }
+
+
+/// <summary>
+/// 发送POST请求
+/// </summary>
+/// <param name="url"></param>
+/// <param name="postJson"></param>
+/// <returns></returns>
+public string PostFunction(string url, string postJson)
     {
         string Result = "";
         string serviceAddress = url;
@@ -533,4 +725,1182 @@ SELECT * FROM wl_t_dddjpmmx WHERE id=168183
 
     }
 
+}
+
+
+//天津检测所
+//请求信息
+public class ReportsListInputStc
+{
+    public ReportsListInputStc() { }
+    private string trustDateFrom;
+    private string trustDateTo;
+    private string auditDateFrom;
+    private string auditDateTo;
+    private string productName;
+    private string goodsName;
+    private string enterpriseNo;
+    private string trustCustomerName;
+    private string makeCustomerName;
+    private string testItem;
+    private string failItem;
+    private string productStandardNo;
+    private string methodStandardNo;
+
+    public string TrustDateFrom
+    {
+        get
+        {
+            return trustDateFrom;
+        }
+
+        set
+        {
+            trustDateFrom = value;
+        }
+    }
+
+    public string TrustDateTo
+    {
+        get
+        {
+            return trustDateTo;
+        }
+
+        set
+        {
+            trustDateTo = value;
+        }
+    }
+
+    public string AuditDateFrom
+    {
+        get
+        {
+            return auditDateFrom;
+        }
+
+        set
+        {
+            auditDateFrom = value;
+        }
+    }
+
+    public string AuditDateTo
+    {
+        get
+        {
+            return auditDateTo;
+        }
+
+        set
+        {
+            auditDateTo = value;
+        }
+    }
+
+    public string ProductName
+    {
+        get
+        {
+            return productName;
+        }
+
+        set
+        {
+            productName = value;
+        }
+    }
+
+    public string GoodsName
+    {
+        get
+        {
+            return goodsName;
+        }
+
+        set
+        {
+            goodsName = value;
+        }
+    }
+
+    public string EnterpriseNo
+    {
+        get
+        {
+            return enterpriseNo;
+        }
+
+        set
+        {
+            enterpriseNo = value;
+        }
+    }
+
+    public string TrustCustomerName
+    {
+        get
+        {
+            return trustCustomerName;
+        }
+
+        set
+        {
+            trustCustomerName = value;
+        }
+    }
+
+    public string MakeCustomerName
+    {
+        get
+        {
+            return makeCustomerName;
+        }
+
+        set
+        {
+            makeCustomerName = value;
+        }
+    }
+
+    public string TestItem
+    {
+        get
+        {
+            return testItem;
+        }
+
+        set
+        {
+            testItem = value;
+        }
+    }
+
+    public string FailItem
+    {
+        get
+        {
+            return failItem;
+        }
+
+        set
+        {
+            failItem = value;
+        }
+    }
+
+    public string ProductStandardNo
+    {
+        get
+        {
+            return productStandardNo;
+        }
+
+        set
+        {
+            productStandardNo = value;
+        }
+    }
+
+    public string MethodStandardNo
+    {
+        get
+        {
+            return methodStandardNo;
+        }
+
+        set
+        {
+            methodStandardNo = value;
+        }
+    }
+
+}
+public class RequestHeadStc
+{
+    public RequestHeadStc() { }
+    // 请求方法名称
+    private string method;
+
+    // 用户编码 权限判断用
+    private string appKey;
+
+    // 用户口令 权限判断用
+    private string secretKey;
+
+    // 请求流水码
+    private string askSerialNo;
+
+    // 请求时间格式 YYYYMMDDHHMMSS
+    private string sendTime;
+
+    public string Method
+    {
+        get
+        {
+            return method;
+        }
+
+        set
+        {
+            method = value;
+        }
+    }
+
+    public string AppKey
+    {
+        get
+        {
+            return appKey;
+        }
+
+        set
+        {
+            appKey = value;
+        }
+    }
+
+    public string SecretKey
+    {
+        get
+        {
+            return secretKey;
+        }
+
+        set
+        {
+            secretKey = value;
+        }
+    }
+
+    public string AskSerialNo
+    {
+        get
+        {
+            return askSerialNo;
+        }
+
+        set
+        {
+            askSerialNo = value;
+        }
+    }
+
+    public string SendTime
+    {
+        get
+        {
+            return sendTime;
+        }
+
+        set
+        {
+            sendTime = value;
+        }
+    }
+}
+public class ReportsListRequestStructBean
+{
+    public ReportsListRequestStructBean() { }
+    // 请求头对象
+    private RequestHeadStc head;
+
+    // 请求体对象
+    private ReportsListInputStc body;
+
+    public RequestHeadStc Head
+    {
+        get
+        {
+            return head;
+        }
+
+        set
+        {
+            head = value;
+        }
+    }
+
+    public ReportsListInputStc Body
+    {
+        get
+        {
+            return body;
+        }
+
+        set
+        {
+            body = value;
+        }
+    }
+}
+public class ReportsRequestStructBean
+{
+    public ReportsRequestStructBean() { }
+    // 请求头对象
+    private RequestHeadStc head;
+
+    // 请求体对象
+    private ReportsInputStc body;
+
+    public RequestHeadStc Head
+    {
+        get
+        {
+            return head;
+        }
+
+        set
+        {
+            head = value;
+        }
+    }
+
+    public ReportsInputStc Body
+    {
+        get
+        {
+            return body;
+        }
+
+        set
+        {
+            body = value;
+        }
+    }
+}
+public class ReportsInputStc
+{
+    public ReportsInputStc() { }
+    private string _reportNO;
+
+    public string reportNO
+    {
+        get
+        {
+            return _reportNO;
+        }
+
+        set
+        {
+            _reportNO = value;
+        }
+    }
+}
+//请求信息 end
+//响兴信息
+public class MessageContentStc
+{
+    public MessageContentStc() { }
+
+    // 消息代码
+    private string msgCode;
+
+    // 消息类型 E M
+    private string msgType;
+
+    // 消息内容
+    private string msgContent;
+
+    // 消息来源
+    private string msgSystem;
+
+    public string MsgCode
+    {
+        get
+        {
+            return msgCode;
+        }
+
+        set
+        {
+            msgCode = value;
+        }
+    }
+
+    public string MsgType
+    {
+        get
+        {
+            return msgType;
+        }
+
+        set
+        {
+            msgType = value;
+        }
+    }
+
+    public string MsgContent
+    {
+        get
+        {
+            return msgContent;
+        }
+
+        set
+        {
+            msgContent = value;
+        }
+    }
+
+    public string MsgSystem
+    {
+        get
+        {
+            return msgSystem;
+        }
+
+        set
+        {
+            msgSystem = value;
+        }
+    }
+}
+public class ReportsListOutStc
+{
+    public ReportsListOutStc() { }
+
+    // 返回值
+    private string resultContent;
+
+    public string ResultContent
+    {
+        get
+        {
+            return resultContent;
+        }
+
+        set
+        {
+            resultContent = value;
+        }
+    }
+}
+public class ResponseHeadStc
+{
+    public ResponseHeadStc() { }
+    // 请求原值返回
+    private string method;
+
+    // 操作状态 E失败  M成功
+    private string responseCode;
+
+    // 返回操作信息 中文
+    private string responseInfo;
+
+    // 返回时间
+    private string responseTime;
+
+    // 请求流水码 原值返回
+    private string askSerialNo;
+
+    // 平台交易处理流水号
+    private string answerSerialNo;
+
+    // 应用返回信息列表
+    private List<MessageContentStc> msgList;
+
+    public string Method
+    {
+        get
+        {
+            return method;
+        }
+
+        set
+        {
+            method = value;
+        }
+    }
+
+    public string ResponseCode
+    {
+        get
+        {
+            return responseCode;
+        }
+
+        set
+        {
+            responseCode = value;
+        }
+    }
+
+    public string ResponseInfo
+    {
+        get
+        {
+            return responseInfo;
+        }
+
+        set
+        {
+            responseInfo = value;
+        }
+    }
+
+    public string ResponseTime
+    {
+        get
+        {
+            return responseTime;
+        }
+
+        set
+        {
+            responseTime = value;
+        }
+    }
+
+    public string AskSerialNo
+    {
+        get
+        {
+            return askSerialNo;
+        }
+
+        set
+        {
+            askSerialNo = value;
+        }
+    }
+
+    public string AnswerSerialNo
+    {
+        get
+        {
+            return answerSerialNo;
+        }
+
+        set
+        {
+            answerSerialNo = value;
+        }
+    }
+
+    public List<MessageContentStc> MsgList
+    {
+        get
+        {
+            return msgList;
+        }
+
+        set
+        {
+            msgList = value;
+        }
+    }
+}
+public class ReportsListResponseStructBean
+{
+    public ReportsListResponseStructBean() { }
+    // 返回头
+    private ResponseHeadStc head;
+
+    // 返回体
+    private ReportsListOutStc body;
+
+    public ResponseHeadStc Head
+    {
+        get
+        {
+            return head;
+        }
+
+        set
+        {
+            head = value;
+        }
+    }
+
+    public ReportsListOutStc Body
+    {
+        get
+        {
+            return body;
+        }
+
+        set
+        {
+            body = value;
+        }
+    }
+}
+public class ResultContent
+{
+    public ResultContent() { }
+    private string _stfbreportno;
+    public string stfbreportno
+    {
+        get
+        {
+            return _stfbreportno;
+        }
+
+        set
+        {
+            _stfbreportno = value;
+        }
+    }
+
+
+    private string acceptDate;
+    private string superviseNoticeCode;
+    private string makeCustomername;
+    private string productName;
+    private string productCount;
+
+    private string samplespec;
+    private string securityCategories;
+    private string qualityRegistration;
+
+
+    private string _acceptdate;
+    public string acceptdate
+    {
+        get
+        {
+            return _acceptdate;
+        }
+
+        set
+        {
+            _acceptdate = value;
+        }
+    }
+
+    private string _dapprovedate;
+    public string dapprovedate
+    {
+        get
+        {
+            return _dapprovedate;
+        }
+
+        set
+        {
+            _dapprovedate = value;
+        }
+    }
+
+
+    private string _productstandard;
+    public string productstandard
+    {
+        get
+        {
+            return _productstandard;
+        }
+
+        set
+        {
+            _productstandard = value;
+        }
+    }
+
+    private string _itemlist;
+    public string itemlist
+    {
+        get
+        {
+            return _itemlist;
+        }
+
+        set
+        {
+            _itemlist = value;
+        }
+    }
+
+    private string _trademark;
+    public string trademark
+    {
+        get
+        {
+            return _trademark;
+        }
+
+        set
+        {
+            _trademark = value;
+        }
+    }
+
+    private string _fails;
+    public string fails
+    {
+        get
+        {
+            return _fails;
+        }
+
+        set
+        {
+            _fails = value;
+        }
+    }
+
+    private string _urlimage;
+    public string urlimage
+    {
+        get
+        {
+            return _urlimage;
+        }
+
+        set
+        {
+            _urlimage = value;
+        }
+    }
+
+    private string _urlpdf;
+    public string urlpdf
+    {
+        get
+        {
+            return _urlpdf;
+        }
+
+        set
+        {
+            _urlpdf = value;
+        }
+    }
+
+    private string _productsremark;
+    public string productsremark
+    {
+        get
+        {
+            return _productsremark;
+        }
+
+        set
+        {
+            _productsremark = value;
+        }
+    }
+
+
+    private string _productsremarkFull;
+    public string productsremarkFull
+    {
+        get
+        {
+            return _productsremarkFull;
+        }
+
+        set
+        {
+            _productsremarkFull = value;
+        }
+    }
+
+    private string _trustcustomername;
+    public string trustcustomername
+    {
+        get
+        {
+            return _trustcustomername;
+        }
+
+        set
+        {
+            _trustcustomername = value;
+        }
+    }
+
+    private List<Samples> _samples;
+    public List<Samples> samples
+    {
+        get
+        {
+            return _samples;
+        }
+
+        set
+        {
+            _samples = value;
+        }
+    }
+
+    private List<Detail> _detail;
+    public List<Detail> detail
+    {
+        get
+        {
+            return _detail;
+        }
+
+        set
+        {
+            _detail = value;
+        }
+    }
+
+    public string AcceptDate
+    {
+        get
+        {
+            return acceptDate;
+        }
+
+        set
+        {
+            acceptDate = value;
+        }
+    }
+
+    public string SuperviseNoticeCode
+    {
+        get
+        {
+            return superviseNoticeCode;
+        }
+
+        set
+        {
+            superviseNoticeCode = value;
+        }
+    }
+
+    public string MakeCustomername
+    {
+        get
+        {
+            return makeCustomername;
+        }
+
+        set
+        {
+            makeCustomername = value;
+        }
+    }
+
+    public string ProductName
+    {
+        get
+        {
+            return productName;
+        }
+
+        set
+        {
+            productName = value;
+        }
+    }
+
+    public string ProductCount
+    {
+        get
+        {
+            return productCount;
+        }
+
+        set
+        {
+            productCount = value;
+        }
+    }
+
+    public string Samplespec
+    {
+        get
+        {
+            return samplespec;
+        }
+
+        set
+        {
+            samplespec = value;
+        }
+    }
+
+    public string SecurityCategories
+    {
+        get
+        {
+            return securityCategories;
+        }
+
+        set
+        {
+            securityCategories = value;
+        }
+    }
+
+    public string QualityRegistration
+    {
+        get
+        {
+            return qualityRegistration;
+        }
+
+        set
+        {
+            qualityRegistration = value;
+        }
+    }
+}
+public class Samples
+{
+    public Samples() { }
+    private string _samplesn;
+    public string samplesn
+    {
+        get
+        {
+            return _samplesn;
+        }
+
+        set
+        {
+            _samplesn = value;
+        }
+    }
+
+
+    private string _sampleMark;
+    public string sampleMark
+    {
+        get
+        {
+            return _sampleMark;
+        }
+
+        set
+        {
+            _sampleMark = value;
+        }
+    }
+
+}
+public class Detail
+{
+    public Detail() { }
+    private string _samplesn;
+    public string samplesn
+    {
+        get
+        {
+            return _samplesn;
+        }
+
+        set
+        {
+            _samplesn = value;
+        }
+    }
+
+
+    private string _item;
+    public string item
+    {
+        get
+        {
+            return _item;
+        }
+
+        set
+        {
+            _item = value;
+        }
+    }
+
+    private string _prefixA;
+    public string prefixA
+    {
+        get
+        {
+            return _prefixA;
+        }
+
+        set
+        {
+            _prefixA = value;
+        }
+    }
+
+    private string _prefix;
+    public string prefix
+    {
+        get
+        {
+            return _prefix;
+        }
+
+        set
+        {
+            _prefix = value;
+        }
+    }
+    private string _result;
+    public string result
+    {
+        get
+        {
+            return _result;
+        }
+
+        set
+        {
+            _result = value;
+        }
+    }
+
+
+    private string _standvalue;
+    public string standvalue
+    {
+        get
+        {
+            return _standvalue;
+        }
+
+        set
+        {
+            _standvalue = value;
+        }
+    }
+    private string _acturevalue;
+    public string acturevalue
+    {
+        get
+        {
+            return _acturevalue;
+        }
+
+        set
+        {
+            _acturevalue = value;
+        }
+    }
+
+
+}
+//响兴信息end
+//天津检测所end
+
+
+//WEBAPI
+
+/// <summary>
+/// POST数据
+/// </summary>
+public class Par
+{
+    public string partnerid;
+    public string servicetype;
+    public string bizdata;
+    public string timestamp;
+    public string nonce;
+    public string sign;
+}
+/// <summary>
+/// 疵点
+/// </summary>
+public class FabricFault
+{
+    public string cdmc;
+    public string url;
+    public float cdwz;
+    public int cdfs;
+}
+/// <summary>
+/// 码单
+/// </summary>
+public class WtMemoVO
+{
+    public string serviceuuid;
+    public string ph;
+    public string gh;
+    public string ys;
+    public float mdsl;
+    public string xhdx;
+    public string mfk;
+    public float fk;
+    public string kz;
+    public string jh;
+    public string sphh;
+    public float mc;
+    public string qtj;
+    public string qtw;
+    public string sxj;
+    public string sxw;
+    public float wx;
+    public float sjsl;
+    public float twsc;
+    public float bzsc;
+    public string tm;
+    public string lltm;
+    public string mdbz;
+    public float wh;
+    public float hpl;
+    public string sjb;
+    public string juanb;
+    public string dxm;
+    public List<FabricFault> fabricFaultList = new List<FabricFault>();
+
+}
+/// <summary>
+/// 报告数据
+/// </summary>
+public class BillData
+{
+    public string clientuuid;
+    public string djh;
+    public string rq;
+    public bool mlyqryzx;
+    public string mlyqryzxbz;
+    public bool dhyjdyzx;
+    public string dhyjdyzxbz;
+    public bool sghfgyqryzx;
+    public string sghfgyqryzxbz;
+    public bool pypzjsgyzx;
+    public string pypzjsgyzxbz;
+    public float hpl;
+    public string bz;
+    public string type;
+    public int bgzt;
+    public int lydjlx;
+    public int lydjid;
+    public int userid;
+    public string tsrq;
+    public List<WtMemoVO> wtMemoVOList = new List<WtMemoVO>();
+}
+//WEBAPI END
+
+
+/// <summary>
+/// 广州检测记录主信息
+/// </summary>
+public class zbInfo
+{
+    public string 安全技术等级;
+    public string 送样日期;
+    public string 检测依据;
+    public string 委托序号;
+    public string 报告编号;
+    public string 样品名称;
+    public string 样品货款号;
+    public string 下载地址;
+    public string 检验结论;
+    public string 出证日期;
+    public string 是否强标;
+    public List<ItemInfo> itemInfos;
+}
+
+/// <summary>
+/// 广州检测记录检测项目信息
+/// </summary>
+public class ItemInfo
+{
+    public string 检测项目;
+    public string 测试方法;
+    public string 技术要求;
+    public string 检测结果;
+    public string 单项判定;
 }

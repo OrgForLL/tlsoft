@@ -10,6 +10,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <a href="javascript:;" class="doc_btn" data-dir="next" style="display: block; width: 33.33%;">办 理</a>
     <input type="button" onclick="go()" value="submit" />
         <div id="r">
     
@@ -22,6 +23,26 @@
     window.onload = function () {
         //tagPick();//测试吊牌分检
         //go();
+
+
+    }
+
+    $(document).ready(function () {
+        $(".doc_btn[data-dir='next']").click(function (e) {
+            getNextNodes(e);
+        });
+
+        $(".doc_btn[data-dir='next']").click(function () {
+            fun2();
+        });
+    });
+
+    function fun2() {
+        console.log(1);
+    }
+    function getNextNodes(event) {
+        console.log("getNextNodes");
+         
     }
     function testJSON() {
         $.ajax("ht.aspx?type=getinterfacelist", {//?Method=GetListJson&FormName=GetApplicationFeeList
