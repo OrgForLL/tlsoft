@@ -1,0 +1,8 @@
+﻿2020-12-11 17:21:59 - [信息]没有对应的委托单！！！
+2020-12-11 17:22:59 - [信息]{"type":"WARN","msg":"检测数据不存在！！！"}
+2020-12-11 17:27:13 - [错误]【调用网络访问失败】Url:http://gbs.fnctory.com/OpenAPI/Lilanz?type=reports& Message:操作超时  Source:System  StackTrace:   在 System.Net.HttpWebRequest.GetResponse()
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.SynchronousDate.HttpRequestThrowException(String strUrl, String strPostDatas, String method, String referer, String objencoding, Int32 Timeout, CookieContainer& objCookieContainer, String& rescookie, Boolean flag, Dictionary`2 headDic) 位置 g:\gitRepos\tlsoft\web\interface\sc_lab_jcbgsjtb.aspx:行号 1104  InnerException:
+2020-12-11 17:27:35 - [错误]【调用网络访问失败】Url:http://gbs.fnctory.com/OpenAPI/Lilanz?type=reports& Message:操作超时  Source:System  StackTrace:   在 System.Net.HttpWebRequest.GetResponse()
+   在 ASP.interface_sc_lab_jcbgsjtb_aspx.SynchronousDate.HttpRequestThrowException(String strUrl, String strPostDatas, String method, String referer, String objencoding, Int32 Timeout, CookieContainer& objCookieContainer, String& rescookie, Boolean flag, Dictionary`2 headDic) 位置 g:\gitRepos\tlsoft\web\interface\sc_lab_jcbgsjtb.aspx:行号 1104  InnerException:
+2020-12-11 17:52:21 - [信息]{"type":"ERROR","msg":"检测数据同步失败！！！"}
+2020-12-23 09:28:51 - [信息]{"type":"WARN","msg":"检测数据不存在！！！"}

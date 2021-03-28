@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" %>
-
 <%@ Import Namespace="System.Net" %>
 <%@ Import Namespace="System.IO" %>
 <%@ Import Namespace="System.IO.Compression" %>
@@ -20,8 +19,8 @@
         string now = Convert.ToInt64(ts.TotalSeconds).ToString();
         string date = DateTime.Now.ToString("yyyy-MM-dd");
         if (Request["date"] != null) date = DateTime.Parse(Request["date"].ToString()).ToString("yyyy-MM-dd");
-        //0:：福州；1：广州,2:天津,3:泉州石狮,4远东
-        string bs = "0";
+        //0:：福州；1：广州,2:天津
+        string bs = "1";
         if (Request["bs"] != null) bs = Request["bs"];
         SynchronousDate synchronousDate = new SynchronousDate();
         string tbInfo = synchronousDate.SyncData(bs, "自动同步" + now, date);
@@ -31,9 +30,10 @@
         {
             //下载pdf到本地 start
             string downPDFInfo = synchronousDate.DownPDF(GetTBSJIDS(date, bs, "自动同步" + now));
+
             if (downPDFInfo.IndexOf("SUCCESS") > -1)
             {
-                DataView data = GetTBJL(date, bs,"自动同步" + now).DefaultView;
+                DataView data = GetTBJL(date, bs).DefaultView;
                 if (data.Count > 0)
                 {
                     //上传成分的检测pdf start
@@ -65,17 +65,9 @@
             }
             else if (downPDFInfo.IndexOf("SUCCESS") == -1 || downPDFInfo.IndexOf("WARN") == -1)
             {
-                if (downPDFInfo == "")
-                {
-                    Response.Write("已同步！！！");
-                    Response.End();
-                }
-                else
-                {
-                    WriteLog("下载pdf失败！！！  " + downPDFInfo); //创建日志
-                    Response.Write("下载pdf失败！！！" + downPDFInfo);
-                    Response.End();
-                }
+                WriteLog("下载pdf失败！！！  " + downPDFInfo); //创建日志
+                Response.Write("下载pdf失败！！！");
+                Response.End();
             }
             //下载pdf到本地 end
         }
@@ -92,152 +84,6 @@
             Response.End();
         }
         //同步数据 end
-
-    }
-    //贴牌自动添加
-    public void AutoTj_tp(string ids) {
-        string mlids = ids;// ids.Substring(1, ids.Length);
-        using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
-        {
-            string sql = @" 
-                SELECT distinct gz.chdm sphh,gz.lymxid htddid,a.mlid,a.text,ROW_NUMBER() OVER(PARTITION BY a.mlid ORDER BY gz.chdm ) xh
-                FROM dbo.ghs_t_zldamxb a
-                INNER JOIN cl_v_sygzb gz ON a.mlid=gz.id AND a.zd='sygzb_tp' AND gz.gzlx='3311' AND gz.tzid=1         
-                WHERE mlid in (@mlids)
-            ";
-
-            SqlParameter[] paras = new SqlParameter[1];
-            paras[0]=new SqlParameter("@mlids", mlids);
-            DataView dv = sqlhelp.ExecuteDataTable(sql, CommandType.Text,paras).DefaultView;
-            string rtMsg = "";
-            //StringBuilder strSQL = new StringBuilder();
-            string strSQL = " declare @id int;declare @ytp varchar(max); ";
-            strSQL += "create table #tmp( ";
-            strSQL += "id int not null default(0),";
-            strSQL += "text varchar(200) not null default('')";
-            strSQL += ")";
-            for (int i = 0; i < dv.Count; i++)
-            {
-                strSQL += " insert into yf_t_bjdlb (lxid,tzid,rq,chdm,zdr,bz,lydjid,bjr) values ";
-                strSQL += " (411,1,getdate(),'" + dv[i]["sphh"].ToString() + "','sys','第三方首缸检测自动生成,第" + (dv[i]["xh"].ToString()) + "张','" + dv[i]["htddid"].ToString() + "','自动同步')";
-                strSQL += " SET @id=SCOPE_IDENTITY(); ";
-                strSQL += " select @ytp=max(text1) from ghs_t_zldamxb where mlid='" + dv[i]["mlid"].ToString() + "' and zd = 'sygzb_tp' and text='" + dv[i]["text"].ToString() + "' ";
-                strSQL += " update yf_T_bjdlb set kz=@ytp,zs='1', fk='application/pdf' where id =@id; ";
-                strSQL += " insert into #tmp (id,text) values (@id,'" + dv[i]["text"].ToString() + "')";
-            }
-            strSQL += " select * from #tmp; drop table #tmp; ";
-
-            DataTable dt = null;
-            rtMsg = dal.ExecuteQuery(strSQL, out dt);
-            if (rtMsg == "")
-            {
-                if (dt.Rows.Count > 0)
-                {
-                    for (int j = 0; j < dt.Rows.Count; j++)
-                    {
-                        string oldfile = "/photo/sygzb_pdf/" + dt.Rows[j]["text"].ToString();
-                        string newfile = "/MyUpload/fileupcp/" + "1-" + dt.Rows[j]["id"].ToString() + "-1.pdf";
-                        //string htmlurl = "../tl_yf/yf_cl_copyfile.aspx?oldfile=" + oldfile + "&newfile=" + newfile + " ";
-                        File.Copy(HttpContext.Current.Server.MapPath(oldfile), HttpContext.Current.Server.MapPath(newfile), true);
-                    }
-                }
-            }
-
-        }
-    }
-
-    //自制自动添加
-    public void AutoTj_zz(string ids, string isForce)
-    {
-        string mlids = ids;// ids.Substring(1, ids.Length);
-        //if (isForce.ToLower() == "true")
-        //{
-        //    isForce = "1";
-        //}
-        //else
-        //{
-        //    isForce = "0";
-        //}
-        using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
-        {
-            string sql = @" 
-                SELECT  a.lymxid htmxid,a.id mlid,b.text
-                INTO #aa
-                FROM cl_v_sygzb a
-                INNER JOIN ghs_t_zldamxb b ON a.id=b.mlid AND b.zd='sygzb_sg'
-                WHERE a.id  IN (@mlids)  AND a.gzlx=3312 AND a.tzid=1 and b.isForce=@isForce
-
-                SELECT a.cgddh,a.lymxid,a.id,a.clbh,c.zdbs,b.htmxid,b.mlid,b.text
-                INTO #bb
-                FROM zw_t_htylddmx a
-                INNER JOIN #aa b ON a.mxid=b.htmxid
-                INNER JOIN zw_t_htdddjb c ON a.id=c.id
-
-                SELECT a.cgddh,a.lymxid,a.id,a.clbh,a.zdbs,a.htmxid,a.mlid,a.text 
-                INTO #m1 
-                FROM #bb a WHERE ISNULL(a.cgddh,'')<>'' AND a.cgddh<>'nbgzh'
-
-                SELECT c.scddbh cgddh,a.lymxid,a.id,a.clbh,a.zdbs,a.htmxid,a.mlid,a.text 
-                INTO #m2 
-                FROM #bb a 
-                INNER JOIN dbo.cl_v_dddjmx b ON a.lymxid=b.mxid AND a.id=b.htddid AND b.djlx=621
-                inner join cl_v_cgjh_ddmx c on c.mxid=b.mxid
-                WHERE ISNULL(a.cgddh,'')='' AND c.scddbh<>'nbgzh'
-
-                SELECT c.scddbh cgddh,a.lymxid,a.id,a.clbh,a.zdbs,a.htmxid,a.mlid,a.text 
-                INTO #m3 
-                FROM #bb a
-                INNER JOIN dbo.cl_v_dddjmx b ON a.clbh=b.chdm AND a.id=b.htddid AND b.djlx=621
-                inner join cl_v_cgjh_ddmx c on c.mxid=b.mxid
-                WHERE ISNULL(a.cgddh,'')='' AND c.scddbh<>'nbgzh'
-
-                SELECT  b.sphh,a.htmxid,a.clbh,MAX(a.mlid) mlid,MAX(a.text) text into #temp
-                FROM (
-	                select * from #m1 union  select * from #m2 union  select * from #m3
-                ) a
-                INNER JOIN YX_T_Spcgjhb b ON a.cgddh=b.cggzh
-                GROUP BY a.htmxid,b.sphh,a.clbh
-
-                SELECT *,ROW_NUMBER() OVER(PARTITION BY mlid ORDER BY clbh) xh FROM #temp 
-                ";
-            SqlParameter[] paras = new SqlParameter[2];
-            paras[0] = new SqlParameter("@mlids", mlids);
-            paras[1] = new SqlParameter("@isForce", isForce);
-            DataView dv = sqlhelp.ExecuteDataTable(sql, CommandType.Text, paras).DefaultView;
-            string rtMsg = "";
-
-            string strSQL = " declare @id int;declare @ytp varchar(max); ";
-            strSQL += "create table #tmp( ";
-            strSQL += "id int not null default(0),";
-            strSQL += "text varchar(200) not null default('')";
-            strSQL += ")";
-            for (int i = 0; i < dv.Count; i++)
-            {
-                strSQL += " insert into yf_t_bjdlb (lxid,tzid,rq,chdm,zdr,bz,lydjid,bjr) values ";
-                strSQL += " (411,1,getdate(),'" + dv[i]["sphh"].ToString() + "','sys','第三方首缸检测自动生成,第" + (dv[i]["xh"].ToString()) + "张','" + dv[i]["htmxid"].ToString() + "','自动同步')";
-                strSQL += " SET @id=SCOPE_IDENTITY(); ";
-                strSQL += " select @ytp=max(text1) from ghs_t_zldamxb where mlid='" + dv[i]["mlid"].ToString() + "' and zd = 'sygzb_sg' and text='" + dv[i]["text"].ToString() + "' ";
-                strSQL += " update yf_T_bjdlb set kz=@ytp,zs='1', fk='application/pdf' where id =@id; ";
-                strSQL += " insert into #tmp (id,text) values (@id,'" + dv[i]["text"].ToString() + "')";
-            }
-            strSQL += " select * from #tmp; drop table #tmp; ";
-
-            DataTable dt = null;
-            rtMsg = dal.ExecuteQuery(strSQL, out dt);
-            if (rtMsg == "")
-            {
-                if (dt.Rows.Count > 0)
-                {
-                    for (int j = 0; j < dt.Rows.Count; j++)
-                    {
-                        string oldfile = "/photo/sygzb_pdf/" + dt.Rows[j]["text"].ToString();
-                        string newfile = "/MyUpload/fileupcp/" + "1-" + dt.Rows[j]["id"].ToString() + "-1.pdf";
-                        //string htmlurl = "../tl_yf/yf_cl_copyfile.aspx?oldfile=" + oldfile + "&newfile=" + newfile + " ";
-                        File.Copy(HttpContext.Current.Server.MapPath(oldfile), HttpContext.Current.Server.MapPath(newfile), true);
-                    }
-                }
-            }
-        }
     }
 
     public class SynchronousDate
@@ -259,30 +105,19 @@
                 rtMsg = @"{""type"":""ERROR"",""msg"":""日期参数有误！""}";
             else
             {
-                try
-                {
-                    if (ctrl == "0")
-                        fz = PullFZDatas(bdate, edate, username); //福州
-                    else if (ctrl == "1")
-                        fz = PullGZDatas(bdate, edate, username); //广州
-                    else if (ctrl == "2")
-                        fz = PullTJDatas(bdate, edate, username); //天津
-                    else if (ctrl == "3" || ctrl == "4")//4=远东
-                        fz = PullQZDatas(bdate, edate, username, ctrl); //石狮
+                if (ctrl == "0")
+                    fz = PullFZDatas(bdate, edate, username);  //福州
+                else if (ctrl == "1")
+                    fz = PullGZDatas(bdate, edate, username); //广州
+                else if (ctrl == "2")
+                    fz = PullTJDatas(bdate, edate, username);  //天津
 
-
-                    if (fz.IndexOf("WARN") > -1)
-                        rtMsg = @"{""type"":""WARN"",""msg"":""检测数据不存在！！！""}";
-                    else if (fz.IndexOf("SUCCESS") > -1 || fz.IndexOf("WARN") > -1)
-                        rtMsg = @"{""type"":""SUCCESS""}";
-                    else
-                        rtMsg = @"{""type"":""ERROR"",""msg"":""检测数据同步失败！！！""}";
-                }
-                catch (SystemException ex)
-                {
-                    rtMsg = @"{""type"":""ERROR"",""msg"":""{0}""}";
-                    rtMsg = string.Format(rtMsg, ex.Message);
-                }
+                if (fz.IndexOf("WARN") > -1)
+                    rtMsg = @"{""type"":""WARN"",""msg"":""检测数据不存在！！！""}";
+                else if (fz.IndexOf("SUCCESS") > -1 || fz.IndexOf("WARN") > -1)
+                    rtMsg = @"{""type"":""SUCCESS""}";
+                else
+                    rtMsg = @"{""type"":""ERROR"",""msg"":""检测数据同步失败！！！""}";
             }
 
             return rtMsg;
@@ -303,16 +138,14 @@
             else
             {
                 //实验报告文件保存位置
-
                 rtMsg = DownloadPDF(HttpContext.Current.Server.MapPath("../MyUpload/" + DateTime.Now.ToString("yyyyMM") + "/"), ids);
             }
             return rtMsg;
         }
 
-        //调用实验室接口将报告信息存到本地数据库中-天津   
+        //调用实验室接口将报告信息存到本地数据库中-天津
         public string PullTJDatas(string bdate, string edate, string username)
         {
-            System.Diagnostics.Debug.Write(DateTime.Now.ToString());
             string rtMsg = "";
             string jls = "0";
             // 请求对象
@@ -340,16 +173,10 @@
             Body.FailItem = "";
             Body.ProductStandardNo = "";
             Body.MethodStandardNo = "";
-            //Body.TrustDateFrom = (Convert.ToDateTime(bdate)).AddDays(-30).ToString("yyyy-MM-dd");//委托日期
-            //Body.TrustDateTo = edate;
-            //Body.AuditDateFrom = bdate;//出证日期
-            //Body.AuditDateTo = (Convert.ToDateTime(bdate)).AddDays(1).ToString("yyyy-MM-dd");
-
-            Body.TrustDateFrom = "";//委托日期
-            Body.TrustDateTo = "";
-            Body.AuditDateFrom = (Convert.ToDateTime(bdate)).AddDays(-30).ToString("yyyy-MM-dd");//出证日期
+            Body.TrustDateFrom = (Convert.ToDateTime(bdate)).AddDays(-30).ToString("yyyy-MM-dd");//委托日期
+            Body.TrustDateTo = edate;
+            Body.AuditDateFrom = bdate;//出证日期
             Body.AuditDateTo = (Convert.ToDateTime(bdate)).AddDays(1).ToString("yyyy-MM-dd");
-
             RequestBean.Head = Head;
             RequestBean.Body = Body;
             // 返回对象
@@ -417,11 +244,10 @@
                     strSQL.Append("end;");
                 }
                 strSQL.Append("select @jls;");
-                System.Diagnostics.Debug.Write(DateTime.Now.ToString());
                 using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
                 {
                     DataTable dt = null;
-                    //rtMsg = dal.ExecuteQuery(strSQL.ToString(), out dt);
+                    rtMsg = dal.ExecuteQuery(strSQL.ToString(), out dt);
                     if (rtMsg == "" && dt.Rows.Count > 0)
                         jls = dt.Rows[0][0].ToString();
                 }
@@ -443,7 +269,6 @@
         public string PullFZDatas(string bdate, string edate, string username)
         {
             string url = @"http://www.ffib.cn/query/55a81b96c60f8918e43.php?bdate={0}&edate={1}";
-            //string url = @"http://www.ffib.cn:8099/query/55a81b96c60f8918e43.php?bdate={0}&edate={1}";
             string rtMsg = "", jls = "0";
             url = string.Format(url, bdate, edate);
             string JSONdate = clsNetExecute.HttpRequest(url);
@@ -465,8 +290,8 @@
                     strSQL.Append("declare @id int;declare @jls int;set @jls=0;");
                     string zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='0')
 										begin
-										insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,isForce,bs)
-										values ('{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','','{10}','{11}','{12}','{13}','0');
+										insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,bs)
+										values ('{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','','{10}','{11}','{12}','0');
 										set @id=(select SCOPE_IDENTITY());set @jls=@jls+1; ";
                     string mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
                     for (int i = 0; i < root.data.Count; i++)
@@ -477,7 +302,7 @@
                         strSQL.Append(string.Format(zSQL, root.data[i].报告编号, root.data[i].报告编号,
                             root.data[i].样品名称, yphh, root.data[i].送样日期,
                             root.data[i].出证日期, root.data[i].检测依据, root.data[i].安全技术等级,
-                            root.data[i].检验结论, root.data[i].下载地址, username, DateTime.Now.ToString(), root.data[i].委托序号, root.data[i].isForce));
+                            root.data[i].检验结论, root.data[i].下载地址, username, DateTime.Now.ToString(), root.data[i].委托序号));
                         if (root.data[i].row == null)
                         {
                             strSQL.Append("end;");
@@ -525,6 +350,7 @@
         public string PullGZDatas(string startDate, string endDate, string username)
         {
             string url = @"http://www.gttc.net.cn/WSInterface/Handler/GetReportData_LiLang.ashx?AccessToken=D3865E240DB0445A9245F51D85119FBA&BeginQueryDate={0}&EndQueryDate={1}";
+                          //http://www.gttc.net.cn/WSInterface/Handler/GetReportData_LiLang.ashx?AccessToken=D3865E240DB0445A9245F51D85119FBA&BeginQueryDate
             string rtMsg = "", jls = "0";
             url = string.Format(url, startDate, endDate);
             string JsonStr = clsNetExecute.HttpRequest(url);
@@ -538,8 +364,8 @@
                     strSQL.Append("declare @id int;declare @jls int;set @jls=0;");
                     string zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='1')
                                         begin
-                                            insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,bs,isForce)
-                                            values ('{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','','{10}','{11}','{12}','1',{13});
+                                            insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,bs)
+                                            values ('{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','','{10}','{11}','{12}','1');
                                             set @id=(select SCOPE_IDENTITY());set @jls=@jls+1; ";
                     string mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
                     for (int i = 0; i < data.Count; i++)
@@ -548,7 +374,7 @@
                         strSQL.Append(string.Format(zSQL, data[i].报告编号, data[i].报告编号,
                             data[i].样品名称, yphh, data[i].送样日期,
                             data[i].出证日期, data[i].检测依据, data[i].安全技术等级,
-                            data[i].检验结论, data[i].下载地址, username, DateTime.Now.ToString(), data[i].委托序号, data[i].是否强标));
+                            data[i].检验结论, data[i].下载地址, username, DateTime.Now.ToString(), data[i].委托序号));
                         if (data[i].itemInfos == null)
                         {
                             strSQL.Append("end;");
@@ -582,146 +408,12 @@
             }
             else
                 rtMsg = @"{""type"":""WARN"",""msg"":""Sorry,没有找到数据！""}";
-            return rtMsg;
-        }
-
-        /// <summary>
-        /// 调用石狮提供的接口获取检测数据并存储到本地数据库中
-        /// </summary>
-        /// <param name="startDate">开始日期</param>
-        /// <param name="endDate">结束日期</param>
-        /// <returns></returns>
-        public string PullQZDatas(string bdate, string edate, string username, string ctrl)// 3石狮|4远东
-        {
-            ReportsListResponseBean ResponseBean = new ReportsListResponseBean();
-            //远东的token
-            Dictionary<string, string> hDIC = new Dictionary<string, string>();
-            hDIC.Add("token", "noWgQiZyXbrVka6T8gg2MQYP8lVAtmNu");
-            string rtMsg = "";
-            string jls = "0";
-            RequestStc Head = new RequestStc();
-            string url = "";
-            string retmp = "";
-            if (ctrl == "3")
-            {
-                // 请用户名
-                Head.AppKey = "UTSoft.Interface.ZFLJQZ";
-                // 请求时间
-                Head.ApplyTime = System.DateTime.Now.ToString("yyyyMMddHHmmss");
-                // 请求方法
-                Head.Method = "GetReportList";
-                // 请求用户密码
-                Head.SecretKey = "EE711C07-D562-4D01-B886-6091E894BE82";
-                // 请求唯一标识 建议用UUID 双方排查日志用
-                Head.SerialNo = Guid.NewGuid().ToString();
-                // 请求功能URL
-                url = "http://59.56.241.229:8088/CustomerInterface/API/LL";
-                Head.Param = "{\"bdate\":\"" + bdate + "\", \"edate\":\"" + (Convert.ToDateTime(edate)).AddDays(1).ToString("yyyy-MM-dd") + "\"}";
-                string postJson = JsonConvert.SerializeObject(Head, Newtonsoft.Json.Formatting.None);
-                // 请求后台
-
-                try
-                {
-                    retmp = PostFunction(url, postJson);
-                    rtMsg = retmp;
-                }
-                catch (SystemException ex)
-                {
-                    rtMsg = @"{""type"":""ERROR"",""msg"":""无法链接泉州石狮外部服务器！""}";
-                    return rtMsg;
-                }
-                ResponseBean = JsonConvert.DeserializeObject<ReportsListResponseBean>(retmp);
-            }
-            else if (ctrl == "4")
-            {
-                // 请求功能URL
-                url = "http://gbs.fnctory.com/OpenAPI/Lilanz?type=reports&";//+ "bdate=" + bdate + "&edate=" + (Convert.ToDateTime(edate)).AddDays(1).ToString("yyyy-MM-dd");             
-                string postJson = "bdate=" + bdate + "&edate=" + bdate;
-                // 请求后台
-                try
-                {
-                    retmp = HttpRequest(url, postJson, "post", null, "utf-8", 36000, hDIC);
-                    rtMsg = retmp;
-                }
-                catch (SystemException ex)
-                {
-                    rtMsg = @"{""type"":""ERROR"",""msg"":""无法链接远东服务器！""}";
-                    return rtMsg;
-                }
-                ResponseBean.Body = JsonConvert.DeserializeObject<List<ReportsListResponseBody>>(retmp);
-            }
-
-
-            List<ReportsListResponseBody> contentList = ResponseBean.Body;
-            if (contentList != null && contentList.Count > 0)
-            {
-                StringBuilder strSQL = new StringBuilder();
-                strSQL.Append("declare @id int;declare @jls int;set @jls=0;");
-                string zSQL = @"if not exists(select top 1 1 from yf_t_syjcbg where bgbh='{0}' and bs='3')
-                                    begin
-                                    insert into yf_t_syjcbg(bgbh,ypmc,yphh,syrq,czrq,jcyj,aqdj,jcjg,pdf,localpdf,tbr,tbsj,wtid,bs,isForce)
-                                    values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','','{9}','{10}','{11}','3',{12});
-                                    set @id=(select SCOPE_IDENTITY());set @jls=@jls+1; ";
-                string mSQL = @"insert into yf_t_syjcbgmxb(id,jcxmmc,csff,jsyq,jcjg,dxpd) values (@id,'{0}','{1}','{2}','{3}','{4}');";
-                foreach (ReportsListResponseBody r in contentList)
-                {
-                    if (r.Urlpdf.IndexOf("http://") == 0)
-                        r.Urlpdf = r.Urlpdf.Substring(7, r.Urlpdf.Length - 7);
-
-                    strSQL.Append(string.Format(zSQL, r.Stfbreportno, r.ProductName, r.Productsremark, r.AcceptDate, r.Dapprovedate, "", r.SecurityCategories, (r.Fails.ToString() == "0" ? "合格" : "不合格"), r.Urlpdf, username, DateTime.Now.ToString(), r.SuperviseNoticeCode, r.IsForce));
-                    if (r.SuperviseNoticeCode.Length > 0)
-                    {
-                        List<ReportsInfoResponseBody> conList = null;
-                        if (ctrl == "3")
-                        {
-                            Head.Method = "GetReportInfo";
-                            Head.Param = "{\"stfbreportno\":\"" + r.Stfbreportno + "\"}";
-                            // 返回对象
-                            ReportsInfoResponseBean ReqBean = new ReportsInfoResponseBean();
-                            string postJs = JsonConvert.SerializeObject(Head, Newtonsoft.Json.Formatting.None);
-                            ReqBean = JsonConvert.DeserializeObject<ReportsInfoResponseBean>(PostFunction(url, postJs));
-                            conList = ReqBean.Body;
-                        }
-                        else if (ctrl == "4")
-                        {
-                            // 请求功能URL
-                            url = "http://gbs.fnctory.com/OpenAPI/Lilanz?type=details&";
-                            string postJson = "stfbreportno=" + r.Stfbreportno;
-                            // 请求后台      
-                            conList = JsonConvert.DeserializeObject<List<ReportsInfoResponseBody>>(HttpRequest(url, postJson, "post", null, "utf-8", 36000, hDIC));
-                        }
-                        if (conList.Count > 0)
-                        {
-                            foreach (ReportsInfoResponseBody c in conList)
-                                strSQL.Append(string.Format(mSQL, c.Item, c.Prefix, c.Standvalue, c.Acturevalue, c.Result));
-                        }
-                    }
-                    strSQL.Append("end;");
-                }
-                strSQL.Append("select @jls;");
-                using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
-                {
-                    DataTable dt = null;
-                    rtMsg = dal.ExecuteQuery(strSQL.ToString(), out dt);
-                    if (rtMsg == "" && dt.Rows.Count > 0)
-                        jls = dt.Rows[0][0].ToString();
-                }
-                if (rtMsg == "")
-                {
-                    rtMsg = @"{{""type"":""SUCCESS"",""msg"":""成功同步【{0}】条数据！""}}";
-                    rtMsg = string.Format(rtMsg, jls);
-                }
-            }
-            else
-            {
-                rtMsg = @"{""type"":""WARN"",""msg"":""Sorry,没有找到数据！""}";
-            }
 
             return rtMsg;
         }
 
         /// <summary>
-        /// 下载执行    
+        /// 下载执行
         /// </summary>
         /// <param name="id"></param>
         /// <param name="URL"></param>
@@ -733,7 +425,6 @@
             string rtMsg = "";
             string strPath = Path.GetDirectoryName(path);
             string _filename = "";
-            string message = "";
             if (!Directory.Exists(strPath))
                 Directory.CreateDirectory(strPath);
             try
@@ -775,17 +466,8 @@
                     rtMsg = errSite.ToString();
             }
             catch (Exception ex)
-            {
-                rtMsg = string.Format(@"{{""type"":""ERROR"",""msg"":""{0}""}}", ex.Message); message = ex.Message;
-            }
-
-            using (LiLanzDALForXLM dal = new LiLanzDALForXLM())
-            {
-                string sql = "update yf_t_syjcbg set bz=@bz where id=@id";
-                List<SqlParameter> paras = new List<SqlParameter>();
-                paras.Add(new SqlParameter("@bz", message));
-                paras.Add(new SqlParameter("@id", id));
-                dal.ExecuteNonQuerySecurity(sql, paras);
+            {                
+                rtMsg = string.Format(@"{{""type"":""ERROR"",""msg"":""{0}""}}", ex.Message);
             }
 
             return rtMsg;
@@ -815,10 +497,8 @@
                         {
                             ID = dt.Rows[i]["id"].ToString();
                             URL = dt.Rows[i]["pdf"].ToString().Replace("\\", "");
+                            filename = DateTime.Now.ToString("yyyyMMdd") + URL.Substring(URL.LastIndexOf("/") + 1, URL.Length - URL.LastIndexOf("/") - 1);
 
-                            //filename = DateTime.Now.ToString("yyyyMMdd") + URL.Substring(URL.LastIndexOf("/") + 1, URL.Length - URL.LastIndexOf("/") - 1);
-
-                            filename = DateTime.Now.ToString("yyyyMMdd") + dt.Rows[i]["bgbh"].ToString() + ".pdf";
                             if (!URL.Contains("http://") || !URL.Contains("https://"))
                                 URL = "http://" + URL;
                             rtMsg = DownloadPDFExecutor(ID, URL, path, filename);
@@ -839,7 +519,6 @@
                 }
             }
             return rtMsg;
-
         }
 
         /// <summary>
@@ -900,7 +579,6 @@
                     mxinfo.检测结果 = jcItem[j].GetJsonValue("CheckResult").Replace("\r\n", "");
                     mxinfo.单项判定 = jcItem[j].GetJsonValue("SingleJudgement");
                     mxinfo.技术要求 = jcItem[j].GetJsonValue("StandardValue");
-
                     itemInfos.Add(mxinfo);
 
                     if (jcItem[j].GetJsonValue("SingleJudgement") == "不符合")
@@ -923,63 +601,71 @@
                         itemInfoHgs.Add(mxinfo);
                     }
                 }
-                zbinfo = new zbInfo();
-                zbinfo.委托序号 = testItem[i].GetJsonValue("OrderNo");
-                zbinfo.样品名称 = testItem[i].GetJsonValue("SampleName");
-                zbinfo.样品货款号 = sphh;
-                zbinfo.安全技术等级 = aqjsdj;
-                zbinfo.检测依据 = jcyj;
-                zbinfo.出证日期 = testItem[i].GetJsonValue("ReportPrintTime");
-                zbinfo.送样日期 = testItem[i].GetJsonValue("SampleReceiveTime");
-                if (testItem[i].GetJsonValue("isForce") == "")
-                {
-                    zbinfo.是否强标 = "0";
-                }
-                else
-                {
-                    zbinfo.是否强标 = testItem[i].GetJsonValue("isForce");
-                }
+
                 if (testItem[i].GetJsonValue("Judgement") == "不合格") // 不合格
                 {
+                    paths = testItem[i].GetJsonValue("FailReportDownPath").Split('/');
+                    zbinfo = new zbInfo();
+                    zbinfo.委托序号 = testItem[i].GetJsonValue("OrderNo");
+                    zbinfo.报告编号 = paths[paths.Length - 1].Split('.')[0] + "F";
+                    zbinfo.样品名称 = testItem[i].GetJsonValue("SampleName");
+                    zbinfo.样品货款号 = sphh;
+                    zbinfo.下载地址 = testItem[i].GetJsonValue("FailReportDownPath").Replace("http://", "");
+                    zbinfo.检验结论 = "不合格";
+                    zbinfo.安全技术等级 = aqjsdj;
+                    zbinfo.检测依据 = jcyj;
+                    zbinfo.出证日期 = testItem[i].GetJsonValue("ReportPrintTime");
+                    zbinfo.送样日期 = testItem[i].GetJsonValue("SampleReceiveTime");
+                    zbinfo.itemInfos = itemInfoBhgs;
+                    data.Add(zbinfo);
 
-                    if (testItem[i].GetJsonValue("FailReportDownPath") != "")
-                    {
-                        paths = testItem[i].GetJsonValue("FailReportDownPath").Split('/');
-                        zbinfo.报告编号 = paths[paths.Length - 1].Split('.')[0] + "F";
-                        zbinfo.下载地址 = testItem[i].GetJsonValue("FailReportDownPath").Replace("http://", "");
-                        zbinfo.检验结论 = "不合格";
-                        zbinfo.itemInfos = itemInfoBhgs;
+                    paths = testItem[i].GetJsonValue("PassReportDownPath").Split('/');
+                    zbinfo = new zbInfo();
+                    zbinfo.委托序号 = testItem[i].GetJsonValue("OrderNo");
+                    zbinfo.报告编号 = paths[paths.Length - 1].Split('.')[0] + "P";
+                    zbinfo.样品名称 = testItem[i].GetJsonValue("SampleName");
+                    zbinfo.样品货款号 = sphh;
+                    zbinfo.下载地址 = testItem[i].GetJsonValue("PassReportDownPath").Replace("http://", "");
+                    zbinfo.检验结论 = "合格";
+                    zbinfo.安全技术等级 = aqjsdj;
+                    zbinfo.检测依据 = jcyj;
+                    zbinfo.出证日期 = testItem[i].GetJsonValue("ReportPrintTime");
+                    zbinfo.送样日期 = testItem[i].GetJsonValue("SampleReceiveTime");
+                    zbinfo.itemInfos = itemInfoHgs;
+                    data.Add(zbinfo);
 
-                    }
-                    if (testItem[i].GetJsonValue("PassReportDownPath") != "")
-                    {
-                        paths = testItem[i].GetJsonValue("PassReportDownPath").Split('/');
-                        zbinfo.报告编号 = paths[paths.Length - 1].Split('.')[0] + "P";
-                        zbinfo.下载地址 = testItem[i].GetJsonValue("PassReportDownPath").Replace("http://", "");
-                        zbinfo.检验结论 = "合格";
-                        zbinfo.itemInfos = itemInfoHgs;
-
-                    }
-                    if (testItem[i].GetJsonValue("ReportDownPath") != "")
-                    {
-                        zbinfo.报告编号 = testItem[i].GetJsonValue("ReportNo");
-                        zbinfo.下载地址 = testItem[i].GetJsonValue("ReportDownPath").Replace("http://", "");
-                        zbinfo.检验结论 = testItem[i].GetJsonValue("Judgement");
-                        zbinfo.itemInfos = itemInfos;
-                    }
+                    //zbinfo = new zbInfo();
+                    //zbinfo.委托序号 = testItem[i].GetJsonValue("OrderNo");
+                    //zbinfo.报告编号 = testItem[i].GetJsonValue("ReportNo");
+                    //zbinfo.样品名称 = testItem[i].GetJsonValue("SampleName");
+                    //zbinfo.样品货款号 = sphh;
+                    //zbinfo.下载地址 = testItem[i].GetJsonValue("ReportDownPath").Replace("http://", "");
+                    //zbinfo.检验结论 = testItem[i].GetJsonValue("Judgement");
+                    //zbinfo.安全技术等级 = aqjsdj;
+                    //zbinfo.检测依据 = jcyj;
+                    //zbinfo.出证日期 = testItem[i].GetJsonValue("ReportPrintTime");
+                    //zbinfo.送样日期 = testItem[i].GetJsonValue("SampleReceiveTime");
+                    //zbinfo.itemInfos = itemInfos;
+                    //data.Add(zbinfo);
                 }
                 else // 合格
                 {
                     paths = testItem[i].GetJsonValue("ReportDownPath").Split('/');
+                    zbinfo = new zbInfo();
+                    zbinfo.委托序号 = testItem[i].GetJsonValue("OrderNo");
                     zbinfo.报告编号 = testItem[i].GetJsonValue("ReportNo");
+                    zbinfo.样品名称 = testItem[i].GetJsonValue("SampleName");
+                    zbinfo.样品货款号 = sphh;
                     zbinfo.下载地址 = testItem[i].GetJsonValue("ReportDownPath").Replace("http://", "");
                     zbinfo.检验结论 = testItem[i].GetJsonValue("Judgement");
+                    zbinfo.安全技术等级 = aqjsdj;
+                    zbinfo.检测依据 = jcyj;
+                    zbinfo.出证日期 = testItem[i].GetJsonValue("ReportPrintTime");
+                    zbinfo.送样日期 = testItem[i].GetJsonValue("SampleReceiveTime");
                     zbinfo.itemInfos = itemInfos;
-
+                    data.Add(zbinfo);
                 }
-                data.Add(zbinfo);
             }
-
             return data;
         }
 
@@ -1003,6 +689,7 @@
             }
             return new string(c);
         }
+
         /// <summary>
         /// 发送POST请求
         /// </summary>
@@ -1014,6 +701,7 @@
             string Result = "";
             string serviceAddress = url;
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serviceAddress);
+
             request.Method = "POST";
             request.ContentType = "application/json";
             string strContent = postJson;
@@ -1035,127 +723,12 @@
             return Result;
 
         }
-
-        // x-www-form-urlencoded
-        public static string HttpRequest(string strUrl, string strPostDatas, string method, string referer, string objencoding, int Timeout, Dictionary<string, string> headDic)
-        {
-            CookieContainer cookieContainer = null;
-            string text = "";
-            return HttpRequest(strUrl, strPostDatas, method, referer, objencoding, Timeout, ref cookieContainer, ref text, false, headDic);
-        }
-
-        public static string HttpRequest(string strUrl, string strPostDatas, string method, string referer, string objencoding, int Timeout, ref CookieContainer objCookieContainer, ref string rescookie, bool flag, Dictionary<string, string> headDic)
-        {
-            string result = "";
-            try
-            {
-                result = HttpRequestThrowException(strUrl, strPostDatas, method, referer, objencoding, Timeout, ref objCookieContainer, ref rescookie, flag, headDic);
-            }
-            catch (Exception ex)
-            {
-                result = "Error:" + ex.Message;
-            }
-            return result;
-        }
-
-        public static string HttpRequestThrowException(string strUrl, string strPostDatas, string method, string referer, string objencoding, int Timeout, ref CookieContainer objCookieContainer, ref string rescookie, bool flag, Dictionary<string, string> headDic)
-        {
-            HttpWebResponse httpWebResponse = null;
-            string result = "";
-            try
-            {
-                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(strUrl);
-                httpWebRequest.Method = method;
-                httpWebRequest.KeepAlive = true;
-                httpWebRequest.ContentType = "application/x-www-form-urlencoded";
-                httpWebRequest.Timeout = Timeout;
-                httpWebRequest.Referer = referer;
-                if (headDic != null)
-                {
-                    foreach (string key in headDic.Keys)
-                        httpWebRequest.Headers.Add(key, headDic[key]);
-                }
-                bool flag2 = objCookieContainer == null;
-                if (flag2)
-                {
-                    objCookieContainer = new CookieContainer();
-                }
-                httpWebRequest.CookieContainer = objCookieContainer;
-                StringBuilder stringBuilder = new StringBuilder();
-                httpWebRequest.ContentLength = 0L;
-                bool flag3 = strPostDatas != null && strPostDatas.Length > 0;
-                if (flag3)
-                {
-                    byte[] bytes;
-                    if (flag)
-                    {
-                        string[] array = strPostDatas.TrimStart(new char[] { '?' }).Split(new char[] { '&' });
-                        for (int i = 0; i < array.Length; i++)
-                        {
-                            string[] array2 = array[i].Split(new char[] { '=' });
-                            bool flag4 = array2.Length >= 2;
-                            if (flag4)
-                            {
-                                stringBuilder.Append(HttpUtility.UrlEncode(array2[0]));
-                                stringBuilder.Append("=");
-                                stringBuilder.Append(HttpUtility.UrlEncode(array2[1]));
-                                bool flag5 = i < array.Length - 1;
-                                if (flag5)
-                                {
-                                    stringBuilder.Append("&");
-                                }
-                            }
-                        }
-                        bytes = Encoding.GetEncoding(objencoding.Trim()).GetBytes(stringBuilder.ToString());
-                    }
-                    else
-                    {
-                        bytes = Encoding.GetEncoding(objencoding.Trim()).GetBytes(strPostDatas);
-                    }
-                    httpWebRequest.ContentLength = (long)bytes.Length;
-                    using (Stream requestStream = httpWebRequest.GetRequestStream())
-                    {
-                        requestStream.Write(bytes, 0, bytes.Length);
-                    }
-                }
-                httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                objCookieContainer = httpWebRequest.CookieContainer;
-                CookieCollection cookies = objCookieContainer.GetCookies(httpWebRequest.RequestUri);
-                foreach (Cookie cookie in cookies)
-                {
-                    rescookie = cookie.Name + "=" + cookie.Value;
-                }
-                using (Stream responseStream = httpWebResponse.GetResponseStream())
-                {
-                    using (StreamReader streamReader = new StreamReader(responseStream, Encoding.GetEncoding(objencoding.Trim())))
-                    {
-                        result = streamReader.ReadToEnd();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                clsLocalLoger.WriteError(string.Format("【调用网络访问失败】Url:{0} Message:{1}  Source:{2}  StackTrace:{3}  InnerException:{4}", new object[] { strUrl, ex.Message, ex.Source, ex.StackTrace, ex.InnerException }));
-                result = "Error:" + ex.Message;
-                throw ex;
-            }
-            finally
-            {
-                bool flag6 = httpWebResponse != null;
-                if (flag6)
-                {
-                    httpWebResponse.Close();
-                }
-            }
-            return result;
-        }
-
     }
 
     public class PDFUploadCZ
     {
         LiLanzDAL sqlhelp = new LiLanzDAL();
-        public string Zyff(string ctrl, string ids, string mlid, string zd, string mxid, string isForce)
+        public string Zyff(string ctrl, string ids, string mlid, string zd, string mxid)
         {
             string rtMsg = "";
 
@@ -1168,7 +741,7 @@
             switch (ctrl)
             {
                 case "upload":
-                    rtMsg = UploadPDF(ids, mlid, zd, isForce);
+                    rtMsg = UploadPDF(ids, mlid, zd);
                     break;
                 case "delete":
                     rtMsg = DeletePDF(mxid, zd);
@@ -1181,16 +754,8 @@
             return rtMsg;
         }
         //上传操作，将文件复制一份出来并写入数据库
-        public string UploadPDF(string ids, string mlid, string zd, string isforce)
+        public string UploadPDF(string ids, string mlid, string zd)
         {
-            //if (isforce.ToLower() == "true")
-            //{
-            //    isforce = "1";
-            //}
-            //else
-            //{
-            //    isforce = "0";
-            //}
             string[] tmp = ids.Split(',');
             DataTable dt = null;
             string errInfo = "";
@@ -1202,7 +767,6 @@
                 {
                     string path = "", filename = "", newfilename = "", errs = "";
                     string toPath = "../photo/sygzb_pdf/";
-                    string mlids = "";
                     int value = 0, sucCount = 0;
                     if (zd == "sygzb_tp")
                         value = 3311;
@@ -1229,23 +793,18 @@
                                     if (File.Exists(HttpContext.Current.Server.MapPath(toPath + newfilename)))
                                     {
                                         //检查是否复制成功，成功则接着写入数据库
-                                        sql = "insert into ghs_t_zldamxb(mlid,zd,value,text,text1,step,isForce) values(@mlid,@zd,@value,@text,@text1,0,@isforce);";
+                                        sql = "insert into ghs_t_zldamxb(mlid,zd,value,text,text1,step) values(@mlid,@zd,@value,@text,@text1,0);";
                                         List<SqlParameter> paras = new List<SqlParameter>();
                                         paras.Add(new SqlParameter("@mlid", mlid));
                                         paras.Add(new SqlParameter("@zd", zd));
                                         paras.Add(new SqlParameter("@value", value));
                                         paras.Add(new SqlParameter("@text", newfilename));
                                         paras.Add(new SqlParameter("@text1", filename));
-                                        paras.Add(new SqlParameter("@isforce", isforce));
                                         errInfo = dal.ExecuteNonQuerySecurity(sql, paras);
                                         if (errInfo == "")
-                                        {
                                             sucCount++;
-                                            mlids = mlids + ',' + mlid;
-                                        }
                                         else
                                             errs += errInfo + "|";
-
                                     }
                                 }
                             }
@@ -1297,7 +856,7 @@
             return "删除失败！";
         }
     }
-
+    
     /// <summary>
     /// 获取指定同步日期数据的id串
     /// </summary>
@@ -1310,10 +869,10 @@
         string sql = @"
             SELECT id
             FROM yf_t_syjcbg
-            WHERE bs='{1}' /*and CONVERT(VARCHAR(50),czrq,112)>=dateadd(day, -15,CAST('{0}' AS DATETIME))*/ and tbr='{2}' and isnull(localpdf,'')='' 
+            WHERE bs='{1}' and CONVERT(VARCHAR(50),czrq,112)=CONVERT(VARCHAR(50),CAST('{0}' AS DATETIME),112) and isnull(localpdf,'')='' 
             ORDER BY id DESC
         ";
-        sql = string.Format(sql, tbrq, bs, tbr);
+        sql = string.Format(sql, tbrq, bs);
         string ids = "0";
         using (SqlDataReader sdr = sqlhelp.ExecuteReader(sql))
         {
@@ -1330,16 +889,16 @@
     /// </summary>
     /// <param name="tbrq">同步日期</param>
     /// <returns>返回指定出证日期数据记录表</returns>
-    public DataTable GetTBJL(string tbrq, string bs, string tbr)
+    public DataTable GetTBJL(string tbrq, string bs)
     {
         string sql = @"
-            SELECT b.sygzid mlid,b.djlx,a.id,a.bgbh,a.jcjg,a.isForce
+            SELECT b.sygzid mlid,b.djlx,a.id,a.bgbh,a.jcjg
             FROM yf_t_syjcbg a
             INNER JOIN yf_t_wtjyxy b ON a.wtid=b.id
-            WHERE bs='{1}' and a.tbr='{2}' /*CONVERT(VARCHAR(50),czrq,112)=CONVERT(VARCHAR(50),CAST('{0}' AS DATETIME),112)*/
+            WHERE bs='{1}' and CONVERT(VARCHAR(50),czrq,112)=CONVERT(VARCHAR(50),CAST('{0}' AS DATETIME),112)
             ORDER BY a.id DESC
         ";
-        sql = string.Format(sql, tbrq, bs, tbr);
+        sql = string.Format(sql, tbrq, bs);
         using (DataTable dt = sqlhelp.ExecuteDataTable(sql))
         {
             return dt;
@@ -1366,7 +925,7 @@
             }
             PDFUploadCZ pDFUploadCZ = new PDFUploadCZ();
             //Zyff(string ctrl, string userid, string ids, string mlid, string zd, string mxid, string StartPath)
-            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "", "0").IndexOf("成功复制") > -1)
+            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "").IndexOf("成功复制") > -1)
             {
                 ztsm++;
             }
@@ -1388,7 +947,6 @@
         foreach (DataRow dr in mlidb.Select())
         {
             string iscg = "0";
-
             //上传合格
             dv.RowFilter = "djlx='3311' and mlid=" + dr["mlid"] + " and (bgbh like '%P' or jcjg='合格') ";
             string ids = "0";
@@ -1397,15 +955,12 @@
                 ids += "," + dr1["id"];
             }
             PDFUploadCZ pDFUploadCZ = new PDFUploadCZ();
-            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "", "0").IndexOf("成功复制") > -1)
+            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "").IndexOf("成功复制") > -1)
             {
                 ztsm++;
             }
-            //添加合格
-            AutoTj_tp(dr["mlid"].ToString());
-
             //上传不合格
-            dv.RowFilter = "djlx='3311' and mlid=" + dr["mlid"] + " and jcjg <>'合格' ";
+            dv.RowFilter = "djlx='3311' and mlid=" + dr["mlid"] + " jcjg <>'合格' ";
             ids = "0";
             foreach (DataRow dr1 in dv.ToTable().Select())
             {
@@ -1429,32 +984,34 @@
     {
         int ztsm = 0;
         string zd = "sygzb_sg";
-        DataTable mlidb = dv.ToTable(true, new string[] { "mlid", "isForce" });//去重，并只有mlid,isForce列的表
+        DataTable mlidb = dv.ToTable(true, new string[] { "mlid" });//去重，并只有mlid列的表
         foreach (DataRow dr in mlidb.Select())
         {
+            string iscg = "0";
             //上传合格
-            dv.RowFilter = "djlx='3312' and mlid=" + dr["mlid"] + " and isForce=" + (dr["isForce"].ToString().ToLower() == "true" ? "1" : "0") + " and (bgbh like '%P' or jcjg='合格') ";
+            dv.RowFilter = "djlx='3312' and mlid=" + dr["mlid"] + " and (bgbh like '%P' or jcjg='合格') ";
             string ids = "0";
             foreach (DataRow dr1 in dv.ToTable().Select())
+            {
                 ids += "," + dr1["id"];
-
+            }
             PDFUploadCZ pDFUploadCZ = new PDFUploadCZ();
-
-            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "", dr["isForce"].ToString()).IndexOf("成功复制") > -1)
+            if (pDFUploadCZ.Zyff("upload", ids, dr["mlid"].ToString(), zd, "").IndexOf("成功复制") > -1)
+            {
                 ztsm++;
-
-            AutoTj_zz(dr["mlid"].ToString(), dr["isForce"].ToString());
-
+            }
             //str+="mlid:"+dr["mlid"]+";"+ids+"<br />\n";
             //上传不合格
-            dv.RowFilter = "djlx='3312' and mlid=" + dr["mlid"] + " and isForce=" + (dr["isForce"].ToString().ToLower() == "true" ? "1" : "0") + " and jcjg <>'合格' ";
+            dv.RowFilter = "djlx='3312' and mlid=" + dr["mlid"] + " and jcjg <>'合格' ";
             ids = "0";
             foreach (DataRow dr1 in dv.ToTable().Select())
+            {
                 ids += "," + dr1["id"];
-
+            }
             if (UploadPDF(ids, dr["mlid"].ToString(), zd).IndexOf("成功复制") > -1)
+            {
                 ztsm++;
-
+            }
         }
         //Response.Write(str);
         return ztsm;
@@ -1708,15 +1265,6 @@
             get { return this._检验结论; }
             set { this._检验结论 = value; }
         }
-        /// <summary>
-        ///
-        /// </summary>
-        public string _isForce;
-        public string isForce
-        {
-            get { return this._isForce; }
-            set { this._isForce = value; }
-        }
         public List<RowItem> _row;
         /// <summary>
         ///
@@ -1756,7 +1304,6 @@
         public string 下载地址;
         public string 检验结论;
         public string 出证日期;
-        public string 是否强标;
         public List<ItemInfo> itemInfos;
     }
 
@@ -1772,7 +1319,7 @@
         public string 单项判定;
     }
 
-    //天津检测所
+        //天津检测所
     //请求信息
     public class ReportsListInputStc
     {
@@ -2828,308 +2375,4 @@
     }
     //响兴信息end
     //天津检测所end
-
-    //石狮检测所begin
-    //请求信息
-    public class RequestStc
-    {
-        public RequestStc() { }
-        // 请求方法名称
-        private string method;
-
-        // 用户编码 权限判断用
-        private string appKey;
-
-        // 用户口令 权限判断用
-        private string secretKey;
-
-        // 请求时间
-        private string applyTime;
-
-        // 请求唯一标识 建议用UUID 双方排查日志用
-        private string serialNo;
-
-        private string param;
-
-        public string Param
-        {
-            get { return param; }
-            set { param = value; }
-        }
-
-
-        public string SerialNo
-        {
-            get { return serialNo; }
-            set { serialNo = value; }
-        }
-
-
-        public string ApplyTime
-        {
-            get { return applyTime; }
-            set { applyTime = value; }
-        }
-
-        public string Method
-        {
-            get
-            {
-                return method;
-            }
-
-            set
-            {
-                method = value;
-            }
-        }
-
-        public string AppKey
-        {
-            get
-            {
-                return appKey;
-            }
-
-            set
-            {
-                appKey = value;
-            }
-        }
-
-        public string SecretKey
-        {
-            get
-            {
-                return secretKey;
-            }
-
-            set
-            {
-                secretKey = value;
-            }
-        }
-
-    }
-
-
-    public class ReportsParamStc
-    {
-        public ReportsParamStc() { }
-
-        private string bdate;
-        private string edate;
-
-        public string Bdate
-        {
-            get { return bdate; }
-            set { bdate = value; }
-        }
-
-        public string Edate
-        {
-            get { return edate; }
-            set { edate = value; }
-        }
-    }
-
-    public class ReportsListResponseBean
-    {
-        public ReportsListResponseBean() { }
-
-        private string success;
-
-        private string message;
-
-        private string serialNo;
-
-        private List<ReportsListResponseBody> body;
-
-        public string Success
-        {
-            get { return success; }
-            set { success = value; }
-        }
-
-        public string Message
-        {
-            get { return message; }
-            set { message = value; }
-        }
-
-        public string SerialNo
-        {
-            get { return serialNo; }
-            set { serialNo = value; }
-        }
-
-        public List<ReportsListResponseBody> Body
-        {
-            get { return body; }
-            set { body = value; }
-        }
-    }
-
-    public class ReportsListResponseBody
-    {
-        public ReportsListResponseBody() { }
-
-        private string stfbreportno;
-        private string productName;
-        private string productsremark;
-        private string acceptDate;
-        private string dapprovedate;
-        private string testBasis;
-        private string securityCategories;
-        private string fails;
-        private string urlpdf;
-        private string superviseNoticeCode;
-        private string isForce;
-
-        public string Stfbreportno
-        {
-            get { return stfbreportno; }
-            set { stfbreportno = value; }
-        }
-
-        public string ProductName
-        {
-            get { return productName; }
-            set { productName = value; }
-        }
-
-        public string Productsremark
-        {
-            get { return productsremark; }
-            set { productsremark = value; }
-        }
-
-        public string AcceptDate
-        {
-            get { return acceptDate; }
-            set { acceptDate = value; }
-        }
-
-        public string Dapprovedate
-        {
-            get { return dapprovedate; }
-            set { dapprovedate = value; }
-        }
-
-        public string TestBasis
-        {
-            get { return testBasis; }
-            set { testBasis = value; }
-        }
-
-        public string SecurityCategories
-        {
-            get { return securityCategories; }
-            set { securityCategories = value; }
-        }
-
-        public string Fails
-        {
-            get { return fails; }
-            set { fails = value; }
-        }
-
-        public string Urlpdf
-        {
-            get { return urlpdf; }
-            set { urlpdf = value; }
-        }
-
-        public string SuperviseNoticeCode
-        {
-            get { return superviseNoticeCode; }
-            set { superviseNoticeCode = value; }
-        }
-
-        public string IsForce
-        {
-            get { return isForce; }
-            set { isForce = value; }
-        }
-    }
-
-    public class ReportsInfoResponseBean
-    {
-        public ReportsInfoResponseBean() { }
-
-        private string success;
-
-        private string message;
-
-        private string serialNo;
-
-        private List<ReportsInfoResponseBody> body;
-
-        public string Success
-        {
-            get { return success; }
-            set { success = value; }
-        }
-
-        public string Message
-        {
-            get { return message; }
-            set { message = value; }
-        }
-
-        public string SerialNo
-        {
-            get { return serialNo; }
-            set { serialNo = value; }
-        }
-
-        public List<ReportsInfoResponseBody> Body
-        {
-            get { return body; }
-            set { body = value; }
-        }
-    }
-
-    public class ReportsInfoResponseBody
-    {
-        public ReportsInfoResponseBody() { }
-
-        private string item;
-        private string prefix;
-        private string standvalue;
-        private string acturevalue;
-        private string result;
-
-        public string Item
-        {
-            get { return item; }
-            set { item = value; }
-        }
-
-        public string Prefix
-        {
-            get { return prefix; }
-            set { prefix = value; }
-        }
-
-        public string Standvalue
-        {
-            get { return standvalue; }
-            set { standvalue = value; }
-        }
-
-        public string Acturevalue
-        {
-            get { return acturevalue; }
-            set { acturevalue = value; }
-        }
-
-        public string Result
-        {
-            get { return result; }
-            set { result = value; }
-        }
-
-    }
-    //石狮检测所end
 </script>

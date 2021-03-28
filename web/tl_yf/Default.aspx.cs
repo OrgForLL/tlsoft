@@ -242,8 +242,80 @@ public partial class tl_yf_Default : System.Web.UI.Page
         string postJson = string.Format("partnerid={0}&servicetype={1}&data={2}&timestamp={3}&nonce={4}&sign={5}", p.partnerid, p.servicetype, p.bizdata, p.timestamp, p.nonce, p.sign);
         string r = PostFunctionjson(url, postJson);
     }
-
+    //雨田
     protected void Page_Load(object sender, EventArgs e)
+    {
+        BillDataShoe billData = new BillDataShoe();
+        billData.khxt = "L216XL100601";
+        billData.gcxt = "工厂型体";
+        billData.ddbh = "订单编号";
+        //部位1
+        BillDataShoeItem billDataShoeItem = new BillDataShoeItem();
+        billDataShoeItem.bw = "外头";
+        billDataShoeItem.bwdw = "个";
+        billDataShoeItem.dw = "平方英尺";
+        //标准码用量
+        billDataShoeItem.bzdh = 0.428525f;
+        //损耗
+        billDataShoeItem.sh = 0.012856f;
+        //合计
+        billDataShoeItem.hj = 0.441381f;
+        billData.bwList.Add(billDataShoeItem);
+
+        BillDataShoeCm billDataShoeCmM = new BillDataShoeCm();
+        billDataShoeCmM.cm = "M";
+        billDataShoeCmM.bzdh= 0.428515f;
+        billDataShoeCmM.sh =  0.012846f;
+        billDataShoeCmM.hj = 0.441361f;
+        BillDataShoeCm billDataShoeCmL = new BillDataShoeCm();
+        billDataShoeCmL.cm = "L";
+        billDataShoeCmL.bzdh = 0.428505f;
+        billDataShoeCmL.sh = 0.012836f;
+        billDataShoeCmL.hj = 0.441341f;
+        //billDataShoeItem.cmList.Add(billDataShoeCmM);
+        //billDataShoeItem.cmList.Add(billDataShoeCmL);
+        ///部位2
+        BillDataShoeItem billDataShoeItem2 = new BillDataShoeItem();
+        billDataShoeItem2.bw = "领口内";
+        billDataShoeItem2.bwdw = "个";
+        billDataShoeItem2.dw = "米";
+        //标准码用量
+        billDataShoeItem2.bzdh = 0.011392f;
+        //损耗
+        billDataShoeItem2.sh = 0.000342f;
+        //合计
+        billDataShoeItem2.hj = 0.011734f;
+        billData.bwList.Add(billDataShoeItem2);
+
+        BillDataShoeCm billDataShoeCm2M = new BillDataShoeCm();
+        billDataShoeCm2M.cm = "M";
+        billDataShoeCm2M.bzdh = 0.011382f;
+        billDataShoeCm2M.sh = 0.000332f;
+        billDataShoeCm2M.hj = 0.011714f;
+        BillDataShoeCm billDataShoeCm2L = new BillDataShoeCm();
+        billDataShoeCm2L.cm = "L";
+        billDataShoeCm2L.bzdh = 0.011372f;
+        billDataShoeCm2L.sh = 0.000322f;
+        billDataShoeCm2L.hj = 0.011694f;
+        //billDataShoeItem2.cmList.Add(billDataShoeCm2M);
+        //billDataShoeItem2.cmList.Add(billDataShoeCm2L); 
+
+        Par p = new Par();
+        p.partnerid = "10427";
+        p.servicetype = "showBom";
+        p.bizdata = JsonConvert.SerializeObject(billData);
+        p.timestamp = "20200926103912";
+        p.nonce = "3410f33283";       
+
+        p.sign = GetSign2("3D174925-86B5-4668-A333-C645ECECE48B", p.partnerid, p.servicetype, p.bizdata, p.timestamp, p.nonce);
+        //正式
+        string url = @"http://127.0.0.1:9309/ApiRoute?action=llwebapi";
+        url = @"http://api.lilanz.com:9307/ApiRoute?action=llwebapi";
+        string postJson = string.Format("partnerid={0}&servicetype={1}&data={2}&timestamp={3}&nonce={4}&sign={5}", p.partnerid, p.servicetype, p.bizdata, p.timestamp, p.nonce, p.sign);
+        string r = PostFunctionjson(url, postJson);
+    }
+
+    protected void Page_Load0323(object sender, EventArgs e)
     {
         BillData billData = new BillData();
         billData.clientuuid = "客户端uuid1";
@@ -1845,6 +1917,48 @@ public class WtMemoVO
     public List<FabricFault> fabricFaultList = new List<FabricFault>();
 
 }
+//雨田
+public class BillDataShoe
+{
+    //客户型体
+    public string khxt;
+    //工厂型体
+    public string gcxt;
+    //订单编号
+    public string ddbh;    
+
+    public List<BillDataShoeItem> bwList = new List<BillDataShoeItem>();
+}
+public class BillDataShoeItem
+{
+    //部位
+    public string bw;
+    //部位单位
+    public string bwdw;
+    //单位
+    public string dw;
+    //标准码用量
+    public float bzdh;
+    //损耗
+    public float sh;
+    //合计
+    public float hj;
+
+    public List<BillDataShoeCm> cmList = new List<BillDataShoeCm>();
+}
+
+public class BillDataShoeCm
+{
+    //尺码
+    public string cm;    
+    //标准码用量
+    public float bzdh;
+    //损耗
+    public float sh;
+    //合计
+    public float hj;
+}
+
 /// <summary>
 /// 报告数据
 /// </summary>
